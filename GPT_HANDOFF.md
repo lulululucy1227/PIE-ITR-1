@@ -29,12 +29,12 @@
 - V1 D2-D has two-column Case Review, workspace router, compact context, local scroll handling, Chinese-first Inspector, English email reply/copy, and teal LogiQ entry. `CaseEvidenceAttachment` is a future-only DTO; no OCR/vision exists.
 - V2 local preview has multi-case tabs, empty New Case, API-backed Search/Analyze/Translate/explicit Commit UI, Todo/notes local state, reply copy, and LogiQ button.
 - V2 dependencies installed with pnpm; `pnpm run build` passes. Local API health and Vite-proxied health were verified. No real ticket/business endpoint or production write was invoked.
+- A safe Git baseline is published on `agent/initial-pie-itr-workbench` with draft PR #1; credentials, runtime caches, dependencies, and build outputs are excluded.
 
 ## Known risks / unverified work
 
 - V2 browser interaction acceptance is pending: safe mocked/read-only prepare/analyze/translate, workspace/stale-async isolation, error rendering, and UI layout.
 - V1 Windows visual acceptance remains pending at 1000×650, 1200×700, and maximized size, including repeated workspace switching/wheel behavior.
-- The project is not a Git repository; no diff/history/checkpoint is available. Treat the listed migration files as uncommitted work until the user establishes version control.
 
 ## Rules
 
