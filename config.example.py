@@ -1,0 +1,14 @@
+# Copy this file to config.py and fill in your own credentials.
+NEXTOP_AUTH = ""
+NEXTOP_COOKIE = ""
+NEXTOP_SATOKEN = ""
+
+FEISHU_APP_ID = ""
+FEISHU_APP_SECRET = ""
+FEISHU_USER_ACCESS_TOKEN = ""
+FEISHU_USER_REFRESH_TOKEN = ""
+FEISHU_APP_TOKEN = ""
+FEISHU_TABLE_ID = ""
+
+DEEPSEEK_API_KEY = ""
+DEEPSEEK_BASE_URL = ""
