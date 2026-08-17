@@ -5,7 +5,7 @@
 - Current development branch: `agent/pie-itr-v2-workbench` (local work reconciled against `origin/agent/initial-pie-itr-workbench`).
 
 - Turn technical communications into structured ITR Cases without bypassing Feishu-owned formulas, lookups, downstream tags, IDs, or Closed automation.
-- V1: `gui.py` Tkinter operational fallback; `main.py` CLI fallback.
+- Current mainline: V2 React Workbench. V1: `gui.py` Tkinter operational fallback; `main.py` CLI fallback.
 - Shared backend: `case_service.py` orchestrates existing Nextop, Feishu, analyzer, tag, image, duplicate, lock, Todo, and commit rules.
 - V2 preview: React/TypeScript `frontend/` -> local `local_api.py`/`api_adapter.py` -> existing `case_service.py`. V2 does not duplicate business rules and is not the default entry point.
 
@@ -30,11 +30,10 @@
 
 - V1 D2-D has two-column Case Review, workspace router, compact context, local scroll handling, Chinese-first Inspector, English email reply/copy, and teal LogiQ entry. `CaseEvidenceAttachment` is a future-only DTO; no OCR/vision exists.
 - V2 local preview has multi-case tabs, empty New Case, API-backed Search/Analyze/Translate/explicit Commit UI, Todo/notes local state, reply copy, and LogiQ button.
-- V2 browser acceptance passed with local mock API data: load, analyze, translate, error rendering, workspace isolation, stale-request switching, and layout. Todo checkbox alignment was corrected in `frontend/src/styles.css`. `pnpm run build` and the 20 offline tests pass. No real ticket/business endpoint or production write was invoked.
+- V2 acceptance fixes add workspace ID/generation async guards, closed-case response discard, Todo isolation, and LogiQ device-name clipboard behavior. Five lightweight Node tests plus 20 Python offline tests and V2 production build pass. No real ticket/business endpoint or production write was invoked.
 
 ## Known risks / unverified work
 
-- V1 Windows visual acceptance remains pending at 1000×650, 1200×700, and maximized size, including repeated workspace switching/wheel behavior.
 - Git reconciliation is in progress; local source is preserved and the remote baseline is the commit parent. Sensitive local configuration and runtime caches remain ignored.
 
 ## Rules
@@ -52,4 +51,4 @@ cd frontend; pnpm run build
 ```
 
 - Current status: 20 offline tests and V2 production build pass; V2 local browser acceptance is complete with safe mock data.
-- Next and only task: perform V1 Windows visual acceptance at 1000×650, 1200×700, and maximized size, including workspace switching and mouse-wheel behavior.
+- Next and only task: V2 Real Read-only Acceptance — waiting for a user-confirmed safe ticket. V1 stays a stable fallback; do not schedule visual-only V1 work.

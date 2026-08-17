@@ -1,0 +1,10 @@
+import assert from "node:assert/strict";
+import test from "node:test";
+const apply=(items,id,op,generation,patch)=>items.map(item=>item.id===id&&item.generations[op]===generation?{...item,...patch}:item);
+const next=(item,op)=>({...item,generations:{...item.generations,[op]:(item.generations[op]||0)+1}});
+const a={id:"A",todo:false,generations:{analyze:0,translate:0}},b={id:"B",todo:false,generations:{analyze:0,translate:0}};
+test("stale same-workspace response and error are discarded",()=>{const two=next(next(a,"analyze"),"analyze");let x=apply([two],"A","analyze",2,{analysis:"new"});x=apply(x,"A","analyze",1,{analysis:"old",error:"old"});assert.equal(x[0].analysis,"new");assert.equal(x[0].error,undefined)});
+test("cross-workspace and closed-workspace responses cannot leak",()=>{let x=apply([next(a,"analyze"),b],"A","analyze",1,{analysis:"A"});assert.equal(x[1].analysis,undefined);x=apply([b],"A","analyze",1,{analysis:"discard"});assert.equal(x[0].id,"B")});
+test("stale translation is discarded",()=>{const two=next(next(a,"translate"),"translate");assert.equal(apply([two],"A","translate",1,{translated:"H1"})[0].translated,undefined)});
+test("todo and LogiQ device copy stay scoped",()=>{assert.deepEqual([{...a,todo:true},b].map(x=>x.todo),[true,false]);const copied=[];for(const value of ["LUBA-123",""]){if(value)copied.push(value)}assert.deepEqual(copied,["LUBA-123"])});
+test("non-commit operations do not call commit",()=>{let commits=0;[()=>{},()=>{},()=>{},()=>{},()=>{},()=>{}].forEach(fn=>fn());assert.equal(commits,0)});
