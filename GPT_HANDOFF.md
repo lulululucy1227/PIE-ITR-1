@@ -30,6 +30,8 @@
 - V2 local preview has multi-case tabs, empty New Case, API-backed Search/Analyze/Translate/explicit Commit UI, Todo/notes local state, reply copy, and LogiQ button.
 - V2 dependencies installed with pnpm; `pnpm run build` passes. Local API health and Vite-proxied health were verified. No real ticket/business endpoint or production write was invoked.
 - A safe Git baseline is published on `agent/initial-pie-itr-workbench` with draft PR #1; credentials, runtime caches, dependencies, and build outputs are excluded.
+- Important: the local desktop project is still not a Git repository. Remote `.gitignore`, `config.example.py`, and this handoff update are not yet synchronized locally. Do not clone, pull, checkout, reset, or overwrite the local worktree.
+- After the V2 Windows acceptance task completes, perform Git integration as a separate task: protect the local copy, compare it with the remote baseline, initialize safely while preserving all local changes, bring in the remote safety files, scan for sensitive data, then decide whether PR #1 needs updating.
 
 ## Known risks / unverified work
 
