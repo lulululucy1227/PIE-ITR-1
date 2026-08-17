@@ -2,6 +2,8 @@
 
 ## Goal and architecture
 
+- Current development branch: `agent/pie-itr-v2-workbench` (local work reconciled against `origin/agent/initial-pie-itr-workbench`).
+
 - Turn technical communications into structured ITR Cases without bypassing Feishu-owned formulas, lookups, downstream tags, IDs, or Closed automation.
 - V1: `gui.py` Tkinter operational fallback; `main.py` CLI fallback.
 - Shared backend: `case_service.py` orchestrates existing Nextop, Feishu, analyzer, tag, image, duplicate, lock, Todo, and commit rules.
@@ -28,15 +30,12 @@
 
 - V1 D2-D has two-column Case Review, workspace router, compact context, local scroll handling, Chinese-first Inspector, English email reply/copy, and teal LogiQ entry. `CaseEvidenceAttachment` is a future-only DTO; no OCR/vision exists.
 - V2 local preview has multi-case tabs, empty New Case, API-backed Search/Analyze/Translate/explicit Commit UI, Todo/notes local state, reply copy, and LogiQ button.
-- V2 dependencies installed with pnpm; `pnpm run build` passes. Local API health and Vite-proxied health were verified. No real ticket/business endpoint or production write was invoked.
-- A safe Git baseline is published on `agent/initial-pie-itr-workbench` with draft PR #1; credentials, runtime caches, dependencies, and build outputs are excluded.
-- Important: the local desktop project is still not a Git repository. Remote `.gitignore`, `config.example.py`, and this handoff update are not yet synchronized locally. Do not clone, pull, checkout, reset, or overwrite the local worktree.
-- After the V2 Windows acceptance task completes, perform Git integration as a separate task: protect the local copy, compare it with the remote baseline, initialize safely while preserving all local changes, bring in the remote safety files, scan for sensitive data, then decide whether PR #1 needs updating.
+- V2 browser acceptance passed with local mock API data: load, analyze, translate, error rendering, workspace isolation, stale-request switching, and layout. Todo checkbox alignment was corrected in `frontend/src/styles.css`. `pnpm run build` and the 20 offline tests pass. No real ticket/business endpoint or production write was invoked.
 
 ## Known risks / unverified work
 
-- V2 browser interaction acceptance is pending: safe mocked/read-only prepare/analyze/translate, workspace/stale-async isolation, error rendering, and UI layout.
 - V1 Windows visual acceptance remains pending at 1000×650, 1200×700, and maximized size, including repeated workspace switching/wheel behavior.
+- Git reconciliation is in progress; local source is preserved and the remote baseline is the commit parent. Sensitive local configuration and runtime caches remain ignored.
 
 ## Rules
 
@@ -52,5 +51,5 @@ python -B -m unittest -q test_case_service_d1b.py test_gui_d2a.py test_local_api
 cd frontend; pnpm run build
 ```
 
-- Current status: 20 offline tests pass; V2 production build passes; health smoke test passes.
-- Next and only task: perform Windows browser interaction acceptance of V2 with safe mocks/read-only data, then fix observed V2 integration defects without changing V1 business logic.
+- Current status: 20 offline tests and V2 production build pass; V2 local browser acceptance is complete with safe mock data.
+- Next and only task: perform V1 Windows visual acceptance at 1000×650, 1200×700, and maximized size, including workspace switching and mouse-wheel behavior.
