@@ -1,0 +1,17 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# Local credentials and runtime state
+config.py
+fields_cache.json
+image_hashes.json
+token_hash.json
+uploaded_images.json
+sop_generated.json
+
+# Frontend dependencies and build artifacts
+.pnpm-store/
+frontend/node_modules/
+frontend/dist/
+frontend/tsconfig.tsbuildinfo
