@@ -1,9 +1,20 @@
-# Python bytecode
+# Python bytecode and local runtime state
 __pycache__/
 *.py[cod]
+cache/
+logs/
+*.log
 
-# Local credentials and runtime state
+# Credentials, sessions, and local data caches
 config.py
+.env
+.env.*
+!config.example.*
+*token*
+*secret*
+*credential*
+*cookie*
+*session*
 fields_cache.json
 image_hashes.json
 token_hash.json
@@ -12,6 +23,15 @@ sop_generated.json
 
 # Frontend dependencies and build artifacts
 .pnpm-store/
+node_modules/
 frontend/node_modules/
 frontend/dist/
 frontend/tsconfig.tsbuildinfo
+dist/
+build/
+
+# Local test artifacts
+*.png
+*.jpg
+*.jpeg
+
