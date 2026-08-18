@@ -281,6 +281,13 @@ def get_all_records(field_names=None):
         page_token = d["page_token"]
     return results
 
+def get_table_records_readonly(table_id, field_names=None):
+    """Bounded read-only access for approved retrieval sources; never writes."""
+    path=f"/open-apis/bitable/v1/apps/{config.FEISHU_APP_TOKEN}/tables/{table_id}/records/search"
+    data=_request("POST",path,params={"page_size":500},json={"field_names":list(field_names or [])})
+    if data.get("code")!=0: raise RuntimeError("Feishu retrieval read failed.")
+    return data.get("data",{}).get("items",[])
+
 
 def find_records_by_reference_no(reference_no, field_names, limit=100):
     """Read a bounded same-source record set for manual-case candidate matching.

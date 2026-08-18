@@ -99,6 +99,7 @@ class PreparedNextopCase:
     selected_match_kind: str | None = None
     can_create: bool = False
     can_update: bool = False
+    context_pack: dict = field(default_factory=dict, repr=False)
 
 
 @dataclass
@@ -609,11 +610,13 @@ def prepare_nextop_case(ticket_no, progress_callback=None, *, duplicate_decision
                 existing_id = duplicate_record_id if duplicate_record_id in allowed_ids else legacy_matches[0].get("record_id")
                 existing_case = next((item for item in legacy_matches if item.get("record_id") == existing_id), None)
                 selected_match_kind = "legacy"
+        import context_service
+        context_pack=context_service.build_context(ticket_no, fields, messages, history)
         prepared = PreparedNextopCase(ticket_no, history, analysis, fields, messages, info,
                                       existing_record_id=existing_id, existing_case=existing_case,
                                       match_status="ONE" if existing_id else "NOT_FOUND",
                                       matches=existing.get("matches", []), selected_match_kind=selected_match_kind,
-                                      can_create=not bool(existing_id), can_update=bool(existing_id))
+                                      can_create=not bool(existing_id), can_update=bool(existing_id), context_pack=context_pack)
         _progress(progress_callback, "prepared", "Ready for review.", True)
         return _result(True, "prepared_existing" if existing_id else "prepared_new", "Nextop Case is ready for review.", prepared=prepared, case=existing_case or candidate_from_record({"record_id": None, "fields": fields}))
     except nextop_api.NextopAuthRequired:

@@ -23,7 +23,9 @@ def _inspector_hash(data):
 
 def analyze_case_for_inspector(case):
     data={k:case.get(k) for k in ('description','case_history','fault_symptom','pie_comment','solutions','model_type','error_codes','status')}
-    result=_call_deepseek(INSPECTOR_SYSTEM_PROMPT, json.dumps(data, ensure_ascii=False))
+    context=case.get("context_pack") or {}
+    guidance="\nNo reliable historical evidence was found: use current-ticket facts only; do not invent verified precedent." if context.get("knowledge_coverage")=="none" else "\nContext evidence is supplied with provenance; distinguish evidence from inference. Do not repeat actions explicitly reported ineffective unless explaining why."
+    result=_call_deepseek(INSPECTOR_SYSTEM_PROMPT+guidance, json.dumps({"case":data,"context":context}, ensure_ascii=False))
     rec=list(result.get('historical_pie_recommendations') or [])
     state=str(result.get('solution_state') or 'NONE').upper()
     if state not in {'FINAL','CURRENT','WORKAROUND','PENDING','NONE'}: state='NONE'
