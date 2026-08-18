@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import fs from "node:fs";
 const apply=(items,id,op,generation,patch)=>items.map(item=>item.id===id&&item.generations[op]===generation?{...item,...patch}:item);
 const next=(item,op)=>({...item,generations:{...item.generations,[op]:(item.generations[op]||0)+1}});
 const a={id:"A",todo:false,generations:{analyze:0,translate:0}},b={id:"B",todo:false,generations:{analyze:0,translate:0}};
@@ -8,3 +9,6 @@ test("cross-workspace and closed-workspace responses cannot leak",()=>{let x=app
 test("stale translation is discarded",()=>{const two=next(next(a,"translate"),"translate");assert.equal(apply([two],"A","translate",1,{translated:"H1"})[0].translated,undefined)});
 test("todo and LogiQ device copy stay scoped",()=>{assert.deepEqual([{...a,todo:true},b].map(x=>x.todo),[true,false]);const copied=[];for(const value of ["LUBA-123",""]){if(value)copied.push(value)}assert.deepEqual(copied,["LUBA-123"])});
 test("non-commit operations do not call commit",()=>{let commits=0;[()=>{},()=>{},()=>{},()=>{},()=>{},()=>{}].forEach(fn=>fn());assert.equal(commits,0)});
+test("successful prepare queues exactly the auto analyze path while failures return early",()=>{const source=fs.readFileSync(new URL("../src/workbench.tsx",import.meta.url),"utf8");assert.match(source,/if \(!result\.success\) return/);assert.match(source,/queueMicrotask\(\(\) => analyze\(preparedCase\)\)/);assert.match(source,/\.\.\.\(item\.prepared\.analysis \|\| \{\}\)/);assert.match(source,/Re-analyze/)});
+test("review UI exposes explicit insufficient information and capability-gated LogiQ",()=>{const source=fs.readFileSync(new URL("../src/workbench.tsx",import.meta.url),"utf8");assert.match(source,/Information insufficient/);assert.match(source,/Why this is needed/);assert.match(source,/capability\?\.logiq === "supported"/);assert.match(source,/disabled=\{!logiqSupported\}/)});
+test("desktop layout has a bounded context column, no horizontal body overflow, and a scrollable reply",()=>{const css=fs.readFileSync(new URL("../src/styles.css",import.meta.url),"utf8");assert.match(css,/body\{margin:0;overflow-x:hidden\}/);assert.match(css,/grid-template-columns:270px minmax\(0,1fr\)/);assert.match(css,/\.reply\{max-height:250px;overflow:auto\}/)});

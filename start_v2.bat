@@ -3,6 +3,23 @@ setlocal
 cd /d "%~dp0"
 start "PIE ITR Local API" /b python -B local_api.py
 cd frontend
-start "PIE ITR V2" /b pnpm dev --host 127.0.0.1 --port 5173
+set "PIE_NODE="
+for /f "delims=" %%N in ('where node 2^>nul') do if not defined PIE_NODE set "PIE_NODE=%%N"
+if not defined PIE_NODE if exist "%USERPROFILE%\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe" set "PIE_NODE=%USERPROFILE%\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe"
+if not defined PIE_NODE (
+  echo Node.js is required to start PIE ITR V2. Install Node.js LTS, then run this file again.
+  pause
+  exit /b 1
+)
+if exist "node_modules\.bin\vite.cmd" (
+  start "PIE ITR V2" /b "%PIE_NODE%" "node_modules\vite\bin\vite.js" --host 127.0.0.1 --port 5173
+) else (
+  where pnpm >nul 2>nul || (
+    echo Frontend dependencies are missing. Run: corepack enable ^&^& corepack pnpm install
+    pause
+    exit /b 1
+  )
+  start "PIE ITR V2" /b pnpm dev --host 127.0.0.1 --port 5173
+)
 timeout /t 2 /nobreak >nul
 start "" http://127.0.0.1:5173/

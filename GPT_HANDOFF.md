@@ -30,7 +30,9 @@
 
 - V1 D2-D has two-column Case Review, workspace router, compact context, local scroll handling, Chinese-first Inspector, English email reply/copy, and teal LogiQ entry. `CaseEvidenceAttachment` is a future-only DTO; no OCR/vision exists.
 - V2 local preview has multi-case tabs, empty New Case, API-backed Search/Analyze/Translate/explicit Commit UI, Todo/notes local state, reply copy, and LogiQ button.
-- V2 acceptance fixes add workspace ID/generation async guards, closed-case response discard, Todo isolation, and LogiQ device-name clipboard behavior. Phase 1 adds a read-only Context Pack: same-reference ITR, exact Error Code, and technical-note retrieval with provenance; empty retrieval remains valid, draft KB is excluded, and context-aware Analyze avoids unsupported precedent. 23 Python tests and V2 production build pass. No real ticket/business endpoint or production write was invoked.
+- Phase 1 Closure baseline: successful V2 Search/Load automatically queues context-aware Analyze; failed preparation does not; Re-analyze remains manual. Workspace operation generations discard stale/closed responses. Context Pack is read-only: current Nextop conversation, same-reference Historical ITR, exact Error Code and Technical Information records with record/source provenance. No match is valid (`knowledge_coverage=none`); unreviewed `工单速查_V2` remains excluded as authoritative knowledge.
+- Inspector contract now includes `information_status`, `missing_information`, `reason_for_request`, and `next_action`. An insufficient result is normalized to a request-only English reply. A deterministic output guard prevents unsupported LogiQ/device-log requests and plainly repeated failed connector checks. Capability baseline: LUBA 1 has `device_log=unsupported` and `logiq=unsupported`; all unlisted products are `unknown`, never implicitly supported. Only explicit Commit may write.
+- V2 UI retains case-local Todo/notes/close state, Review fields, Copy Reply, translation cache behavior, and responsive desktop layout (270px Context column, no body horizontal overflow, internally scrollable Reply). LogiQ UI is enabled only for an explicitly supported capability and otherwise remains unavailable.
 
 ## Known risks / unverified work
 
@@ -50,5 +52,6 @@ python -B -m unittest -q test_case_service_d1b.py test_gui_d2a.py test_local_api
 cd frontend; pnpm run build
 ```
 
-- Current status: 20 offline tests and V2 production build pass; V2 local browser acceptance is complete with safe mock data.
-- Next and only task: V2 Real Read-only Acceptance of Context Pack with a user-confirmed safe ticket; validate returned provenance/coverage and no writes. V1 stays a stable fallback; do not schedule visual-only V1 work.
+- Closure tests: 33 Python offline tests pass (`test_case_service_d1b`, `test_context_service`, `test_gui_d2a`, `test_local_api`, `test_phase1_closure`); 8 frontend state/layout tests pass; V2 production build passes. No real Nextop/Feishu calls or writes were made during closure.
+- Known limitation: automated browser control was unavailable locally, so 1600x900 and 1920x1080 Chrome 100% visual acceptance remains a manual check; CSS/static tests cover its no-overflow, bounded-context, and scrollable-reply contract.
+- Next and only task after explicit user direction: Phase 1.5 Golden Regression / governed old-code comparison. Do not start Parts, RAG, Vision, assistant-ui, Data Browser, or any external write work automatically.
