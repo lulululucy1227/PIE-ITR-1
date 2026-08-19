@@ -44,45 +44,25 @@ class NextopAuthRequired(RuntimeError):
     """Existing local session cannot be refreshed without new browser input."""
 
 
-def _ensure_fresh_session():
-    import refresh_nextop_token
-    try:
-        auth, cookie_str, satoken = refresh_nextop_token.refresh()
-    except Exception as exc:
-        raise NextopAuthRequired("Nextop session refresh requires a new PageOrder request.") from exc
-    refresh_nextop_token.persist(auth, cookie_str, satoken)
-    config.NEXTOP_AUTH = auth
-    config.NEXTOP_COOKIE = cookie_str
-    config.NEXTOP_SATOKEN = satoken
-
-
 def _post(url, payload):
     r = requests.post(url, json=payload, headers=_headers(), cookies=_cookies())
     if r.status_code in (401, 403):
-        _ensure_fresh_session()
-        r = requests.post(url, json=payload, headers=_headers(), cookies=_cookies())
+        raise NextopAuthRequired("Nextop authentication expired or invalid.")
     r.raise_for_status()
     data = r.json()
     if data.get("code") in SESSION_EXPIRED_CODES:
-        _ensure_fresh_session()
-        r = requests.post(url, json=payload, headers=_headers(), cookies=_cookies())
-        r.raise_for_status()
-        data = r.json()
+        raise NextopAuthRequired("Nextop authentication expired or invalid.")
     return data
 
 
 def _get(url, params):
     r = requests.get(url, params=params, headers=_headers(), cookies=_cookies())
     if r.status_code in (401, 403):
-        _ensure_fresh_session()
-        r = requests.get(url, params=params, headers=_headers(), cookies=_cookies())
+        raise NextopAuthRequired("Nextop authentication expired or invalid.")
     r.raise_for_status()
     data = r.json()
     if data.get("code") in SESSION_EXPIRED_CODES:
-        _ensure_fresh_session()
-        r = requests.get(url, params=params, headers=_headers(), cookies=_cookies())
-        r.raise_for_status()
-        data = r.json()
+        raise NextopAuthRequired("Nextop authentication expired or invalid.")
     return data
 
 

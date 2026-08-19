@@ -7,6 +7,7 @@ const fresh = ():Case => ({ id:crypto.randomUUID(), ticket:"", todo:false, notes
 export function App() {
   const [cases,setCases] = useState<Case[]>([fresh()]);
   const [active,setActive] = useState(0);
+  const [tokenOpen,setTokenOpen] = useState(false); const [curl,setCurl] = useState(""); const [tokenMessage,setTokenMessage] = useState("");
   const casesRef = useRef(cases); casesRef.current = cases;
   const current = cases[active];
   const patch = (id:string, data:Partial<Case>) => setCases(items => items.map(item => item.id === id ? {...item,...data} : item));
@@ -31,12 +32,13 @@ export function App() {
   const logiqSupported = current.analysis?.capability?.logiq === "supported";
   return <main>
     <header><div className="tabs">{cases.map((item,index)=><button className={index===active?"active":""} onClick={()=>setActive(index)} key={item.id}>{item.ticket || "New Case"}</button>)}<button onClick={()=>{setCases(items=>[...items,fresh()]);setActive(cases.length);}}>+</button></div></header>
-    <section className="status">{current.loading || current.error || "Ready"}</section>
-    <div className="workbench"><aside><h2>Context</h2><label>Ticket<input value={current.ticket} onChange={event=>patch(current.id,{ticket:event.target.value})} onKeyDown={event=>event.key==="Enter"&&load()}/></label><button onClick={load}>Search / Load</button>{current.prepared&&<><p>Reference: {current.prepared.ticket_no}</p><label className="todo"><input type="checkbox" checked={current.todo} onChange={event=>patch(current.id,{todo:event.target.checked})}/> Add to ITR Todo</label><textarea placeholder="Session notes" value={current.notes} onChange={event=>patch(current.id,{notes:event.target.value})}/><button onClick={()=>close(current.id)}>Close Case</button></>}</aside>
+    <section className="status">{current.loading || current.error || "Ready"}{current.error?.includes("authentication")&&<button onClick={()=>setTokenOpen(true)}>Update Nextop Token</button>}</section>
+    <div className="workbench"><aside><h2>Context</h2><label>Ticket<input value={current.ticket} onChange={event=>patch(current.id,{ticket:event.target.value})} onKeyDown={event=>event.key==="Enter"&&load()}/></label><button onClick={load}>Search / Load</button><button onClick={()=>setTokenOpen(true)}>Update Nextop Token</button>{current.prepared&&<><p>Reference: {current.prepared.ticket_no}</p><label className="todo"><input type="checkbox" checked={current.todo} onChange={event=>patch(current.id,{todo:event.target.checked})}/> Add to ITR Todo</label><textarea placeholder="Session notes" value={current.notes} onChange={event=>patch(current.id,{notes:event.target.value})}/><button onClick={()=>close(current.id)}>Close Case</button></>}</aside>
     <article><div className="tools"><h1>Case Review</h1><button disabled={!current.prepared} onClick={()=>analyze()}>Re-analyze</button><button onClick={()=>patch(current.id,{language:"ORIGINAL"})}>Original</button><button disabled={!current.analysis} onClick={translate}>中文</button><button className="logiq" disabled={!logiqSupported} title={logiqSupported ? "Copies device name and opens LogiQ" : "LogiQ is unavailable until product capability is confirmed"} onClick={()=>{const device=current.prepared?.fields?.["Device name"] || current.prepared?.fields?.device_name;if(device) navigator.clipboard.writeText(device);window.open("https://logiq.cloud-cn.mammotion.com/","_blank")}}>LogiQ · Logs</button></div>
     {review ? <Review value={review} original={current.analysis}/> : <p className="empty">Load a case to automatically build context and analyze it.</p>}
     <section className="reply"><h3>Email Reply</h3><pre>{current.analysis?.reply_en || "—"}</pre>{current.analysis?.reply_en&&<button onClick={()=>navigator.clipboard.writeText(current.analysis.reply_en)}>Copy Reply</button>}</section>
     <button className="commit" disabled={!current.prepared} onClick={commit}>{current.prepared?.can_update?"Update ITR":"Create in ITR"}</button></article></div>
+  {tokenOpen&&<div className="token-modal"><section><h2>Update Nextop Token</h2><p>Log in to Nextop, open DevTools → Network, copy an authenticated request as cURL, then paste it here.</p><textarea value={curl} onChange={e=>setCurl(e.target.value)} placeholder="Paste Copy as cURL"/><button onClick={async()=>{try{const r=await api("/auth/nextop/update",{curl});setTokenMessage(r.success?"Token configured. Load the current ticket again.":"Token was not accepted.")}catch{setTokenMessage("Token was not accepted.")}}}>Save & Validate</button><button onClick={()=>setTokenOpen(false)}>Close</button><p>{tokenMessage}</p></section></div>}
   </main>;
 }
 

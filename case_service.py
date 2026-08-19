@@ -619,8 +619,9 @@ def prepare_nextop_case(ticket_no, progress_callback=None, *, duplicate_decision
                                       can_create=not bool(existing_id), can_update=bool(existing_id), context_pack=context_pack)
         _progress(progress_callback, "prepared", "Ready for review.", True)
         return _result(True, "prepared_existing" if existing_id else "prepared_new", "Nextop Case is ready for review.", prepared=prepared, case=existing_case or candidate_from_record({"record_id": None, "fields": fields}))
-    except nextop_api.NextopAuthRequired:
-        return _result(False, "prepare_nextop", "Nextop authentication requires a PageOrder request.", error_type="nextop_auth_required")
+    except nextop_api.NextopAuthRequired as exc:
+        missing = "not configured" in str(exc).lower()
+        return _result(False, "prepare_nextop", "Nextop authentication is not configured." if missing else "Nextop authentication expired or invalid.", ticket_no=ticket_no, error_type="NEXTOP_CREDENTIALS_MISSING" if missing else "NEXTOP_AUTH_FAILED")
     except Exception as exc:
         return _exception_failure(exc, "prepare_nextop", "Nextop preparation failed.", ticket_no=ticket_no)
 

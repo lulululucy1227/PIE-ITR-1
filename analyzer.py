@@ -11,12 +11,14 @@ import config
 import feishu_api
 import field_options as fo
 from product_capabilities import capabilities, contains_log_request
+from analysis_validators import validate
 
 @dataclass
 class InspectorAnalysis:
     customer_description: str; repair_actions: list[str]; current_blocker: str; blocker_is_inferred: bool
     historical_pie_recommendations: list[str]; ai_suggested_next_step: str; solution_state: str; solution: str; reply_en: str; source_language: str; source_hash: str
     information_status: str = "sufficient"; missing_information: list[str] = None; reason_for_request: list[str] = None; next_action: str = "assess"; capability: dict = None
+    confirmed_facts: list[str] = None; already_tried: list[str] = None; ruled_out: list[str] = None; hypotheses: list[dict] = None; resolution_path: list[str] = None; needs_human_check: bool = False; escalation: list[str] = None; parts_to_verify: list[str] = None
 
 INSPECTOR_SYSTEM_PROMPT = """Return JSON only. Ground every fact in the supplied case data. customer_description is the concise current customer/dealer issue, not an email copy. repair_actions contains ONLY actions explicitly confirmed as physically or operationally completed by a customer, dealer, technician, or device. Exclude PIE review, recommendations, instructions, proposed actions, future actions, and suggestions. Historical recommendations must be real PIE guidance extracted from history/Solutions only. If a blocker is inferred set blocker_is_inferred true; never state inference as fact. solution_state must be FINAL, CURRENT, WORKAROUND, PENDING, or NONE. reply_en is a complete copy-ready English email with a neutral greeting (use "Hi Team," or "Hello," unless a reliable name is present), blank lines, concise body, and a closing such as "Best regards,\nPIE Technical Support". Do not invent a recipient name and do not promise ETA, firmware dates, warranty, replacement, refund, or compensation."""
 
@@ -67,7 +69,7 @@ def analyze_case_for_inspector(case):
     guidance="\nNo reliable historical evidence was found: use current-ticket facts only; do not invent verified precedent." if context.get("knowledge_coverage")=="none" else "\nContext evidence is supplied with provenance; distinguish evidence from inference. Do not repeat actions explicitly reported ineffective unless explaining why."
     model=str(case.get("model_type") or data.get("model_type") or "")
     capability=capabilities(model)
-    contract="\nReturn additionally: information_status (sufficient|insufficient), missing_information[], reason_for_request[], next_action (assess|request_information). If insufficient, reply_en must only request the listed information and must not add diagnosis/actions. If sufficient, reply_en must not introduce actions absent from assessment/solution. Never request logs or LogiQ unless Product capability explicitly says supported. Product capability: "+json.dumps(capability)
+    contract="\nReturn additionally: information_status (sufficient|insufficient), missing_information[], reason_for_request[], next_action (assess|request_information), confirmed_facts[], already_tried[], ruled_out[], hypotheses[] (cause, confidence high|medium|low, evidence[], cited[], discriminator), resolution_path[], needs_human_check, escalation[], parts_to_verify[] (always empty). Historical ITR and technical notes are evidence, never confirmed facts. hypothesis.cited may use only real Context Pack provenance IDs. If insufficient, reply_en must only request the listed information and must not add diagnosis/actions. If sufficient, reply_en must not introduce actions absent from assessment/solution. Never request logs or LogiQ unless Product capability explicitly says supported. Product capability: "+json.dumps(capability)
     result=_call_deepseek(INSPECTOR_SYSTEM_PROMPT+guidance+contract, json.dumps({"case":data,"context":context}, ensure_ascii=False))
     rec=list(result.get('historical_pie_recommendations') or [])
     state=str(result.get('solution_state') or 'NONE').upper()
@@ -87,8 +89,10 @@ def analyze_case_for_inspector(case):
     state=str(result.get("solution_state") or state).upper()
     if state not in {'FINAL','CURRENT','WORKAROUND','PENDING','NONE'}: state='NONE'
     next_action=str(result.get("next_action") or ("request_information" if status=="insufficient" else "assess"))
+    result = validate(result, context, capability, status == "insufficient" or _restricted_or_repeated(result, context, capability))
     return InspectorAnalysis(str(result.get('customer_description') or ''), [str(x) for x in result.get('repair_actions',[])], str(result.get('current_blocker') or ''), bool(result.get('blocker_is_inferred')),
-        rec, '' if rec else str(result.get('ai_suggested_next_step') or ''), state, str(result.get('solution') or ''), str(result.get('reply_en') or ''), 'ORIGINAL', _inspector_hash(data),status,missing,reasons,next_action,capability)
+        rec, '' if rec else str(result.get('ai_suggested_next_step') or ''), state, str(result.get('solution') or ''), str(result.get('reply_en') or ''), 'ORIGINAL', _inspector_hash(data),status,missing,reasons,next_action,capability,
+        result["confirmed_facts"], result["already_tried"], result["ruled_out"], result["hypotheses"], result["resolution_path"], result["needs_human_check"], result["escalation"], result["parts_to_verify"])
 
 def translate_inspector_analysis_to_zh(analysis):
     fields=['customer_description','repair_actions','current_blocker','historical_pie_recommendations','ai_suggested_next_step','solution']

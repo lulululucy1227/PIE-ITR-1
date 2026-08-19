@@ -26,13 +26,26 @@ def analysis_from_json(data):
 class LocalApiAdapter:
     """API-facing methods: Search/Analyze/Translate are read-only by contract."""
     def health(self):
-        return {"ok": True, "service": "nextopsync-local-api"}
+        import nextop_auth
+        return {"ok": True, "service": "nextopsync-local-api", "nextop":nextop_auth.status()}
+
+    def nextop_auth_status(self):
+        import nextop_auth
+        return nextop_auth.status()
+
+    def update_nextop_token(self, payload):
+        import nextop_api, nextop_auth
+        return nextop_auth.update_from_curl(payload.get("curl"), lambda: nextop_api.search_tickets("", size=1))
 
     def prepare(self, payload):
         import case_service
         if str(payload.get("source") or "nextop").lower() != "nextop":
             return {"success": False, "error_type": "unsupported_source", "message": "Only Nextop preparation is available in V2 Phase 1."}
-        return to_json(case_service.prepare_nextop_case(str(payload.get("ticket_no") or "")))
+        try: return to_json(case_service.prepare_nextop_case(str(payload.get("ticket_no") or "")))
+        except Exception as exc:
+            import nextop_api
+            if isinstance(exc,nextop_api.NextopAuthRequired): return {"success":False,"error_type":"NEXTOP_CREDENTIALS_MISSING" if "not configured" in str(exc) else "NEXTOP_AUTH_FAILED","message":"Nextop authentication is not configured." if "not configured" in str(exc) else "Nextop authentication expired or invalid."}
+            return {"success":False,"error_type":"NEXTOP_REQUEST_ERROR","message":"Nextop request failed."}
 
     def analyze(self, payload):
         import case_service

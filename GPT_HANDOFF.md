@@ -35,6 +35,7 @@
 - Inspector contract now includes `information_status`, `missing_information`, `reason_for_request`, and `next_action`. An insufficient result is normalized to a request-only English reply. A deterministic output guard prevents unsupported LogiQ/device-log requests and plainly repeated failed connector checks. Capability baseline: LUBA 1 has `device_log=unsupported` and `logiq=unsupported`; all unlisted products are `unknown`, never implicitly supported. Only explicit Commit may write.
 - V2 UI retains case-local Todo/notes/close state, Review fields, Copy Reply, translation cache behavior, and responsive desktop layout (270px Context column, no body horizontal overflow, internally scrollable Reply). LogiQ UI is enabled only for an explicitly supported capability and otherwise remains unavailable.
 - Safe dead-code cleanup removed only `generate_sop.py`, an unreferenced legacy batch-write SOP prototype with no launcher, test, or documentation reference. V1 fallback and all current launch/token utilities remain preserved.
+- Phase 1.5A Golden Foundation adds offline synthetic contract coverage, deterministic validator fields, and pure pasted-source normalization. V2 now supports a manual Copy-as-cURL Nextop credential update flow with ignored local storage, runtime update, read-only validation, and explicit missing/expired auth errors; fail-closed remains intact. Real Nextop auth acceptance is pending user-operated UI validation.
 
 ## Known risks / unverified work
 
@@ -54,6 +55,6 @@ python -B -m unittest -q test_case_service_d1b.py test_gui_d2a.py test_local_api
 cd frontend; pnpm run build
 ```
 
-- Baseline tests: 34 Python offline tests pass (`test_case_service_d1b`, `test_context_service`, `test_gui_d2a`, `test_local_api`, `test_phase1_closure`); 8 frontend state/layout tests pass; V2 production build passes. No real Nextop/Feishu calls or writes were made during baseline restoration.
+- Current offline regression: 50 Python tests pass (baseline, Golden, multi-source, and auth); 8 frontend state/layout tests pass; V2 production build passes. No real Nextop/Feishu calls or writes were made during automated validation.
 - Known limitation: automated browser control was unavailable locally, so 1600x900 and 1920x1080 Chrome 100% visual acceptance remains a manual check; CSS/static tests cover its no-overflow, bounded-context, and scrollable-reply contract.
 - Next and only task after explicit user direction: Phase 1.5 Golden Regression / governed old-code comparison. Do not start Parts, RAG, Vision, assistant-ui, Data Browser, or any external write work automatically.
