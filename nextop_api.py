@@ -38,10 +38,20 @@ def _cookies():
 
 
 SESSION_EXPIRED_CODES = {"A00998", "A00997"}
+SUCCESS_CODES = {"000000", 0, "0", None}
 
 
 class NextopAuthRequired(RuntimeError):
     """Existing local session cannot be refreshed without new browser input."""
+
+class NextopResponseError(RuntimeError):
+    """Nextop replied, but the envelope cannot safely be treated as ticket data."""
+
+class NextopLookupEmpty(NextopResponseError):
+    """A successful exact-lookup request returned no matching record."""
+
+class NextopParseError(NextopResponseError):
+    """Expected ticket/message response structure was absent."""
 
 
 def _post(url, payload):
@@ -52,6 +62,8 @@ def _post(url, payload):
     data = r.json()
     if data.get("code") in SESSION_EXPIRED_CODES:
         raise NextopAuthRequired("Nextop authentication expired or invalid.")
+    if data.get("code") not in SUCCESS_CODES:
+        raise NextopResponseError("Nextop request returned an unsuccessful response.")
     return data
 
 
@@ -63,6 +75,8 @@ def _get(url, params):
     data = r.json()
     if data.get("code") in SESSION_EXPIRED_CODES:
         raise NextopAuthRequired("Nextop authentication expired or invalid.")
+    if data.get("code") not in SUCCESS_CODES:
+        raise NextopResponseError("Nextop request returned an unsuccessful response.")
     return data
 
 
@@ -122,21 +136,52 @@ def find_ticket_by_no(repair_order_no):
         "isOrderFilterForm": True, "language": "zh"
     }
     data = _post(f"{BASE}/ticketOrder/wOrder/pageOrders", payload)
-    records = data.get("data", {}).get("records", [])
+    body = data.get("data")
+    if not isinstance(body, dict) or not isinstance(body.get("records"), list):
+        raise NextopParseError("Ticket lookup response has no records list.")
+    records = body["records"]
+    if not records:
+        raise NextopLookupEmpty("Ticket lookup returned no exact record.")
     for rec in records:
         if rec.get("repairOrderNo") == repair_order_no:
             return rec
-    return None
+    raise NextopResponseError("Ticket lookup returned records without an exact ticket number.")
 
 
 def get_basic_info(ticket_id):
     data = _get(f"{BASE}/ticketOrder/wOrder/workbench/basicInfo", {"id": ticket_id})
+    if not isinstance(data.get("data"), dict):
+        raise NextopParseError("Ticket detail response has no data object.")
     return data["data"]
 
+
+def _message_list(data):
+    body = data.get("data")
+    if isinstance(body, list): return body, None
+    if isinstance(body, dict):
+        for key in ("records", "list", "items"):
+            if isinstance(body.get(key), list): return body[key], body
+    raise NextopParseError("Ticket messages response has no message list.")
 
 def get_messages(ticket_id, size=100):
-    data = _get(f"{BASE}/ticketOrder/wOrder/workbench/messages", {"id": ticket_id, "size": size})
-    return data["data"]
+    """Read and normalize the conversation endpoint; paginate only when its envelope declares a total."""
+    params = {"id": ticket_id, "size": size, "current": 1}
+    first = _get(f"{BASE}/ticketOrder/wOrder/workbench/messages", params)
+    messages, envelope = _message_list(first)
+    total = envelope.get("total") if envelope else None
+    try: total = int(total)
+    except (TypeError, ValueError): total = len(messages)
+    current = 2
+    while envelope and len(messages) < total and current <= 100:
+        page = _get(f"{BASE}/ticketOrder/wOrder/workbench/messages", {"id": ticket_id, "size": size, "current": current})
+        extra, _ = _message_list(page)
+        if not extra: break
+        messages.extend(extra); current += 1
+    deduped = {}
+    for index, message in enumerate(messages):
+        key = message.get("id") or message.get("messageId") or f"{message.get('sendTime')}:{message.get('senderName')}:{index}"
+        deduped[str(key)] = message
+    return sorted(deduped.values(), key=lambda item: (item.get("sendTime") or item.get("createTime") or 0, str(item.get("id") or item.get("messageId") or "")))
 
 
 def html_to_text(html):
@@ -197,8 +242,6 @@ MSG_CONTENT_LIMIT = 3000  # 每条消息正文最多传给 AI 的字符数
 
 def get_ticket_full(repair_order_no):
     ticket = find_ticket_by_no(repair_order_no)
-    if not ticket:
-        raise ValueError(f"未找到工单 {repair_order_no}")
     ticket_id = ticket["id"]
     basic = get_basic_info(ticket_id)
     messages = get_messages(ticket_id)

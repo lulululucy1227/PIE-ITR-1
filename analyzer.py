@@ -63,6 +63,17 @@ def _insufficient(result, missing=None, reasons=None):
 def _inspector_hash(data):
     return hashlib.sha256(json.dumps(data, ensure_ascii=False, sort_keys=True, default=str).encode()).hexdigest()
 
+_INTERNAL_CN_FIELDS = ("repair_actions", "current_blocker", "historical_pie_recommendations", "ai_suggested_next_step", "solution", "missing_information", "reason_for_request")
+
+def _internal_analysis_to_zh(result):
+    """Make the production Inspector payload Chinese without changing its contract."""
+    values = {key: result.get(key) for key in _INTERNAL_CN_FIELDS}
+    translated = _call_deepseek("Translate only these JSON values to clear Simplified Chinese. Preserve JSON types and meaning. Do not add facts or actions. Preserve product names, models, error codes, part numbers, firmware versions, LogiQ, Mammotion Kit, connector names and proprietary module names.", json.dumps(values, ensure_ascii=False))
+    for key in _INTERNAL_CN_FIELDS:
+        if key in translated and isinstance(translated[key], type(values[key])):
+            result[key] = translated[key]
+    return result
+
 def analyze_case_for_inspector(case):
     data={k:case.get(k) for k in ('description','case_history','fault_symptom','pie_comment','solutions','model_type','error_codes','status')}
     context=case.get("context_pack") or {}
@@ -90,6 +101,7 @@ def analyze_case_for_inspector(case):
     if state not in {'FINAL','CURRENT','WORKAROUND','PENDING','NONE'}: state='NONE'
     next_action=str(result.get("next_action") or ("request_information" if status=="insufficient" else "assess"))
     result = validate(result, context, capability, status == "insufficient" or _restricted_or_repeated(result, context, capability))
+    result = _internal_analysis_to_zh(result)
     return InspectorAnalysis(str(result.get('customer_description') or ''), [str(x) for x in result.get('repair_actions',[])], str(result.get('current_blocker') or ''), bool(result.get('blocker_is_inferred')),
         rec, '' if rec else str(result.get('ai_suggested_next_step') or ''), state, str(result.get('solution') or ''), str(result.get('reply_en') or ''), 'ORIGINAL', _inspector_hash(data),status,missing,reasons,next_action,capability,
         result["confirmed_facts"], result["already_tried"], result["ruled_out"], result["hypotheses"], result["resolution_path"], result["needs_human_check"], result["escalation"], result["parts_to_verify"])

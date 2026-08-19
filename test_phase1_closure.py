@@ -50,6 +50,16 @@ class PhaseOneContractTests(unittest.TestCase):
         self.assertEqual(value.information_status, "insufficient")
         self.assertNotIn("Replace the mainboard", value.reply_en)
 
+    def test_production_analyze_route_keeps_customer_original_and_translates_internal_fields(self):
+        english = result(customer_description="Original English issue", repair_actions=["Replaced the driver board."], current_blocker="Waiting for confirmation.", historical_pie_recommendations=[], ai_suggested_next_step="Request required information.", solution="Replace mainboard.")
+        chinese = {"repair_actions":["已更换驱动板。"],"current_blocker":"等待确认。","historical_pie_recommendations":[],"ai_suggested_next_step":"请求必要信息。","solution":"更换主板。","missing_information":[],"reason_for_request":[]}
+        with patch.object(analyzer, "_call_deepseek", side_effect=[english, chinese]):
+            value=analyzer.analyze_case_for_inspector({"model_type":"LUBA 3","description":"Original English issue","context_pack":{}})
+        self.assertEqual(value.customer_description,"Original English issue")
+        self.assertEqual(value.repair_actions,["已更换驱动板。"])
+        self.assertEqual(value.ai_suggested_next_step,"请求必要信息。")
+        self.assertIn("Hi Team",value.reply_en)
+
     def test_luba1_log_requests_are_removed_from_every_output(self):
         value = self.inspect(result(information_status="sufficient", missing_information=["Upload logs"], reason_for_request=["Run LogiQ"], ai_suggested_next_step="Export device logs", solution="Use LogiQ", reply_en="Please upload device logs."), "LUBA 1")
         self.assertEqual(value.capability, {"device_log":"unsupported", "logiq":"unsupported"})
@@ -130,7 +140,7 @@ class PhaseOneContractTests(unittest.TestCase):
         }
         scenarios = {
             "duplicate_lookup": ("open_existing_case", RuntimeError("lookup"), "FEISHU_LOOKUP_ERROR"),
-            "nextop_fetch": ("get_ticket_full", RuntimeError("response"), "NEXTOP_RESPONSE_ERROR"),
+            "nextop_fetch": ("get_ticket_full", RuntimeError("response"), "NEXTOP_REQUEST_ERROR"),
             "analyze": ("analyze_case_history", RuntimeError("analysis"), "ANALYZE_ERROR"),
             "context_build": ("build_context", RuntimeError("context"), "CONTEXT_BUILD_ERROR"),
         }

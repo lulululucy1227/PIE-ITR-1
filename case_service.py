@@ -675,9 +675,13 @@ def prepare_nextop_case(ticket_no, progress_callback=None, *, duplicate_decision
         missing = "not configured" in str(exc).lower()
         return _result(False, "prepare_nextop", "Nextop authentication is not configured." if missing else "Nextop authentication expired or invalid.", ticket_no=ticket_no, error_type="NEXTOP_CREDENTIALS_MISSING" if missing else "NEXTOP_AUTH_FAILED", stage="nextop_fetch")
     except Exception as exc:
-        if isinstance(exc, ValueError) and "未找到工单" in str(exc):
-            return _result(False, "prepare_nextop", "Nextop ticket was not found.", ticket_no=ticket_no, error_type="NEXTOP_TICKET_NOT_FOUND", stage="ticket_search")
-        codes={"duplicate_lookup":"FEISHU_LOOKUP_ERROR","context_build":"CONTEXT_BUILD_ERROR","analyze":"ANALYZE_ERROR","prepare_fields":"PREPARATION_ERROR","nextop_fetch":"NEXTOP_RESPONSE_ERROR"}
+        if isinstance(exc, nextop_api.NextopLookupEmpty):
+            return _result(False, "prepare_nextop", "Ticket lookup returned no exact result; verify Nextop scope or ticket number.", ticket_no=ticket_no, error_type="NEXTOP_LOOKUP_EMPTY", stage="ticket_search")
+        if isinstance(exc, nextop_api.NextopParseError):
+            return _result(False, "prepare_nextop", "Nextop returned an unexpected ticket response.", ticket_no=ticket_no, error_type="NEXTOP_PARSE_ERROR", stage="nextop_fetch")
+        if isinstance(exc, nextop_api.NextopResponseError):
+            return _result(False, "prepare_nextop", "Nextop ticket lookup could not be confirmed.", ticket_no=ticket_no, error_type="NEXTOP_RESPONSE_ERROR", stage="nextop_fetch")
+        codes={"duplicate_lookup":"FEISHU_LOOKUP_ERROR","context_build":"CONTEXT_BUILD_ERROR","analyze":"ANALYZE_ERROR","prepare_fields":"PREPARATION_ERROR","nextop_fetch":"NEXTOP_REQUEST_ERROR"}
         messages={"duplicate_lookup":"Preparation failed at Feishu duplicate lookup.","context_build":"Preparation failed while building context.","analyze":"Ticket loaded, but analysis failed.","prepare_fields":"Preparation failed while preparing ticket fields.","nextop_fetch":"Nextop ticket request failed."}
         return _result(False, "prepare_nextop", messages.get(stage,"Preparation failed."), ticket_no=ticket_no, error_type=codes.get(stage,"PREPARATION_ERROR"), stage=stage)
 
