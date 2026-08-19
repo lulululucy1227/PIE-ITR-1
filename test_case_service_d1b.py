@@ -42,7 +42,7 @@ class PreparedNextopCommitTests(unittest.TestCase):
         prepare.assert_called_once_with("N-1", None, duplicate_decision=None, duplicate_record_id=None)
         commit.assert_called_once_with(prepared, None, include_itr_todo=True, todo_dirty=True)
 
-    def test_prepare_then_commit_fetches_and_analyzes_once(self):
+    def test_prepare_then_commit_rechecks_nextop_without_reanalyzing(self):
         ticket_data = {"messages": [], "list_info": {"createTime": 1, "outerName": "", "outerAddress": "", "title": ""}}
         with patch.object(service, "open_existing_case", return_value={"match_status": "NOT_FOUND"}), \
              patch.object(service.nextop_api, "get_ticket_full", return_value=ticket_data) as fetch, \
@@ -58,12 +58,13 @@ class PreparedNextopCommitTests(unittest.TestCase):
             prepared = service.prepare_nextop_case("N-1")["prepared"]
             result = service.commit_prepared_nextop_case(prepared)
         self.assertTrue(result["success"])
-        self.assertEqual(fetch.call_count, 1)
+        self.assertEqual(fetch.call_count, 2)
         self.assertEqual(analyze.call_count, 1)
 
     def test_stale_exact_prepared_target_is_not_written(self):
         prepared = _prepared(existing="rec-old", kind="exact")
-        with patch.object(service.feishu_api, "find_records_by_reference_exact", return_value=[{"record_id": "rec-new", "fields": {}}]), \
+        with patch.object(service, "refresh_latest_nextop_case", return_value={"success": True, "change_type": "NO_CHANGE"}), \
+             patch.object(service.feishu_api, "find_records_by_reference_exact", return_value=[{"record_id": "rec-new", "fields": {}}]), \
              patch.object(service.feishu_api, "update_record") as update:
             result = service.commit_prepared_nextop_case(prepared)
         self.assertFalse(result["success"])
@@ -72,7 +73,8 @@ class PreparedNextopCommitTests(unittest.TestCase):
 
     def test_record_lock_releases_after_update_exception(self):
         prepared = _prepared(existing="rec-lock", kind="legacy")
-        with patch.object(service.feishu_api, "get_record", return_value={"record_id": "rec-lock", "fields": {}}), \
+        with patch.object(service, "refresh_latest_nextop_case", return_value={"success": True, "change_type": "NO_CHANGE"}), \
+             patch.object(service.feishu_api, "get_record", return_value={"record_id": "rec-lock", "fields": {}}), \
              patch.object(service, "build_notes_attachments", return_value=None), \
              patch.object(service.feishu_api, "update_record", side_effect=[RuntimeError("offline"), {"code": 0}]) as update, \
              patch.object(service, "_refresh_case_counts", return_value={"count": None, "warning": False, "reports": []}):

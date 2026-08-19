@@ -37,6 +37,8 @@
 - Safe dead-code cleanup removed only `generate_sop.py`, an unreferenced legacy batch-write SOP prototype with no launcher, test, or documentation reference. V1 fallback and all current launch/token utilities remain preserved.
 - Phase 1.5A Golden Foundation adds offline synthetic contract coverage, deterministic validator fields, and pure pasted-source normalization. V2 supports a manual Copy-as-cURL Nextop credential update flow with ignored local storage, runtime update, read-only validation, and explicit missing/expired auth errors; fail-closed remains intact. Real Nextop read acceptance passed for `E264714`: token update, Search/Load, ticket fetch, read-only Context, automatic Analyze, and correct-workspace display. No Nextop write, Feishu write, or ITR Commit occurred.
 - Old UI reuse audit decision: **KEEP CURRENT V2 UI**. The legacy assistant is reference-only. Reusable concepts are card hierarchy, progress/status feedback, modal hierarchy, ticket status affordance, attachment review pattern, and pre-commit review emphasis. Do not migrate legacy `app.py`, `static/index.html`, pipeline, Nextop/Feishu adapters, KB/archive, or free reply generation.
+- Support UX: Inspector internal technical fields are requested in Simplified Chinese by contract; Customer Issue remains original source text with an independent Chinese view; Email Reply remains English with an independent Chinese review view. The header has a compact Nextop status/token entry; the existing token modal remains the only token UI.
+- Nextop freshness: each prepared Nextop Case stores a content-free ticket-version fingerprint. Manual Refresh is read-only. A latest PIE reply updates Case History/reply fields without re-running Inspector; a new agent message rebuilds read-only context/preparation and triggers Inspector re-analysis. Prepare/Commit paths perform a freshness read; Commit rechecks and blocks if the version changed or cannot be verified. No polling, Nextop writes, or Feishu writes were added.
 
 ## Known risks / unverified work
 
@@ -56,6 +58,6 @@ python -B -m unittest -q test_case_service_d1b.py test_gui_d2a.py test_local_api
 cd frontend; pnpm run build
 ```
 
-- Current offline regression: 52 Python tests pass (including 4 Golden, 4 multi-source, and 8 auth tests); 9 frontend state/layout tests pass; V2 production build passes. Real acceptance confirms only the read-only Nextop flow above; no real Nextop/Feishu writes were made.
+- Current offline regression: 58 Python tests pass (including 4 Golden, 4 multi-source, 8 auth, and 6 freshness tests); 11 frontend state/layout tests pass; V2 production build passes. Real acceptance confirms only the prior read-only Nextop flow. Real freshness acceptance is pending user-operated testing; no real Nextop/Feishu writes were made.
 - Known limitation: automated browser control was unavailable locally, so 1600x900 and 1920x1080 Chrome 100% visual acceptance remains a manual check; CSS/static tests cover its no-overflow, bounded-context, and scrollable-reply contract.
 - Next and only task after explicit user direction: Phase 1.5 Golden Regression / governed old-code comparison. Do not start Parts, RAG, Vision, assistant-ui, Data Browser, or any external write work automatically.

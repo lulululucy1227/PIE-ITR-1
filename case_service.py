@@ -2,6 +2,8 @@
 import re
 import threading
 import sys
+import hashlib
+import json
 from contextlib import contextmanager
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
@@ -67,6 +69,9 @@ def analyze_existing_case_for_inspector(case):
 def translate_inspector_analysis_to_zh(analysis):
     return analyzer.translate_inspector_analysis_to_zh(analysis)
 
+def translate_text_to_zh(text):
+    return analyzer.translate_text_to_zh(text)
+
 
 @dataclass
 class ManualDraft:
@@ -100,6 +105,8 @@ class PreparedNextopCase:
     can_create: bool = False
     can_update: bool = False
     context_pack: dict = field(default_factory=dict, repr=False)
+    ticket_version: str = ""
+    fetched_at: str = ""
 
 
 @dataclass
@@ -312,6 +319,49 @@ def build_nextop_case_history(messages):
         elif sender: header.append(sender)
         blocks.append(("[" + "] [".join(header) + "]\n" if header else "") + content)
     return "\n\n".join(blocks)
+
+def _ticket_version(messages, list_info=None):
+    """Stable, local-only freshness token.  It never contains ticket content."""
+    payload = [{key: item.get(key) for key in ("time", "senderType", "senderName", "content", "subject")}
+               for item in (messages or [])]
+    return hashlib.sha256(json.dumps(payload, ensure_ascii=False, sort_keys=True, default=str).encode()).hexdigest()[:16]
+
+def _refresh_failure(ticket_no, exc):
+    if isinstance(exc, nextop_api.NextopAuthRequired):
+        missing = "not configured" in str(exc).lower()
+        return _result(False, "refresh_nextop", "Nextop authentication is not configured." if missing else "Nextop authentication expired or invalid.", ticket_no=ticket_no, error_type="NEXTOP_CREDENTIALS_MISSING" if missing else "NEXTOP_AUTH_FAILED", stage="nextop_fetch")
+    return _result(False, "refresh_nextop", "Latest Nextop state could not be verified.", ticket_no=ticket_no, error_type="NEXTOP_REFRESH_ERROR", stage="nextop_fetch")
+
+def refresh_latest_nextop_case(prepared):
+    """Read latest Nextop state and return a safe delta; never writes Feishu or Nextop."""
+    if not isinstance(prepared, PreparedNextopCase):
+        return _result(False, "refresh_nextop", "No prepared Nextop Case is available.", error_type="invalid_prepared")
+    try:
+        ticket = nextop_api.get_ticket_full(prepared.ticket_no)
+        messages, info = ticket["messages"], ticket["list_info"]
+        version = _ticket_version(messages, info)
+    except Exception as exc:
+        return _refresh_failure(prepared.ticket_no, exc)
+    if version == prepared.ticket_version:
+        return _result(True, "refresh_nextop", "Up to date.", ticket_no=prepared.ticket_no, change_type="NO_CHANGE", prepared=prepared, ticket_version=version)
+    old_count = len(prepared.messages)
+    new_messages = messages[old_count:] if messages[:old_count] == prepared.messages else messages
+    if new_messages and all(_is_nextop_support_reply(item) for item in new_messages):
+        history = build_nextop_case_history(messages)
+        fields = build_v2_fields(history, prepared.analysis, (info.get("outerName"), info.get("outerAddress"), info.get("title")))
+        reply = _nextop_reply_fields(messages); _guard_select(reply, "Status"); fields.update(reply)
+        import context_service
+        refreshed = PreparedNextopCase(prepared.ticket_no, history, prepared.analysis, fields, messages, info,
+            prepared.existing_record_id, prepared.existing_case, prepared.match_status, prepared.matches,
+            prepared.selected_match_kind, prepared.can_create, prepared.can_update,
+            context_service.build_context(prepared.ticket_no, fields, messages, history), version,
+            datetime.now(timezone.utc).isoformat())
+        return _result(True, "refresh_nextop", "Latest reply synced.", ticket_no=prepared.ticket_no, change_type="NEW_PIE_MESSAGE", prepared=refreshed, ticket_version=version)
+    refreshed = prepare_nextop_case(prepared.ticket_no)
+    if not refreshed.get("success"):
+        return refreshed
+    change = "NEW_AGENT_MESSAGE" if new_messages else "OTHER_TICKET_CHANGE"
+    return _result(True, "refresh_nextop", "New agent message received — analysis refreshed." if change == "NEW_AGENT_MESSAGE" else "Ticket state changed; review refreshed.", ticket_no=prepared.ticket_no, change_type=change, prepared=refreshed["prepared"], ticket_version=refreshed["prepared"].ticket_version, requires_reanalyze=True)
 
 
 def build_imported_case_history(source, text, imported_at=None):
@@ -617,7 +667,8 @@ def prepare_nextop_case(ticket_no, progress_callback=None, *, duplicate_decision
                                       existing_record_id=existing_id, existing_case=existing_case,
                                       match_status="ONE" if existing_id else "NOT_FOUND",
                                       matches=existing.get("matches", []), selected_match_kind=selected_match_kind,
-                                      can_create=not bool(existing_id), can_update=bool(existing_id), context_pack=context_pack)
+                                        can_create=not bool(existing_id), can_update=bool(existing_id), context_pack=context_pack,
+                                        ticket_version=_ticket_version(messages, info), fetched_at=datetime.now(timezone.utc).isoformat())
         _progress(progress_callback, "prepared", "Ready for review.", True)
         return _result(True, "prepared_existing" if existing_id else "prepared_new", "Nextop Case is ready for review.", prepared=prepared, case=existing_case or candidate_from_record({"record_id": None, "fields": fields}))
     except nextop_api.NextopAuthRequired as exc:
@@ -660,6 +711,11 @@ def commit_prepared_nextop_case(prepared, progress_callback=None, *, include_itr
         return _result(False, "commit_prepared", "Invalid prepared Case.", error_type="invalid_prepared")
     if not prepared.fields or not prepared.case_history:
         return _result(False, "commit_prepared", "Prepared Case has no review data; load it again before writing.", ticket_no=prepared.ticket_no, error_type="invalid_prepared")
+    freshness = refresh_latest_nextop_case(prepared)
+    if not freshness.get("success"):
+        return _result(False, "commit_prepared", "Latest Nextop state could not be verified; ITR Commit is blocked.", ticket_no=prepared.ticket_no, error_type=freshness.get("error_type") or "NEXTOP_REFRESH_ERROR", stage=freshness.get("stage"))
+    if freshness.get("change_type") != "NO_CHANGE":
+        return _result(False, "commit_prepared", "Ticket has changed since ITR preparation. Please review the latest messages.", ticket_no=prepared.ticket_no, error_type="NEXTOP_TICKET_STALE", latest_change=freshness.get("change_type"), prepared=freshness.get("prepared"))
     guard = None
     try:
         fields = dict(prepared.fields)

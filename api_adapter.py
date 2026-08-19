@@ -51,9 +51,17 @@ class LocalApiAdapter:
         import case_service
         return to_json(case_service.analyze_existing_case_for_inspector(dict(payload.get("case") or {})))
 
+    def refresh(self, payload):
+        import case_service
+        return to_json(case_service.refresh_latest_nextop_case(prepared_from_json(payload.get("prepared"))))
+
     def translate(self, payload):
         import case_service
         return to_json(case_service.translate_inspector_analysis_to_zh(analysis_from_json(payload.get("analysis"))))
+
+    def translate_text(self, payload):
+        import case_service
+        return {"text": case_service.translate_text_to_zh(payload.get("text") or "")}
 
     def commit(self, payload):
         import case_service

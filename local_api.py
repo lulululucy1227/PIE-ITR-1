@@ -24,8 +24,8 @@ class Handler(BaseHTTPRequestHandler):
         else: self._send(404, {"success": False, "message": "Not found."})
 
     def do_POST(self):
-        routes = {"/api/cases/prepare": ADAPTER.prepare, "/api/auth/nextop/status": lambda _p: ADAPTER.nextop_auth_status(), "/api/auth/nextop/update": ADAPTER.update_nextop_token, "/api/cases/analyze": ADAPTER.analyze,
-                  "/api/cases/translate": ADAPTER.translate, "/api/cases/commit": ADAPTER.commit}
+        routes = {"/api/cases/prepare": ADAPTER.prepare, "/api/cases/refresh": ADAPTER.refresh, "/api/auth/nextop/status": lambda _p: ADAPTER.nextop_auth_status(), "/api/auth/nextop/update": ADAPTER.update_nextop_token, "/api/cases/analyze": ADAPTER.analyze,
+                  "/api/cases/translate": ADAPTER.translate, "/api/cases/translate-text": ADAPTER.translate_text, "/api/cases/commit": ADAPTER.commit}
         action = routes.get(self.path)
         if not action:
             self._send(404, {"success": False, "message": "Not found."}); return
