@@ -8,6 +8,8 @@ BASE = "https://api.nextop.com"
 
 
 def _headers(extra=None):
+    if not all((config.NEXTOP_AUTH, config.NEXTOP_COOKIE, config.NEXTOP_SATOKEN)):
+        raise NextopAuthRequired("Nextop credentials are not configured.")
     ts = str(int(time.time() * 1000))
     h = {
         "accept": "application/json, text/plain, */*",

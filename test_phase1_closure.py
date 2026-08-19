@@ -15,6 +15,8 @@ import analyzer
 import context_service
 import product_capabilities
 import case_service
+import feishu_api
+import nextop_api
 
 
 def result(**extra):
@@ -103,6 +105,18 @@ class PhaseOneContractTests(unittest.TestCase):
         with patch.object(case_service.feishu_api, "create_record") as create, patch.object(case_service.feishu_api, "update_record") as update, patch.object(analyzer, "_call_deepseek", return_value=result()):
             analyzer.analyze_case_for_inspector({"model_type":"LUBA 3", "description":"x", "context_pack":{}})
         create.assert_not_called(); update.assert_not_called()
+
+    def test_empty_local_credentials_fail_before_external_requests(self):
+        with patch.object(feishu_api.requests, "request", create=True) as request:
+            with self.assertRaises(feishu_api.FeishuAuthRequired):
+                feishu_api._request("GET", "/open-apis/bitable/v1/apps/example")
+        request.assert_not_called()
+        with self.assertRaises(nextop_api.NextopAuthRequired):
+            nextop_api._headers()
+        with patch.object(analyzer.requests, "post", create=True) as post:
+            with self.assertRaisesRegex(RuntimeError, "credentials are not configured"):
+                analyzer._call_deepseek("system", "input")
+        post.assert_not_called()
 
 
 if __name__ == "__main__":

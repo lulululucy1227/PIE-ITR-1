@@ -160,6 +160,8 @@ Rules:
 
 
 def _call_deepseek(system_prompt, user_content, retries=5):
+    if not config.DEEPSEEK_API_KEY or not config.DEEPSEEK_BASE_URL:
+        raise RuntimeError("DeepSeek credentials are not configured.")
     last_error = None
     for attempt in range(retries):
         try:

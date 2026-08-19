@@ -7,6 +7,10 @@ BASE = "https://open.feishu.cn"
 _AUTH_ERROR_CODES = {99991663, 99991661, 99991677, 99991668}
 
 
+class FeishuAuthRequired(RuntimeError):
+    """Local credentials are missing; do not attempt an external request."""
+
+
 def _safe_feishu_message(message):
     """Keep technical diagnostics while excluding likely submitted values."""
     text = re.sub(r"\s+", " ", str(message or "")).strip()
@@ -54,6 +58,8 @@ def _persist_tokens(access_token, refresh_token):
 
 
 def _get_app_access_token():
+    if not all((config.FEISHU_APP_ID, config.FEISHU_APP_SECRET)):
+        raise FeishuAuthRequired("Feishu app credentials are not configured.")
     resp = requests.post(f"{BASE}/open-apis/auth/v3/app_access_token/internal",
                           json={"app_id": config.FEISHU_APP_ID, "app_secret": config.FEISHU_APP_SECRET})
     resp.raise_for_status()
@@ -62,6 +68,8 @@ def _get_app_access_token():
 
 def refresh_user_token():
     """用 refresh_token 换取新的 access_token，并写回 config.py"""
+    if not config.FEISHU_USER_REFRESH_TOKEN:
+        raise FeishuAuthRequired("Feishu refresh token is not configured.")
     app_token = _get_app_access_token()
     resp = requests.post(
         f"{BASE}/open-apis/authen/v1/refresh_access_token",
@@ -76,6 +84,8 @@ def refresh_user_token():
 
 
 def _request(method, path, **kwargs):
+    if not config.FEISHU_USER_ACCESS_TOKEN:
+        raise FeishuAuthRequired("Feishu user access token is not configured.")
     import time as _t
     url = f"{BASE}{path}"
     headers = kwargs.pop("headers", {})

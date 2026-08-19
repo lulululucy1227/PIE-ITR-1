@@ -2,7 +2,8 @@
 
 ## Goal and architecture
 
-- Current development branch: `agent/pie-itr-v2-workbench` (local work reconciled against `origin/agent/initial-pie-itr-workbench`).
+- Formal development directory: `C:\\Users\\Reggie\\Desktop\\PIE-ITR-1` on `agent/pie-itr-v2-workbench` (no remote configured).
+- Zero-credential baseline is restored and fail-closed: absent Nextop, Feishu, or DeepSeek credentials fail before an external request. Current clean development baseline is this commit.
 
 - Turn technical communications into structured ITR Cases without bypassing Feishu-owned formulas, lookups, downstream tags, IDs, or Closed automation.
 - Current mainline: V2 React Workbench. V1: `gui.py` Tkinter operational fallback; `main.py` CLI fallback.
@@ -52,6 +53,6 @@ python -B -m unittest -q test_case_service_d1b.py test_gui_d2a.py test_local_api
 cd frontend; pnpm run build
 ```
 
-- Closure tests: 33 Python offline tests pass (`test_case_service_d1b`, `test_context_service`, `test_gui_d2a`, `test_local_api`, `test_phase1_closure`); 8 frontend state/layout tests pass; V2 production build passes. No real Nextop/Feishu calls or writes were made during closure.
+- Baseline tests: 34 Python offline tests pass (`test_case_service_d1b`, `test_context_service`, `test_gui_d2a`, `test_local_api`, `test_phase1_closure`); 8 frontend state/layout tests pass; V2 production build passes. No real Nextop/Feishu calls or writes were made during baseline restoration.
 - Known limitation: automated browser control was unavailable locally, so 1600x900 and 1920x1080 Chrome 100% visual acceptance remains a manual check; CSS/static tests cover its no-overflow, bounded-context, and scrollable-reply contract.
 - Next and only task after explicit user direction: Phase 1.5 Golden Regression / governed old-code comparison. Do not start Parts, RAG, Vision, assistant-ui, Data Browser, or any external write work automatically.
