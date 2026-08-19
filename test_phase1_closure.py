@@ -107,16 +107,57 @@ class PhaseOneContractTests(unittest.TestCase):
         create.assert_not_called(); update.assert_not_called()
 
     def test_empty_local_credentials_fail_before_external_requests(self):
-        with patch.object(feishu_api.requests, "request", create=True) as request:
+        with patch.object(feishu_api.config, "FEISHU_USER_ACCESS_TOKEN", ""), patch.object(feishu_api.requests, "request", create=True) as request:
             with self.assertRaises(feishu_api.FeishuAuthRequired):
                 feishu_api._request("GET", "/open-apis/bitable/v1/apps/example")
         request.assert_not_called()
-        with self.assertRaises(nextop_api.NextopAuthRequired):
-            nextop_api._headers()
-        with patch.object(analyzer.requests, "post", create=True) as post:
+        with patch.object(nextop_api.config, "NEXTOP_AUTH", ""), patch.object(nextop_api.config, "NEXTOP_COOKIE", ""), patch.object(nextop_api.config, "NEXTOP_SATOKEN", ""):
+            with self.assertRaises(nextop_api.NextopAuthRequired):
+                nextop_api._headers()
+        with patch.object(analyzer.config, "DEEPSEEK_API_KEY", ""), patch.object(analyzer.config, "DEEPSEEK_BASE_URL", ""), patch.object(analyzer.requests, "post", create=True) as post:
             with self.assertRaisesRegex(RuntimeError, "credentials are not configured"):
                 analyzer._call_deepseek("system", "input")
         post.assert_not_called()
+
+    def test_prepare_errors_are_stage_specific_and_never_masquerade_as_auth(self):
+        ticket = {"messages": [], "list_info": {"createTime": "2026-01-01", "outerName": "", "outerAddress": "", "title": ""}}
+        common = {
+            "open_existing_case": {"match_status": "NOT_FOUND"},
+            "build_nextop_case_history": "history",
+            "analyze_case_history": {},
+            "build_v2_fields": {},
+            "_nextop_reply_fields": {"Status": ""},
+        }
+        scenarios = {
+            "duplicate_lookup": ("open_existing_case", RuntimeError("lookup"), "FEISHU_LOOKUP_ERROR"),
+            "nextop_fetch": ("get_ticket_full", RuntimeError("response"), "NEXTOP_RESPONSE_ERROR"),
+            "analyze": ("analyze_case_history", RuntimeError("analysis"), "ANALYZE_ERROR"),
+            "context_build": ("build_context", RuntimeError("context"), "CONTEXT_BUILD_ERROR"),
+        }
+        for stage, (target, failure, code) in scenarios.items():
+            with self.subTest(stage=stage):
+                with patch.object(case_service, "open_existing_case", return_value=common["open_existing_case"]), \
+                     patch.object(case_service, "build_nextop_case_history", return_value=common["build_nextop_case_history"]), \
+                     patch.object(case_service.nextop_api, "get_ticket_full", return_value=ticket), \
+                     patch.object(case_service.analyzer, "analyze_case_history", return_value=common["analyze_case_history"]), \
+                     patch.object(case_service, "build_v2_fields", return_value=common["build_v2_fields"]), \
+                     patch.object(case_service, "_nextop_reply_fields", return_value=common["_nextop_reply_fields"]), \
+                     patch.object(case_service, "find_nextop_legacy_duplicates", return_value=[]), \
+                     patch("context_service.build_context", return_value={}):
+                    if target == "build_context":
+                        context_patch = patch("context_service.build_context", side_effect=failure)
+                    elif target == "get_ticket_full":
+                        context_patch = patch.object(case_service.nextop_api, target, side_effect=failure)
+                    elif target == "analyze_case_history":
+                        context_patch = patch.object(case_service.analyzer, target, side_effect=failure)
+                    else:
+                        context_patch = patch.object(case_service, target, side_effect=failure)
+                    with context_patch:
+                        value = case_service.prepare_nextop_case("SAFE-STAGE")
+                self.assertEqual(value["stage"], stage)
+                self.assertEqual(value["error_type"], code)
+                self.assertEqual(value["ticket_no"], "SAFE-STAGE")
+                self.assertNotIn("AUTH", value["error_type"])
 
 
 if __name__ == "__main__":

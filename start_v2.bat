@@ -1,6 +1,8 @@
 @echo off
 setlocal
 cd /d "%~dp0"
+rem Replace a previous PIE Local API instance on its fixed loopback port.
+for /f "tokens=5" %%P in ('netstat -ano ^| findstr ":8787"') do taskkill /f /pid %%P >nul 2>nul
 start "PIE ITR Local API" /b python -B local_api.py
 cd frontend
 set "PIE_NODE="

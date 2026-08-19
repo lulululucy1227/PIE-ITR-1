@@ -45,7 +45,7 @@ class LocalApiAdapter:
         except Exception as exc:
             import nextop_api
             if isinstance(exc,nextop_api.NextopAuthRequired): return {"success":False,"error_type":"NEXTOP_CREDENTIALS_MISSING" if "not configured" in str(exc) else "NEXTOP_AUTH_FAILED","message":"Nextop authentication is not configured." if "not configured" in str(exc) else "Nextop authentication expired or invalid."}
-            return {"success":False,"error_type":"NEXTOP_REQUEST_ERROR","message":"Nextop request failed."}
+            return {"success":False,"error_type":"NEXTOP_RESPONSE_ERROR","stage":"local_api_prepare","message":"Preparation request failed before a safe case result was returned.","detail":type(exc).__name__}
 
     def analyze(self, payload):
         import case_service

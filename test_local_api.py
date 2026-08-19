@@ -36,5 +36,15 @@ class LocalApiTests(unittest.TestCase):
             self.assertTrue(adapter.commit(payload)["success"])
         commit.assert_called_once()
 
+    def test_unexpected_prepare_failure_has_safe_stage_diagnostic(self):
+        adapter = api_adapter.LocalApiAdapter()
+        with patch.object(service, "prepare_nextop_case", side_effect=RuntimeError("cookie=private-value")):
+            result = adapter.prepare({"source": "nextop", "ticket_no": "E264714"})
+        self.assertFalse(result["success"])
+        self.assertEqual(result["stage"], "local_api_prepare")
+        self.assertEqual(result["error_type"], "NEXTOP_RESPONSE_ERROR")
+        self.assertEqual(result["detail"], "RuntimeError")
+        self.assertNotIn("private-value", str(result))
+
 
 if __name__ == "__main__": unittest.main()

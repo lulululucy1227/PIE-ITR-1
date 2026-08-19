@@ -18,11 +18,13 @@ class NextopAuthTests(unittest.TestCase):
         for value in ("", "curl -H 'Authorization: x'"):
             with self.assertRaises(nextop_auth.NextopCredentialError): nextop_auth.parse_curl(value)
     def test_missing_credentials_fail_closed_before_network(self):
-        with self.assertRaises(nextop_api.NextopAuthRequired): nextop_api._headers()
+        with patch.object(nextop_api.config, "NEXTOP_AUTH", ""), patch.object(nextop_api.config, "NEXTOP_COOKIE", ""), patch.object(nextop_api.config, "NEXTOP_SATOKEN", ""):
+            with self.assertRaises(nextop_api.NextopAuthRequired): nextop_api._headers()
     def test_auth_failure_classified_and_ticket_preserved(self):
         with patch.object(case_service,"open_existing_case",return_value={"match_status":"NOT_FOUND"}), patch.object(case_service.nextop_api,"get_ticket_full",side_effect=nextop_api.NextopAuthRequired("Nextop authentication expired or invalid.")):
             value=case_service.prepare_nextop_case("SAFE-1")
         self.assertEqual(value["error_type"],"NEXTOP_AUTH_FAILED"); self.assertEqual(value["ticket_no"],"SAFE-1")
+        self.assertEqual(value["stage"], "nextop_fetch")
     def test_persistence_is_atomic_redacted_and_preserves_other_config(self):
         with tempfile.TemporaryDirectory() as directory:
             path=Path(directory)/"config.py"; path.write_text('NEXTOP_AUTH = ""\nNEXTOP_COOKIE = ""\nNEXTOP_SATOKEN = ""\nOTHER = "keep"\n',encoding="utf-8")

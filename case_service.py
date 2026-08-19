@@ -587,16 +587,17 @@ def open_existing_case(identifier):
 def prepare_nextop_case(ticket_no, progress_callback=None, *, duplicate_decision=None, duplicate_record_id=None):
     """Fetch/analyze/review Nextop only.  This function never writes ITR."""
     ticket_no = str(ticket_no or "").strip()
+    stage = "duplicate_lookup"
     try:
         _progress(progress_callback, "matching", "Checking for an existing ITR Case.")
         existing = open_existing_case(ticket_no)
         if existing.get("match_status") == "MULTIPLE":
             return _result(False, "prepared_multiple", "Multiple exact ITR Cases require selection.", match_status="MULTIPLE", matches=existing["matches"])
-        _progress(progress_callback, "nextop_fetch", "Fetching Nextop ticket.")
+        stage = "nextop_fetch"; _progress(progress_callback, "nextop_fetch", "Fetching Nextop ticket.")
         ticket_data = nextop_api.get_ticket_full(ticket_no); messages = ticket_data["messages"]; history = build_nextop_case_history(messages)
-        _progress(progress_callback, "analysis", "Analyzing Nextop Case for review.")
+        stage = "analyze"; _progress(progress_callback, "analysis", "Analyzing Nextop Case for review.")
         analysis = analyzer.analyze_case_history(history); info = ticket_data["list_info"]
-        dealer_context = (info.get("outerName"), info.get("outerAddress"), info.get("title")) + tuple(m.get("senderName") for m in messages if m.get("senderType") == 1)
+        stage = "prepare_fields"; dealer_context = (info.get("outerName"), info.get("outerAddress"), info.get("title")) + tuple(m.get("senderName") for m in messages if m.get("senderType") == 1)
         fields = build_v2_fields(history, analysis, dealer_context); fields.update({"Reference No.": ticket_no, "Ticket Created Time": info["createTime"]}); reply = _nextop_reply_fields(messages); _guard_select(reply, "Status"); fields.update(reply)
         existing_id = existing.get("record_id") if existing.get("match_status") == "ONE" else None
         existing_case = existing.get("case") if existing_id else None
@@ -610,7 +611,7 @@ def prepare_nextop_case(ticket_no, progress_callback=None, *, duplicate_decision
                 existing_id = duplicate_record_id if duplicate_record_id in allowed_ids else legacy_matches[0].get("record_id")
                 existing_case = next((item for item in legacy_matches if item.get("record_id") == existing_id), None)
                 selected_match_kind = "legacy"
-        import context_service
+        stage = "context_build"; import context_service
         context_pack=context_service.build_context(ticket_no, fields, messages, history)
         prepared = PreparedNextopCase(ticket_no, history, analysis, fields, messages, info,
                                       existing_record_id=existing_id, existing_case=existing_case,
@@ -621,9 +622,13 @@ def prepare_nextop_case(ticket_no, progress_callback=None, *, duplicate_decision
         return _result(True, "prepared_existing" if existing_id else "prepared_new", "Nextop Case is ready for review.", prepared=prepared, case=existing_case or candidate_from_record({"record_id": None, "fields": fields}))
     except nextop_api.NextopAuthRequired as exc:
         missing = "not configured" in str(exc).lower()
-        return _result(False, "prepare_nextop", "Nextop authentication is not configured." if missing else "Nextop authentication expired or invalid.", ticket_no=ticket_no, error_type="NEXTOP_CREDENTIALS_MISSING" if missing else "NEXTOP_AUTH_FAILED")
+        return _result(False, "prepare_nextop", "Nextop authentication is not configured." if missing else "Nextop authentication expired or invalid.", ticket_no=ticket_no, error_type="NEXTOP_CREDENTIALS_MISSING" if missing else "NEXTOP_AUTH_FAILED", stage="nextop_fetch")
     except Exception as exc:
-        return _exception_failure(exc, "prepare_nextop", "Nextop preparation failed.", ticket_no=ticket_no)
+        if isinstance(exc, ValueError) and "未找到工单" in str(exc):
+            return _result(False, "prepare_nextop", "Nextop ticket was not found.", ticket_no=ticket_no, error_type="NEXTOP_TICKET_NOT_FOUND", stage="ticket_search")
+        codes={"duplicate_lookup":"FEISHU_LOOKUP_ERROR","context_build":"CONTEXT_BUILD_ERROR","analyze":"ANALYZE_ERROR","prepare_fields":"PREPARATION_ERROR","nextop_fetch":"NEXTOP_RESPONSE_ERROR"}
+        messages={"duplicate_lookup":"Preparation failed at Feishu duplicate lookup.","context_build":"Preparation failed while building context.","analyze":"Ticket loaded, but analysis failed.","prepare_fields":"Preparation failed while preparing ticket fields.","nextop_fetch":"Nextop ticket request failed."}
+        return _result(False, "prepare_nextop", messages.get(stage,"Preparation failed."), ticket_no=ticket_no, error_type=codes.get(stage,"PREPARATION_ERROR"), stage=stage)
 
 
 def _nextop_update_fields(fields, audit, include_itr_todo, todo_dirty):
