@@ -3,7 +3,7 @@
 ## Goal and architecture
 
 - Formal development directory: `C:\\Users\\Reggie\\Desktop\\PIE-ITR-1` on `agent/pie-itr-v2-workbench` (no remote configured).
-- Zero-credential baseline is restored and fail-closed: absent Nextop, Feishu, or DeepSeek credentials fail before an external request. Current clean development baseline is this commit.
+- Zero-credential baseline is restored and fail-closed: absent Nextop, Feishu, or DeepSeek credentials fail before an external request. Current cleanup baseline is this commit.
 
 - Turn technical communications into structured ITR Cases without bypassing Feishu-owned formulas, lookups, downstream tags, IDs, or Closed automation.
 - Current mainline: V2 React Workbench. V1: `gui.py` Tkinter operational fallback; `main.py` CLI fallback.
@@ -34,6 +34,7 @@
 - Phase 1 Closure baseline: successful V2 Search/Load automatically queues context-aware Analyze; failed preparation does not; Re-analyze remains manual. Workspace operation generations discard stale/closed responses. Context Pack is read-only: current Nextop conversation, same-reference Historical ITR, exact Error Code and Technical Information records with record/source provenance. No match is valid (`knowledge_coverage=none`); unreviewed `工单速查_V2` remains excluded as authoritative knowledge.
 - Inspector contract now includes `information_status`, `missing_information`, `reason_for_request`, and `next_action`. An insufficient result is normalized to a request-only English reply. A deterministic output guard prevents unsupported LogiQ/device-log requests and plainly repeated failed connector checks. Capability baseline: LUBA 1 has `device_log=unsupported` and `logiq=unsupported`; all unlisted products are `unknown`, never implicitly supported. Only explicit Commit may write.
 - V2 UI retains case-local Todo/notes/close state, Review fields, Copy Reply, translation cache behavior, and responsive desktop layout (270px Context column, no body horizontal overflow, internally scrollable Reply). LogiQ UI is enabled only for an explicitly supported capability and otherwise remains unavailable.
+- Safe dead-code cleanup removed only `generate_sop.py`, an unreferenced legacy batch-write SOP prototype with no launcher, test, or documentation reference. V1 fallback and all current launch/token utilities remain preserved.
 
 ## Known risks / unverified work
 
