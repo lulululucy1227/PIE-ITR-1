@@ -5,6 +5,7 @@ Feishu record-write calls in-process before loading any ticket.
 """
 import argparse
 import json
+from dataclasses import asdict, is_dataclass
 
 import analyzer
 import case_service
@@ -70,6 +71,8 @@ def validate(ticket):
                 result["Failure Reason"] = str(analyzed.get("error_type") or "ANALYZE")
                 return result
             active, analysis = analyzed["prepared"], analyzed.get("analysis") or {}
+            if is_dataclass(analysis):
+                analysis = asdict(analysis)
             reply = str(analysis.get("reply_en") or "").strip()
             reply_error = str(analysis.get("reply_generation_error") or "").strip()
             result.update({

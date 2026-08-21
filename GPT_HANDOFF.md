@@ -44,6 +44,7 @@
 - Workbench core closure pass: Refresh distinguishes no-change, latest PIE reply (WAITING), and latest agent reply (reanalyze); reply totals remain derived from the complete normalized message history; translation routes fail closed and preload Customer/Reply Chinese copies; English Reply has a deterministic language guard; tabs have local close/status controls; ITR Preview presents the same prepared fields in a readable modal before explicit Commit. No local mirror was started because Phase G is gated on A-F acceptance.
 - P0 CLOSED. Delivered deterministic model resolution, stable Nextop refresh/freshness, WAITING state, Human Guidance lifecycle, translation preload, bounded English reply repair, stable Total Replied, canonical Case State, non-destructive ITR update, classification propagation, NFF checkbox, manual 问题归属, and freshness/preservation-safe ITR Preview. The real-ticket read-only validation tool is redacted and write-guarded.
 - Real-ticket read-only validation: E249010 PASS, E266161 PASS, E277639 PASS, E257011 PASS. Nextop production write is not enabled; no real Feishu test write was executed.
+- P1 CLOSED. P1A keeps communication state separate from ticket-keyed local workflow state with ACTIVE, WAITING_LOGIQ, CHECK_PART, VIDEO_CALL, ESCALATE, and DONE; Next Action and restart/tab-close recovery are local and workspace-isolated. P1B derives a compact Active Work Queue from that same state, with LOGIQ/PART/VIDEO/ESC/ACTIVE labels, deterministic sorting, DONE filtering, and queue resume. NFF readiness is deterministic and manual: Customer Original Issue, three Suite PDF reports, Connect Checking, and Latest Log are required; incomplete evidence blocks silent NFF selection, urgent incomplete cases show Service Manager Review, and future Kit Aging Test is not active. Attachment types require human confirmation when reliable metadata is unavailable. No P0 canonical state, Feishu schema, database, or second persistence was added.
 
 ## Known risks / unverified work
 
@@ -63,7 +64,7 @@ python -B -m unittest -q test_case_service_d1b.py test_gui_d2a.py test_local_api
 cd frontend; pnpm run build
 ```
 
-- Current offline regression: Python 93/93 PASS; Frontend 17/17 PASS; Type Check PASS; production build PASS.
+- Current offline regression: Python 93/93 PASS; Frontend 20/20 PASS; Type Check PASS; production build PASS.
 - Real-ticket read-only validation: E249010 PASS, E266161 PASS, E277639 PASS, E257011 PASS. No ticket content or credentials are stored in this handoff.
 - No Nextop production write, no real Feishu test write, and no ITR Commit were executed.
 - Known limitation: automated browser control was unavailable locally, so 1600x900 and 1920x1080 Chrome 100% visual acceptance remains a manual check; CSS/static tests cover its no-overflow, bounded-context, and scrollable-reply contract.
