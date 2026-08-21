@@ -41,10 +41,13 @@
 - Nextop freshness: each prepared Nextop Case stores a content-free ticket-version fingerprint. Manual Refresh is read-only. A latest PIE reply updates Case History/reply fields without re-running Inspector; a new agent message rebuilds read-only context/preparation and triggers Inspector re-analysis. Prepare/Commit paths perform a freshness read; Commit rechecks and blocks if the version changed or cannot be verified. No polling, Nextop writes, or Feishu writes were added.
 - Nextop lookup/message correction: `pageOrders` is ticket-list lookup only; `workbench/basicInfo` is detail and `workbench/messages` is the conversation source. Empty exact lookup, malformed envelopes, unsuccessful envelopes, and request failures are now distinct safe errors; only an explicitly confirmed server-side condition may be called not-found. Messages are normalized, ordered by timestamp, and paginate only when the response declares a total. Explicit Search/Load failure clears the previous Review; Refresh failure preserves it as STALE, disables ITR, and says it is the last successful snapshot. Ticket tabs show LOADING, ANALYZING, READY, INSUFFICIENT, STALE, or ERROR.
 - Real-language correction: Inspector internal fields are structurally translated to Chinese in the production Analyze route after fact/guard validation; Customer Issue remains original and Customer/Reply Chinese views are local cached toggles that clear when a load/refresh changes the source.
+- Workbench core closure pass: Refresh distinguishes no-change, latest PIE reply (WAITING), and latest agent reply (reanalyze); reply totals remain derived from the complete normalized message history; translation routes fail closed and preload Customer/Reply Chinese copies; English Reply has a deterministic language guard; tabs have local close/status controls; ITR Preview presents the same prepared fields in a readable modal before explicit Commit. No local mirror was started because Phase G is gated on A-F acceptance.
+- P0 CLOSED. Delivered deterministic model resolution, stable Nextop refresh/freshness, WAITING state, Human Guidance lifecycle, translation preload, bounded English reply repair, stable Total Replied, canonical Case State, non-destructive ITR update, classification propagation, NFF checkbox, manual 问题归属, and freshness/preservation-safe ITR Preview. The real-ticket read-only validation tool is redacted and write-guarded.
+- Real-ticket read-only validation: E249010 PASS, E266161 PASS, E277639 PASS, E257011 PASS. Nextop production write is not enabled; no real Feishu test write was executed.
 
 ## Known risks / unverified work
 
-- Git reconciliation is in progress; local source is preserved and the remote baseline is the commit parent. Sensitive local configuration and runtime caches remain ignored.
+- No remaining P0 blocker. Sensitive local configuration and runtime caches remain ignored.
 
 ## Rules
 
@@ -53,13 +56,15 @@
 - Do not add Data Browser, OCR/Vision, LogiQ API/login, Tauri, installer, or another business layer without a separate task.
 - Read only task-relevant files; use symbol search and local ranges. Keep this file concise and update it after completed milestones only.
 
-## Tests and next task
+## Verification
 
 ```powershell
 python -B -m unittest -q test_case_service_d1b.py test_gui_d2a.py test_local_api.py
 cd frontend; pnpm run build
 ```
 
-- Current offline regression: 64 Python tests pass (including 4 Golden, 4 multi-source, 8 auth, 6 freshness, and 5 sanitized Nextop-schema tests); 11 frontend state/layout tests pass; V2 production build passes. Real E260206 lookup/message/language retest is pending user-operated testing; no real Nextop/Feishu writes were made.
+- Current offline regression: Python 93/93 PASS; Frontend 17/17 PASS; Type Check PASS; production build PASS.
+- Real-ticket read-only validation: E249010 PASS, E266161 PASS, E277639 PASS, E257011 PASS. No ticket content or credentials are stored in this handoff.
+- No Nextop production write, no real Feishu test write, and no ITR Commit were executed.
 - Known limitation: automated browser control was unavailable locally, so 1600x900 and 1920x1080 Chrome 100% visual acceptance remains a manual check; CSS/static tests cover its no-overflow, bounded-context, and scrollable-reply contract.
-- Next and only task after explicit user direction: Phase 1.5 Golden Regression / governed old-code comparison. Do not start Parts, RAG, Vision, assistant-ui, Data Browser, or any external write work automatically.
+- Next phase not started.

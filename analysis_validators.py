@@ -2,6 +2,13 @@
 import re
 
 _RISK = re.compile(r"\b(replace(?:ment)?|refund|scrap(?:ping)?|warranty|ETA|password|delete data|erase data)\b", re.I)
+_CJK = re.compile(r"[\u3400-\u9fff]")
+
+def reply_is_english(text):
+    """Deterministic guard: the copy-ready reply must be English, not prompt-only."""
+    text = str(text or "")
+    letters = re.findall(r"[A-Za-z]", text)
+    return bool(letters) and len(_CJK.findall(text)) <= max(2, len(letters) // 12)
 
 def provenance_ids(context):
     ids = {"current_ticket"}
@@ -33,6 +40,8 @@ def validate(result, context, capability, restricted):
         escalation.append("High-risk commitment requires human review.")
     if restricted:
         escalation.append("Unsupported capability request requires human review.")
+    if result.get("reply_generation_error"):
+        escalation.append("Reply generation error requires human review.")
     result["escalation"] = list(dict.fromkeys(escalation))
     result["needs_human_check"] = bool(result.get("needs_human_check")) or bool(result["escalation"])
     result["validator_restricted"] = bool(restricted)

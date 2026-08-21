@@ -36,6 +36,15 @@ class PhaseOneContractTests(unittest.TestCase):
         with patch.object(analyzer, "_call_deepseek", return_value=output):
             return analyzer.analyze_case_for_inspector({"model_type": model, "description": "Reported issue", "context_pack": context or {}})
 
+    def test_feishu_table_discovery_and_schema_reads_are_read_only(self):
+        with patch.object(feishu_api, "_request", side_effect=[
+            {"code": 0, "data": {"items": [{"table_id": "tbl-partner", "name": "Partner codes"}]}},
+            {"code": 0, "data": {"items": [{"field_name": "Email Domain"}]}},
+        ]) as request:
+            self.assertEqual(feishu_api.list_tables_readonly()[0]["table_id"], "tbl-partner")
+            self.assertEqual(feishu_api.get_table_fields_metadata_readonly("tbl-partner")[0]["field_name"], "Email Domain")
+        self.assertEqual([call.args[0] for call in request.call_args_list], ["GET", "GET"])
+
     def test_insufficient_has_explicit_state_and_reply_only_requests_missing_items(self):
         value = self.inspect(result(information_status="insufficient", missing_information=["SN", "firmware version"], reason_for_request=["to identify the device"], reply_en="Replace mainboard"))
         self.assertEqual(value.information_status, "insufficient")
@@ -59,6 +68,47 @@ class PhaseOneContractTests(unittest.TestCase):
         self.assertEqual(value.repair_actions,["已更换驱动板。"])
         self.assertEqual(value.ai_suggested_next_step,"请求必要信息。")
         self.assertIn("Hi Team",value.reply_en)
+
+    def test_human_guidance_is_context_not_a_confirmed_fact(self):
+        calls=[]
+        def reply(_system, content):
+            calls.append(content)
+            return result(confirmed_facts=[], reply_en="Hi Team,\n\nPlease reseat the vision module connector.\n\nBest regards,\nPIE Technical Support")
+        with patch.object(analyzer, "_call_deepseek", side_effect=reply):
+            value=analyzer.analyze_case_for_inspector({"model_type":"YUKA","description":"Vision issue", "human_guidance":"重新插拔视觉模组线束", "context_pack":{}})
+        self.assertIn("重新插拔视觉模组线束", calls[0])
+        self.assertEqual(value.confirmed_facts, [])
+        self.assertIn("Hi Team", value.reply_en)
+
+    def test_diagnostic_path_can_remain_actionable_without_confirmed_solution(self):
+        diagnostic = result(
+            current_blocker="", solution_state="PENDING", solution="",
+            ai_suggested_next_step="使用已知正常的驱动板完成对比测试。",
+            resolution_path=["检查 App 中的准确错误码。", "由代理使用已知正常的驱动板测试。"],
+            hypotheses=[{"cause":"驱动板或切割电机之一可能异常", "confidence":"low", "evidence":["已报告的症状"], "cited":["current_ticket"], "discriminator":"已知正常驱动板的对比结果"}],
+            reply_en="Hi Team,\n\nPlease check the exact App error code and perform the known-good drive-board comparison.\n\nBest regards,\nPIE Technical Support",
+        )
+        value = self.inspect(diagnostic, "LUBA mini 2", {"follow_up":{"already_tried":["Blade disc and bracket checked."]}})
+        self.assertEqual(value.solution, "")
+        self.assertEqual(value.information_status, "sufficient")
+        self.assertTrue(value.resolution_path)
+        self.assertIn("known-good", value.reply_en)
+
+    def test_missing_reply_is_explicit_error_not_ready_blank(self):
+        value = self.inspect(result(reply_en=""))
+        self.assertIn("Reply generation error", value.reply_generation_error)
+
+    def test_non_english_reply_gets_one_bounded_repair_without_losing_analysis(self):
+        initial = result(reply_en="请确认 LUBA 3 的 Error 1207。", solution="Awaiting confirmation.")
+        repaired = {"reply_en": "Hi Team,\n\nPlease confirm Error 1207 on the LUBA 3.\n\nBest regards,\nPIE Technical Support"}
+        translated = {"repair_actions":[],"current_blocker":"","historical_pie_recommendations":[],"ai_suggested_next_step":"请确认信息。","solution":"等待确认。","missing_information":[],"reason_for_request":[]}
+        with patch.object(analyzer, "_call_deepseek", side_effect=[initial, repaired, translated]) as call:
+            value = analyzer.analyze_case_for_inspector({"model_type":"LUBA 3", "description":"Reported issue", "human_guidance":"请协助确认。", "context_pack":{}})
+        self.assertEqual(call.call_count, 3)
+        self.assertIn("Error 1207", value.reply_en)
+        self.assertTrue(analyzer.reply_is_english(value.reply_en))
+        self.assertEqual(value.solution_state, "PENDING")
+        self.assertEqual(value.reply_generation_error, "")
 
     def test_luba1_log_requests_are_removed_from_every_output(self):
         value = self.inspect(result(information_status="sufficient", missing_information=["Upload logs"], reason_for_request=["Run LogiQ"], ai_suggested_next_step="Export device logs", solution="Use LogiQ", reply_en="Please upload device logs."), "LUBA 1")
@@ -168,6 +218,21 @@ class PhaseOneContractTests(unittest.TestCase):
                 self.assertEqual(value["error_type"], code)
                 self.assertEqual(value["ticket_no"], "SAFE-STAGE")
                 self.assertNotIn("AUTH", value["error_type"])
+
+    def test_missing_feishu_read_configuration_is_explicit(self):
+        with patch.object(case_service, "open_existing_case", side_effect=feishu_api.FeishuAuthRequired("missing")):
+            value = case_service.prepare_nextop_case("SAFE-FEISHU")
+        self.assertFalse(value["success"])
+        self.assertEqual(value["error_type"], "FEISHU_CREDENTIALS_MISSING")
+        self.assertEqual(value["stage"], "duplicate_lookup")
+
+    def test_feishu_lookup_failure_keeps_only_safe_code(self):
+        error = feishu_api.FeishuReadError(1234, "request value='customer@example.com'")
+        with patch.object(case_service, "open_existing_case", side_effect=error):
+            value = case_service.prepare_nextop_case("SAFE-FEISHU")
+        self.assertEqual(value["error_type"], "FEISHU_LOOKUP_ERROR")
+        self.assertEqual(value["detail"], "Feishu code: 1234")
+        self.assertNotIn("customer@example.com", str(value))
 
 
 if __name__ == "__main__":

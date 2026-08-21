@@ -3,7 +3,15 @@ setlocal
 cd /d "%~dp0"
 rem Replace a previous PIE Local API instance on its fixed loopback port.
 for /f "tokens=5" %%P in ('netstat -ano ^| findstr ":8787"') do taskkill /f /pid %%P >nul 2>nul
-start "PIE ITR Local API" /b python -B local_api.py
+set "PIE_PY="
+for /f "delims=" %%P in ('where python 2^>nul') do if not defined PIE_PY set "PIE_PY=%%P"
+if not defined PIE_PY if exist "%USERPROFILE%\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" set "PIE_PY=%USERPROFILE%\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe"
+if not defined PIE_PY (
+  echo Python is required to start PIE ITR Local API. Install Python, then run this file again.
+  pause
+  exit /b 1
+)
+start "PIE ITR Local API" /b "%PIE_PY%" -B local_api.py
 cd frontend
 set "PIE_NODE="
 for /f "delims=" %%N in ('where node 2^>nul') do if not defined PIE_NODE set "PIE_NODE=%%N"

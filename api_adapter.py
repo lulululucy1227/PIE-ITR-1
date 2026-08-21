@@ -35,7 +35,12 @@ class LocalApiAdapter:
 
     def update_nextop_token(self, payload):
         import nextop_api, nextop_auth
-        return nextop_auth.update_from_curl(payload.get("curl"), lambda: nextop_api.search_tickets("", size=1))
+        try:
+            return nextop_auth.update_from_curl(payload.get("curl"), lambda: nextop_api.search_tickets("", size=1))
+        except nextop_auth.NextopCredentialError as exc:
+            return {"success": False, "error_type": "NEXTOP_CREDENTIAL_INVALID", "message": str(exc)}
+        except Exception:
+            return {"success": False, "error_type": "NEXTOP_VALIDATION_ERROR", "message": "Nextop token validation failed. Please copy the complete request as cURL again."}
 
     def prepare(self, payload):
         import case_service
@@ -49,11 +54,16 @@ class LocalApiAdapter:
 
     def analyze(self, payload):
         import case_service
-        return to_json(case_service.analyze_existing_case_for_inspector(dict(payload.get("case") or {})))
+        prepared = prepared_from_json(payload.get("prepared"))
+        return to_json(case_service.reanalyze_prepared_nextop_case(prepared, payload.get("human_guidance") or ""))
 
     def refresh(self, payload):
         import case_service
         return to_json(case_service.refresh_latest_nextop_case(prepared_from_json(payload.get("prepared"))))
+
+    def preview(self, payload):
+        import case_service
+        return to_json(case_service.prepare_commit_preview(prepared_from_json(payload.get("prepared"))))
 
     def translate(self, payload):
         import case_service
@@ -61,7 +71,12 @@ class LocalApiAdapter:
 
     def translate_text(self, payload):
         import case_service
-        return {"text": case_service.translate_text_to_zh(payload.get("text") or "")}
+        try:
+            text = case_service.translate_text_to_zh(payload.get("text") or "")
+            return {"success": True, "text": text}
+        except Exception:
+            # Keep provider details, credentials, and request bodies out of the UI.
+            return {"success": False, "error_type": "TRANSLATION_ERROR", "message": "Chinese translation failed."}
 
     def commit(self, payload):
         import case_service
@@ -70,4 +85,8 @@ class LocalApiAdapter:
             prepared,
             include_itr_todo=bool(payload.get("include_itr_todo")),
             todo_dirty=bool(payload.get("todo_dirty")),
+            nff_value=bool(payload.get("nff_value")),
+            nff_dirty=bool(payload.get("nff_dirty")),
+            issue_owner_value=payload.get("issue_owner_value"),
+            issue_owner_dirty=bool(payload.get("issue_owner_dirty")),
         ))

@@ -33,4 +33,15 @@ class NextopSchemaTests(unittest.TestCase):
             messages=nextop_api.get_messages("opaque-id",size=1)
         self.assertEqual([item["id"] for item in messages],["one","two"]); self.assertEqual(get.call_count,2)
 
+    def test_paginated_idless_messages_dedupe_with_stable_identity(self):
+        duplicate={"sendTime":1,"senderType":1,"senderName":"Agent","content":"same"}
+        pages=[{"code":"000000","data":{"total":3,"records":[duplicate,{"sendTime":2,"senderType":2,"senderName":"PIE","content":"reply"}]}},{"code":"000000","data":{"total":3,"records":[dict(duplicate)]}}]
+        with patch.object(nextop_api,"_get",side_effect=pages): messages=nextop_api.get_messages("opaque-id",size=2)
+        self.assertEqual(len(messages),2)
+        self.assertEqual(messages[0], duplicate)
+
+    def test_attachment_metadata_reports_image_video_file_and_other_without_download(self):
+        attachments=nextop_api.get_message_file_attachments({"files":[{"id":"i","fileName":"photo.jpg"},{"id":"v","fileName":"clip.mp4"},{"id":"f","fileName":"device.log"},{"id":"o","fileName":"opaque"}]})
+        self.assertEqual([item["kind"] for item in attachments],["image","video","file","other"])
+
 if __name__ == "__main__": unittest.main()

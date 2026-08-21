@@ -1,5 +1,7 @@
 import time
 import random
+import hashlib
+import json
 import requests
 from bs4 import BeautifulSoup
 import config
@@ -163,6 +165,12 @@ def _message_list(data):
             if isinstance(body.get(key), list): return body[key], body
     raise NextopParseError("Ticket messages response has no message list.")
 
+def _message_key(message):
+    key = message.get("id") or message.get("messageId")
+    if key: return str(key)
+    identity = {name: message.get(name) for name in ("sendTime", "createTime", "senderType", "senderName", "senderAddr", "content", "subject")}
+    return hashlib.sha256(json.dumps(identity, ensure_ascii=False, sort_keys=True, default=str).encode()).hexdigest()
+
 def get_messages(ticket_id, size=100):
     """Read and normalize the conversation endpoint; paginate only when its envelope declares a total."""
     params = {"id": ticket_id, "size": size, "current": 1}
@@ -178,9 +186,8 @@ def get_messages(ticket_id, size=100):
         if not extra: break
         messages.extend(extra); current += 1
     deduped = {}
-    for index, message in enumerate(messages):
-        key = message.get("id") or message.get("messageId") or f"{message.get('sendTime')}:{message.get('senderName')}:{index}"
-        deduped[str(key)] = message
+    for message in messages:
+        deduped.setdefault(_message_key(message), message)
     return sorted(deduped.values(), key=lambda item: (item.get("sendTime") or item.get("createTime") or 0, str(item.get("id") or item.get("messageId") or "")))
 
 
@@ -217,7 +224,9 @@ def download_image(url):
     return r.content, r.headers.get("content-type", "")
 
 
-IMAGE_EXTENSIONS = (".jpg", ".jpeg", ".png", ".gif", ".bmp", ".webp")
+IMAGE_EXTENSIONS = (".jpg", ".jpeg", ".png", ".gif", ".bmp", ".webp", ".heic")
+VIDEO_EXTENSIONS = (".mp4", ".mov", ".avi", ".mkv", ".webm")
+LOG_FILE_EXTENSIONS = (".log", ".txt", ".csv", ".zip", ".rar", ".7z")
 
 
 def get_file_link(file_id):
@@ -227,13 +236,16 @@ def get_file_link(file_id):
 
 
 def get_message_file_attachments(message):
-    """提取一条消息的附件列表（区别于正文里的<img>内嵌图片），只保留图片类型"""
+    """Return safe attachment metadata; downloading and vision remain separate read-only phases."""
     files = message.get("files") or []
     result = []
     for f in files:
-        name = (f.get("fileName") or "").lower()
-        if name.endswith(IMAGE_EXTENSIONS):
-            result.append({"id": f.get("id"), "file_name": f.get("fileName")})
+        name = str(f.get("fileName") or "")
+        lower = name.lower()
+        kind = ("image" if lower.endswith(IMAGE_EXTENSIONS) else
+                "video" if lower.endswith(VIDEO_EXTENSIONS) else
+                "file" if lower.endswith(LOG_FILE_EXTENSIONS) else "other")
+        result.append({"id": f.get("id"), "file_name": name, "kind": kind})
     return result
 
 
@@ -245,15 +257,18 @@ def get_ticket_full(repair_order_no):
     ticket_id = ticket["id"]
     basic = get_basic_info(ticket_id)
     messages = get_messages(ticket_id)
-    cleaned_messages = []
+    cleaned_messages, attachment_counts = [], {"image": 0, "video": 0, "file": 0, "other": 0}
     for m in messages:
         raw_html = m.get("content")
         image_urls = extract_image_urls(raw_html)
         file_attachments = get_message_file_attachments(m)
+        for attachment in file_attachments: attachment_counts[attachment["kind"]] += 1
+        attachment_counts["image"] += len(image_urls)
         content = html_to_text(raw_html)
         if len(content) > MSG_CONTENT_LIMIT:
             content = content[:MSG_CONTENT_LIMIT] + "\n...[truncated]"
         cleaned_messages.append({
+            "id": _message_key(m),
             "sender": m.get("senderAddr") or m.get("senderName"),
             "senderName": m.get("senderName"),
             "senderType": m.get("senderType"),  # 1=客户来信, 2=客服回复
@@ -272,6 +287,7 @@ def get_ticket_full(repair_order_no):
         "list_info": ticket,
         "basic": basic,
         "messages": cleaned_messages,
+        "attachment_counts": attachment_counts,
     }
 
 

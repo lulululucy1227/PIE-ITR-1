@@ -11,14 +11,14 @@ import config
 import feishu_api
 import field_options as fo
 from product_capabilities import capabilities, contains_log_request
-from analysis_validators import validate
+from analysis_validators import validate, reply_is_english
 
 @dataclass
 class InspectorAnalysis:
     customer_description: str; repair_actions: list[str]; current_blocker: str; blocker_is_inferred: bool
     historical_pie_recommendations: list[str]; ai_suggested_next_step: str; solution_state: str; solution: str; reply_en: str; source_language: str; source_hash: str
     information_status: str = "sufficient"; missing_information: list[str] = None; reason_for_request: list[str] = None; next_action: str = "assess"; capability: dict = None
-    confirmed_facts: list[str] = None; already_tried: list[str] = None; ruled_out: list[str] = None; hypotheses: list[dict] = None; resolution_path: list[str] = None; needs_human_check: bool = False; escalation: list[str] = None; parts_to_verify: list[str] = None
+    confirmed_facts: list[str] = None; already_tried: list[str] = None; ruled_out: list[str] = None; hypotheses: list[dict] = None; resolution_path: list[str] = None; needs_human_check: bool = False; escalation: list[str] = None; parts_to_verify: list[str] = None; reply_generation_error: str = ""
 
 INSPECTOR_SYSTEM_PROMPT = """Return JSON only. Ground every fact in the supplied case data. customer_description is the concise current customer/dealer issue in its original source language, not an email copy. repair_actions contains ONLY actions explicitly confirmed as physically or operationally completed by a customer, dealer, technician, or device. Exclude PIE review, recommendations, instructions, proposed actions, future actions, and suggestions. Historical recommendations must be real PIE guidance extracted from history/Solutions only. If a blocker is inferred set blocker_is_inferred true; never state inference as fact. solution_state must be FINAL, CURRENT, WORKAROUND, PENDING, or NONE. reply_en is a complete copy-ready English email with a neutral greeting (use "Hi Team," or "Hello," unless a reliable name is present), blank lines, concise body, and a closing such as "Best regards,\nPIE Technical Support". Do not invent a recipient name and do not promise ETA, firmware dates, warranty, replacement, refund, or compensation."""
 
@@ -77,11 +77,12 @@ def _internal_analysis_to_zh(result):
 def analyze_case_for_inspector(case):
     data={k:case.get(k) for k in ('description','case_history','fault_symptom','pie_comment','solutions','model_type','error_codes','status')}
     context=case.get("context_pack") or {}
+    human_guidance=str(case.get("human_guidance") or "").strip()
     guidance="\nNo reliable historical evidence was found: use current-ticket facts only; do not invent verified precedent." if context.get("knowledge_coverage")=="none" else "\nContext evidence is supplied with provenance; distinguish evidence from inference. Do not repeat actions explicitly reported ineffective unless explaining why."
     model=str(case.get("model_type") or data.get("model_type") or "")
     capability=capabilities(model)
-    contract="\nReturn additionally: information_status (sufficient|insufficient), missing_information[], reason_for_request[], next_action (assess|request_information), confirmed_facts[], already_tried[], ruled_out[], hypotheses[] (cause, confidence high|medium|low, evidence[], cited[], discriminator), resolution_path[], needs_human_check, escalation[], parts_to_verify[] (always empty). customer_description preserves original customer/dealer wording. Write repair_actions, current_blocker, historical_pie_recommendations, ai_suggested_next_step, solution, missing_information and reason_for_request in clear Simplified Chinese. Preserve product names, models, error codes, part numbers, firmware versions, LogiQ, Mammotion Kit, connector names and proprietary module names. Historical ITR and technical notes are evidence, never confirmed facts. hypothesis.cited may use only real Context Pack provenance IDs. If insufficient, reply_en must only request the listed information and must not add diagnosis/actions. If sufficient, reply_en must not introduce actions absent from assessment/solution. Never request logs or LogiQ unless Product capability explicitly says supported. Product capability: "+json.dumps(capability)
-    result=_call_deepseek(INSPECTOR_SYSTEM_PROMPT+guidance+contract, json.dumps({"case":data,"context":context}, ensure_ascii=False))
+    contract="\nReturn additionally: information_status (sufficient|insufficient), missing_information[], reason_for_request[], next_action (assess|request_information), confirmed_facts[], already_tried[], ruled_out[], hypotheses[] (cause, confidence high|medium|low, evidence[], cited[], discriminator), resolution_path[], needs_human_check, escalation[], parts_to_verify[] (always empty). customer_description preserves original customer/dealer wording. Write repair_actions, current_blocker, historical_pie_recommendations, ai_suggested_next_step, solution, missing_information and reason_for_request in clear Simplified Chinese. Preserve product names, models, error codes, part numbers, firmware versions, LogiQ, Mammotion Kit, connector names and proprietary module names. Historical ITR and technical notes are evidence, never confirmed facts. Human Guidance is operator intent, not a confirmed fact: use it to shape PIE Guidance, Next Step, Solution and reply_en, but never promote it to confirmed_facts or repair_actions. hypothesis.cited may use only real Context Pack provenance IDs. When a symptom and meaningful prior checks are already present but the root cause is unconfirmed, do not reduce the response to a generic request for information: keep the confirmed facts, name the missing discriminator, and provide a conditional diagnostic path for the agent/partner. Mark each branch as hypothesis or diagnostic action, leave solution blank unless confirmed, and never describe remote PIE as having performed physical work. If insufficient, reply_en must only request the listed information and must not add diagnosis/actions. If sufficient, reply_en must not introduce actions absent from assessment/solution. Never request logs or LogiQ unless Product capability explicitly says supported. Product capability: "+json.dumps(capability)
+    result=_call_deepseek(INSPECTOR_SYSTEM_PROMPT+guidance+contract, json.dumps({"case":data,"context":context,"human_guidance":human_guidance}, ensure_ascii=False))
     rec=list(result.get('historical_pie_recommendations') or [])
     state=str(result.get('solution_state') or 'NONE').upper()
     if state not in {'FINAL','CURRENT','WORKAROUND','PENDING','NONE'}: state='NONE'
@@ -97,14 +98,28 @@ def analyze_case_for_inspector(case):
         status = "insufficient"; missing=result["missing_information"]; reasons=result["reason_for_request"]
     else:
         status="sufficient"; result["next_action"]="assess"
+    if result.get("reply_en") and not reply_is_english(result.get("reply_en")):
+        try:
+            repaired = _call_deepseek("Rewrite the supplied email reply in English only. Preserve its technical meaning, product names, part numbers, and error codes. Return JSON only: {\"reply_en\": \"...\"}.", json.dumps({"reply_en": result.get("reply_en")}, ensure_ascii=False))
+            candidate = str((repaired or {}).get("reply_en") or "").strip()
+            if reply_is_english(candidate):
+                result["reply_en"] = candidate
+            else:
+                result["reply_en"] = ""
+                result["reply_generation_error"] = "Reply generation error: the generated reply was not English after one repair attempt."
+        except Exception:
+            result["reply_en"] = ""
+            result["reply_generation_error"] = "Reply generation error: the generated reply was not English after one repair attempt."
+    if not str(result.get("reply_en") or "").strip() and not result.get("reply_generation_error"):
+        result["reply_generation_error"] = "Reply generation error: no English reply was generated."
     state=str(result.get("solution_state") or state).upper()
     if state not in {'FINAL','CURRENT','WORKAROUND','PENDING','NONE'}: state='NONE'
     next_action=str(result.get("next_action") or ("request_information" if status=="insufficient" else "assess"))
     result = validate(result, context, capability, status == "insufficient" or _restricted_or_repeated(result, context, capability))
     result = _internal_analysis_to_zh(result)
     return InspectorAnalysis(str(result.get('customer_description') or ''), [str(x) for x in result.get('repair_actions',[])], str(result.get('current_blocker') or ''), bool(result.get('blocker_is_inferred')),
-        rec, '' if rec else str(result.get('ai_suggested_next_step') or ''), state, str(result.get('solution') or ''), str(result.get('reply_en') or ''), 'ORIGINAL', _inspector_hash(data),status,missing,reasons,next_action,capability,
-        result["confirmed_facts"], result["already_tried"], result["ruled_out"], result["hypotheses"], result["resolution_path"], result["needs_human_check"], result["escalation"], result["parts_to_verify"])
+        rec, '' if rec else str(result.get('ai_suggested_next_step') or ''), state, str(result.get('solution') or ''), str(result.get('reply_en') or ''), 'ORIGINAL', _inspector_hash({"case": data, "human_guidance": human_guidance}),status,missing,reasons,next_action,capability,
+        result["confirmed_facts"], result["already_tried"], result["ruled_out"], result["hypotheses"], result["resolution_path"], result["needs_human_check"], result["escalation"], result["parts_to_verify"], str(result.get("reply_generation_error") or ""))
 
 def translate_inspector_analysis_to_zh(analysis):
     fields=['customer_description','repair_actions','current_blocker','historical_pie_recommendations','ai_suggested_next_step','solution']
@@ -112,8 +127,12 @@ def translate_inspector_analysis_to_zh(analysis):
     return _call_deepseek(prompt, json.dumps({k:getattr(analysis,k) for k in fields}, ensure_ascii=False))
 
 def translate_text_to_zh(text):
-    prompt = "Translate this text to Simplified Chinese only. Preserve product names, models, error codes, part numbers, firmware versions, LogiQ, Mammotion Kit, connector names and proprietary module names. Do not add analysis or facts."
-    return _call_deepseek(prompt, str(text or ""))
+    prompt = "Translate the supplied text to Simplified Chinese. Preserve product names, models, error codes, part numbers, firmware versions, LogiQ, Mammotion Kit, connector names and proprietary module names. Do not add analysis or facts. Return JSON only: {\"text\": \"translation\"}."
+    value = _call_deepseek(prompt, str(text or ""))
+    translated = str((value or {}).get("text") or "").strip()
+    if not translated:
+        raise RuntimeError("Translation returned no text.")
+    return translated
 
 
 def _live_options(field_name, fallback):

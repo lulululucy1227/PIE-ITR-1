@@ -50,5 +50,10 @@ class NextopAuthTests(unittest.TestCase):
     def test_update_error_is_redacted(self):
         with self.assertRaises(nextop_auth.NextopCredentialError) as error: nextop_auth.parse_curl("curl -H 'Cookie: secret-value'")
         self.assertNotIn("secret-value",str(error.exception))
+    def test_update_api_returns_a_safe_invalid_curl_message(self):
+        adapter=LocalApiAdapter()
+        result=adapter.update_nextop_token({"curl":"-H 'Cookie: secret-value'"})
+        self.assertFalse(result["success"]); self.assertEqual(result["error_type"],"NEXTOP_CREDENTIAL_INVALID")
+        self.assertNotIn("secret-value",str(result))
 
 if __name__=="__main__": unittest.main()

@@ -5,7 +5,7 @@ import sys
 import hashlib
 import json
 from contextlib import contextmanager
-from dataclasses import dataclass, field
+from dataclasses import asdict, dataclass, field, replace
 from datetime import datetime, timezone
 from difflib import SequenceMatcher
 from time import perf_counter
@@ -28,13 +28,29 @@ FIELD_MAP = {
 }
 V2_MANAGED_FIELDS = tuple(FIELD_MAP.values()) + ("一级标签", "二级标签")
 ITR_TODO_FIELD = "加入ITR待办"
+ITR_NFF_FIELD = "加入NFF"
+ITR_ISSUE_OWNER_FIELD = "问题归属"
+ITR_ISSUE_OWNER_OPTIONS = {"产品问题", "代理问题"}
 MULTI_SELECT_FIELDS = {"Fault Symptom", "Error Code"}
 _ALLOWED_OPTIONS = {"Fault Symptom": set(fo.FAULT_SYMPTOM), "Error Code": set(fo.ERROR_CODE)}
-_CANDIDATE_FIELDS = ["Ticket No.", "Reference No.", "Disti/Dealer/Service Point", "Device name", "Model Type", "PIE-Comment", "Description", "Solutions", "Fault Symptom", "Error Code", "Replied Time-NEW", "Status", "Ticket Created Time", "案例数", "Case History", "一级标签", "二级标签", ITR_TODO_FIELD]
+_CANDIDATE_FIELDS = ["Ticket No.", "Reference No.", "Disti/Dealer/Service Point", "Device name", "Model Type", "PIE-Comment", "Description", "Solutions", "Fault Symptom", "Error Code", "Error massages", "Replied Time-First", "Replied Time-NEW", "Total Replied", "Status", "Ticket Created Time", "案例数", "Case History", "一级标签", "二级标签", ITR_TODO_FIELD, ITR_NFF_FIELD, ITR_ISSUE_OWNER_FIELD]
+_PRESERVE_ON_EMPTY = {"Description", "Solutions", "PIE-Comment", "一级标签", "二级标签", "Error Code", "Error massages", "Model Type", "Case History", "Ticket Created Time", "Replied Time-First", "Replied Time-NEW", "Total Replied"}
 _CANDIDATE_LIMIT = 5
 _RECENT_CANDIDATE_DAYS = 14
 _MANUAL_SOURCES = {"whatsapp", "lark", "email"}
 _record_write_locks, _record_lock_guard = set(), threading.Lock()
+_QUOTED_HISTORY_LINE = re.compile(r"^\s*(on .{0,100}wrote:|from:|sent:|to:|subject:|发件人[:：]|主题[:：]|>)", re.I)
+_CLOSING_LINE = re.compile(r"^\s*(best regards|kind regards|thanks(?: and regards)?|thank you|sincerely|cheers|此致|敬礼|谢谢|祝好)\s*[,，.。!！]*\s*$", re.I)
+_PARTNER_SIGNATURE = re.compile(r"^\s*=+\s*$|^\s*EMEA Partner Support", re.I)
+
+# Governed, evidence-backed serial prefixes.  Do not infer a product from an
+# unknown prefix: this registry is deliberately small and centrally maintained.
+DEVICE_PREFIX_MODEL_MAP = {
+    "LUBA-MB": "luba mini 2",
+    "LUBA-VP": "luba 2x",
+    "LUBA-VS": "luba 2",
+    "YUKA-MVT": "yuka mini 2 800",
+}
 
 @contextmanager
 def _record_write_guard(record_id):
@@ -65,6 +81,42 @@ def parse_case_history_for_display(history):
 
 def analyze_existing_case_for_inspector(case):
     return analyzer.analyze_case_for_inspector(case)
+
+
+def reanalyze_prepared_nextop_case(prepared, human_guidance=""):
+    """Rebuild one prepared Case from its stable snapshot and one new Inspector result.
+
+    The returned PreparedNextopCase is the only payload accepted by Preview and
+    Commit.  This prevents a guided re-analysis being displayed while an older
+    field set is accidentally submitted.
+    """
+    if not isinstance(prepared, PreparedNextopCase):
+        return _result(False, "reanalyze", "No prepared Nextop Case is available.", error_type="invalid_prepared")
+    source = dict(prepared.analysis or {})
+    source.update({
+        "case_history": prepared.case_history,
+        "description": prepared.fields.get("Description") or source.get("description") or "",
+        "fault_symptom": prepared.fields.get("Fault Symptom") or source.get("fault_symptom") or [],
+        "pie_comment": prepared.fields.get("PIE-Comment") or source.get("pie_comment") or "",
+        "solutions": prepared.fields.get("Solutions") or source.get("solutions") or "",
+        "model_type": prepared.fields.get("Model Type") or source.get("model_type") or "",
+        "error_codes": prepared.fields.get("Error Code") or source.get("error_code") or [],
+        "status": prepared.fields.get("Status") or source.get("status") or "",
+        "context_pack": prepared.context_pack,
+        "human_guidance": str(human_guidance or "").strip(),
+    })
+    analysis = analyzer.analyze_case_for_inspector(source)
+    analysis_data = asdict(analysis)
+    fields = dict(prepared.fields)
+    # These are current Inspector-owned fields.  A blank current solution is
+    # intentional and must replace an older disproven one.
+    fields.update({
+        "Case History": prepared.case_history,
+        "Description": analysis_data["customer_description"],
+        "PIE-Comment": analysis_data["ai_suggested_next_step"],
+        "Solutions": analysis_data["solution"],
+    })
+    return _result(True, "reanalyze", "Case analysis is current.", prepared=replace(prepared, analysis=analysis_data, fields=fields), analysis=analysis)
 
 def translate_inspector_analysis_to_zh(analysis):
     return analyzer.translate_inspector_analysis_to_zh(analysis)
@@ -107,6 +159,13 @@ class PreparedNextopCase:
     context_pack: dict = field(default_factory=dict, repr=False)
     ticket_version: str = ""
     fetched_at: str = ""
+    message_fingerprint: str = ""
+    latest_message_id: str = ""
+    latest_message_timestamp: object = None
+    latest_sender_role: str = "UNKNOWN"
+    attachment_counts: dict = field(default_factory=dict)
+    model_resolution: dict = field(default_factory=dict)
+    partner_resolution: dict = field(default_factory=dict)
 
 
 @dataclass
@@ -298,6 +357,74 @@ def _guard_device_name(fields):
     if _normalized_text(device_name) in {_normalized_text(option) for option in model_options}:
         fields["Device name"] = ""
 
+def _normalize_device_prefix(value):
+    """Normalize only formatting, never product semantics."""
+    return re.sub(r"[-_\s]+", "-", str(value or "").strip()).upper()
+
+
+def resolve_model(device_name, explicit_model=""):
+    """Resolve a known serial prefix; unknown and conflicts stay reviewable."""
+    normalized = _normalize_device_prefix(device_name)
+    match = next(((prefix, model) for prefix, model in
+                  sorted(DEVICE_PREFIX_MODEL_MAP.items(), key=lambda item: len(item[0]), reverse=True)
+                  if normalized.startswith(prefix)), None)
+    prefix, mapped = match if match else ("", "")
+    explicit = str(explicit_model or "").strip()
+    if explicit and mapped and _normalized_text(explicit) != _normalized_text(mapped):
+        return {"status": "MODEL_CONFLICT", "model": explicit, "explicit_model": explicit,
+                "prefix_model": mapped, "matched_prefix": prefix}
+    if explicit:
+        return {"status": "EXPLICIT", "model": explicit, "matched_prefix": prefix}
+    if mapped:
+        return {"status": "PREFIX_MATCH", "model": mapped, "matched_prefix": prefix}
+    return {"status": "UNKNOWN", "model": "", "matched_prefix": ""}
+
+
+def _model_from_device_name(device_name):
+    return resolve_model(device_name).get("model", "")
+
+
+_DEVICE_TOKEN = re.compile(r"\b(?:LUBA|YUKA)[-_][A-Z0-9-]{4,}\b", re.I)
+
+
+def _device_tokens(value):
+    return [_normalize_device_prefix(item) for item in _DEVICE_TOKEN.findall(str(value or ""))]
+
+
+def _structured_device_tokens(value):
+    found = []
+    if isinstance(value, dict):
+        for key, item in value.items():
+            lowered = str(key).casefold()
+            if any(token in lowered for token in ("device", "serial", "machine", "product")):
+                found.extend(_device_tokens(item))
+            if isinstance(item, (dict, list, tuple)):
+                found.extend(_structured_device_tokens(item))
+    elif isinstance(value, (list, tuple)):
+        for item in value:
+            found.extend(_structured_device_tokens(item))
+    return found
+
+
+def extract_ticket_device(ticket_data):
+    """Choose only a deterministic device token, preserving disagreements."""
+    info = dict((ticket_data or {}).get("list_info") or {})
+    basic = dict((ticket_data or {}).get("basic") or {})
+    messages = list((ticket_data or {}).get("messages") or [])
+    grouped = [
+        ("structured", _structured_device_tokens(basic) + _structured_device_tokens(info)),
+        ("title", _device_tokens(info.get("title") or info.get("subject"))),
+        ("message", [token for message in messages for token in _device_tokens(message.get("content"))]),
+    ]
+    candidates = [(source, token) for source, tokens in grouped for token in tokens]
+    unique = list(dict.fromkeys(token for _source, token in candidates))
+    if len(unique) > 1:
+        return {"status": "DEVICE_CONFLICT", "device_name": "", "candidates": unique}
+    if unique:
+        source = next(source for source, token in candidates if token == unique[0])
+        return {"status": source.upper(), "device_name": unique[0], "candidates": unique}
+    return {"status": "UNRESOLVED", "device_name": "", "candidates": []}
+
 
 def format_time(value):
     if value in (None, ""): return ""
@@ -309,8 +436,13 @@ def format_time(value):
 
 def build_nextop_case_history(messages):
     blocks, pie_names = [], {name.lower() for name in settings.PIE_SENDERS}
-    for message in messages:
-        content = str(message.get("content") or "").strip()
+    seen = set()
+    ordered = sorted(messages or [], key=lambda item: (item.get("time") or 0, str(item.get("id") or item.get("messageId") or "")))
+    for message in ordered:
+        identity = str(message.get("id") or message.get("messageId") or hashlib.sha256(json.dumps({key: message.get(key) for key in ("time", "senderType", "senderName", "content")}, ensure_ascii=False, sort_keys=True, default=str).encode()).hexdigest())
+        if identity in seen: continue
+        seen.add(identity)
+        content = _clean_nextop_message_content(message.get("content"))
         if not content: continue
         header, sender = [], str(message.get("senderName") or "").strip()
         if format_time(message.get("time")): header.append(format_time(message.get("time")))
@@ -320,11 +452,37 @@ def build_nextop_case_history(messages):
         blocks.append(("[" + "] [".join(header) + "]\n" if header else "") + content)
     return "\n\n".join(blocks)
 
-def _ticket_version(messages, list_info=None):
+def _clean_nextop_message_content(content):
+    """Keep current technical evidence while removing quoted mail chains and repeated signatures."""
+    lines = str(content or "").replace("\r\n", "\n").splitlines()
+    kept = []
+    for line in lines:
+        if _QUOTED_HISTORY_LINE.match(line) or _PARTNER_SIGNATURE.match(line): break
+        kept.append(line.rstrip())
+        if _CLOSING_LINE.match(line): break
+    text = "\n".join(kept).strip()
+    return re.sub(r"\n{3,}", "\n\n", text)
+
+def _message_fingerprint(messages):
     """Stable, local-only freshness token.  It never contains ticket content."""
-    payload = [{key: item.get(key) for key in ("time", "senderType", "senderName", "content", "subject")}
+    payload = [{key: item.get(key) for key in ("id", "time", "senderType", "senderRole", "authorType", "direction", "senderName", "content", "subject")}
                for item in (messages or [])]
     return hashlib.sha256(json.dumps(payload, ensure_ascii=False, sort_keys=True, default=str).encode()).hexdigest()[:16]
+
+def _ticket_version(messages, list_info=None):
+    metadata = {key: (list_info or {}).get(key) for key in ("id", "repairOrderNo", "title", "outerName", "outerAddress", "createTime", "status", "updateTime")}
+    return hashlib.sha256(json.dumps({"messages": _message_fingerprint(messages), "metadata": metadata}, ensure_ascii=False, sort_keys=True, default=str).encode()).hexdigest()[:16]
+
+def _message_role(message):
+    if _is_nextop_support_reply(message): return "PIE"
+    role_data = " ".join(str(message.get(key) or "") for key in ("senderRole", "authorType", "direction")).casefold()
+    if str(message.get("senderType") or "") == "1" or any(token in role_data for token in ("customer", "dealer", "inbound", "agent")):
+        return "AGENT"
+    return "UNKNOWN"
+
+def _latest_message_info(messages):
+    latest = (messages or [])[-1] if messages else {}
+    return {"latest_message_id": str(latest.get("id") or latest.get("messageId") or ""), "latest_message_timestamp": latest.get("time"), "latest_sender_role": _message_role(latest)}
 
 def _refresh_failure(ticket_no, exc):
     if isinstance(exc, nextop_api.NextopAuthRequired):
@@ -340,28 +498,40 @@ def refresh_latest_nextop_case(prepared):
         ticket = nextop_api.get_ticket_full(prepared.ticket_no)
         messages, info = ticket["messages"], ticket["list_info"]
         version = _ticket_version(messages, info)
+        message_fingerprint = _message_fingerprint(messages)
+        latest = _latest_message_info(messages)
     except Exception as exc:
         return _refresh_failure(prepared.ticket_no, exc)
     if version == prepared.ticket_version:
-        return _result(True, "refresh_nextop", "Up to date.", ticket_no=prepared.ticket_no, change_type="NO_CHANGE", prepared=prepared, ticket_version=version)
-    old_count = len(prepared.messages)
-    new_messages = messages[old_count:] if messages[:old_count] == prepared.messages else messages
-    if new_messages and all(_is_nextop_support_reply(item) for item in new_messages):
+        return _result(True, "refresh_nextop", "Refresh complete.", ticket_no=prepared.ticket_no, change_type="NO_CHANGE", prepared=prepared, ticket_version=version, message_fingerprint=message_fingerprint, **latest)
+    if message_fingerprint == (prepared.message_fingerprint or _message_fingerprint(prepared.messages)):
         history = build_nextop_case_history(messages)
         fields = build_v2_fields(history, prepared.analysis, (info.get("outerName"), info.get("outerAddress"), info.get("title")))
-        reply = _nextop_reply_fields(messages); _guard_select(reply, "Status"); fields.update(reply)
+        reply = _nextop_reply_fields(messages); _guard_select(reply, "Status"); fields.update(_preserve_reply_count(reply, prepared.fields.get("Total Replied")))
         import context_service
         refreshed = PreparedNextopCase(prepared.ticket_no, history, prepared.analysis, fields, messages, info,
             prepared.existing_record_id, prepared.existing_case, prepared.match_status, prepared.matches,
             prepared.selected_match_kind, prepared.can_create, prepared.can_update,
             context_service.build_context(prepared.ticket_no, fields, messages, history), version,
-            datetime.now(timezone.utc).isoformat())
-        return _result(True, "refresh_nextop", "Latest reply synced.", ticket_no=prepared.ticket_no, change_type="NEW_PIE_MESSAGE", prepared=refreshed, ticket_version=version)
-    refreshed = prepare_nextop_case(prepared.ticket_no)
+            datetime.now(timezone.utc).isoformat(), message_fingerprint=message_fingerprint, attachment_counts=dict(ticket.get("attachment_counts") or {}), model_resolution=dict(fields.get("_model_resolution") or {}), partner_resolution=dict(fields.get("_partner_resolution") or {}), **latest)
+        return _result(True, "refresh_nextop", "Ticket metadata synced.", ticket_no=prepared.ticket_no, change_type="METADATA_CHANGED", prepared=refreshed, ticket_version=version, message_fingerprint=message_fingerprint, **latest)
+    if latest["latest_sender_role"] == "PIE":
+        history = build_nextop_case_history(messages)
+        fields = build_v2_fields(history, prepared.analysis, (info.get("outerName"), info.get("outerAddress"), info.get("title")))
+        reply = _nextop_reply_fields(messages); _guard_select(reply, "Status"); fields.update(_preserve_reply_count(reply, prepared.fields.get("Total Replied")))
+        import context_service
+        refreshed = PreparedNextopCase(prepared.ticket_no, history, prepared.analysis, fields, messages, info,
+            prepared.existing_record_id, prepared.existing_case, prepared.match_status, prepared.matches,
+            prepared.selected_match_kind, prepared.can_create, prepared.can_update,
+            context_service.build_context(prepared.ticket_no, fields, messages, history), version,
+            datetime.now(timezone.utc).isoformat(), message_fingerprint=message_fingerprint, attachment_counts=dict(ticket.get("attachment_counts") or {}), model_resolution=dict(fields.get("_model_resolution") or {}), partner_resolution=dict(fields.get("_partner_resolution") or {}), **latest)
+        return _result(True, "refresh_nextop", "Latest PIE reply synced. Waiting for agent reply.", ticket_no=prepared.ticket_no, change_type="NEW_PIE_MESSAGE", prepared=refreshed, ticket_version=version, message_fingerprint=message_fingerprint, **latest)
+    refreshed = prepare_nextop_case(prepared.ticket_no, ticket_data=ticket)
     if not refreshed.get("success"):
         return refreshed
-    change = "NEW_AGENT_MESSAGE" if new_messages else "OTHER_TICKET_CHANGE"
-    return _result(True, "refresh_nextop", "New agent message received — analysis refreshed." if change == "NEW_AGENT_MESSAGE" else "Ticket state changed; review refreshed.", ticket_no=prepared.ticket_no, change_type=change, prepared=refreshed["prepared"], ticket_version=refreshed["prepared"].ticket_version, requires_reanalyze=True)
+    change = "NEW_AGENT_MESSAGE" if latest["latest_sender_role"] == "AGENT" else "NEW_UNKNOWN_MESSAGE"
+    message = "New agent message received — analysis refreshed." if change == "NEW_AGENT_MESSAGE" else "New message sender is unknown — review and analysis refreshed."
+    return _result(True, "refresh_nextop", message, ticket_no=prepared.ticket_no, change_type=change, prepared=refreshed["prepared"], ticket_version=refreshed["prepared"].ticket_version, requires_reanalyze=True, **_latest_message_info(refreshed["prepared"].messages))
 
 
 def build_imported_case_history(source, text, imported_at=None):
@@ -372,13 +542,24 @@ def build_imported_case_history(source, text, imported_at=None):
 def _apply_tags(fields, analysis, tags=None):
     l1, l2 = tags if tags is not None else tag_engine.classify(_tag_text(analysis))
     fields["一级标签"], fields["二级标签"] = l1 or "", l2 or ""
+    fields["_classification"] = {
+        "status": "RESOLVED" if l1 and l2 else "UNRESOLVED",
+        "reason": "No legal exact ITR tag mapping was returned." if not (l1 and l2) else "",
+    }
 
 
 def build_v2_fields(case_history, analysis, dealer_context=(), single_select_audit=None, tags=None):
     fields = {"Case History": case_history}
     for key, name in FIELD_MAP.items():
         if key != "case_history": fields[name] = _wrap_field(name, analysis.get(key, ""))
+    resolution = resolve_model(fields.get("Device name"), fields.get("Model Type"))
+    if not fields.get("Model Type"):
+        fields["Model Type"] = resolution["model"]
+    # Transient evidence for the local review/analyzer only; it is not a
+    # Feishu-managed field and is removed before any write boundary.
+    fields["_model_resolution"] = resolution
     _apply_dealer_alias(fields, *dealer_context); _guard_dealer(fields, single_select_audit); _guard_select(fields, "Model Type", single_select_audit)
+    fields["_partner_resolution"] = {"status": "RESOLVED" if fields.get("Disti/Dealer/Service Point") else "UNRESOLVED", "partner": fields.get("Disti/Dealer/Service Point") or ""}
     _apply_tags(fields, analysis, tags); _guard_select(fields, "一级标签", single_select_audit); _guard_select(fields, "二级标签", single_select_audit)
     _guard_device_name(fields)
     for name in V2_MANAGED_FIELDS: fields.setdefault(name, [] if name in MULTI_SELECT_FIELDS else "")
@@ -389,7 +570,8 @@ def sanitize_create_fields(fields):
     """Create records omit no-value fields; updates retain explicit clearing values."""
     return {
         name: value for name, value in fields.items()
-        if value is not None
+        if not str(name).startswith("_")
+        and value is not None
         and not (isinstance(value, str) and not value.strip())
         and not (isinstance(value, (list, tuple, set, dict)) and not value)
     }
@@ -480,6 +662,18 @@ def _nextop_reply_fields(messages):
     return result
 
 
+def _preserve_reply_count(fields, floor):
+    """Never lower a known ITR reply total when a Nextop snapshot is partial."""
+    try:
+        known = int(str(floor or "").strip())
+    except (TypeError, ValueError):
+        return fields
+    current = int(fields.get("Total Replied") or 0)
+    if known > current:
+        fields["Total Replied"] = known
+    return fields
+
+
 def find_nextop_legacy_duplicates(analysis, limit=100):
     """Return only high-confidence legacy candidates; never auto-merge them."""
     records = feishu_api.get_records_for_matching(_CANDIDATE_FIELDS, limit=limit)
@@ -562,7 +756,7 @@ def normalize_itr_todo(value):
 
 def candidate_from_record(record):
     fields, value = record.get("fields", {}), feishu_api.normalize_field_value
-    return {"record_id": record.get("record_id"), "ticket_no": value(fields.get("Ticket No.")), "reference_no": value(fields.get("Reference No.")), "disti": value(fields.get("Disti/Dealer/Service Point")), "device_name": value(fields.get("Device name")), "model_type": value(fields.get("Model Type")), "pie_comment": value(fields.get("PIE-Comment")), "description": value(fields.get("Description")), "solutions": value(fields.get("Solutions")), "fault_symptom": value(fields.get("Fault Symptom")), "error_codes": value(fields.get("Error Code")), "replied_time_first": value(fields.get("Replied Time-First")), "replied_time_new": value(fields.get("Replied Time-NEW")), "status": value(fields.get("Status")), "case_history": value(fields.get("Case History")), "first_level_tag": value(fields.get("一级标签")), "second_level_tag": value(fields.get("二级标签")), "ticket_created_time": value(fields.get("Ticket Created Time")), "case_count": value(fields.get("案例数")), "include_itr_todo": normalize_itr_todo(fields.get(ITR_TODO_FIELD))}
+    return {"record_id": record.get("record_id"), "ticket_no": value(fields.get("Ticket No.")), "reference_no": value(fields.get("Reference No.")), "disti": value(fields.get("Disti/Dealer/Service Point")), "device_name": value(fields.get("Device name")), "model_type": value(fields.get("Model Type")), "pie_comment": value(fields.get("PIE-Comment")), "description": value(fields.get("Description")), "solutions": value(fields.get("Solutions")), "fault_symptom": value(fields.get("Fault Symptom")), "error_codes": value(fields.get("Error Code")), "replied_time_first": value(fields.get("Replied Time-First")), "replied_time_new": value(fields.get("Replied Time-NEW")), "total_replied": value(fields.get("Total Replied")), "status": value(fields.get("Status")), "case_history": value(fields.get("Case History")), "first_level_tag": value(fields.get("一级标签")), "second_level_tag": value(fields.get("二级标签")), "ticket_created_time": value(fields.get("Ticket Created Time")), "case_count": value(fields.get("案例数")), "nff": normalize_itr_todo(fields.get(ITR_NFF_FIELD)), "issue_owner": value(fields.get(ITR_ISSUE_OWNER_FIELD)), "include_itr_todo": normalize_itr_todo(fields.get(ITR_TODO_FIELD))}
 
 
 def score_candidate(new_analysis, candidate, now_ms):
@@ -634,7 +828,7 @@ def open_existing_case(identifier):
     return _result(True, "open_existing", "Existing Case loaded.", match_status="ONE", record_id=matches[0]["record_id"], case=matches[0], matches=matches)
 
 
-def prepare_nextop_case(ticket_no, progress_callback=None, *, duplicate_decision=None, duplicate_record_id=None):
+def prepare_nextop_case(ticket_no, progress_callback=None, *, duplicate_decision=None, duplicate_record_id=None, ticket_data=None):
     """Fetch/analyze/review Nextop only.  This function never writes ITR."""
     ticket_no = str(ticket_no or "").strip()
     stage = "duplicate_lookup"
@@ -644,13 +838,17 @@ def prepare_nextop_case(ticket_no, progress_callback=None, *, duplicate_decision
         if existing.get("match_status") == "MULTIPLE":
             return _result(False, "prepared_multiple", "Multiple exact ITR Cases require selection.", match_status="MULTIPLE", matches=existing["matches"])
         stage = "nextop_fetch"; _progress(progress_callback, "nextop_fetch", "Fetching Nextop ticket.")
-        ticket_data = nextop_api.get_ticket_full(ticket_no); messages = ticket_data["messages"]; history = build_nextop_case_history(messages)
+        ticket_data = ticket_data or nextop_api.get_ticket_full(ticket_no); messages = ticket_data["messages"]; history = build_nextop_case_history(messages)
         stage = "analyze"; _progress(progress_callback, "analysis", "Analyzing Nextop Case for review.")
         analysis = analyzer.analyze_case_history(history); info = ticket_data["list_info"]
+        device_resolution = extract_ticket_device(ticket_data)
+        if not analysis.get("device_name") and device_resolution["status"] not in {"DEVICE_CONFLICT", "UNRESOLVED"}:
+            analysis["device_name"] = device_resolution["device_name"]
         stage = "prepare_fields"; dealer_context = (info.get("outerName"), info.get("outerAddress"), info.get("title")) + tuple(m.get("senderName") for m in messages if m.get("senderType") == 1)
-        fields = build_v2_fields(history, analysis, dealer_context); fields.update({"Reference No.": ticket_no, "Ticket Created Time": info["createTime"]}); reply = _nextop_reply_fields(messages); _guard_select(reply, "Status"); fields.update(reply)
+        fields = build_v2_fields(history, analysis, dealer_context); fields["_device_resolution"] = device_resolution; fields.update({"Reference No.": ticket_no, "Ticket Created Time": info["createTime"]}); reply = _nextop_reply_fields(messages); _guard_select(reply, "Status"); fields.update(reply)
         existing_id = existing.get("record_id") if existing.get("match_status") == "ONE" else None
         existing_case = existing.get("case") if existing_id else None
+        _preserve_reply_count(fields, (existing_case or {}).get("total_replied"))
         selected_match_kind = "exact" if existing_id else None
         if not existing_id:
             legacy_matches = find_nextop_legacy_duplicates(analysis)
@@ -668,12 +866,29 @@ def prepare_nextop_case(ticket_no, progress_callback=None, *, duplicate_decision
                                       match_status="ONE" if existing_id else "NOT_FOUND",
                                       matches=existing.get("matches", []), selected_match_kind=selected_match_kind,
                                         can_create=not bool(existing_id), can_update=bool(existing_id), context_pack=context_pack,
-                                        ticket_version=_ticket_version(messages, info), fetched_at=datetime.now(timezone.utc).isoformat())
+                                        ticket_version=_ticket_version(messages, info), fetched_at=datetime.now(timezone.utc).isoformat(),
+                                        message_fingerprint=_message_fingerprint(messages), attachment_counts=dict(ticket_data.get("attachment_counts") or {}), model_resolution=dict(fields.get("_model_resolution") or {}), partner_resolution=dict(fields.get("_partner_resolution") or {}), **_latest_message_info(messages))
         _progress(progress_callback, "prepared", "Ready for review.", True)
         return _result(True, "prepared_existing" if existing_id else "prepared_new", "Nextop Case is ready for review.", prepared=prepared, case=existing_case or candidate_from_record({"record_id": None, "fields": fields}))
     except nextop_api.NextopAuthRequired as exc:
         missing = "not configured" in str(exc).lower()
         return _result(False, "prepare_nextop", "Nextop authentication is not configured." if missing else "Nextop authentication expired or invalid.", ticket_no=ticket_no, error_type="NEXTOP_CREDENTIALS_MISSING" if missing else "NEXTOP_AUTH_FAILED", stage="nextop_fetch")
+    except feishu_api.FeishuAuthRequired as exc:
+        cause = str(exc).lower()
+        if "refresh token" in cause:
+            message = "Feishu refresh authorization is missing. Refresh the Feishu user authorization in the local configuration."
+        elif "expired" in cause or "invalid" in cause:
+            message = "Feishu user authorization has expired or is invalid. Refresh the local Feishu authorization."
+        elif "app or table" in cause:
+            message = "Feishu ITR app or table configuration is missing."
+        elif "app credentials" in cause:
+            message = "Feishu app credentials are missing."
+        else:
+            message = "Feishu read credentials or table configuration is missing."
+        return _result(False, "prepare_nextop", message, ticket_no=ticket_no, error_type="FEISHU_CREDENTIALS_MISSING", stage=stage)
+    except feishu_api.FeishuReadError as exc:
+        detail = f"Feishu code: {exc.code}" if exc.code not in (None, "") else None
+        return _result(False, "prepare_nextop", f"Feishu duplicate lookup failed: {exc.message}", ticket_no=ticket_no, error_type="FEISHU_LOOKUP_ERROR", stage=stage, detail=detail)
     except Exception as exc:
         if isinstance(exc, nextop_api.NextopLookupEmpty):
             return _result(False, "prepare_nextop", "Ticket lookup returned no exact result; verify Nextop scope or ticket number.", ticket_no=ticket_no, error_type="NEXTOP_LOOKUP_EMPTY", stage="ticket_search")
@@ -709,7 +924,45 @@ def _prepared_stale(ticket_no, record_id, kind):
                    ticket_no=ticket_no, record_id=record_id, error_type="prepared_stale")
 
 
-def commit_prepared_nextop_case(prepared, progress_callback=None, *, include_itr_todo=False, todo_dirty=False):
+def _issue_owner_for_submit(value, dirty):
+    """Validate an explicit human ownership choice; untouched values preserve ITR."""
+    if not dirty:
+        return None
+    value = str(value or "").strip()
+    if not value:
+        return None
+    try:
+        options = set(feishu_api.get_select_field_options(ITR_ISSUE_OWNER_FIELD))
+    except Exception:
+        return False
+    return value if value in options else False
+
+
+def _has_payload_value(value):
+    return value not in (None, "", [], {}, "—", "undefined")
+
+
+def _non_destructive_update_fields(update_fields):
+    """VALID NEW VALUE > EXISTING VALUE > EMPTY: omit empty overwrite attempts."""
+    return {name: value for name, value in update_fields.items() if name not in _PRESERVE_ON_EMPTY or _has_payload_value(value)}
+
+
+def prepare_commit_preview(prepared):
+    """Return the exact effective fields a later Commit would submit; read-only."""
+    freshness = refresh_latest_nextop_case(prepared)
+    if not freshness.get("success") or freshness.get("change_type") != "NO_CHANGE":
+        return _result(False, "preview", "ITR Preview is blocked until the latest Nextop state is current.", error_type="NEXTOP_TICKET_STALE", prepared=freshness.get("prepared"))
+    current = freshness["prepared"]
+    fields = dict(current.fields)
+    if current.existing_record_id:
+        existing = feishu_api.get_record(current.existing_record_id).get("fields") or {}
+        for name in _PRESERVE_ON_EMPTY:
+            if not _has_payload_value(fields.get(name)) and _has_payload_value(existing.get(name)):
+                fields[name] = existing[name]
+    return _result(True, "preview", "ITR Preview is current.", prepared=replace(current, fields=fields))
+
+
+def commit_prepared_nextop_case(prepared, progress_callback=None, *, include_itr_todo=False, todo_dirty=False, nff_value=False, nff_dirty=False, issue_owner_value=None, issue_owner_dirty=False):
     """Write an already prepared Nextop Case; never fetches or analyzes Nextop."""
     if not isinstance(prepared, PreparedNextopCase):
         return _result(False, "commit_prepared", "Invalid prepared Case.", error_type="invalid_prepared")
@@ -720,6 +973,9 @@ def commit_prepared_nextop_case(prepared, progress_callback=None, *, include_itr
         return _result(False, "commit_prepared", "Latest Nextop state could not be verified; ITR Commit is blocked.", ticket_no=prepared.ticket_no, error_type=freshness.get("error_type") or "NEXTOP_REFRESH_ERROR", stage=freshness.get("stage"))
     if freshness.get("change_type") != "NO_CHANGE":
         return _result(False, "commit_prepared", "Ticket has changed since ITR preparation. Please review the latest messages.", ticket_no=prepared.ticket_no, error_type="NEXTOP_TICKET_STALE", latest_change=freshness.get("change_type"), prepared=freshness.get("prepared"))
+    selected_owner = _issue_owner_for_submit(issue_owner_value, issue_owner_dirty)
+    if selected_owner is False:
+        return _result(False, "commit_prepared", "Issue ownership could not be validated against the current ITR schema.", ticket_no=prepared.ticket_no, error_type="issue_owner_invalid")
     guard = None
     try:
         fields = dict(prepared.fields)
@@ -753,12 +1009,20 @@ def commit_prepared_nextop_case(prepared, progress_callback=None, *, include_itr
             fields["Notes"] = notes
         if existing_id:
             update_fields = _nextop_update_fields(fields, update_single_select_audit, include_itr_todo, todo_dirty)
+            update_fields = _non_destructive_update_fields(update_fields)
+            if nff_dirty:
+                update_fields[ITR_NFF_FIELD] = bool(nff_value)
+            if selected_owner:
+                update_fields[ITR_ISSUE_OWNER_FIELD] = selected_owner
             update_single_select_audit = finalize_update_single_select_audit(update_single_select_audit, update_fields)
             _progress(progress_callback, "writing", "Updating existing ITR Case.")
             response, action, record_id = feishu_api.update_record(existing_id, update_fields), "updated", existing_id
         else:
             _progress(progress_callback, "writing", "Creating ITR Case.")
             fields[ITR_TODO_FIELD] = bool(include_itr_todo)
+            fields[ITR_NFF_FIELD] = bool(nff_value)
+            if selected_owner:
+                fields[ITR_ISSUE_OWNER_FIELD] = selected_owner
             response, action, record_id = feishu_api.create_record(sanitize_create_fields(fields)), "created", None
         if record_id is None:
             record_id = _response_record_id(response)

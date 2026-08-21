@@ -23,10 +23,11 @@ class LocalApiTests(unittest.TestCase):
 
     def test_analyze_and_translate_never_commit(self):
         adapter = api_adapter.LocalApiAdapter()
-        analysis = {"source_hash": "h", "reply_en": "Hello"}
-        with patch.object(service, "analyze_existing_case_for_inspector", return_value=analysis) as analyze, \
+        prepared = {"ticket_no": "T", "case_history": "history", "fields": {}, "analysis": {}, "messages": [], "list_info": {}}
+        analysis = {"success": True, "prepared": prepared, "analysis": {"source_hash": "h", "reply_en": "Hello"}}
+        with patch.object(service, "reanalyze_prepared_nextop_case", return_value=analysis) as analyze, \
              patch.object(service, "commit_prepared_nextop_case") as commit:
-            self.assertEqual(adapter.analyze({"case": {"ticket_no": "T"}})["reply_en"], "Hello")
+            self.assertEqual(adapter.analyze({"prepared": prepared})["analysis"]["reply_en"], "Hello")
         analyze.assert_called_once(); commit.assert_not_called()
 
     def test_commit_is_only_write_route(self):
@@ -35,6 +36,16 @@ class LocalApiTests(unittest.TestCase):
         with patch.object(service, "commit_prepared_nextop_case", return_value={"success": True}) as commit:
             self.assertTrue(adapter.commit(payload)["success"])
         commit.assert_called_once()
+
+    def test_commit_forwards_only_explicit_nff_and_issue_ownership(self):
+        adapter = api_adapter.LocalApiAdapter()
+        payload = {"prepared": {"ticket_no": "E-SYN", "case_history": "h", "fields": {}, "analysis": {}, "messages": [], "list_info": {}}, "nff_value": True, "nff_dirty": True, "issue_owner_value": "产品问题", "issue_owner_dirty": True}
+        with patch.object(service, "commit_prepared_nextop_case", return_value={"success": True}) as commit:
+            adapter.commit(payload)
+        self.assertTrue(commit.call_args.kwargs["nff_value"])
+        self.assertTrue(commit.call_args.kwargs["nff_dirty"])
+        self.assertEqual(commit.call_args.kwargs["issue_owner_value"], "产品问题")
+        self.assertTrue(commit.call_args.kwargs["issue_owner_dirty"])
 
     def test_unexpected_prepare_failure_has_safe_stage_diagnostic(self):
         adapter = api_adapter.LocalApiAdapter()
@@ -45,6 +56,16 @@ class LocalApiTests(unittest.TestCase):
         self.assertEqual(result["error_type"], "NEXTOP_RESPONSE_ERROR")
         self.assertEqual(result["detail"], "RuntimeError")
         self.assertNotIn("private-value", str(result))
+
+    def test_translation_route_returns_safe_success_or_failure(self):
+        adapter = api_adapter.LocalApiAdapter()
+        with patch.object(service, "translate_text_to_zh", return_value="中文") as translate:
+            self.assertEqual(adapter.translate_text({"text": "Hello"}), {"success": True, "text": "中文"})
+        translate.assert_called_once_with("Hello")
+        with patch.object(service, "translate_text_to_zh", side_effect=RuntimeError("secret")):
+            result = adapter.translate_text({"text": "Hello"})
+        self.assertEqual(result["error_type"], "TRANSLATION_ERROR")
+        self.assertNotIn("secret", str(result))
 
 
 if __name__ == "__main__": unittest.main()

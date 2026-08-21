@@ -11,6 +11,14 @@ class FeishuAuthRequired(RuntimeError):
     """Local credentials are missing; do not attempt an external request."""
 
 
+class FeishuReadError(RuntimeError):
+    """Safe read-only Feishu failure; carries no request data or credentials."""
+    def __init__(self, code=None, message=None):
+        self.code = code
+        self.message = _safe_feishu_message(message)
+        super().__init__("Feishu read failed.")
+
+
 def _safe_feishu_message(message):
     """Keep technical diagnostics while excluding likely submitted values."""
     text = re.sub(r"\s+", " ", str(message or "")).strip()
@@ -78,7 +86,7 @@ def refresh_user_token():
     )
     data = resp.json()
     if data.get("code") != 0:
-        raise RuntimeError(f"刷新飞书token失败: {data}")
+        raise FeishuAuthRequired("Feishu user authorization expired or invalid.")
     _persist_tokens(data["data"]["access_token"], data["data"]["refresh_token"])
     return config.FEISHU_USER_ACCESS_TOKEN
 
@@ -156,13 +164,15 @@ def find_records_by_ticket_no_exact(ticket_no, field_names=None):
 
 
 def _find_records_exact(field_name, value, field_names=None):
+    if not config.FEISHU_APP_TOKEN or not config.FEISHU_TABLE_ID:
+        raise FeishuAuthRequired("Feishu app or table configuration is missing.")
     path = f"/open-apis/bitable/v1/apps/{config.FEISHU_APP_TOKEN}/tables/{config.FEISHU_TABLE_ID}/records/search"
     data = _request("POST", path, params={"page_size": 100}, json={
         "field_names": list(field_names or []),
         "filter": {"conjunction": "and", "conditions": [{"field_name": field_name, "operator": "is", "value": [str(value or "").strip()]}]},
     })
     if data.get("code") != 0:
-        raise RuntimeError("Feishu exact lookup failed.")
+        raise FeishuReadError(data.get("code"), data.get("msg"))
     return data.get("data", {}).get("items", [])
 
 
@@ -242,6 +252,24 @@ def get_table_fields_metadata():
     data = _request("GET", path, params={"page_size": 200})
     if data.get("code") != 0:
         raise RuntimeError("Feishu field metadata request failed.")
+    return data.get("data", {}).get("items", [])
+
+
+def list_tables_readonly():
+    """List table identities/names in the configured Bitable; read-only only."""
+    path = f"/open-apis/bitable/v1/apps/{config.FEISHU_APP_TOKEN}/tables"
+    data = _request("GET", path, params={"page_size": 100})
+    if data.get("code") != 0:
+        raise RuntimeError("Feishu table discovery request failed.")
+    return data.get("data", {}).get("items", [])
+
+
+def get_table_fields_metadata_readonly(table_id):
+    """Read schema for a named table without inspecting its record values."""
+    path = f"/open-apis/bitable/v1/apps/{config.FEISHU_APP_TOKEN}/tables/{table_id}/fields"
+    data = _request("GET", path, params={"page_size": 200})
+    if data.get("code") != 0:
+        raise RuntimeError("Feishu table field metadata request failed.")
     return data.get("data", {}).get("items", [])
 
 

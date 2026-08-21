@@ -24,7 +24,7 @@ class Handler(BaseHTTPRequestHandler):
         else: self._send(404, {"success": False, "message": "Not found."})
 
     def do_POST(self):
-        routes = {"/api/cases/prepare": ADAPTER.prepare, "/api/cases/refresh": ADAPTER.refresh, "/api/auth/nextop/status": lambda _p: ADAPTER.nextop_auth_status(), "/api/auth/nextop/update": ADAPTER.update_nextop_token, "/api/cases/analyze": ADAPTER.analyze,
+        routes = {"/api/cases/prepare": ADAPTER.prepare, "/api/cases/refresh": ADAPTER.refresh, "/api/cases/preview": ADAPTER.preview, "/api/auth/nextop/status": lambda _p: ADAPTER.nextop_auth_status(), "/api/auth/nextop/update": ADAPTER.update_nextop_token, "/api/cases/analyze": ADAPTER.analyze,
                   "/api/cases/translate": ADAPTER.translate, "/api/cases/translate-text": ADAPTER.translate_text, "/api/cases/commit": ADAPTER.commit}
         action = routes.get(self.path)
         if not action:
@@ -36,7 +36,8 @@ class Handler(BaseHTTPRequestHandler):
         except (ValueError, TypeError):
             self._send(400, {"success": False, "message": "Invalid JSON request."})
         except Exception:
-            self._send(500, {"success": False, "message": "Local API operation failed."})
+            # Do not expose headers, credentials, request bodies, or provider traces.
+            self._send(500, {"success": False, "stage": self.path.rsplit("/", 1)[-1], "error_type": "LOCAL_API_OPERATION_ERROR", "message": "The local service could not complete this operation. Restart PIE ITR and try again."})
 
 
 def main():
