@@ -1,55 +1,47 @@
 # Knowledge Type Taxonomy
 
-Status: Active baseline
+Status: Active — preserve current Feishu taxonomy unless evidence from real KB usage justifies change
 
-## Goal
-Knowledge type exists to help PIE/customer support understand a Knowledge Entry at a glance. It is not an ontology and must not become a deep classification system.
+## Decision correction
+A previously proposed six-type taxonomy was too abstract and was not sufficiently grounded in the actual ITR/工单速查 records. It is withdrawn.
 
-Default target: keep the active taxonomy small (about six customer-facing types). Add a new type only when it changes how the knowledge is used, reviewed, searched or maintained.
+Knowledge Type must follow the real support content already present in Feishu, not an imagined ontology. Do not add new types merely because they seem conceptually clean.
 
-## Active types
+## Current Feishu types
 
-### 1. 维修解决方案
-Use only when evidence supports a concrete problem, an action that was actually performed, and an explicit result/resolution.
+The currently observed active options are:
 
-Do not use when the content is only a recommendation, suspected root cause, next troubleshooting step or diagnostic sequence.
+1. 维修解决方案
+2. 历史版本问题
+3. 料号/兼容性
+4. 软件/工具操作
+5. 流程/政策
 
-### 2. 诊断与排查
-Use for verified diagnostic facts, troubleshooting paths, cross-tests, log-based localization, inspection sequences and PIE-recommended next checks when a final repair result is not established.
+These remain the baseline until a real-content audit shows a repeated, material class of Knowledge that cannot be understood or filtered well with the existing options.
 
-This type intentionally combines “diagnostic fact” and “troubleshooting path” to avoid unnecessary fragmentation.
+## Practical meaning
 
-### 3. 料号与兼容性
-Use when the core reusable value is a part number, replacement/supply rule, interchangeability/compatibility, discontinuation or component-ordering rule.
+### 维修解决方案
+Knowledge whose practical value is helping support resolve or handle a technical case. The exact evidence boundary remains governed by Evidence Policy; a recommendation must not be silently upgraded into a verified repair result.
 
-### 4. 软件与工具
-Use for Mammotion Kit, ToolSuite/MammoSuite, flashing, upgrade, tool behavior, software operation and tool-version handling.
+### 历史版本问题
+Knowledge whose main value is explaining an issue, behavior or workaround tied to an older firmware/software/tool/product version. This is kept as a current user-facing type because it already exists in the real KB and is useful to support old-version cases.
 
-### 5. 产品与版本
-Use for product capability/limitation, firmware/version-specific behavior, historical version facts, service/account behavior and similar facts whose main meaning is product/version status rather than a repair action.
+### 料号/兼容性
+Part numbers, replacement relationships, interchangeability/compatibility, supply/ordering facts and closely related spare-part facts.
 
-Historical/current status is lifecycle metadata, not a separate Knowledge Type.
+### 软件/工具操作
+Mammotion Kit, ToolSuite/MammoSuite, flashing, upgrade, software/tool operation and tool-specific handling.
 
-### 6. 部件与结构
-Use when the core fact is hardware/component identity, structure, location, integrated assembly relationship or visual identification, and the value is not primarily a part-number/compatibility rule.
+### 流程/政策
+Support/business/process rules that agents need to follow, when these are genuinely reusable operational knowledge rather than AI governance instructions.
 
-## Classification principles
+## Change rule
 
-- Classify by the entry's primary reusable value, not by every fact it contains.
-- One entry should normally have one type.
-- Topic ID / fault category / fault module remain separate classification dimensions and should not be duplicated inside Knowledge Type.
-- Image requirement is not a Knowledge Type.
-- “Single case”, “historical version”, “pending evidence” and “superseded” are not Knowledge Types; they belong to evidence/lifecycle/status.
-- Avoid a broad “Other” type when an entry clearly fits one of the six types. If repeated valid knowledge does not fit, report the gap before adding a seventh type.
+Do not create a new Knowledge Type until all of the following are true:
+- multiple real Knowledge entries repeatedly fail to fit the current types;
+- the mismatch causes a real support usability/filtering problem;
+- adding a type makes entries easier to understand at a glance;
+- the same need cannot already be represented by Topic ID, fault category/module, model, version, status or other existing fields.
 
-## Migration guidance
-
-Existing records should be reclassified without changing their factual content:
-- old 维修解决方案 -> keep only if repair gate is met; otherwise 诊断与排查;
-- 诊断事实 / 排查路径 -> 诊断与排查;
-- 料号/兼容性 -> 料号与兼容性;
-- 软件/工具操作 -> 软件与工具;
-- 产品能力 / version facts / service behavior -> 产品与版本;
-- structure/component-identification facts -> 部件与结构.
-
-The taxonomy is deliberately shallow so a support agent can understand it immediately and so filters remain usable as the KB grows.
+Before any taxonomy change, run a read-only audit of current Knowledge records and report the actual examples that do not fit. No taxonomy change should be based only on theoretical classification design.
