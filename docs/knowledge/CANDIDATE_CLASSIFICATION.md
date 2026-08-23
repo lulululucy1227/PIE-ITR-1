@@ -39,6 +39,18 @@ Evidence 不足以形成可靠、可复用 Knowledge。
 
 动作：不写 KB。
 
+## Matching rule
+
+Candidate matching must compare the independent fact itself, not only Topic ID or fault taxonomy.
+
+At minimum consider model, part/component, error code, version, knowledge title/conclusion, compatibility/supply fact, and the underlying evidence meaning when relevant.
+
+Important constraints:
+- Different Topic IDs do **not** prove that two entries cannot conflict or supersede one another.
+- A unique/new Topic ID does **not** prove that `POSSIBLE_SUPERSEDED = 0`.
+- Same Topic ID does **not** automatically imply REINFORCEMENT/DUPLICATE.
+- Conflict/supersession review is semantic and time-aware, especially for firmware, software/tool versions, compatibility, supply rules and product/service behavior.
+
 ## Design note
 
 分类算法未来可以工程化，但在当前阶段分类规则仍通过 GPT + 飞书智能体 + PIE 人工审核验证。
