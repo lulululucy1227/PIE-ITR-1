@@ -4,6 +4,7 @@ import threading
 import sys
 import hashlib
 import json
+import uuid
 from contextlib import contextmanager
 from dataclasses import asdict, dataclass, field, replace
 from datetime import datetime, timezone
@@ -31,6 +32,33 @@ ITR_TODO_FIELD = "加入ITR待办"
 ITR_NFF_FIELD = "加入NFF"
 ITR_ISSUE_OWNER_FIELD = "问题归属"
 ITR_ISSUE_OWNER_OPTIONS = {"产品问题", "代理问题"}
+NFF_EVIDENCE_LABELS = {
+    "customer_issue": "Customer Original Issue",
+    "functional_test": "Functional Test PDF report",
+    "communication_check": "Communication Check PDF report",
+    "automap_run": "AutoMap Run PDF report",
+    "connect_checking": "Connect Checking screenshot",
+    "latest_log": "latest log or confirmation that the uploaded log is the latest",
+}
+
+
+def nff_missing_evidence(evidence):
+    """Return exact missing NFF evidence labels; never collapse to a count."""
+    values = dict(evidence or {})
+    return [label for key, label in NFF_EVIDENCE_LABELS.items() if not bool(values.get(key))]
+
+
+def nff_reply_for_source(source, candidate, evidence):
+    """Generate a missing-only, source-aware reply after evidence evaluation."""
+    missing = nff_missing_evidence(evidence)
+    if str(candidate or "").upper() == "NO":
+        return "", missing
+    if not missing:
+        return "NFF evidence is complete. Manual NFF decision is required.", missing
+    bullets = "\n".join(f"- {item}" for item in missing)
+    if str(source or "").casefold() in {"whatsapp", "lark"}:
+        return f"Please also provide:\n{bullets}", missing
+    return f"Hello,\n\nPlease also provide:\n{bullets}\n\nBest regards,\nPIE Technical Support", missing
 MULTI_SELECT_FIELDS = {"Fault Symptom", "Error Code"}
 _ALLOWED_OPTIONS = {"Fault Symptom": set(fo.FAULT_SYMPTOM), "Error Code": set(fo.ERROR_CODE)}
 _CANDIDATE_FIELDS = ["Ticket No.", "Reference No.", "Disti/Dealer/Service Point", "Device name", "Model Type", "PIE-Comment", "Description", "Solutions", "Fault Symptom", "Error Code", "Error massages", "Replied Time-First", "Replied Time-NEW", "Total Replied", "Status", "Ticket Created Time", "案例数", "Case History", "一级标签", "二级标签", ITR_TODO_FIELD, ITR_NFF_FIELD, ITR_ISSUE_OWNER_FIELD]
@@ -137,6 +165,31 @@ class ManualDraft:
 
 
 @dataclass
+class ManualIntakeDraft:
+    """Source-neutral, uncreated manual intake.  It has no Feishu write path."""
+    draft_key: str
+    source: str
+    raw_source_evidence: str = field(repr=False)
+    normalized_analysis_input: str = field(repr=False)
+    contact: str = ""
+    partner_candidate: dict = field(default_factory=dict)
+    partner_confirmed: str = ""
+    country: str = ""
+    device: str = ""
+    model: str = ""
+    serial_number: str = ""
+    session_notes: str = ""
+    attachment_metadata: list = field(default_factory=list)
+    source_timestamp: str = ""
+    case_history_append: str = field(repr=False, default="")
+    analysis: dict = field(default_factory=dict, repr=False)
+    tags: tuple = ("", "")
+    device_evidence: dict = field(default_factory=dict)
+    image_evidence: list = field(default_factory=list)
+    reply_suppressed: bool = False
+
+
+@dataclass
 class PreparedNextopCase:
     """Read/analyze-only Nextop review object; it never writes Feishu."""
     ticket_no: str
@@ -204,12 +257,13 @@ def parse_manual_messages(text):
             timestamp_ms = int(datetime(int(year), int(month), int(day), int(hour), int(minute), tzinfo=timezone.utc).timestamp() * 1000)
         if cn or standard:
             if current: messages.append(current)
-            current = {"id": len(messages) + 1, "timestamp_ms": timestamp_ms, "content": content.strip()}
+            current = {"id": len(messages) + 1, "timestamp_ms": timestamp_ms,
+                       "sender": _sender.strip(), "content": content.strip()}
         elif current:
             current["content"] = (current["content"] + "\n" + line).strip()
     if current: messages.append(current)
     messages = [item for item in messages if item["content"]]
-    return messages or ([{"id": 1, "timestamp_ms": None, "content": str(text or "").strip()}] if str(text or "").strip() else [])
+    return messages or ([{"id": 1, "timestamp_ms": None, "sender": "", "content": str(text or "").strip()}] if str(text or "").strip() else [])
 
 
 def _progress(callback, stage, message, success=None):
@@ -1068,6 +1122,390 @@ def refresh_nextop_session(pageorder_request, progress_callback=None):
     except Exception:
         _progress(progress_callback, "nextop_auth_failed", "Nextop authentication failed.", False)
         return _result(False, "nextop_authenticated", "Nextop authentication refresh failed.", error_type="nextop_auth_failed")
+
+
+def _manual_source_timestamp(messages):
+    values = [item.get("timestamp_ms") for item in messages if item.get("timestamp_ms")]
+    if not values:
+        return ""
+    return datetime.fromtimestamp(min(values) / 1000, timezone.utc).isoformat()
+
+
+def build_manual_source_block(source, raw_source_evidence, *, contact="", source_timestamp=""):
+    """Preserve original evidence; processing time is intentionally not recorded as source time."""
+    lines = [f"[Source: {str(source or '').strip()}]"]
+    if source_timestamp:
+        lines.append(f"[Source timestamp: {source_timestamp}]")
+    if str(contact or "").strip():
+        lines.append(f"[Contact: {str(contact).strip()}]")
+    return "\n".join(lines + [str(raw_source_evidence or "").strip()]).strip()
+
+
+_MODEL_FAMILY_TOKEN = re.compile(r"^(?:luba|yuka)(?:mini)?[\s_-]*\d+(?:[\s_-]*x)?$", re.I)
+_SERIAL_LABEL = re.compile(r"\b(?:serial(?:\s+number)?|s/?n)\s*[:#-]?\s*([A-Z0-9][A-Z0-9_-]{4,})\b", re.I)
+_ERROR_CODE_TOKEN = re.compile(r"\b(?:E|ERR(?:OR)?[- ]?)[A-Z0-9]{2,}\b", re.I)
+
+
+def is_valid_manual_serial(value):
+    """Reject model names (notably LUBA 2 X) before they reach a draft."""
+    text = str(value or "").strip()
+    compact = re.sub(r"[\s_-]+", "", text).casefold()
+    if not text or _MODEL_FAMILY_TOKEN.fullmatch(text) or compact in {"luba2x", "luba3", "luba2", "lubamini2", "yukamini2"}:
+        return False
+    return bool(re.fullmatch(r"[A-Z0-9][A-Z0-9_-]{4,}", text, re.I))
+
+
+def _manual_evidence(raw_text, supplied_device="", supplied_model="", supplied_serial="", image_evidence=None):
+    raw_devices = list(dict.fromkeys(_device_tokens(raw_text)))
+    images = [item for item in (image_evidence or []) if isinstance(item, dict)]
+    image_devices = list(dict.fromkeys(_normalize_device_prefix(value)
+                                       for item in images for value in (item.get("device_candidates") or [])
+                                       if _device_tokens(value)))
+    image_models = list(dict.fromkeys(str(value).strip() for item in images for value in (item.get("model_candidates") or []) if str(value).strip()))
+    explicit_device = _normalize_device_prefix(supplied_device) if _device_tokens(supplied_device) else ""
+    candidates = list(dict.fromkeys(([explicit_device] if explicit_device else []) + raw_devices + image_devices))
+    source = "MANUAL_CONFIRMED" if explicit_device else ("RAW_EXPLICIT" if len(raw_devices) == 1 else ("IMAGE_CANDIDATE" if len(image_devices) == 1 else ""))
+    # A single model-approved image candidate is useful case evidence. It is
+    # still marked for human confirmation before any ITR write.
+    chosen = explicit_device or (raw_devices[0] if len(raw_devices) == 1 else (image_devices[0] if len(image_devices) == 1 else ""))
+    serials = list(dict.fromkeys(_SERIAL_LABEL.findall(str(raw_text or ""))))
+    serials += [str(value).strip() for item in images for value in (item.get("serial_candidates") or [])]
+    serials = [item for item in serials if is_valid_manual_serial(item)]
+    requested_serial = str(supplied_serial or "").strip()
+    serial = requested_serial if is_valid_manual_serial(requested_serial) else (serials[0] if len(set(serials)) == 1 else "")
+    resolution = resolve_model(chosen, supplied_model)
+    known_model = resolution.get("model") or ""
+    model_conflict = bool(known_model and image_models and any(_normalized_text(item) != _normalized_text(known_model) for item in image_models))
+    image_errors = list(dict.fromkeys(str(value).strip() for item in images for value in (item.get("error_codes") or []) if str(value).strip()))
+    image_messages = list(dict.fromkeys(str(value).strip() for item in images for value in (item.get("error_messages") or []) if str(value).strip()))
+    technical_facts = [fact for item in images for fact in (item.get("technical_facts") or []) if isinstance(fact, dict) and str(fact.get("label") or "").strip() and str(fact.get("value") or "").strip()]
+    return {
+        "device_name": chosen, "device_candidates": candidates,
+        "device_status": source or ("MULTIPLE_CANDIDATES" if len(candidates) > 1 else "UNRESOLVED"),
+        "image_confirmation_required": bool((image_devices or image_models or image_errors or image_messages) and not (explicit_device or supplied_model or requested_serial)),
+        "model_resolution": resolution, "model_candidates": list(dict.fromkeys(([known_model] if known_model else []) + image_models)), "model_conflict": model_conflict,
+        "serial_number": serial,
+        "serial_status": "VALID" if serial else ("REJECTED_MODEL_FAMILY" if requested_serial else "UNRESOLVED"),
+        "error_code_candidates": list(dict.fromkeys(_ERROR_CODE_TOKEN.findall(str(raw_text or "")) + image_errors)),
+        "error_message_candidates": image_messages,
+        "technical_facts": technical_facts,
+    }
+
+
+def _manual_support_reply_ids(messages):
+    """Return only evidence-backed manual support messages."""
+    aliases = {str(name).casefold() for name in settings.PIE_SENDERS}
+    ids = []
+    for item in messages or []:
+        sender = str(item.get("sender") or "").strip().casefold()
+        tokens = set(re.findall(r"[a-z0-9]+", sender))
+        if sender and (bool(tokens & aliases) or any(token in sender for token in ("pie", "support", "mammotion"))):
+            ids.append(item["id"])
+    return ids
+
+
+def _manual_reply_statistics(messages):
+    """Derive workload metrics from imported source evidence only."""
+    support_ids = _manual_support_reply_ids(messages)
+    replies = [item for item in messages or [] if item.get("id") in set(support_ids)]
+    timestamps = [item.get("timestamp_ms") for item in replies if item.get("timestamp_ms")]
+    if not replies or len(timestamps) != len(replies):
+        return {"status": "NEEDS_CONFIRMATION", "support_reply_ids": support_ids,
+                "message": "Reply statistics need confirmation", "fields": {}}
+    return {"status": "DERIVED", "support_reply_ids": support_ids,
+            "fields": {"Total Replied": len(replies), "Replied Time-First": min(timestamps), "Replied Time-NEW": max(timestamps)}}
+
+
+def _actionable_manual_guidance(value):
+    """Keep a case summary out of PIE Guidance."""
+    text = str(value or "").strip()
+    action = re.compile(r"\b(?:ask|request|confirm|verify|check|collect|provide|test|replace|restart|update|inspect)\b|请|确认|检查|收集|提供|测试|更换|重启|更新|核实", re.I)
+    return text if text and action.search(text) else ""
+
+
+def _validated_repair_actions(actions, raw_text):
+    """Reject recommendations, questions, and negated repair history."""
+    source = str(raw_text or "").casefold()
+    accepted = []
+    for value in actions or []:
+        action = str(value or "").strip()
+        low = action.casefold()
+        if not action or action.endswith("?") or re.match(r"(?:please|ask|request|recommend|建议|请)\b", low):
+            continue
+        if any(token in low for token in ("replaced", "changed", "更换", "替换")):
+            if re.search(r"(?:not|never|未|没有|没有被|尚未)\s+(?:been\s+)?(?:replaced|changed|更换|替换)", source):
+                continue
+        accepted.append(action)
+    return list(dict.fromkeys(accepted))
+
+
+def _manual_reply(analysis, source, messages):
+    support_ids = set(analysis.get("support_reply_ids") or [])
+    if messages and messages[-1].get("id") in support_ids:
+        return "", True
+    issue = str(analysis.get("description") or "").strip()
+    if not issue:
+        return "", False
+    if str(source).casefold() in {"whatsapp", "lark"}:
+        return "Thank you for the update. We have recorded the information provided and will continue the review.", False
+    return "Hello,\n\nThank you for the update. We have recorded the information provided and will continue the review.\n\nBest regards,\nPIE Technical Support", False
+
+
+def prepare_manual_intake(payload):
+    """Prepare/analyze a manual source without any Feishu create or update."""
+    from intake import normalize_case
+    import partner_resolver
+    payload = dict(payload or {})
+    source = str(payload.get("source") or "").strip().casefold()
+    raw = str(payload.get("raw_source_evidence") or "").strip()
+    if source not in _MANUAL_SOURCES:
+        return _result(False, "prepare_manual_intake", "Unsupported manual source.", error_type="invalid_source")
+    if not raw:
+        return _result(False, "prepare_manual_intake", "Paste the original conversation before analyzing.", error_type="empty_content")
+    try:
+        normalized = normalize_case(source, raw, str(payload.get("source_reference") or ""))
+        manual_messages = parse_manual_messages(raw)
+        source_timestamp = _manual_source_timestamp(manual_messages)
+        contact = str(payload.get("contact") or "").strip()
+        partner_confirmed = str(payload.get("partner_confirmed") or "").strip()
+        try:
+            partner_candidate = partner_resolver.resolve_partner(partner_resolver.load_partner_records_readonly(), explicit_partner=partner_confirmed, contact=contact)
+        except Exception:
+            partner_candidate = {"status": "UNKNOWN", "partner": "", "code": "", "country": "", "reason": "partner_source_unavailable", "candidates": []}
+        case_history = build_manual_source_block(source, raw, contact=contact, source_timestamp=source_timestamp)
+        analysis = analyzer.analyze_case_history(case_history, manual_messages=manual_messages)
+        attachments = list(payload.get("attachments") or [])
+        image_evidence = analyzer.analyze_manual_images(attachments) if any(str(item.get("type") or "").startswith("image/") for item in attachments if isinstance(item, dict)) else []
+        evidence = _manual_evidence(raw, payload.get("device") or "", payload.get("model") or "", payload.get("serial_number") or "", image_evidence)
+        device = evidence["device_name"]
+        if device:
+            analysis["device_name"] = device
+        if str(payload.get("model") or "").strip():
+            analysis["model_type"] = str(payload.get("model")).strip()
+        elif evidence["model_resolution"].get("model") and not analysis.get("model_type"):
+            analysis["model_type"] = evidence["model_resolution"]["model"]
+        # Manual-source diagnostic requests are guidance, not a verified ITR
+        # Solution. Retain them in review only and leave Solutions empty until
+        # a confirmed resolution is available.
+        analysis["diagnostic_guidance"] = analysis.get("pie_comment") or ""
+        analysis["pie_guidance"] = _actionable_manual_guidance(analysis.get("pie_guidance") or analysis.get("solutions"))
+        analysis["repair_actions"] = _validated_repair_actions(analysis.get("repair_actions"), raw)
+        analysis["solutions"] = ""
+        reply_statistics = _manual_reply_statistics(manual_messages)
+        analysis["support_reply_ids"] = reply_statistics["support_reply_ids"]
+        analysis["reply_statistics"] = reply_statistics
+        reply, reply_suppressed = _manual_reply(analysis, source, manual_messages)
+        analysis["reply_en"] = reply
+        analysis["reply_suppressed"] = reply_suppressed
+        if not reply and not reply_suppressed:
+            analysis["reply_generation_error"] = "Manual reply could not be generated."
+        tags = tag_engine.classify(_tag_text(analysis))
+        draft = ManualIntakeDraft(
+            draft_key=str(payload.get("draft_key") or f"temp:{uuid.uuid4()}"), source=source,
+            raw_source_evidence=raw, normalized_analysis_input=normalized.current_message or raw,
+            contact=contact, partner_candidate=partner_candidate, partner_confirmed=partner_confirmed,
+            country=str(payload.get("country") or partner_candidate.get("country") or "").strip(), device=device, model=str(payload.get("model") or evidence["model_resolution"].get("model") or "").strip(),
+            serial_number=evidence["serial_number"], session_notes=str(payload.get("session_notes") or "").strip(),
+            attachment_metadata=list(payload.get("attachment_metadata") or []), source_timestamp=source_timestamp,
+            case_history_append=case_history, analysis=analysis, tags=tags, device_evidence=evidence,
+            image_evidence=image_evidence, reply_suppressed=reply_suppressed,
+        )
+        return _result(True, "prepare_manual_intake", "Manual source is ready for review.", draft=draft, analysis=analysis)
+    except Exception:
+        return _result(False, "prepare_manual_intake", "Manual source preparation failed.", error_type="manual_prepare_error")
+
+
+def manual_draft_from_json(data):
+    allowed = set(ManualIntakeDraft.__dataclass_fields__)
+    return ManualIntakeDraft(**{key: value for key, value in dict(data or {}).items() if key in allowed})
+
+
+def reanalyze_manual_draft(draft, human_guidance=""):
+    """Run the established Inspector contract over an already-local manual draft.
+
+    This never fetches Nextop or writes Feishu.  The original raw evidence and
+    source-specific fields remain the authoritative draft payload.
+    """
+    if not isinstance(draft, ManualIntakeDraft):
+        return _result(False, "manual_reanalyze", "Analyze the manual source before regenerating.", error_type="invalid_manual_draft")
+    from dataclasses import asdict
+    source = dict(draft.analysis or {})
+    source.update({
+        "case_history": draft.case_history_append,
+        "description": source.get("description") or "",
+        "fault_symptom": source.get("fault_symptom") or [],
+        "pie_comment": source.get("pie_comment") or "",
+        "solutions": source.get("solutions") or "",
+        "model_type": draft.model or source.get("model_type") or "",
+        "error_codes": source.get("error_code") or [],
+        "human_guidance": str(human_guidance or "").strip(),
+        "context_pack": {"knowledge_coverage": "none"},
+    })
+    inspector = asdict(analyzer.analyze_case_for_inspector(source))
+    analysis = dict(source)
+    analysis.update(inspector)
+    analysis["diagnostic_guidance"] = source.get("pie_comment") or ""
+    analysis["pie_guidance"] = inspector.get("ai_suggested_next_step") or ""
+    # A diagnostic request remains guidance.  Only an Inspector-confirmed
+    # solution may enter the future ITR Solution field.
+    analysis["solutions"] = inspector.get("solution") or ""
+    updated = replace(draft, analysis=analysis, reply_suppressed=False)
+    return _result(True, "manual_reanalyze", "Manual analysis and reply were regenerated.", draft=updated, analysis=analysis)
+
+
+def prepare_manual_append_preview(ticket_no, draft):
+    """Read-only preview for a future manual append; it never calls update_record."""
+    ticket_no = str(ticket_no or "").strip()
+    if not ticket_no.upper().startswith("ITR-"):
+        return _result(False, "manual_append_preview", "Enter an exact ITR Ticket No.", error_type="invalid_ticket_no")
+    existing = open_existing_case(ticket_no)
+    if not existing.get("success"):
+        return existing
+    record = feishu_api.get_record(existing["record_id"])
+    fields = record.get("fields") or {}
+    prior_history = feishu_api.normalize_field_value(fields.get("Case History")) or ""
+    append = str(draft.case_history_append or "").strip()
+    merged = append_manual_history(prior_history, append, draft.raw_source_evidence)
+    if merged is None:
+        return _result(False, "manual_append_preview", "This source evidence is already present in Case History.", error_type="duplicate")
+    protected = ("Ticket No.", "Solutions", "一级标签", "二级标签", "三级标签", "PIE-Comment", "Total Replied", "Notes")
+    actions = [{"field": "Case History", "action": "APPEND", "existing": prior_history, "proposed": merged}]
+    actions.extend({"field": name, "action": "PRESERVE", "existing": feishu_api.normalize_field_value(fields.get(name)), "proposed": draft.analysis.get({"Solutions": "solutions", "PIE-Comment": "pie_comment"}.get(name, ""), "") if name in {"Solutions", "PIE-Comment"} else ""} for name in protected)
+    return _result(True, "manual_append_preview", "Safe append preview is ready. Production append is disabled.", ticket_no=ticket_no, record_id=existing["record_id"], case=existing["case"], actions=actions, production_write_enabled=False)
+
+
+def _manual_partner(draft):
+    return str(draft.partner_confirmed or (draft.partner_candidate or {}).get("partner") or "").strip()
+
+
+def _manual_create_fields(draft, *, include_itr_todo=False, nff_value=False, issue_owner=""):
+    """Build the exact new-record payload; no reference number is invented."""
+    analysis = dict(draft.analysis or {})
+    evidence = dict(draft.device_evidence or {})
+    if evidence.get("device_name"):
+        analysis["device_name"] = evidence["device_name"]
+    if evidence.get("model_resolution", {}).get("model") and not analysis.get("model_type"):
+        analysis["model_type"] = evidence["model_resolution"]["model"]
+    fields = build_v2_fields(draft.case_history_append, analysis, (_manual_partner(draft),), tags=draft.tags)
+    reply_statistics = dict(analysis.get("reply_statistics") or {})
+    if reply_statistics.get("status") == "DERIVED":
+        fields.update(reply_statistics.get("fields") or {})
+    if _manual_partner(draft):
+        fields["Disti/Dealer/Service Point"] = _manual_partner(draft)
+        fields["_partner_resolution"] = {"status": "EXPLICIT" if draft.partner_confirmed else "RESOLVED", "partner": _manual_partner(draft)}
+    # No Nextop reference exists for these source types.  It must remain absent.
+    fields.pop("Reference No.", None)
+    if include_itr_todo:
+        fields[ITR_TODO_FIELD] = True
+    if nff_value:
+        fields[ITR_NFF_FIELD] = True
+    if issue_owner in ITR_ISSUE_OWNER_OPTIONS:
+        fields[ITR_ISSUE_OWNER_FIELD] = issue_owner
+    return sanitize_create_fields(fields)
+
+
+def prepare_manual_create_preview(draft, *, include_itr_todo=False, nff_value=False, issue_owner=""):
+    if not isinstance(draft, ManualIntakeDraft) or not str(draft.raw_source_evidence or "").strip():
+        return _result(False, "manual_create_preview", "Analyze the manual source before creating ITR.", error_type="invalid_manual_draft")
+    if nff_value:
+        return _result(False, "manual_create_preview", "NFF remains a manual decision and requires confirmed evidence before ITR creation.", error_type="nff_evidence_required")
+    fields = _manual_create_fields(draft, include_itr_todo=include_itr_todo, nff_value=False, issue_owner=issue_owner)
+    return _result(True, "manual_create_preview", "Create ITR preview is ready.", fields=fields, source=draft.source,
+                   attachment_count=len(draft.attachment_metadata or []), device_evidence=draft.device_evidence,
+                   serial_number=draft.serial_number, production_write_enabled=False)
+
+
+def _decode_manual_attachments(attachments):
+    """Decode browser-local attachment data only at the explicit write boundary."""
+    import base64
+    decoded = []
+    for item in attachments or []:
+        if not isinstance(item, dict):
+            continue
+        name = str(item.get("name") or "attachment").strip()[:180] or "attachment"
+        encoded = str(item.get("data_base64") or "")
+        if not encoded:
+            continue
+        try:
+            content = base64.b64decode(encoded, validate=True)
+        except Exception:
+            raise ValueError("A local attachment could not be read.")
+        if not content or len(content) > 15 * 1024 * 1024:
+            raise ValueError("An attachment is empty or exceeds the 15 MB local limit.")
+        decoded.append((name, content))
+    return decoded
+
+
+def _append_uploaded_manual_attachments(record_id, attachments):
+    decoded = _decode_manual_attachments(attachments)
+    if not decoded:
+        return {"success": True, "count": 0}
+    try:
+        record = feishu_api.get_record(record_id)
+        current = [{"file_token": item["file_token"]} for item in (record.get("fields", {}).get("Notes") or []) if item.get("file_token")]
+        tokens = list(current)
+        for name, content in decoded:
+            tokens.append({"file_token": feishu_api.upload_attachment(content, name)})
+        response = feishu_api.update_record(record_id, {"Notes": tokens})
+    except Exception:
+        return {"success": False, "count": len(decoded)}
+    if response.get("code") != 0:
+        return {"success": False, "count": len(decoded)}
+    return {"success": True, "count": len(decoded)}
+
+
+def _readback_manual_ticket(record_id):
+    for _attempt in range(3):
+        record = feishu_api.get_record(record_id)
+        ticket_no = str(feishu_api.normalize_field_value((record.get("fields") or {}).get("Ticket No.")) or "").strip()
+        if ticket_no:
+            return ticket_no, record
+    return "", {}
+
+
+def create_manual_itr(draft, attachments=None, *, include_itr_todo=False, nff_value=False, issue_owner=""):
+    """Explicit new-case write: create once, then read Feishu's native Ticket No."""
+    preview = prepare_manual_create_preview(draft, include_itr_todo=include_itr_todo, nff_value=nff_value, issue_owner=issue_owner)
+    if not preview.get("success"):
+        return preview
+    response = feishu_api.create_record(preview["fields"])
+    if response.get("code") != 0:
+        return _feishu_failure(response, "manual_create", "Manual ITR creation failed.", source=draft.source)
+    record_id = _response_record_id(response)
+    if not record_id:
+        return _result(False, "manual_create", "ITR create may have succeeded, but no record ID was returned. Do not create again.", error_type="uncertain_write")
+    ticket_no, _record = _readback_manual_ticket(record_id)
+    if not ticket_no:
+        return _result(False, "manual_create", "ITR create may have succeeded, but Ticket No. readback failed. Do not create again; recover using the returned record.", error_type="readback_failed", record_id=record_id, write_state="UNCERTAIN")
+    attachment_result = _append_uploaded_manual_attachments(record_id, attachments)
+    if not attachment_result["success"]:
+        return _result(False, "manual_create", "ITR was created, but one or more attachments could not be saved. Do not create again.", error_type="attachment_partial", record_id=record_id, ticket_no=ticket_no, write_state="PARTIAL_ATTACHMENTS")
+    return _result(True, "manual_create", "ITR created with native Ticket No.", record_id=record_id, ticket_no=ticket_no, attachment_count=attachment_result["count"], write_state="COMPLETE")
+
+
+def append_manual_itr(ticket_no, draft, attachments=None):
+    """Explicit append writes only Case History/Notes; managed case fields are untouched."""
+    preview = prepare_manual_append_preview(ticket_no, draft)
+    if not preview.get("success"):
+        return preview
+    record_id = preview["record_id"]
+    history = next(item["proposed"] for item in preview["actions"] if item["field"] == "Case History")
+    with _record_write_guard(record_id) as acquired:
+        if not acquired:
+            return _result(False, "manual_append", "This ITR case is being updated in another workspace.", error_type="case_busy")
+        # Re-read immediately before writing so an earlier preview never replaces history.
+        current = feishu_api.get_record(record_id)
+        prior = feishu_api.normalize_field_value((current.get("fields") or {}).get("Case History")) or ""
+        merged = append_manual_history(prior, draft.case_history_append, draft.raw_source_evidence)
+        if merged is None:
+            return _result(False, "manual_append", "This source evidence is already present in Case History.", error_type="duplicate")
+        response = feishu_api.update_record(record_id, {"Case History": merged})
+        if response.get("code") != 0:
+            return _feishu_failure(response, "manual_append", "Manual evidence could not be appended.", record_id=record_id)
+        attachment_result = _append_uploaded_manual_attachments(record_id, attachments)
+        if not attachment_result["success"]:
+            return _result(False, "manual_append", "Case History was appended, but one or more attachments could not be saved. Do not append again.", error_type="attachment_partial", record_id=record_id, ticket_no=ticket_no, write_state="PARTIAL_ATTACHMENTS")
+    return _result(True, "manual_append", "Evidence was appended to the existing ITR case.", record_id=record_id, ticket_no=ticket_no, attachment_count=attachment_result["count"], write_state="COMPLETE")
 
 
 def prepare_manual_submission(source, raw_text, progress_callback=None):

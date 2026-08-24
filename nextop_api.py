@@ -7,6 +7,9 @@ from bs4 import BeautifulSoup
 import config
 
 BASE = "https://api.nextop.com"
+# Read-only ticket loading must fail back to the local error contract rather
+# than leave a validation/UI process without a report indefinitely.
+REQUEST_TIMEOUT = (8, 18)
 
 
 def _headers(extra=None):
@@ -57,7 +60,7 @@ class NextopParseError(NextopResponseError):
 
 
 def _post(url, payload):
-    r = requests.post(url, json=payload, headers=_headers(), cookies=_cookies())
+    r = requests.post(url, json=payload, headers=_headers(), cookies=_cookies(), timeout=REQUEST_TIMEOUT)
     if r.status_code in (401, 403):
         raise NextopAuthRequired("Nextop authentication expired or invalid.")
     r.raise_for_status()
@@ -70,7 +73,7 @@ def _post(url, payload):
 
 
 def _get(url, params):
-    r = requests.get(url, params=params, headers=_headers(), cookies=_cookies())
+    r = requests.get(url, params=params, headers=_headers(), cookies=_cookies(), timeout=REQUEST_TIMEOUT)
     if r.status_code in (401, 403):
         raise NextopAuthRequired("Nextop authentication expired or invalid.")
     r.raise_for_status()

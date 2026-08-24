@@ -5,6 +5,7 @@ import config
 
 BASE = "https://open.feishu.cn"
 _AUTH_ERROR_CODES = {99991663, 99991661, 99991677, 99991668}
+_AUTONUMBER_EXACT_SCAN_PAGES = 20
 
 
 class FeishuAuthRequired(RuntimeError):
@@ -17,6 +18,25 @@ class FeishuReadError(RuntimeError):
         self.code = code
         self.message = _safe_feishu_message(message)
         super().__init__("Feishu read failed.")
+
+
+def classify_read_error(error):
+    """Return a safe UI category without exposing response/request details."""
+    if isinstance(error, FeishuAuthRequired):
+        return "AUTH_EXPIRED"
+    code = getattr(error, "code", None)
+    message = str(getattr(error, "message", "") or "").casefold()
+    if code in _AUTH_ERROR_CODES or "authorization" in message or "access token" in message:
+        return "AUTH_EXPIRED"
+    if "permission" in message or "forbidden" in message:
+        return "PERMISSION_DENIED"
+    if "table" in message and ("not found" in message or "invalid" in message):
+        return "TABLE_NOT_FOUND"
+    if "network" in message or "timeout" in message:
+        return "NETWORK_ERROR"
+    if "json" in message or "response" in message:
+        return "INVALID_RESPONSE"
+    return "UNKNOWN_FEISHU_ERROR"
 
 
 def _safe_feishu_message(message):
@@ -100,14 +120,15 @@ def _request(method, path, **kwargs):
     headers["Authorization"] = f"Bearer {config.FEISHU_USER_ACCESS_TOKEN}"
     headers["Content-Type"] = "application/json; charset=utf-8"
     kwargs.setdefault("timeout", 30)
+    attempts = max(1, int(kwargs.pop("max_attempts", 4)))
     # 网络瞬断（SSL/连接重置）自动重试
     resp = None
-    for attempt in range(4):
+    for attempt in range(attempts):
         try:
             resp = requests.request(method, url, headers=headers, **kwargs)
             break
         except requests.exceptions.RequestException as e:
-            if attempt == 3:
+            if attempt == attempts - 1:
                 raise
             _t.sleep(1.5 * (attempt + 1))
     try:
@@ -159,8 +180,38 @@ def find_records_by_reference_exact(reference_no, field_names=None):
 
 
 def find_records_by_ticket_no_exact(ticket_no, field_names=None):
-    """Read-only exact Ticket No. lookup; caller handles 0/1/many."""
-    return _find_records_exact("Ticket No.", ticket_no, field_names)
+    """Read-only exact lookup for an AutoNumber field.
+
+    Bitable rejects the normal ``is`` filter for AutoNumber (InvalidFilter),
+    so scan only the requested fields page-by-page and compare locally.  The
+    caller still handles zero/one/many; no first-match behavior is introduced.
+    """
+    if not config.FEISHU_APP_TOKEN or not config.FEISHU_TABLE_ID:
+        raise FeishuAuthRequired("Feishu app or table configuration is missing.")
+    wanted = str(ticket_no or "").strip().casefold()
+    if not wanted:
+        return []
+    path = f"/open-apis/bitable/v1/apps/{config.FEISHU_APP_TOKEN}/tables/{config.FEISHU_TABLE_ID}/records/search"
+    requested = list(dict.fromkeys(["Ticket No.", *(field_names or [])]))
+    matches, page_token = [], None
+    for _page in range(_AUTONUMBER_EXACT_SCAN_PAGES):
+        params = {"page_size": 500}
+        if page_token:
+            params["page_token"] = page_token
+        data = _request("POST", path, params=params, json={"field_names": requested})
+        if data.get("code") != 0:
+            raise FeishuReadError(data.get("code"), data.get("msg"))
+        page = data.get("data") or {}
+        for record in page.get("items") or []:
+            value = normalize_field_value((record.get("fields") or {}).get("Ticket No."))
+            if str(value or "").strip().casefold() == wanted:
+                matches.append(record)
+        if not page.get("has_more"):
+            return matches
+        page_token = page.get("page_token")
+        if not page_token:
+            raise FeishuReadError(None, "Feishu returned an invalid paginated response.")
+    raise FeishuReadError(None, "Ticket No. lookup exceeded the safe read-only scan limit.")
 
 
 def _find_records_exact(field_name, value, field_names=None):

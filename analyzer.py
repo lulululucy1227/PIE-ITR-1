@@ -135,6 +135,54 @@ def translate_text_to_zh(text):
     return translated
 
 
+def analyze_manual_images(attachments):
+    """Analyze only browser attachments explicitly supplied for this manual case.
+
+    Results remain reviewable candidates. They are never sent to Feishu here.
+    """
+    if not config.DEEPSEEK_API_KEY or not config.DEEPSEEK_BASE_URL:
+        raise RuntimeError("Image analysis credentials are not configured.")
+    results = []
+    keys = ("device_candidates", "model_candidates", "serial_candidates", "error_codes", "error_messages", "visible_tools", "test_failures", "technical_observations", "technical_facts")
+    prompt = """Inspect this technical support screenshot. Return JSON only:
+{"device_identifier":null,"model_candidate":null,"serial_number":null,"error_codes":[],"error_messages":[],"technical_facts":[{"label":"","value":""}],"visible_tools":[],"test_failures":[],"technical_observations":[],"confidence":"high|medium|low"}.
+Extract only visibly shown evidence. Keep error codes and messages separate.
+Do not infer hidden facts, physical damage, NFF eligibility, or a failure
+conclusion. Product-family/model names such as LUBA 2 X are never serials."""
+    for item in attachments or []:
+        if not isinstance(item, dict) or not str(item.get("type") or "").startswith("image/"):
+            continue
+        encoded = str(item.get("data_base64") or "").strip()
+        if not encoded:
+            continue
+        attachment_id = str(item.get("id") or item.get("attachment_id") or "")
+        if len(encoded) > 14 * 1024 * 1024:
+            results.append({"attachment_id": attachment_id, "status": "REJECTED_TOO_LARGE", **{key: [] for key in keys}, "confidence": "low"})
+            continue
+        try:
+            response = requests.post(
+                f"{config.DEEPSEEK_BASE_URL}/chat/completions",
+                headers={"Authorization": f"Bearer {config.DEEPSEEK_API_KEY}", "Content-Type": "application/json"},
+                json={"model": getattr(config, "DEEPSEEK_MODEL_VISION", None) or getattr(config, "DEEPSEEK_MODEL_FAST", None) or "deepseek-v4-flash",
+                      "messages": [{"role": "system", "content": prompt}, {"role": "user", "content": [{"type": "image_url", "image_url": {"url": f"data:{item.get('type')};base64,{encoded}"}}]}],
+                      "response_format": {"type": "json_object"}, "temperature": 0.0},
+                timeout=(20, 150),
+            )
+            response.raise_for_status()
+            parsed = json.loads(response.json()["choices"][0]["message"]["content"])
+            result = {key: [str(value).strip() for value in (parsed.get(key) or []) if str(value).strip()] if isinstance(parsed.get(key), list) else [] for key in keys if key != "technical_facts"}
+            for key, target in (("device_identifier", "device_candidates"), ("model_candidate", "model_candidates"), ("serial_number", "serial_candidates")):
+                value = str(parsed.get(key) or "").strip()
+                if value:
+                    result[target] = [value]
+            result["technical_facts"] = [{"label": str(item.get("label") or "").strip(), "value": str(item.get("value") or "").strip()} for item in (parsed.get("technical_facts") or []) if isinstance(item, dict) and str(item.get("label") or "").strip() and str(item.get("value") or "").strip()]
+            result.update({"attachment_id": attachment_id, "status": "ANALYZED", "confidence": str(parsed.get("confidence") or "low").lower()})
+        except Exception:
+            result = {"attachment_id": attachment_id, "status": "ANALYSIS_FAILED", **{key: [] for key in keys}, "confidence": "low"}
+        results.append(result)
+    return results
+
+
 def _live_options(field_name, fallback):
     try:
         options = feishu_api.get_select_field_options(field_name)
@@ -165,6 +213,8 @@ Return JSON only, with exactly these keys:
   "disti_dealer": "",
   "model_type": "",
   "pie_comment": "",
+  "pie_guidance": "",
+  "repair_actions": [],
   "description": "",
   "solutions": "",
   "fault_symptom": [],
@@ -183,6 +233,13 @@ Rules:
   modality: recommended/requires/check/flash/upload is not completed/verified.
 - PIE-Comment is a short Chinese summary of the core problem, based mainly on
   Description, symptoms, codes and error messages. Do not repeat Solutions.
+- pie_guidance is a concrete next recommendation for the partner in Chinese.
+  It must contain an explicit action (for example confirm, collect, test, or
+  verify) and must not merely restate the case summary. Leave it empty when no
+  evidence-backed recommendation is available.
+- repair_actions contains only actions explicitly completed by the partner or
+  service point. Exclude questions, recommendations, future actions, and any
+  action negated by the source text.
 - Use only explicit evidence. Do not invent message times, senders, device
   facts, dealer, errors, or actions.
 - device_name is only a concrete, uniquely identifying device identifier
@@ -265,6 +322,8 @@ Indexed manual messages:
         "disti_dealer": result.get("disti_dealer", ""),
         "model_type": result.get("model_type", ""),
         "pie_comment": result.get("pie_comment", ""),
+        "pie_guidance": result.get("pie_guidance", ""),
+        "repair_actions": [str(item).strip() for item in (result.get("repair_actions") or []) if str(item).strip()],
         "description": result.get("description", ""),
         "solutions": result.get("solutions", ""),
         "fault_symptom": result.get("fault_symptom", []),
