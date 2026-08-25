@@ -52,6 +52,17 @@ AI/智能体可以生成候选、分类、摘要和变更建议，但正式发�
 
 AI/智能体不得直接从第 1 层跳到第 3 层。
 
+### Level 3 aggregation must be node-level evidence covered
+“有 2 条以上 ITR”只是 Level 3 的必要条件之一，不代表可以把多个案例中的不同步骤自动串成一条完整 SOP。
+
+形成 Level 3 General Diagnostic Path 时，必须对每个诊断节点逐项建立 Evidence 映射：
+
+- 每一个检查项、测量项、Cross-test、分支判断和处理节点，都必须明确由哪一条或哪几条独立 Evidence 支持；
+- 多个 ITR 只共同支持其中一部分路径时，只能聚合那一部分，不得把各案例中零散出现的节点拼成一条看似完整的统一流程；
+- 节点之间的先后顺序本身也需要 Evidence 支持，不能仅因为工程上“看起来合理”就排序；
+- 跨机型聚合时，必须确认该诊断节点确实可跨这些机型复用，否则应保持机型限定或拆分 Knowledge；
+- 无法做到 node-level evidence coverage 时，降级为多个 Level 2 Knowledge，而不是强行保留 Level 3。
+
 ### Currentness is explicit
 Knowledge 必须能够表达当前有效性。版本相关知识不能因为创建时正确就永久保持“当前有效”。具体生命周期见 `KNOWLEDGE_LIFECYCLE.md`。
 
