@@ -24,18 +24,33 @@ AI/智能体可以生成候选、分类、摘要和变更建议，但正式发�
 ### Reusable, not merely true
 一条 ITR 中真实发生过的内容，不等于值得成为独立 Knowledge。Knowledge 应具有合理的重复使用价值。
 
-### Case-to-knowledge abstraction
-维修/诊断案例沉淀时，不能机械把该案例最终坏掉的具体部件直接当成 Knowledge 的核心结论。应优先提炼能够迁移到下一张相似工单的“症状 → 判断条件 → 诊断/交叉验证路径 → 确认后动作”。
-
-例如，一台机器出现 360° 原地旋转，最终确认右前轮毂电机故障并更换解决。若 Evidence 支持的可复用方法是通过已知良好驱动板/逐轮交叉验证定位故障轮毂电机，那么正式 Knowledge 的主要价值应是“360° 旋转时如何定位异常轮毂电机”，而不是把“右前轮毂电机故障”写成对所有相同症状都成立的结论。右前轮毂电机仅作为该来源案例的具体 Evidence/案例结果保留。
-
-抽象时必须受 Evidence 约束。不得为了“通用化”自行发明新的诊断步骤、适用机型、根因或成功率。
-
-### Symptom/decision-path first for troubleshooting knowledge
-对诊断/排查和可复用维修类 Knowledge，标题和正文优先围绕客服实际检索入口组织：故障现象、Error Code、触发条件、判断方法和决策路径。具体“哪一侧/哪一个部件最终坏了”只有在它本身是稳定、可重复、Evidence 支持的独立规律时，才应成为 Knowledge 核心。
-
 ### Preserve scope
 单案例诊断不能自动推广成所有同机型/同故障的标准方案。必要时明确标注“单案例”“适用范围待确认”等边界。
+
+### Case-to-knowledge abstraction
+维修/诊断类 Knowledge 的目标不是记录“这个案例最后坏了什么”，而是尽可能提炼“下一个类似案例应该如何判断”。优先组织为：症状 → 判断条件 → 排查/交叉验证路径 → 确认故障对象 → 处理动作 → 结果验证。
+
+具体案例中的最终坏件应作为 Evidence/案例结果保留，不得自动成为同类症状的固定 Root Cause。
+
+### Symptom/decision-path first
+对于维修和诊断类知识，标题和主体应优先围绕客服可观察到的症状与决策路径，而不是围绕某个历史案例的最终坏件。料号、兼容性、明确的软件工具规则、版本事实和正式流程政策可以保持事实型表达。
+
+### No invented reusable path
+“知识复用”不等于把单案例补写成完整 SOP。任何被提炼出的通用排查节点、顺序、分支和替代根因，都必须有 Evidence 支持。
+
+- 一个案例中没有执行/讨论过的检查项，不得为了让路径更完整而加入。
+- 一个案例只证明了某一条路径时，只能作为该路径的参考，不能自动扩展成所有可能根因清单。
+- 如果要从多个 ITR 组合成更通用的诊断路径，必须明确引用/核对多个独立 Evidence，再形成聚合 Knowledge。
+- 若当前 Evidence 只能支持“该案例的验证方法”，应保留窄范围，而不是虚构通用 troubleshooting tree。
+
+### Generalization level
+可复用性需要控制抽象层级：
+
+1. **Case result**：该案例最终是什么问题。
+2. **Reusable validation method**：该案例中哪些验证动作可以用于同类问题。
+3. **General diagnostic path**：只有多案例或更强 Evidence 支持时，才可提升为更通用的排查路径。
+
+AI/智能体不得直接从第 1 层跳到第 3 层。
 
 ### Currentness is explicit
 Knowledge 必须能够表达当前有效性。版本相关知识不能因为创建时正确就永久保持“当前有效”。具体生命周期见 `KNOWLEDGE_LIFECYCLE.md`。
