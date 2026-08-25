@@ -22,7 +22,12 @@ Knowledge 中的事实、料号、兼容性、维修判断、版本状态和处�
 具体飞书字段名称可能随表结构演进，字段契约应另行维护，不在本文件硬编码为永久 Schema。
 
 ### Legacy fields
-Solutions、历史解决方案回复模板等 Legacy 字段可以作为线索，但如果缺少允许的原始 Evidence，不应自动把其中新增的料号、兼容性或结论升级为 confirmed fact。
+Solutions、历史解决方案回复模板、历史 ITR SOP/逻辑分析等 Legacy/AI-derived 字段可以作为线索，但如果缺少允许的原始 Evidence，不应自动把其中新增的料号、兼容性、诊断步骤、SOP 或结论升级为 confirmed fact。
+
+尤其注意：
+- “某个 SOP 字段里存在测试步骤”不等于“该案例真实执行了该步骤”；
+- AI/历史 SOP 中出现的通用检查项不得直接补进 Case-based Knowledge；
+- 若希望把某个测试步骤沉淀为独立可复用的 `诊断/排查` Knowledge，必须找到独立的真实 PIE/Support Reply、官方 SOP/产品资料或其他一级 Evidence 支持该步骤本身。
 
 正确做法是标记 Evidence gap / 待人工确认。
 
@@ -44,3 +49,10 @@ Evidence 不足时：
 ## Scope discipline
 
 Evidence 只支持其实际证明的范围。例如某一台设备通过特定更换顺序恢复，只能首先作为单案例 Evidence；除非有更强证据，不得自动升级为所有同类问题的标准维修顺序。
+
+Case-based Knowledge 应区分：
+1. 案例真实执行/观察到的路径；
+2. PIE 明确建议但尚未执行的动作；
+3. Legacy/AI SOP 中仅作为参考出现的通用步骤。
+
+三者不得混写成同一“已验证诊断路径”。
