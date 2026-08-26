@@ -44,6 +44,17 @@ Focus: Error 1500 combined with model capability and firmware state.
 ### E279928
 Focus: failed remote upgrade = attempted action, not solution; cross-channel continuation + Video Call.
 
+### THPO127-25012
+Focus: full-thread continuity + device-location/actor-aware evidence routing.
+Regression expectations:
+- identify whether the mower is currently at end-customer site or agent workshop;
+- do not instruct end customers to use MammoSuite/Mammotion Kit;
+- preserve historical motor-error evidence even when the workshop cannot reproduce the problem;
+- do not infer a driver-board fault without decisive evidence;
+- answer the agent's latest correction/context first;
+- keep the outbound reply minimal and operational;
+- do not hard-code case-specific RTK assumptions as product-wide rules without separate verification.
+
 ### Error 1000022 / 5501 / 6401 / DT-041
 Focus: version-aware known fixes, module communication, upgrade-failure routing, and non-exclusion from replacement history.
 
