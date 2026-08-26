@@ -62,7 +62,7 @@ For customer-support-facing Knowledge, prefer short decision-oriented points ove
 ### 注意事项
 - Keep this field lightweight. Its purpose is only scope limits, case-specific result, Evidence boundary, or safety/risk warning.
 - Do not move removed prose from other columns into 注意事项 merely to preserve text volume.
-- Prefer 0–3 short points. More points are acceptable only when each one changes safe interpretation or applicability.
+- Prefer 0–3 short points. Four points are acceptable when each is necessary. Five or six points may be tolerated only when each point materially changes safe interpretation or applicability and cannot be removed without loss.
 - If an Evidence note is useful only for audit and not for frontline support, prefer 内容审核备注 rather than 注意事项.
 
 ### Avoid duplication across fields
@@ -89,6 +89,22 @@ When reviewing a row, ask whether support can identify within a few seconds:
 4. what limitation matters.
 
 If not, the row remains TOO_DENSE even if every field individually satisfies line-break rules.
+
+## V4.1 freeze baseline
+The V4.1 whole-row scanability pass is the current formatting baseline for future Knowledge generation.
+
+Future batches should generate content directly to this standard instead of creating verbose content first and compressing it later.
+
+Practical acceptance rules:
+- no mechanical three-point formatting for 已知结论;
+- no arbitrary minimum step count for 处理方法;
+- required seven-step methods may remain seven steps when every step is independently necessary;
+- 注意事项 should not exceed four points by default; five to six points require a concrete support/safety reason;
+- semantic duplication, not prefix duplication, is the review standard;
+- whole-row readability takes precedence over isolated per-field metrics;
+- do not use hard character limits as a substitute for semantic review, but long cells should trigger a scanability check.
+
+Formatting rules are now considered stable. Changes to this baseline should be evidence-driven by actual support usability problems, not by aesthetic preference alone.
 
 ## Fact-preservation boundary
 Formatting corrections must not change:
