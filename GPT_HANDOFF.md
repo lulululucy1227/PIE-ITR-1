@@ -3,36 +3,44 @@
 ## Canonical repository
 `lulululucy1227/PIE-ITR-1`
 
-If any task targets another repository, stop and ask the user to verify the repo.
+If any task targets another repository, stop and verify before writing.
 
 ## Current phase
-Business Intelligence & Diagnostic Architecture / real-case accumulation.
+Real-case accumulation + diagnostic architecture refinement. Code changes remain paused while Codex read access is unreliable.
 
-Codex local/GitHub read channel is currently unreliable in the user's environment, so implementation is paused. Do not treat this as a project-code failure.
+## Read first
+1. Issue #1 — daily intake inbox; read newest/relevant comments only.
+2. `docs/knowledge/` — promoted reusable knowledge, only files relevant to the current case.
+3. `docs/regression/REAL_CASE_REGRESSION.md` — representative regression cases.
+4. `docs/architecture/DIAGNOSTIC_ARCHITECTURE.md` — stable diagnostic architecture.
+5. Issue #2 only when discussing architecture changes.
 
-## Authoritative sources
-- Issue #1 — daily real-case / defect / diagnostic-knowledge intake
-- Issue #2 — Diagnostic Architecture v0.1
-- `docs/knowledge/` — promoted reusable knowledge
-- `docs/regression/REAL_CASE_REGRESSION.md` — representative regression cases
-- `docs/architecture/DIAGNOSTIC_ARCHITECTURE.md` — compact architecture baseline
+Do not load all historical material by default.
 
-## Core business boundaries
-- PIE is remote technical support; agents/service technicians perform physical repair, replacement, reseating and measurements.
-- Feishu ITR remains business source of truth for ITR data.
-- `机型映射表` should become the model-resolution business source.
-- Vision is a required diagnostic input, not attachment decoration.
-- `already replaced` does not mean `ruled out`; known-good cross-test and observed behavior changes carry more weight.
-- Evidence routing is contextual; do not request logs for every case.
-- Reply principle: minimum sufficient response. Internal analysis may be detailed; agent-facing reply should be as short as possible while remaining correct/actionable.
+## Core boundaries
+- PIE is remote technical support; agent/service staff perform physical repair/testing.
+- Feishu ITR is the business-fact source of truth.
+- `机型映射表` is the intended model-resolution business source.
+- Vision is a diagnostic input, not attachment decoration.
+- `already replaced` != `ruled out`.
+- Evidence routing depends on problem type, actor/device location and conversation state; logs are not universal.
+- `cannot reproduce` != `fault ruled out` and does not automatically mean NFF.
+- Partner reply follows **minimum sufficient response**.
 
-## Current priorities
-P0: diagnostic correctness, per-case failure visibility, decisive evidence reaching case state.
-P1: Vision/attachments, model mapping, compact ITR review, EN/ZH preload.
-P2: Evidence Router, evidence confidence/provenance, known-fix/error-code model, Parts/SBOM strategy.
+## Priorities
+P0: diagnostic correctness; per-case failures visible; decisive evidence reaches case state.
+P1: Vision/attachments; model mapping; compact ITR review; EN/ZH preload.
+P2: Evidence Router/confidence; error-code/known-fix model; Parts/SBOM strategy.
 
-## Current operating mode
-User sends real cases naturally. Extract useful facts/rules, keep inference separate, record meaningful items in Issue #1, and promote stable reusable knowledge into `docs/knowledge/` only when justified.
+## Intake/promotion
+New case -> Issue #1.
+Stable reusable rule -> relevant `docs/knowledge/` file.
+Representative case -> regression corpus.
+Stable system-level change -> architecture doc.
+Do not promote a single case without sufficient evidence.
+
+## Security
+Repository is public. Do not store passwords/tokens, raw chats, customer/agent PII, or unapproved sensitive internal material.
 
 ## Next implementation gate
-When Codex read access is healthy, run a gap audit between current local implementation, Issue #1 real cases, and Issue #2 / architecture docs before changing code.
+When Codex read access is healthy, run a gap audit across local implementation + Issue #1 findings + promoted knowledge/regression/architecture before changing code.
