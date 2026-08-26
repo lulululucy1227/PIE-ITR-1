@@ -106,6 +106,14 @@ Practical acceptance rules:
 
 Formatting rules are now considered stable. Changes to this baseline should be evidence-driven by actual support usability problems, not by aesthetic preference alone.
 
+## Review-state preservation for formatting-only changes
+A formatting/readability cleanup does not invalidate a completed human content review when it changes only presentation and preserves the original facts, Evidence strength, scope, applicability, diagnostic/repair sequence, Knowledge Type, and source ITR.
+
+Therefore:
+- Knowledge already marked `审核通过` must remain `审核通过` during V4.1-style readability cleanup;
+- do not reset approved Knowledge to `待审核` merely because wording was shortened, reordered within the same semantic structure, split into clearer lines, or semantically deduplicated;
+- if a cleanup discovers that a technical fact, Evidence boundary, applicable model/version, diagnostic sequence, or conclusion itself must change, that is no longer formatting-only and must be handled as a separate content-correction task with the appropriate human review gate.
+
 ## Fact-preservation boundary
 Formatting corrections must not change:
 
@@ -130,4 +138,5 @@ If a batch creates or modifies Knowledge, the final validation should check that
 - single-point content was not mechanically expanded into numbered bullets;
 - 注意事项 did not become a dumping ground for text removed elsewhere;
 - text remains compact enough to scan in the Feishu table view as a whole row;
-- shortening did not remove required Evidence boundaries or diagnostic conditions.
+- shortening did not remove required Evidence boundaries or diagnostic conditions;
+- completed human review status was preserved when the change was formatting-only.
