@@ -90,6 +90,38 @@ When reviewing a row, ask whether support can identify within a few seconds:
 
 If not, the row remains TOO_DENSE even if every field individually satisfies line-break rules.
 
+## Quick judgment field
+`快速判断` is an optional frontline shortcut field for the 客服速查 view. It is not a replacement for 已知结论 or 处理方法 and must not become another long summary field.
+
+Purpose:
+- answer the first decision question: “看到这个现象，第一步往哪里判断？”
+- provide a compact first-hop decision path before the user reads the full diagnostic details.
+
+Rules:
+- prefer 1–3 short lines;
+- one decision/action per line;
+- use arrows only when the Evidence supports an actual sequence or branch;
+- do not force linear `A → B → C` paths when the real logic is conditional;
+- do not invent troubleshooting nodes merely to make the shortcut look complete;
+- if no reliable first-hop decision can be extracted from approved Evidence, leave the field blank;
+- keep it semantically distinct from 已知结论 and 处理方法: it is a first-step shortcut, not a compressed copy of either field.
+
+Recommended expression by Knowledge Type:
+- 诊断/排查: symptom → first test / first branch;
+- 维修解决方案: confirmed condition → first confirmation / action;
+- 料号/兼容性: part/supply fact → ordering/replacement decision;
+- 软件/工具操作: symptom/tool state → first tool action;
+- 历史版本问题: version/symptom → upgrade/workaround decision;
+- 流程/政策: trigger condition → required process action.
+
+View placement:
+- in 客服速查, place `快速判断` near the left side after 知识标题 / 适用机型 / Error Code so it acts as an entry point;
+- keep detailed fields such as 已知结论、注意事项、来源 ITR farther right or in secondary views.
+
+Maintenance:
+- future Knowledge should generate `快速判断` at creation time when Evidence supports it;
+- approved historical Knowledge may be backfilled without resetting review status if only this shortcut field is added and no technical fact, scope, Evidence strength, or sequence is changed.
+
 ## V4.1 freeze baseline
 The V4.1 whole-row scanability pass is the current formatting baseline for future Knowledge generation.
 
