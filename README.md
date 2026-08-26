@@ -1,59 +1,65 @@
 # PIE ITR
 
-PIE Technical Support Intelligence System 的规则、架构与治理仓库。
+PIE Technical Support Intelligence System 的规则、架构、知识治理与项目状态仓库。
 
-## Repository role
+## Source-of-truth map
 
-本仓库是 PIE ITR **系统规则与架构的 Source of Truth**，不是业务数据仓库。
+- **Feishu ITR** — 业务事实 Source of Truth。
+- **工单速查 / Knowledge Base** — 经 Evidence Gate 与人工审核形成的正式业务知识。
+- **PIE ITR Workbench** — PIE 日常技术客服工作入口。
+- **本 GitHub 仓库** — 系统规则、架构、候选知识、回归案例与项目交接状态。
 
-- 飞书 ITR：业务事实 Source of Truth（case、PIE reply、Case History、附件等）。
-- 工单速查 / Knowledge Base：经过 Evidence Gate 与人工审核形成的 Derived Knowledge Store。
-- PIE ITR Workbench：PIE 日常处理工单的 Application Layer。
-- 本 GitHub 仓库：系统规则、架构决策、知识治理规则、接口契约与阶段状态。
+Canonical repository: `lulululucy1227/PIE-ITR-1`.
+如果任何任务准备写入其他仓库，先停止并确认。
 
-## Core architecture
+## Current operating structure
+
+- `GPT_HANDOFF.md` — 精炼项目入口，只保存当前阶段、关键边界、权威来源、优先级和下一步门槛。
+- Issue #1 — 每日真实案例 / Workbench 缺陷 / 新观察的 intake inbox。
+- Issue #2 — 诊断架构变更的讨论与索引；正式架构以文件为准。
+- `docs/knowledge/` — 已晋升的可复用知识与知识治理规则。
+- `docs/regression/REAL_CASE_REGRESSION.md` — 代表性真实案例回归集。
+- `docs/architecture/DIAGNOSTIC_ARCHITECTURE.md` — 当前诊断架构基线。
+- `docs/architecture/PIE_ITR_SYSTEM_ARCHITECTURE.md` — 系统层级与组件边界。
+- `docs/workbench/` — Workbench 关键契约。
+- `governance/` / `decisions/` — 稳定治理规则与 ADR。
+
+## Knowledge flow
 
 ```text
-Nextop / WhatsApp / Lark / Email
-              |
-              v
-          Feishu ITR
-      (Source of Truth)
-              |
-      Evidence / Candidate
-              v
-   Knowledge Maintenance
-              |
-       Human Review Gate
-              v
-       工单速查 / KB
-              |
-       Retrieval / Context
-              v
-      PIE ITR Workbench
+Daily real case / defect
+        |
+        v
+Issue #1 intake
+        |
+        +--> case-specific / pending validation stays here
+        |
+        +--> stable reusable rule --> docs/knowledge/
+        |
+        +--> representative case --> docs/regression/
+        |
+        +--> system-level stable change --> docs/architecture/
 ```
 
-## Tool responsibilities
+不要把 Issue #1 当长期知识库，也不要把完整知识堆进 `GPT_HANDOFF.md`。
 
-- GPT：业务规则设计、知识治理、架构判断、审查、Codex 阶段定义与验收。
-- 飞书智能体：读取 ITR/附件/表结构，并按明确指令执行飞书侧轻量数据操作；当前用于知识沉淀试运行。
-- Codex：实现已经明确并稳定的软件工程规则，包括 Workbench、测试、集成以及未来可能工程化的 Knowledge Maintenance 模块。
-- PIE 人工审核：Knowledge 发布与关键知识生命周期变更的最终 Gate。
+## Core operating principles
 
-原则：**规则仍在讨论时优先用 GPT 验证；规则稳定且需要重复执行时再由 Codex 工程化。**
+- PIE 负责远程诊断、技术判断、指导和建议；代理/服务人员执行现场维修、换件、插拔和测量。
+- `already replaced` 不等于 `ruled out`；Known-good cross-test 和实际行为变化通常证据更强。
+- Evidence routing 必须结合问题类型、当前设备位置、执行者能力和聊天上下文；不要所有问题都要求日志。
+- `cannot reproduce` 不等于故障已排除，也不自动等于 NFF。
+- 内部分析可以充分；对代理回复遵循 **minimum sufficient response**。
+- 单案例不能直接升级成通用 SOP；知识晋升必须保留适用范围与 Evidence。
 
-## Documentation
+## Security boundary
 
-- `docs/architecture/PIE_ITR_SYSTEM_ARCHITECTURE.md` — 系统边界与组件关系
-- `docs/knowledge/KNOWLEDGE_GOVERNANCE.md` — 工单速查治理总则
-- `docs/knowledge/EVIDENCE_POLICY.md` — Evidence 使用规则
-- `docs/knowledge/KNOWLEDGE_LIFECYCLE.md` — Knowledge 生命周期与版本变化
-- `docs/knowledge/CANDIDATE_CLASSIFICATION.md` — 新 ITR 与现有知识的关系分类
-- `docs/knowledge/IMAGE_EVIDENCE_POLICY.md` — 图片/附件 Evidence 原则
-- `decisions/` — 重要架构决策记录（ADR）
+本仓库当前为 **public**。
 
-## Data and security boundary
+禁止提交：
+- API key / token / 密码 / 下载口令等凭据；
+- 客户或代理个人身份信息、邮箱、电话；
+- 原始完整 Case History、附件或未经脱敏的聊天记录；
+- 未确认可公开的内部敏感业务资料。
 
-本仓库当前为 public。禁止提交真实客户/代理身份信息、邮箱、电话、原始 Case History、飞书附件、API key/token、公司内部凭据以及未经确认可公开的内部业务资料、SOP、固件信息或完整 ITR 数据。
-
-文档中的案例必须抽象或脱敏。
+真实案例用于规则/回归时应尽量只保留必要技术事实并脱敏。若后续需要长期保存更完整的内部案例证据，应优先将仓库调整为 private，而不是放宽 public 仓库的安全边界。
