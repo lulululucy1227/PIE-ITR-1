@@ -4,7 +4,7 @@
 - Mobile application used in after-sales/service diagnostic workflows.
 - Use for applicable mobile diagnostic/test flows such as Auto Map Run and sensor checks.
 - Ultrasonic test guidance: move a fixed obstacle at about 60–70 cm in front of each front ultrasonic sensor and observe readings.
-- Known download password: `MMTT`.
+- Access credentials/passwords must not be stored in this public repository.
 - Do not instruct an end customer to run MammoSuite; service-tool requests belong to the agent/service-provider side unless explicitly supported otherwise.
 
 ## Mammotion Kit
