@@ -43,6 +43,8 @@ Before answering whether an antenna or other optional module is compatible with 
 - This is the cable connecting to the front bumper on LUBA 3 AWD. If the partner cannot find it in the exploded view, provide the confirmed part name and part number directly after SBOM/parts verification.
 - `W.S.SJ.000684010 — CDZ Upper Cover`
 - This is the upper plastic cover / hood of the LUBA 3 charging station. If the partner reports that the hood will not attach correctly, photo evidence may support an assembly/moulding abnormality, but do not label it a manufacturing defect from the photo alone. Once the part is identified through SBOM/parts, provide the confirmed part name and part number directly.
+- `C.P.SH.000077000 — YUKA adapter bracket`
+- In the confirmed abnormal cutting-disc-noise case, inspect and clean the underside of the cutting disc first. If the disc is free and the same noise remains, replace this adapter bracket.
 
 ## Future image-to-part chain
 `image -> component candidate -> product/model -> Parts/SBOM -> part candidate/number -> source -> human confirmation`
