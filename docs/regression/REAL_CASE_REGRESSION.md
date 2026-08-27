@@ -67,6 +67,17 @@ Regression expectations:
 - do not keep requesting Auto Map Run in this case when the partner has already stated it cannot complete on this LUBA 3 workflow; treat that tool limitation as case-specific/pending validation unless independently confirmed;
 - outbound reply must omit repeated acknowledgments/background and contain only the minimum actionable next step. The accepted reply started directly with `Please run the GNSS Antenna Check in MammoSuite first.`
 
+### Luba-VAXUT6NC — LiDAR / positioning errors + firmware upgrade failure
+Focus: upgrade-failure causality, failure-stage overconfidence, known-good LiDAR cross-validation, and retrospective correction.
+Regression expectations:
+- do not classify a firmware-upgrade root cause from the percentage where the upgrade fails; ~70% or ~93% does not by itself prove network instability;
+- keep module communication and hardware health active when repeated LiDAR / positioning errors coexist with upgrade failure;
+- treat hotspot, wired Mammotion Kit and backend remote upgrade attempts as diagnostic attempts, not proof that the remaining cause is network or software;
+- when a compatible known-good LiDAR is installed and the mower then upgrades successfully with no LiDAR/positioning errors, treat that controlled behavior change as decisive evidence supporting the original LiDAR being faulty;
+- known-good cross-validation must outweigh the earlier unsupported network attribution;
+- after fitting the replacement LiDAR, make sure the module firmware versions are the same, then complete the three MammoSuite tests and provide the Connect Checking screenshot for post-repair validation;
+- retrospective result is `PARTIAL MATCH`: LiDAR remained in the diagnostic space, but the 93% network attribution was too confident.
+
 ### Error 1000022 / 5501 / 6401 / DT-041
 Focus: version-aware known fixes, module communication, upgrade-failure routing, and non-exclusion from replacement history.
 
