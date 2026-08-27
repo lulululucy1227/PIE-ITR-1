@@ -22,6 +22,14 @@ When a mower is completely unresponsive, do not stop at external power checks an
 6. if the mower still does not start, known-good **upper shell** cross-test.
 External power being normal does not prove the complete power-on chain is normal. A replaced module is not excluded unless the replacement is known-good or the behavior change validates it.
 
+### Model existence / naming validation
+Before querying SBOM, Parts, compatibility, or repair guidance, first validate the partner-reported product name against the current model-mapping table / supported product list.
+- If the reported model name does not exist in the current product mapping, do not continue analysis as if it were valid.
+- Ask for the exact official model name or map the request to a supported model only when the evidence is clear.
+- Obvious naming mistakes should be caught before SBOM lookup; otherwise downstream compatibility conclusions may be built on a nonexistent product.
+- Example: `YUKA 3` is not a current official model family in the mapped product list. Do not infer compatibility with LUBA 3 from similar generation naming.
+- Recommended order for product/part questions: `Partner text -> model-mapping validation -> exact official model -> SBOM/Parts -> compatibility / repair conclusion`.
+
 ### GNSS / positioning
 Satellite count, Connect Checking, MammoSuite and report evidence may be more diagnostic than logs. `satellite = 0` or failed test items should influence assessment directly.
 
