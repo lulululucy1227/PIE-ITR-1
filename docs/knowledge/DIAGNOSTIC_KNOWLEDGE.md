@@ -26,13 +26,18 @@ External power being normal does not prove the complete power-on chain is normal
 Satellite count, Connect Checking, MammoSuite and report evidence may be more diagnostic than logs. `satellite = 0` or failed test items should influence assessment directly.
 
 ### Upgrade failure
-Treat as a symptom, not a root cause. Consider failure stage, error codes, module communication, firmware state, module health and network/wired path.
+Treat upgrade failure as a symptom, not a root cause. Consider failure stage, error codes, module communication, firmware state, module health and network/wired path.
+- Do not classify the root cause from the failure percentage alone. Failing around ~70%, ~93%, or another late stage does not by itself prove network instability.
+- `network instability` should remain a hypothesis unless supported by direct network evidence or a controlled network-path comparison.
+- If upgrade failure coexists with repeated errors from a specific module/fault domain, keep that module health in the active diagnosis even when one attempt fails late.
+- A known-good compatible module cross-test that changes the outcome carries more weight than an inference based on upgrade percentage. If the mower upgrades successfully and the associated errors disappear with a known-good module, that strongly supports the original module being faulty.
 
 ### Shared communication faults
 When several modules show communication loss, inspect shared communication/power/data paths before replacing multiple modules independently.
 
 ### Cross-validation
 If the mower works normally on a known-good charging station/adapter, the original charging station/adapter/power path becomes a high-priority fault domain even if one of those parts had already been replaced.
+More generally, for any replaceable compatible module, use a confirmed known-good module when practical to separate `suspect module fault` from `machine-side shared-path fault`. Observe whether boot, communication, upgrade, positioning, charging or other target behavior changes after the cross-test.
 
 ### Device location / actor capability
 Before assigning the next test, identify whether the mower is currently with the end customer or at the agent/service workshop.
