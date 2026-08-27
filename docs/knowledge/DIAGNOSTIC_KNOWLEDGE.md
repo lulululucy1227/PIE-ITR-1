@@ -6,6 +6,7 @@
 - Do not request logs universally; route to the evidence source most likely to discriminate the fault.
 - Failed/attempted actions are not verified solutions.
 - Evidence routing must consider who currently has the device and what that actor can actually do.
+- Error timing matters: an error that appears after the main abnormal event may be a consequence rather than the root cause. Do not reverse causality without supporting evidence.
 
 ## Reusable patterns
 ### Charging path
@@ -37,3 +38,9 @@ Use the full thread to understand current state, but answer the latest partner p
 
 ### Reply compression
 Internal reasoning may be detailed; outbound reply should contain only the answer, necessary action and truly blocking question. If a sentence can be removed without harming correctness or the next step, remove it.
+- Do not repeat the partner's history, corrections, or already-understood background unless a brief acknowledgment is necessary to avoid confusion.
+- Prefer one direct instruction plus one fallback over a multi-step diagnostic checklist.
+- Avoid generic transitions such as `Based on the current information`, `At this stage`, `Thank you for the detailed information`, or similar filler when they add no action value.
+- Do not restate internal evidence hierarchy or diagnostic rationale unless the partner needs it to perform the next action.
+- When the partner has already complained about long/AI-like replies, bias even harder toward concise, natural, context-continuous language.
+- Final pre-send check: `What is the shortest response that fully helps the agent move forward?` Delete anything that does not improve correctness, execution, or clarity.
