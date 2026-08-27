@@ -8,6 +8,7 @@
 - Important distinction: this `MMTT` password is for the MammoSuite installation/update page that asks for a software-install password. It is not the MammoSuite account login password. If a partner asks for a "password", use the screenshot/context to distinguish installer/update password from account credentials before replying.
 - Do not instruct an end customer to run MammoSuite; service-tool requests belong to the agent/service-provider side unless explicitly supported otherwise.
 - For low vehicle GNSS / satellite-signal cases at the agent/service side, `GNSS Antenna Check` is a high-priority direct diagnostic step. Use its result before defaulting to physical replacement. If abnormal, inspect the rear GNSS antenna disk and connector and use known-good cross-validation where appropriate. If GNSS Antenna Check is normal but the positioning/boundary symptom remains, continue to the next relevant fault domain instead of treating GNSS hardware as confirmed faulty.
+- `Connect Checking` screenshots should be interpreted field-by-field rather than as a single pass/fail state. If the Wi-Fi field shows `--`, do not immediately classify it as a Wi-Fi hardware fault. First distinguish between `not currently connected to Wi-Fi` and `Wi-Fi function cannot connect / is not working`. Ask the partner to confirm the actual Wi-Fi behavior before escalating the diagnosis.
 
 ## Mammotion Kit
 - PC diagnostic tool used in after-sales/service workflows.
