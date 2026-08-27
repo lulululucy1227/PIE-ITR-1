@@ -50,6 +50,16 @@ If replacing a module makes the mower work normally for a period and the same sy
 - Recollect the current symptom evidence first: exact error/screenshot, connector state, Communication Check / Connect Checking where applicable, and fresh log evidence.
 - Then decide whether to cross-test the replacement module again or continue into the adjacent communication/mainboard path.
 
+### Multi-motor undervoltage / common power-path fault
+When several motor channels report undervoltage at the same timestamp, especially together with battery short-circuit protection, do not diagnose several motors as independently failed.
+- Treat the event as a likely common power-path fault until disproven.
+- High-priority checks: battery health; charging-station and adapter output; main power cables/connectors between battery, driverboard and mainboard; CAN cable/connectors between driverboard and mainboard.
+- For the customer's charging station and adapter, measure both **no-load voltage** and **voltage under load** with a multimeter. A unit that appears normal unloaded may still collapse under load.
+- If the mower was repaired successfully in the workshop and the same power/motor errors reappear after return to the customer, keep the customer's charging station/adapter as an active fault source. Do not assume the mower alone caused the recurrence.
+- Use a test driverboard to test all four wheel motors and both cutting motors separately. This isolates a motor that may be overcurrent, shorted or mechanically overloaded and potentially damaging the replacement driverboard.
+- Do not replace the driverboard again before checking the shared power path and individual motor loads.
+- A simultaneous unrelated-looking communication/timestamp error may be a secondary effect of the voltage event; do not promote it to root cause without separate evidence.
+
 ### Abnormal cutting-disc noise
 When an abnormal mechanical noise sounds like the cutting disc is obstructed, inspect the cutting-disc underside first before escalating to motor or controller diagnosis.
 - Check for grass, debris or other material physically blocking the disc and confirm the disc can move freely after cleaning.
