@@ -56,6 +56,21 @@ AI/智能体可以生成候选、分类、摘要和变更建议，但正式发�
 
 Topic ID 是分类结果的派生值，不是分类目标。分类正确性优先于 Topic ID 完整率。
 
+### KB classification follows the current ITR labels
+当 ITR 主表的一级/二级标签体系已经由 PIE 调整并成为当前业务分类基线时，工单速查不应继续维护一套独立推断的故障分类。
+
+对于有 `来源 ITR` 的 Knowledge：
+- `故障类别` 应优先同步来源 ITR 当前的一级标签；
+- `故障模块` 应优先同步来源 ITR 当前的二级标签；
+- `Topic ID` 继续作为公式派生结果，禁止人工填写；
+- 不因同步标签而修改 Knowledge 技术内容、Knowledge Type、审核状态或来源关系。
+
+多来源 ITR 的 Knowledge 只有在来源 ITR 的当前一级/二级标签一致时才可直接同步。如果多个来源 ITR 的当前标签不一致，则必须标记为 `MULTI_SOURCE_TAG_CONFLICT` 并报告 PIE，不得用多数票、来源顺序或 AI 猜测强行选一个标签。
+
+如果来源 ITR 当前标签为空，则 Knowledge 对应标签也不得由 AI 自行补猜；保留空值并报告 `SOURCE_ITR_TAG_MISSING`。如果 Knowledge 没有可追溯的来源 ITR，则不执行自动标签同步。
+
+这意味着：ITR 主表当前标签是 Knowledge 分类回填的业务来源；Knowledge 不应因为历史旧标签、旧 Topic 或早期 AI 分类而继续保留过时分类。
+
 ### Case-to-knowledge abstraction
 维修/诊断类 Knowledge 的目标不是记录“这个案例最后坏了什么”，而是尽可能提炼“下一个类似案例应该如何判断”。优先组织为：症状 → 判断条件 → 排查/交叉验证路径 → 确认故障对象 → 处理动作 → 结果验证。
 
