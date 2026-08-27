@@ -6,6 +6,7 @@
 - Ultrasonic test guidance: move a fixed obstacle at about 60–70 cm in front of each front ultrasonic sensor and observe readings.
 - Shared/public download password: `MMTT`.
 - Do not instruct an end customer to run MammoSuite; service-tool requests belong to the agent/service-provider side unless explicitly supported otherwise.
+- For low vehicle GNSS / satellite-signal cases at the agent/service side, `GNSS Antenna Check` is a high-priority direct diagnostic step. Use its result before defaulting to physical replacement. If abnormal, inspect the rear GNSS antenna disk and connector and use known-good cross-validation where appropriate. If GNSS Antenna Check is normal but the positioning/boundary symptom remains, continue to the next relevant fault domain instead of treating GNSS hardware as confirmed faulty.
 
 ## Mammotion Kit
 - PC diagnostic tool used in after-sales/service workflows.
