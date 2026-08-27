@@ -50,6 +50,13 @@ If replacing a module makes the mower work normally for a period and the same sy
 - Recollect the current symptom evidence first: exact error/screenshot, connector state, Communication Check / Connect Checking where applicable, and fresh log evidence.
 - Then decide whether to cross-test the replacement module again or continue into the adjacent communication/mainboard path.
 
+### Abnormal cutting-disc noise
+When an abnormal mechanical noise sounds like the cutting disc is obstructed, inspect the cutting-disc underside first before escalating to motor or controller diagnosis.
+- Check for grass, debris or other material physically blocking the disc and confirm the disc can move freely after cleaning.
+- If the same noise remains after cleaning and no obstruction is present, continue to the relevant mechanical mounting/support component rather than assuming an electrical fault.
+- Confirmed YUKA case: if the noise persists after the cutting disc is cleaned and free, replace the adapter bracket `C.P.SH.000077000`.
+- Audio/video evidence may support a likely mechanical source, but the diagnosis should still be validated by the physical inspection result.
+
 ### Cross-validation
 If the mower works normally on a known-good charging station/adapter, the original charging station/adapter/power path becomes a high-priority fault domain even if one of those parts had already been replaced.
 More generally, for any replaceable compatible module, use a confirmed known-good module when practical to separate `suspect module fault` from `machine-side shared-path fault`. Observe whether boot, communication, upgrade, positioning, charging or other target behavior changes after the cross-test.
