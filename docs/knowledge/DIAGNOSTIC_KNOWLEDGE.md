@@ -38,6 +38,10 @@ When several modules show communication loss, inspect shared communication/power
 ### Cross-validation
 If the mower works normally on a known-good charging station/adapter, the original charging station/adapter/power path becomes a high-priority fault domain even if one of those parts had already been replaced.
 More generally, for any replaceable compatible module, use a confirmed known-good module when practical to separate `suspect module fault` from `machine-side shared-path fault`. Observe whether boot, communication, upgrade, positioning, charging or other target behavior changes after the cross-test.
+- `No spare part on hand` does not automatically mean `wait for ordered parts`. If the workshop already has a compatible confirmed-good part that is legitimately available to remove, it can be temporarily installed for cross-validation.
+- Do not imply that the agent should dismantle a normal customer machine, a machine awaiting delivery, or any unit that is not appropriate to use as a donor/reference.
+- Service centers should consider keeping one confirmed-good compatible mower as a **reference machine** for diagnostics. Its compatible modules can then be used as known-good references for other faulty units when appropriate.
+- A reference machine is a long-term workshop diagnostic asset, not an instruction to cannibalize an arbitrary working mower.
 
 ### Device location / actor capability
 Before assigning the next test, identify whether the mower is currently with the end customer or at the agent/service workshop.
