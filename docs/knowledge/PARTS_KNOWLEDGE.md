@@ -25,6 +25,17 @@ Use this route first:
 - `C.P.SH.000255000` was confirmed searchable/orderable in MSCS with stock visible.
 - Correct partner guidance: use `C.P.SH.000255000` to order in MSCS; inform the partner that the exploded-view information will be corrected.
 
+## Capability-before-compatibility rule
+Before answering whether an antenna or other optional module is compatible with a mower, first confirm whether that mower architecture actually uses that component type.
+- Do not infer accessory/module compatibility from similar family names or generation numbers.
+- If a model does not use an external RTK antenna, an RTK antenna from another series is not applicable even if the physical connector or naming appears similar.
+- For antenna questions, use: `exact model -> positioning architecture / model capability -> SBOM/Parts if applicable -> compatibility conclusion`.
+
+### Confirmed YUKA mini 2 800 antenna case
+- `YUKA mini 2 800` does not use an external RTK antenna.
+- LUBA mini / YUKA mini RTK antennas are therefore not applicable to YUKA mini 2 800.
+- Correct partner guidance is to answer the capability mismatch directly rather than searching for a cross-series antenna part number.
+
 ## Confirmed examples
 - `C.P.SH.000220000 — LUBA 3 Chassis Module`
 - In a cracked-chassis case, existence of a serviceable chassis module supports chassis replacement as the standard repair path before considering whole-machine exchange.
