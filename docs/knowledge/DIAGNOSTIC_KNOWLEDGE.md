@@ -59,10 +59,14 @@ A symptom disappearing and a clean/latest log are positive evidence, but they do
 - If all post-repair checks are normal and the original fault does not recur, the mower can be considered ready for return.
 
 ### Workflow routing boundary
-Not every partner request belongs to PIE technical diagnosis. If the issue is caused by an after-sales system workflow or master-data option rather than mower behavior, route it to the owning service/process role instead of inventing a technical workaround.
+Not every partner request belongs to PIE technical diagnosis. If the issue is caused by an after-sales system workflow, warranty/service-policy decision, or master-data option rather than mower behavior, route it to the owning service/process role instead of inventing a technical workaround.
 - Example: in MSCS, if a **Repair Order** does not provide the correct normal-status model option for the mower, treat it as an MSCS/service-process issue.
+- Example: if the original issue was reported during warranty but remained unresolved, while the unit is now out of warranty and the original service work order is already closed, treat this as a warranty/service-process decision for the Service Manager rather than a PIE technical reply.
 - Do not tell the partner to select a similar or substitute model unless the service-process owner has explicitly confirmed the mapping.
-- Route the case to the service manager / owning service-process role for the correct MSCS option or handling method.
+- Do not promise warranty coverage, reopen a work order, or authorize service handling from PIE unless explicitly authorized.
+- Route the case to the Service Manager / owning service-process role.
+- Once a case is clearly outside PIE scope, do **not** generate a partner-facing email by default. Instead provide only: (1) a short routing prompt to the Service Manager, and (2) an ultra-brief internal note in both Chinese and English.
+- Internal-note style: one sentence per language, immediately identifying the key problem and why Service Manager review is required. Avoid background detail that is not needed for routing.
 
 ### Reply compression
 Internal reasoning may be detailed; outbound reply should contain only the answer, necessary action and truly blocking question. If a sentence can be removed without harming correctness or the next step, remove it.
