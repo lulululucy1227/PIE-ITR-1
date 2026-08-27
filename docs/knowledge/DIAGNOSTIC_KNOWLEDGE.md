@@ -51,6 +51,13 @@ Do not instruct an end customer to run service-only tools.
 ### Conversation continuity
 Use the full thread to understand current state, but answer the latest partner point first. Do not generate a detached evidence checklist that ignores corrections, device location, completed actions, or the current question.
 
+### Post-repair verification
+A symptom disappearing and a clean/latest log are positive evidence, but they do not by themselves prove the mower is ready to return to the customer.
+- After repair, use the standard MammoSuite verification set where applicable: **Functional Test**, **Communication Check**, **Auto Map Run**, plus a **Connect Checking** screenshot.
+- These outputs serve as repair-completion evidence and should be requested even when the latest logs show no error.
+- `latest log has no error` should be treated as supporting evidence, not a substitute for the post-repair test reports.
+- If all post-repair checks are normal and the original fault does not recur, the mower can be considered ready for return.
+
 ### Workflow routing boundary
 Not every partner request belongs to PIE technical diagnosis. If the issue is caused by an after-sales system workflow or master-data option rather than mower behavior, route it to the owning service/process role instead of inventing a technical workaround.
 - Example: in MSCS, if a **Repair Order** does not provide the correct normal-status model option for the mower, treat it as an MSCS/service-process issue.
