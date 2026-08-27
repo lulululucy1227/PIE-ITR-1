@@ -43,6 +43,13 @@ Treat upgrade failure as a symptom, not a root cause. Consider failure stage, er
 ### Shared communication faults
 When several modules show communication loss, inspect shared communication/power/data paths before replacing multiple modules independently.
 
+### Recurrence after replacement
+If replacing a module makes the mower work normally for a period and the same symptom later returns, treat the temporary recovery as meaningful behavior-change evidence, but not as proof that the replacement module itself is now faulty.
+- `worked after replacement for a few days` supports that the replaced module/fault domain is relevant, but adjacent connector, communication, firmware-sync, power or controller-side faults can still cause recurrence.
+- Do not jump straight to replacing the same module again.
+- Recollect the current symptom evidence first: exact error/screenshot, connector state, Communication Check / Connect Checking where applicable, and fresh log evidence.
+- Then decide whether to cross-test the replacement module again or continue into the adjacent communication/mainboard path.
+
 ### Cross-validation
 If the mower works normally on a known-good charging station/adapter, the original charging station/adapter/power path becomes a high-priority fault domain even if one of those parts had already been replaced.
 More generally, for any replaceable compatible module, use a confirmed known-good module when practical to separate `suspect module fault` from `machine-side shared-path fault`. Observe whether boot, communication, upgrade, positioning, charging or other target behavior changes after the cross-test.
