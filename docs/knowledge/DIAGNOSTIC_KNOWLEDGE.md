@@ -12,6 +12,16 @@
 ### Charging path
 When logs show abnormal docking/charging voltage/current/contact behavior, use those facts to narrow the remaining charging path and produce a concrete next action. Do not fabricate a hardware conclusion if decisive log evidence is absent.
 
+### No power / no boot
+When a mower is completely unresponsive, do not stop at external power checks and do not anchor on an older unrelated error. Use a staged known-good isolation path where applicable:
+1. confirmed-good compatible battery;
+2. observe mainboard / driverboard LED state during power-on attempt;
+3. reseat keypad, keypad cable, main power and CAN connectors with power disconnected;
+4. known-good driverboard cross-test;
+5. known-good mainboard cross-test;
+6. if the mower still does not start, known-good **upper shell** cross-test.
+External power being normal does not prove the complete power-on chain is normal. A replaced module is not excluded unless the replacement is known-good or the behavior change validates it.
+
 ### GNSS / positioning
 Satellite count, Connect Checking, MammoSuite and report evidence may be more diagnostic than logs. `satellite = 0` or failed test items should influence assessment directly.
 
