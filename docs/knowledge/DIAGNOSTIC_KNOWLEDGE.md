@@ -62,6 +62,16 @@ A symptom disappearing and a clean/latest log are positive evidence, but they do
 - `latest log has no error` should be treated as supporting evidence, not a substitute for the post-repair test reports.
 - If all post-repair checks are normal and the original fault does not recur, the mower can be considered ready for return.
 
+### Water-ingress / warranty evidence collection
+Do not jump directly from `water marks`, `water-damaged packaging`, `machine will not power on`, or general signs of use to a warranty decision.
+- First collect enough technical evidence to separate: **water-ingress fact**, **possible ingress point**, **repair/disassembly history**, **customer cleaning method**, and only then the later **warranty/service-policy decision**.
+- Ask whether this is the first repair/opening, whether the mower has been disassembled before, and what was previously repaired. Previous repair history may be relevant to sealing, but does not prove that a prior repair caused ingress.
+- Ask the customer/agent for the exact cleaning method, not a yes/no statement such as `cleaned according to instructions`. Clarify hose use, pressure-washer use, and which areas were directly washed.
+- General intake photos, body-condition photos, bumper photos, packaging photos, or distant underside photos are **not sufficient evidence** to identify a water-entry point.
+- Request close-up evidence targeted at possible ingress/sealing areas, including where applicable: bellows cover below the grass comb, cutting motor area, key membrane, SN label, visible cracks, damaged seals, or other plausible entry points.
+- Absence of a visible entry point in current photos does not prove a product defect or customer misuse. If the evidence is insufficient, say the cause/entry point cannot yet be confirmed and request better evidence.
+- PIE should complete this technical evidence collection before routing the final warranty determination to the Service Manager when policy approval is needed.
+
 ### Workflow routing boundary
 Not every partner request belongs to PIE technical diagnosis. If the issue is caused by an after-sales system workflow, warranty/service-policy decision, or master-data option rather than mower behavior, route it to the owning service/process role instead of inventing a technical workaround.
 - Example: in MSCS, if a **Repair Order** does not provide the correct normal-status model option for the mower, treat it as an MSCS/service-process issue.
