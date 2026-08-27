@@ -13,6 +13,7 @@
 - Do not confuse with MammoSuite.
 - If an agent is looking for a MammoSuite-only function in the PC tool, identify the wrong tool first.
 - Do not instruct an end customer to run Mammotion Kit.
+- After replacing a vision module and/or mainboard, if the mower is still not discoverable in the app or via Bluetooth, a high-value service path is: reseat the vision-module connector, connect to Mammotion Kit by cable, run `Flash Name`, ensure **The module firmware versions must be the same.**, then retest Bluetooth. Treat module desynchronization as a supported hypothesis until behavior changes after synchronization.
 
 ## LogiQ
 - Log-analysis route only for products/cases where capability is supported.
