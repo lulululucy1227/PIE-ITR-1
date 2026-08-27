@@ -4,7 +4,8 @@
 - Mobile application used in after-sales/service diagnostic workflows.
 - Use for applicable mobile diagnostic/test flows such as Auto Map Run and sensor checks.
 - Ultrasonic test guidance: move a fixed obstacle at about 60–70 cm in front of each front ultrasonic sensor and observe readings.
-- Shared/public download password: `MMTT`.
+- Shared/public installation/update password: `MMTT`.
+- Important distinction: this `MMTT` password is for the MammoSuite installation/update page that asks for a software-install password. It is not the MammoSuite account login password. If a partner asks for a "password", use the screenshot/context to distinguish installer/update password from account credentials before replying.
 - Do not instruct an end customer to run MammoSuite; service-tool requests belong to the agent/service-provider side unless explicitly supported otherwise.
 - For low vehicle GNSS / satellite-signal cases at the agent/service side, `GNSS Antenna Check` is a high-priority direct diagnostic step. Use its result before defaulting to physical replacement. If abnormal, inspect the rear GNSS antenna disk and connector and use known-good cross-validation where appropriate. If GNSS Antenna Check is normal but the positioning/boundary symptom remains, continue to the next relevant fault domain instead of treating GNSS hardware as confirmed faulty.
 
