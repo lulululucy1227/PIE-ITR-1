@@ -16,6 +16,9 @@
 - If an agent is looking for a MammoSuite-only function in the PC tool, identify the wrong tool first.
 - Do not instruct an end customer to run Mammotion Kit.
 - After replacing a vision module and/or mainboard, if the mower is still not discoverable in the app or via Bluetooth, a high-value service path is: reseat the vision-module connector, connect to Mammotion Kit by cable, run `Flash Name`, ensure **The module firmware versions must be the same.**, then retest Bluetooth. Treat module desynchronization as a supported hypothesis until behavior changes after synchronization.
+- If both camera views display normally in Mammotion Kit but FPV fails in the Mammotion App, do not classify the cameras/vision hardware as faulty from the App symptom alone. The wired Kit view proves the camera stream can be produced locally, while App FPV also depends on the network/video-stream/backend path.
+- High-value isolation path for `Kit camera OK / App FPV failed` at the agent side: connect the mower to a phone hotspot and retest FPV in the Mammotion App; if it still fails, confirm whether the mainboard or vision module was recently replaced or whether the device name was reflashed, because backend/device-state synchronization may be relevant; if the hotspot test fails and no backend lock/state issue is found, power off the mower, reseat the connectors on both ends of the vision module, and retest.
+- For this FPV case, also confirm whether both camera views are unavailable in the App and collect the hotspot-test result. Do not treat `RTK reference station is not ready` as the root cause of FPV failure unless separate evidence links the two.
 
 ## LogiQ
 - Log-analysis route only for products/cases where capability is supported.
