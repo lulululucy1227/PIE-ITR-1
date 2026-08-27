@@ -55,6 +55,18 @@ Regression expectations:
 - keep the outbound reply minimal and operational;
 - do not hard-code case-specific RTK assumptions as product-wide rules without separate verification.
 
+### Luba-VAEBA54E — boundary exit / GNSS
+Focus: temporal causality, contextual evidence routing, MammoSuite GNSS Antenna Check, and reply compression after partner frustration.
+Regression expectations:
+- treat Error 1004 as a consequence when the partner confirms it occurred after the mower had already left the work area;
+- do not infer LiDAR failure from a post-event tilt error;
+- prioritize the actual current issue: why the mower leaves the work area;
+- when logs indicate low vehicle GNSS signal, route the agent to MammoSuite `GNSS Antenna Check` before defaulting to part replacement;
+- if GNSS Antenna Check is abnormal, inspect the rear GNSS antenna disk/connector and use known-good cross-validation where appropriate;
+- if GNSS Antenna Check is normal and the boundary issue remains, continue to the next relevant fault domain; a known-good LiDAR cross-test may be used as a later discriminating step rather than the first conclusion;
+- do not keep requesting Auto Map Run in this case when the partner has already stated it cannot complete on this LUBA 3 workflow; treat that tool limitation as case-specific/pending validation unless independently confirmed;
+- outbound reply must omit repeated acknowledgments/background and contain only the minimum actionable next step. The accepted reply started directly with `Please run the GNSS Antenna Check in MammoSuite first.`
+
 ### Error 1000022 / 5501 / 6401 / DT-041
 Focus: version-aware known fixes, module communication, upgrade-failure routing, and non-exclusion from replacement history.
 
