@@ -67,6 +67,14 @@ When an abnormal mechanical noise sounds like the cutting disc is obstructed, in
 - Confirmed YUKA case: if the noise persists after the cutting disc is cleaned and free, replace the adapter bracket `C.P.SH.000077000`.
 - Audio/video evidence may support a likely mechanical source, but the diagnosis should still be validated by the physical inspection result.
 
+### Side-bumper fault isolation
+When a side-bumper error remains after the side bumper strip/assembly has been replaced, do not immediately assume the new bumper is also faulty or jump straight to mainboard replacement.
+- Cross-test the suspect/replacement side bumper on a confirmed-good compatible mower first.
+- If the same bumper works normally on the known-good mower, this strongly shifts suspicion to the mower-side sensing path rather than the bumper itself.
+- A likely mower-side fault domain is the side-bumper Hall sensor / chassis-side sensing structure.
+- If the Hall sensor is confirmed faulty and is not independently serviceable, replace the chassis according to the model's supported repair strategy.
+- Preserve the distinction between `likely Hall-sensor/chassis fault` and `confirmed Hall-sensor fault`; the chassis-replacement conclusion should follow cross-validation and applicable serviceability evidence.
+
 ### Cross-validation
 If the mower works normally on a known-good charging station/adapter, the original charging station/adapter/power path becomes a high-priority fault domain even if one of those parts had already been replaced.
 More generally, for any replaceable compatible module, use a confirmed known-good module when practical to separate `suspect module fault` from `machine-side shared-path fault`. Observe whether boot, communication, upgrade, positioning, charging or other target behavior changes after the cross-test.
