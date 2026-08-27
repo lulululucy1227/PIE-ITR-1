@@ -81,6 +81,15 @@ Before assigning the next test, identify whether the mower is currently with the
 - Agent/service workshop: service diagnostic tools and structured service reports may be requested where applicable.
 Do not instruct an end customer to run service-only tools.
 
+### Staged customer-to-workshop evidence collection
+When the mower is currently at the customer's site but may later return to the agent workshop, split evidence collection by device location instead of asking for service-tool tests immediately.
+- While the mower is with the customer: if the fault recurs, ask the customer to upload a fresh log immediately, note the approximate occurrence time, and capture a short video or screenshot of the abnormal behavior.
+- Do not repeatedly ask the customer to remap/reset when those actions have already failed to resolve the issue and the next useful evidence is incident-time data.
+- After the mower returns to the workshop: run the applicable MammoSuite checks, including **GNSS Antenna Check**, **Functional Test**, **Communication Check**, **Auto Map Run**, and provide the **Connect Checking** screenshot.
+- Upload a fresh log again after the workshop tests so PIE can compare customer-side incident evidence with workshop test results.
+- If no device log is visible in the data center, state that explicitly and request a new incident-time upload rather than inferring the positioning state from absent data.
+- This state is not automatically NFF. A customer-side active fault with the mower still at the customer remains an evidence-collection case; NFF becomes relevant only after the mower enters the workshop and the original issue still cannot be reproduced/found.
+
 ### Non-reproduction
 `Cannot reproduce at workshop` does not equal `fault ruled out` and does not automatically qualify a case as NFF. Preserve historical error evidence and consider environment/site-dependent causes when the test environment changed.
 
