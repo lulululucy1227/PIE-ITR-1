@@ -25,9 +25,11 @@ Use this route first:
 - `C.P.SH.000255000` was confirmed searchable/orderable in MSCS with stock visible.
 - Correct partner guidance: use `C.P.SH.000255000` to order in MSCS; inform the partner that the exploded-view information will be corrected.
 
-## Confirmed example
+## Confirmed examples
 - `C.P.SH.000220000 — LUBA 3 Chassis Module`
 - In a cracked-chassis case, existence of a serviceable chassis module supports chassis replacement as the standard repair path before considering whole-machine exchange.
+- `W.D.XC.00025800Y — LUBA 3 AWD Front Signal Cable`
+- This is the cable connecting to the front bumper on LUBA 3 AWD. If the partner cannot find it in the exploded view, provide the confirmed part name and part number directly after SBOM/parts verification.
 
 ## Future image-to-part chain
 `image -> component candidate -> product/model -> Parts/SBOM -> part candidate/number -> source -> human confirmation`
