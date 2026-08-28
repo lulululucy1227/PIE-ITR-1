@@ -84,6 +84,15 @@ When a side-bumper error remains after the side bumper strip/assembly has been r
 - If the Hall sensor is confirmed faulty and is not independently serviceable, replace the chassis according to the model's supported repair strategy.
 - Preserve the distinction between `likely Hall-sensor/chassis fault` and `confirmed Hall-sensor fault`; the chassis-replacement conclusion should follow cross-validation and applicable serviceability evidence.
 
+### Anatomy-first / shared-part diagnosis
+Do not default to generic bottom-up troubleshooting when several failed functions are known from SBOM/exploded-view structure to belong to the same service assembly.
+- First map the reported failed functions to the actual model's serviceable assemblies using SBOM, exploded view and model structure.
+- If several symptoms cluster on one assembly, use a confirmed-good compatible instance of that assembly as the first high-value cross-test before expanding into battery, CAN, driverboard or mainboard checks.
+- Real LUBA MINI AWD 800 case: buttons, STOP button, front bumper and lift detection were all treated as upper-shell related functions. Their simultaneous loss strongly justified **upper shell** as the first suspect.
+- Recommended first action in that case: cross-test with a confirmed-good compatible upper shell. If those functions return to normal, replace the original upper shell.
+- After the cross-test/repair, still complete the standard MammoSuite verification set: **Functional Test**, **Communication Check**, **Auto Map Run**, plus **Connect Checking** screenshot.
+- Principle: `symptom cluster -> SBOM/exploded-view ownership -> shared assembly -> known-good cross-test -> only then widen diagnosis if needed`.
+
 ### Cross-validation
 If the mower works normally on a known-good charging station/adapter, the original charging station/adapter/power path becomes a high-priority fault domain even if one of those parts had already been replaced.
 More generally, for any replaceable compatible module, use a confirmed known-good module when practical to separate `suspect module fault` from `machine-side shared-path fault`. Observe whether boot, communication, upgrade, positioning, charging or other target behavior changes after the cross-test.
