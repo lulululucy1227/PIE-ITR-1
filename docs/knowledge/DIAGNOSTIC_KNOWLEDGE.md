@@ -12,6 +12,15 @@
 ### Charging path
 When logs show abnormal docking/charging voltage/current/contact behavior, use those facts to narrow the remaining charging path and produce a concrete next action. Do not fabricate a hardware conclusion if decisive log evidence is absent.
 
+### Battery Test / controlled battery cross-validation
+When a MammoSuite Battery Test shows an abnormally steep discharge curve or abnormal battery-voltage behavior, preserve before/after evidence and change only one major variable at a time.
+- Before battery replacement, upload a fresh log through MammoSuite.
+- Replace the battery with a new or confirmed-good compatible battery.
+- Re-run the **Battery Test** using the customer's original charging station and original power adapter when the charging path itself is still under investigation. Keeping the same charging hardware avoids changing multiple variables at once.
+- After the repeat Battery Test, upload another fresh log and retain/send the new Battery Test result for comparison.
+- A currently normal charge at the workshop does not by itself exclude the customer's charging station/adapter if the original customer-side symptom involved unstable charging or voltage switching.
+- The comparison target is: `same mower + same customer charging station/adapter + different confirmed-good battery`, with logs captured before and after the change.
+
 ### No power / no boot
 When a mower is completely unresponsive, do not stop at external power checks and do not anchor on an older unrelated error. Use a staged known-good isolation path where applicable:
 1. confirmed-good compatible battery;
