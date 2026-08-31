@@ -45,6 +45,34 @@ Before answering whether an antenna or other optional module is compatible with 
 - LUBA mini / YUKA mini RTK antennas are therefore not applicable to YUKA mini 2 800.
 - Correct partner guidance is to answer the capability mismatch directly rather than searching for a cross-series antenna part number.
 
+## LUBA 3 LiDAR compatibility — DO NOT MIX
+Confirmed service reference explicitly states: **Specific LiDAR for specific models. DO NOT MIX.**
+
+LiDAR appearance is a quick identification aid, but compatibility is determined by the exact LiDAR family / part mapping, not by the fact that both units are for LUBA 3.
+
+Reference mapping shown in the confirmed service material:
+- `C.P.SH.000196000` — `1500AK1 (EU)`
+  - Dome: black
+  - Seal: black ring
+  - Bracket: gray
+  - Quick identifier: `Everything is Black`
+- `CPSH00004100` — `3000/5000/10000 TP2409 (EU/UK/CH)`
+  - Dome: oil-slick / rainbow finish
+  - Seal: blue ring
+  - Bracket: black
+  - Quick identifier: `Black Bracket & Blue Ring`
+- `CPSH00004000` — `1500/3000/5000 Mid360s (EU/UK/CH)`
+  - Dome: blue
+  - Seal: white ring
+  - Bracket: gray
+  - Quick identifier: `White Ring`
+
+Rules:
+- Do not interchange black/gray or visually different LiDAR assemblies solely because they physically fit or are both described as LUBA 3 LiDARs.
+- For LUBA 3 3000/5000 in particular, more than one LiDAR family exists; capacity/model name alone is therefore insufficient to prove compatibility.
+- Use the original LiDAR family / part number and the mower's applicable SBOM/service mapping to select the replacement.
+- If the replacement LiDAR has a different bracket/ring/dome combination from the original, stop and verify the exact mapping before installation.
+
 ## Confirmed examples
 - `C.P.SH.000220000 — LUBA 3 Chassis Module`
 - In a cracked-chassis case, existence of a serviceable chassis module supports chassis replacement as the standard repair path before considering whole-machine exchange.
