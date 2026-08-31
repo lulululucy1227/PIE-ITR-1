@@ -17,3 +17,10 @@ Historical fixes are evidence, not timeless instructions. Every entry should rem
 ## 6401 / chassis log+data port disconnected
 - Real case: wired upgrade failed; replacing vision module again allowed the upgrade to complete.
 - Status: evidence supporting the rule that replacement history does not prove component health.
+
+## LUBA 2 5000X — Function Test cutting-motor anomaly resolved after software update
+- Symptom: cutting/blade motor did not work in **Functional Test**, while the same cutting function worked normally in **Auto Run** and manual mowing.
+- Verified historical resolution: after updating to software version `1.30.31.10`, the blade/cutting-motor item worked normally in Functional Test.
+- Evidence interpretation: this behavior change supports a software/test-path dependency rather than proving a cutting-motor hardware failure.
+- Status: single-case historical verified fix.
+- Guardrail: do not generalize `blade Function Test failure = update to 1.30.31.10`. First confirm that the cutting function works in other operating modes and compare against the current applicable software version.
