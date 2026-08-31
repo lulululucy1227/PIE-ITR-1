@@ -12,7 +12,7 @@ Real-case accumulation + diagnostic architecture refinement. Code changes remain
 1. Issue #1 — learning intake inbox; read newest/relevant comments only.
 2. `docs/workbench/CONTINUOUS_LEARNING_LOOP.md` — current daily-case learning/write behavior.
 3. `docs/knowledge/CANDIDATE_CLASSIFICATION.md` — classify learning value before any GitHub write.
-4. `governance/DATA_PROTECTION.md` — public-repo data boundary.
+4. `governance/DATA_PROTECTION.md` — current retention/security boundary.
 5. `docs/knowledge/` — promoted reusable knowledge, only files relevant to the current case.
 6. `docs/regression/REAL_CASE_REGRESSION.md` — representative regression cases.
 7. `docs/architecture/DIAGNOSTIC_ARCHITECTURE.md` — stable diagnostic architecture.
@@ -30,10 +30,11 @@ Before the first GitHub write in that window, read the current versions of:
 - `governance/DATA_PROTECTION.md`
 
 Then apply this default:
-`daily case != GitHub write`.
-Classify learning value first. `NO_ACTION` / `DUPLICATE` stay out of GitHub. `REINFORCEMENT` normally stays out unless evidence/scope is materially strengthened. Only retain minimal sanitized candidates when there is durable new learning value.
+`daily case -> evaluate learning value first`.
 
-Never copy raw emails/chats into this public repository. Do not store partner/customer PII, email addresses, company/contact names, device names, internal/external ticket references, or other identifying case metadata unless explicitly approved and indispensable to a sanitized regression artifact.
+Do not mechanically mirror every case into GitHub, but also do not automatically strip device names, work-order/CaseID references, agent/partner names, or accepted full replies. These may be retained when they provide traceability, regression evidence, conversation continuity, or reply-quality learning.
+
+Only omit supplied case information when the user explicitly says it should not be recorded/uploaded, when it is irrelevant noise, or when it contains credentials/secrets.
 
 ## Daily Case user-output convention
 For normal case handling in the Daily Case window:
@@ -59,17 +60,22 @@ P1: Vision/attachments; model mapping; compact ITR review; EN/ZH preload.
 P2: Evidence Router/confidence; error-code/known-fix model; Parts/SBOM strategy.
 
 ## Intake/promotion
-Daily case facts -> Feishu ITR / Case History.
-Potential durable learning -> classify first (`NEW / REINFORCEMENT / CONFLICT / POSSIBLE_SUPERSEDED / DUPLICATE / INSUFFICIENT / NO_ACTION`).
-Candidate worth retaining -> Issue #1, minimal and sanitized.
+Every Daily Case should be checked for learning value.
+Potential durable learning -> classify (`NEW / REINFORCEMENT / CONFLICT / POSSIBLE_SUPERSEDED / DUPLICATE / INSUFFICIENT / NO_ACTION`).
+Candidate worth retaining -> Issue #1 with enough case provenance/evidence to remain useful.
 Stable reusable rule -> relevant `docs/knowledge/` file.
 Representative case -> regression corpus.
 Stable system/workflow/governance change -> architecture/workbench/governance file.
-Do not promote a single case without sufficient evidence.
-Do not call an Issue #1 comment a formal rule.
+
+Case traceability metadata and derived rules may coexist. Do not assume identifiers/full replies are useless; retain them when they materially help later lookup, comparison, regression or reply learning.
+
+Do not promote a single case into a broad universal rule without sufficient evidence.
+Do not call an Issue #1 comment a formal rule unless the rule has been promoted to the appropriate tracked file.
 
 ## Security
-Repository is public. Do not store passwords/tokens, raw chats, customer/agent PII, device/case identifiers, or unapproved sensitive internal material.
+Never store API keys, tokens, passwords or other credentials.
+If the user explicitly says certain case information must not be recorded, do not upload it.
+Otherwise, evaluate supplied case information for knowledge and traceability value rather than removing it automatically.
 
 ## Next implementation gate
 When Codex read access is healthy, run a gap audit across local implementation + Issue #1 findings + promoted knowledge/regression/architecture before changing code.
