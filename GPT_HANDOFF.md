@@ -30,11 +30,11 @@ Before the first GitHub write in that window, read the current versions of:
 - `governance/DATA_PROTECTION.md`
 
 Then apply this default:
-`daily case -> evaluate learning value first`.
+`daily case -> evaluate learning value -> preserve useful provenance -> derive reusable rule/candidate`.
 
-Do not mechanically mirror every case into GitHub, but also do not automatically strip device names, work-order/CaseID references, agent/partner names, or accepted full replies. These may be retained when they provide traceability, regression evidence, conversation continuity, or reply-quality learning.
+Do not mechanically mirror every case into GitHub, but also do not automatically strip device names, work-order/CaseID references, agent/partner names, company context, relevant original wording, or accepted full replies. These may be retained when they provide traceability, recurrence evidence, regression value, conversation continuity, or reply-quality learning.
 
-Only omit supplied case information when the user explicitly says it should not be recorded/uploaded, when it is irrelevant noise, or when it contains credentials/secrets.
+If the user does not explicitly say an item should be excluded, treat supplied information as available for knowledge analysis and retention when useful. Only omit it when the user explicitly says not to record/upload it, when it is irrelevant noise, or when it contains credentials/secrets.
 
 ## Daily Case user-output convention
 For normal case handling in the Daily Case window:
@@ -67,7 +67,7 @@ Stable reusable rule -> relevant `docs/knowledge/` file.
 Representative case -> regression corpus.
 Stable system/workflow/governance change -> architecture/workbench/governance file.
 
-Case traceability metadata and derived rules may coexist. Do not assume identifiers/full replies are useless; retain them when they materially help later lookup, comparison, regression or reply learning.
+Case traceability metadata and derived rules may coexist. Do not assume identifiers/full replies are useless; retain them when they materially help later lookup, comparison, recurrence analysis, regression or reply learning.
 
 Do not promote a single case into a broad universal rule without sufficient evidence.
 Do not call an Issue #1 comment a formal rule unless the rule has been promoted to the appropriate tracked file.
