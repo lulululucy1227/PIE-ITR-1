@@ -10,7 +10,7 @@
 - For low vehicle GNSS / satellite-signal cases at the agent/service side, `GNSS Antenna Check` is a high-priority direct diagnostic step. Use its result before defaulting to physical replacement. If abnormal, inspect the rear GNSS antenna disk and connector and use known-good cross-validation where appropriate. If GNSS Antenna Check is normal but the positioning/boundary symptom remains, continue to the next relevant fault domain instead of treating GNSS hardware as confirmed faulty.
 - `Connect Checking` screenshots should be interpreted field-by-field rather than as a single pass/fail state. If the Wi-Fi field shows `--`, do not immediately classify it as a Wi-Fi hardware fault. First distinguish between `not currently connected to Wi-Fi` and `Wi-Fi function cannot connect / is not working`. Ask the partner to confirm the actual Wi-Fi behavior before escalating the diagnosis.
 - When a newer software version is available for a repair case with inconsistent test behavior, update first, then repeat **Functional Test**, **Communication Check**, and **Auto Map Run**. Collect all three reports and the **Connect Checking** screenshot. After the tests are complete, upload a fresh log. If one function had failed only in Functional Test but worked in Auto Map Run/manual operation, explicitly ask whether that same item still fails after the software update.
-- Real LUBA 2 5000X case `Luba-VPWJC22H`: software version `1.30.31.10` was used as the requested update target before repeating the three MammoSuite tests, collecting the Connect Checking screenshot, and uploading a fresh post-test log.
+- Real LUBA 2 5000X case: software version `1.30.31.10` was used as the requested update target before repeating the three MammoSuite tests, collecting the Connect Checking screenshot, and uploading a fresh post-test log. The cutting/blade item that had failed only in Functional Test worked normally after the update; treat this as historical version-dependent evidence, not a timeless fixed target version.
 
 ## Mammotion Kit
 - PC diagnostic tool used in after-sales/service workflows.
@@ -27,6 +27,13 @@
 - Use this evidence to distinguish `tool/version workflow change` from `module synchronization problem`, `device identity mismatch`, or another repair-state issue before giving a new detailed step-by-step procedure.
 - When an agent reports that motherboard replacement now causes update or Wi-Fi/Bluetooth problems across multiple units, treat that as potentially reusable tool/process knowledge, but require version-specific and operation-specific evidence before generalizing it into a standard workflow.
 - Real LUBA 2 motherboard-replacement support case: after the partner reported that the prior wired Mammotion Kit procedure no longer worked consistently following recent updates, the accepted next action was to request a full operation video, current Mammotion Kit version, module-firmware screenshot, and exact error/failure point before revising the procedure.
+
+## Lark / synchronous remote diagnosis
+- Lark video is a valid escalation path when asynchronous email/screenshots/reports are no longer sufficient to understand a complex workshop fault and the agent/service center can operate the machine live.
+- Use synchronous video to observe the exact abnormal behavior, guide the next diagnostic step, and reduce repeated back-and-forth when the state is difficult to describe in text.
+- PIE remains remote support: PIE observes, asks questions, and gives technical guidance; the agent/service-center personnel perform all physical actions on the mower.
+- A video call does not replace decisive evidence that still needs to be retained, such as error codes, test reports, screenshots, logs, measurements, or the validated result of a cross-test.
+- Prefer a video session when several interacting hardware symptoms, repeated board failures, uncertain connector/assembly state, or a live test sequence would be materially easier to evaluate together than through another long email exchange.
 
 ## LogiQ
 - Log-analysis route only for products/cases where capability is supported.
