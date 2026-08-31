@@ -8,6 +8,15 @@ Do not jump to whole-unit replacement only because the agent requests it or says
 
 Agent frustration/effort can change tone, not the technical conclusion.
 
+## Lawn Sweeper Kit repairability boundary
+Current user-confirmed PIE service strategy:
+- Lawn Sweeper Kit is generally **not repaired internally** when the kit itself, internal wiring or internal assembly is damaged; default handling is complete kit replacement.
+- Current confirmed repairable exception: **roller brush failure**, where the dedicated roller-brush spare part can be used.
+- Damaged internal wiring is not a standard repair path; do not recommend cutting, soldering or lengthening wires as the normal service solution.
+- PIE provides the technical repair-vs-replace recommendation only; warranty/replacement approval follows the authorized service process.
+
+Use this as a serviceability rule, not as proof that every accessory cable fault in every product family requires whole-unit replacement.
+
 ## SBOM vs exploded-view consistency rule
 For part-number, compatibility, orderability, replacement-part, or material questions, do not trust the partner-provided part number by default.
 Use this route first:
