@@ -35,6 +35,14 @@ Classify learning value first. `NO_ACTION` / `DUPLICATE` stay out of GitHub. `RE
 
 Never copy raw emails/chats into this public repository. Do not store partner/customer PII, email addresses, company/contact names, device names, internal/external ticket references, or other identifying case metadata unless explicitly approved and indispensable to a sanitized regression artifact.
 
+## Daily Case user-output convention
+For normal case handling in the Daily Case window:
+- show the diagnostic reasoning/decision logic first;
+- when a partner-facing English reply is needed, provide a Chinese translation before the final English reply;
+- the final English reply should be easy to copy as plain text and should not include a person's name in the closing;
+- if a sign-off is needed, use a neutral closing such as `Best regards,` without appending a personal name unless the user explicitly asks for one;
+- if the case is outside PIE outbound scope, do not generate a partner-facing reply: provide the internal technical note/routing action instead.
+
 ## Core boundaries
 - PIE is remote technical support; agent/service staff perform physical repair/testing.
 - Feishu ITR is the business-fact source of truth.
