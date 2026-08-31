@@ -3,13 +3,13 @@
 Status: Planned — implement when Codex/local read access is healthy.
 
 ## Goal
-Make PIE ITR Workbench learn from real daily support work without turning every case into permanent knowledge or forcing PIE to manually maintain a knowledge base.
+Make PIE ITR Workbench learn from real daily support work without forcing PIE to manually maintain a knowledge base or mechanically duplicating every ticket.
 
 Core principle:
 
 `Detect -> Candidate -> Evidence -> Human Gate -> Promote`
 
-Workbench may automatically detect potential learning, but it must not silently convert a single case into a stable rule.
+Workbench may automatically detect potential learning, but it must not silently convert a single case into a broad stable rule.
 
 ## Information layers
 
@@ -21,21 +21,23 @@ Examples:
 - error codes / tool results / image or log evidence
 - actual outcome / resolved state
 - final verified finding
+- device/ticket/agent metadata needed to trace the case
 
-Case facts do not automatically become reusable knowledge.
+Case facts do not automatically become reusable knowledge, but some case facts are valuable provenance for later learning and regression.
 
 ### 2. Learning Candidate
 Workbench detects that a case may contain reusable value.
-Candidate should capture only the minimum useful structure:
+Candidate should capture the useful structure:
 - candidate type
 - observed fact/pattern
 - possible reusable rule
 - supporting evidence
 - scope / model / version boundary when known
 - confidence
-- source case reference **inside the internal business system only when needed**
+- source case reference / device / work-order metadata when useful for traceability
+- exact accepted/sent reply when reply wording itself is part of the learning
 
-For GitHub/public-repository retention, the candidate must be sanitized and should omit direct case identifiers unless explicitly approved and indispensable.
+Do not automatically strip direct case identifiers or conversation material merely because the repository is public. Retain them when they materially help traceability, comparison, regression or reply learning, unless the user explicitly says not to record them.
 
 ### 3. Stable Knowledge / Rule
 Only after PIE confirmation or sufficient repeated evidence.
@@ -45,23 +47,23 @@ Promotion targets:
 - stable system-level behavior -> `docs/architecture/` / `docs/workbench/` / `governance/`
 
 ## Daily-case write gate
-A daily case does **not** automatically create an Issue #1 comment.
+Every Daily Case should be evaluated for learning value.
 
 Before any GitHub write derived from a case:
 1. Classify it using `CANDIDATE_CLASSIFICATION.md`.
 2. Check whether the learning is already represented in current knowledge/rules.
-3. Check the public-repository data boundary.
-4. Write only when there is durable learning value worth retaining.
+3. Decide what original case information is useful for provenance/regression.
+4. Check whether the user explicitly excluded any information from recording.
+5. Write the amount of case evidence + derived learning needed to remain useful later.
 
 Default actions:
-- `NO_ACTION` -> no GitHub write.
-- `DUPLICATE` -> no GitHub write.
-- `REINFORCEMENT` -> normally no new case comment; retain only when the new evidence materially expands confidence/scope and that expansion matters.
-- `INSUFFICIENT` -> no durable rule; keep in the case workflow/review queue if needed.
-- `NEW` / `CONFLICT` / `POSSIBLE_SUPERSEDED` -> minimal sanitized Learning Candidate may enter Issue #1 for review.
+- `NO_ACTION` -> normally no new knowledge artifact.
+- `DUPLICATE` -> normally no new knowledge artifact unless the case adds useful traceability or repeated-evidence value.
+- `REINFORCEMENT` -> retain when the case materially strengthens confidence, model scope, evidence pattern or regression coverage.
+- `INSUFFICIENT` -> do not promote a stable rule; keep the case/evidence only if it remains useful for later resolution.
+- `NEW` / `CONFLICT` / `POSSIBLE_SUPERSEDED` -> create a reviewable Learning Candidate with enough provenance to reconstruct why it matters.
 
-Issue #1 is a **learning intake inbox**, not a raw daily-case ledger.
-Do not use Issue #1 to mirror complete emails, chats, Case History, or every accepted reply.
+Issue #1 is a **learning intake inbox**, not a requirement to copy every Daily Case verbatim. However, case identifiers, agent context, relevant conversation excerpts and accepted replies may be retained when they add value.
 
 ## High-value learning signals
 Workbench should preferentially detect:
@@ -83,7 +85,23 @@ Workbench should preferentially detect:
    - verified fix plus applicable model/version/scope and currentness boundary
 
 6. Workflow / Reply Correction
-   - e.g. wrong actor/tool assignment, impossible Next Action, overly long reply, wrong conversation-state handling
+   - wrong actor/tool assignment, impossible Next Action, overly long reply, wrong conversation-state handling, authority-boundary error
+
+7. Traceability / recurrence
+   - same device returning multiple times
+   - same work-order family or issue recurring after a repair
+   - repeated evidence from the same partner or model that changes confidence/scope
+
+## Value of original case metadata
+Original case metadata can be useful and should not be discarded automatically.
+
+- **Device name / identifier**: high value for linking repeated repairs, recurrence, before/after logs and repair history on the same unit.
+- **Ticket / CaseID / work-order reference**: high traceability value for finding the original business case and validating what actually happened later.
+- **Agent / partner name/company**: lower direct technical value, but useful for conversation continuity, partner tool capability, prior instructions and repeated communication patterns.
+- **Exact partner wording**: useful when the wording changes the correct interpretation or exposes a conversation-state failure.
+- **Exact PIE reply actually sent**: high value for Reply Regression, especially when studying brevity, authority boundaries, or whether a diagnostic action was clearly communicated.
+
+Retention should therefore be **value-based**, not automatically anonymization-based.
 
 ## PIE feedback UX
 Do not require long manual write-ups.
@@ -128,8 +146,9 @@ Only surface a learning candidate when there is likely new value, such as:
 - newly confirmed tool/model capability
 - useful Vision/log/tool evidence pattern
 - reply-generation failure with clear reusable lesson
+- same device/issue returning after repair in a way that changes the repair strategy
 
-Repeated cases with no new learning should stay quiet.
+Repeated cases with no new learning can stay quiet, but repeated evidence that strengthens or weakens an existing rule is not automatically noise.
 
 ## Evidence and promotion rules
 
@@ -141,33 +160,35 @@ Repeated cases with no new learning should stay quiet.
 - Later outcomes must not be back-projected into the original at-the-time analysis.
 - An Issue #1 comment is not itself a formal durable rule. After PIE confirmation, promote stable system/workflow/governance changes into the relevant tracked file.
 
-## Public-repository sanitization gate
-GitHub is public and is not the business-fact database.
-Before retaining a Learning Candidate or regression artifact in GitHub:
-- remove partner/customer names, email addresses, phone numbers and contact signatures;
-- remove partner/company identity unless the identity itself is explicitly approved and necessary to the rule;
-- remove device names, serial-like identifiers, internal/external ticket numbers and source references unless explicitly approved and indispensable to regression;
-- do not paste raw emails, full chats, raw Case History or private attachment content;
-- retain only the technical facts required to understand the learning, Evidence strength and scope.
+## Retention / exclusion gate
+The user controls what supplied case information may be retained.
+
+Default:
+- information supplied in a Daily Case may be used for case traceability, regression and knowledge derivation;
+- do not automatically remove device names, work-order IDs, agent names/company or full accepted replies;
+- keep only information that has practical diagnostic, provenance, regression or reply-learning value;
+- never store credentials/secrets.
+
+Explicit user exclusion overrides the default. If the user says an item does not need to be recorded/uploaded, omit that item.
 
 ## Storage flow
 
 ```text
 Daily case
-  -> ITR / Case History factual record
+  -> ITR / Case History factual Source of Truth
   -> Workbench learning detection
-      -> no new value: end
-      -> potential value: classify candidate
-          -> not worth durable retention: end / internal review only
-          -> worth retention: minimal sanitized Learning Candidate
-              -> PIE review
-                  -> case-specific only
+      -> no useful learning/trace value: end
+      -> useful value: classify candidate
+          -> retain useful case provenance/evidence
+          -> derive reusable learning
+              -> PIE review / explicit correction
+                  -> case-specific evidence only
                   -> reusable Knowledge
                   -> Regression Case
                   -> Workbench/System Rule
 ```
 
-GitHub is for durable rules, candidates worth retaining, regression cases and architecture; it is not the raw full-case database.
+GitHub is for durable project learning, including selected case provenance when it improves that learning; it does not need to be a verbatim backup of every business ticket.
 
 ## New-window bootstrap requirement
 When a new Chat/GPT window is designated as the Daily Case collection window, before its first GitHub write it must re-read the current repository versions of:
@@ -178,6 +199,7 @@ When a new Chat/GPT window is designated as the Daily Case collection window, be
 - `governance/DATA_PROTECTION.md`
 
 Do not rely only on prior-chat memory or early Issue #1 comments to infer the current write policy.
+The required default is: **evaluate every case for learning; do not automatically discard supplied case information; only omit information the user explicitly excludes, irrelevant noise, or credentials/secrets.**
 
 ## Implementation boundary
 
@@ -204,5 +226,6 @@ The feature is successful when:
 - single cases do not silently become universal rules;
 - final outcomes can be compared with original predictions;
 - stable learning can be promoted to the correct knowledge/regression/architecture layer;
+- useful provenance (device/ticket/reply/partner context) can be retained when needed;
 - partner-facing replies remain minimum-sufficient and are not made longer by the learning system;
-- opening a new Daily Case window cannot silently revert GitHub writes to a raw-case mirror pattern.
+- opening a new Daily Case window cannot silently revert to an outdated intake/retention policy.
