@@ -15,7 +15,7 @@ Canonical repository: `lulululucy1227/PIE-ITR-1`.
 ## Current operating structure
 
 - `GPT_HANDOFF.md` — 精炼项目入口，只保存当前阶段、关键边界、权威来源、优先级和下一步门槛。
-- Issue #1 — 每日真实案例 / Workbench 缺陷 / 新观察的 intake inbox。
+- Issue #1 — 每日真实案例 / Workbench 缺陷 / 新观察的 **learning intake inbox**；不是每日工单镜像或原始案例数据库。
 - Issue #2 — 诊断架构变更的讨论与索引；正式架构以文件为准。
 - `docs/knowledge/` — 已晋升的可复用知识与知识治理规则。
 - `docs/regression/REAL_CASE_REGRESSION.md` — 代表性真实案例回归集。
@@ -30,18 +30,35 @@ Canonical repository: `lulululucy1227/PIE-ITR-1`.
 Daily real case / defect
         |
         v
-Issue #1 intake
+Feishu ITR / Case History (full business facts)
         |
-        +--> case-specific / pending validation stays here
+        v
+Learning detection
         |
-        +--> stable reusable rule --> docs/knowledge/
+        +--> NO_ACTION / DUPLICATE: no GitHub write
         |
-        +--> representative case --> docs/regression/
-        |
-        +--> system-level stable change --> docs/architecture/
+        +--> candidate worth retaining -> Issue #1 (minimal, sanitized)
+                    |
+                    +--> stable reusable rule --> docs/knowledge/
+                    |
+                    +--> representative case --> docs/regression/
+                    |
+                    +--> system-level stable change --> docs/architecture/ / docs/workbench/ / governance/
 ```
 
 不要把 Issue #1 当长期知识库，也不要把完整知识堆进 `GPT_HANDOFF.md`。
+
+## Daily-case GitHub write gate
+
+Daily-case handling does **not** imply a GitHub write.
+Before writing anything derived from a real case, first classify the learning value as `NEW / REINFORCEMENT / CONFLICT / POSSIBLE_SUPERSEDED / DUPLICATE / INSUFFICIENT / NO_ACTION`.
+
+Default behavior:
+- `NO_ACTION` / `DUPLICATE` -> do not write to GitHub.
+- `REINFORCEMENT` -> do not create a duplicate case record unless it materially strengthens evidence/scope and is worth retaining.
+- `NEW` / `CONFLICT` / `POSSIBLE_SUPERSEDED` -> create only the minimum sanitized Learning Candidate needed for review.
+- A case that merely confirms an existing rule should normally stay in Feishu ITR / Case History.
+- Do not mark an Issue #1 comment as a “formal rule”; formal durable rules belong in the relevant tracked file after the appropriate PIE gate.
 
 ## Core operating principles
 
@@ -62,4 +79,5 @@ Issue #1 intake
 - 原始完整 Case History、附件或未经脱敏的聊天记录；
 - 未确认可公开的内部敏感业务资料。
 
-真实案例用于规则/回归时应尽量只保留必要技术事实并脱敏。若后续需要长期保存更完整的内部案例证据，应优先将仓库调整为 private，而不是放宽 public 仓库的安全边界。
+真实案例用于规则/回归时应尽量只保留必要技术事实并脱敏。设备名、外部/内部工单号、代理姓名/公司、邮箱等可识别字段默认不进入 GitHub Learning Candidate，除非已明确确认公开且对回归不可替代。
+若后续需要长期保存更完整的内部案例证据，应优先将仓库调整为 private，而不是放宽 public 仓库的安全边界。
