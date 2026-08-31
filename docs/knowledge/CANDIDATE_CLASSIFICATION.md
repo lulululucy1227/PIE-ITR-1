@@ -14,6 +14,8 @@ Status: Draft baseline
 
 动作：默认不重复创建同主题 Knowledge；评估是否增强 Evidence、适用范围或置信度。
 
+对于 Daily Case -> GitHub：`REINFORCEMENT` 默认也不创建新的 Issue #1 长案例记录。只有当新增 Evidence 对置信度、适用范围、回归覆盖或生命周期判断有实质价值时，才保留最小化、脱敏后的 candidate/evidence note。
+
 ## CONFLICT
 新 Evidence 与当前 Knowledge 的事实性结论存在实质冲突。
 
@@ -27,17 +29,26 @@ Status: Draft baseline
 ## DUPLICATE
 新 ITR 没有带来足够新的知识价值，与现有 Knowledge 实质等价。
 
-动作：通常不新建；必要时仅作为额外来源 Evidence。
+动作：通常不新建；必要时仅作为额外来源 Evidence。Daily Case 场景下默认不写 GitHub。
 
 ## INSUFFICIENT
 Evidence 不足以形成可靠、可复用 Knowledge。
 
-动作：不自动补全；可以进入待评估队列或忽略。
+动作：不自动补全；可以进入待评估队列或忽略。若只是当前工单仍需补证据，留在 ITR/Case History 工作流，不为了“沉淀”而写 GitHub。
 
 ## NO_ACTION
 即使 ITR 内容真实，也没有形成/改变 Knowledge 的必要。
 
-动作：不写 KB。
+动作：不写 KB，也不写 GitHub Daily Case 镜像。
+
+## Daily-case GitHub retention rule
+Candidate classification is also the write gate for Issue #1.
+
+- Daily case facts belong to Feishu ITR / Case History.
+- Issue #1 only retains Learning Candidates worth durable review.
+- Do not paste raw case history, full partner messages, accepted replies, or contact metadata merely because a case was discussed in the Daily Case window.
+- Before retaining a candidate in the public repository, apply `governance/DATA_PROTECTION.md` sanitization.
+- An explicit PIE correction can justify `NEW` Workbench/System behavior even from one case, but once confirmed it should be promoted to the relevant tracked rule file rather than left only as an Issue comment.
 
 ## Matching rule
 
