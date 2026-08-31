@@ -9,20 +9,19 @@ If any task targets another repository, stop and verify before writing.
 Real-case accumulation + diagnostic architecture refinement. Code changes remain paused while Codex read access is unreliable.
 
 ## Read first
-1. Issue #1 — learning intake inbox; read newest/relevant comments only.
+1. Issue #1 — Learning Candidate intake; read newest/relevant comments only.
 2. `docs/workbench/CONTINUOUS_LEARNING_LOOP.md` — current daily-case learning/write behavior.
 3. `docs/knowledge/CANDIDATE_CLASSIFICATION.md` — classify learning value before any GitHub write.
-4. `governance/DATA_PROTECTION.md` — current retention/security boundary.
-5. `docs/knowledge/` — promoted reusable knowledge, only files relevant to the current case.
-6. `docs/regression/REAL_CASE_REGRESSION.md` — representative regression cases.
+4. `governance/DATA_PROTECTION.md` — storage/security boundary.
+5. `docs/knowledge/` — promoted reusable knowledge relevant to the current case.
+6. `docs/regression/REAL_CASE_REGRESSION.md` — reusable regression assertions.
 7. `docs/architecture/DIAGNOSTIC_ARCHITECTURE.md` — stable diagnostic architecture.
 8. Issue #2 only when discussing architecture changes.
 
 Do not load all historical material by default.
 
 ## New Daily Case Window bootstrap — mandatory
-When a new chat/window is designated as the Daily Case collection window, do **not** infer GitHub behavior from old Issue #1 comments or prior chat memory alone.
-Before the first GitHub write in that window, read the current versions of:
+When a new chat/window is designated as the Daily Case collection window, before its first GitHub write read the current versions of:
 - `README.md`
 - `GPT_HANDOFF.md`
 - `docs/workbench/CONTINUOUS_LEARNING_LOOP.md`
@@ -30,11 +29,11 @@ Before the first GitHub write in that window, read the current versions of:
 - `governance/DATA_PROTECTION.md`
 
 Then apply this default:
-`daily case -> evaluate learning value -> preserve useful provenance -> derive reusable rule/candidate`.
+`current case -> read full context from Nextop / ITR when needed -> solve current issue -> evaluate reusable learning -> write only the reusable learning/correction/regression value to GitHub`.
 
-Do not mechanically mirror every case into GitHub, but also do not automatically strip device names, work-order/CaseID references, agent/partner names, company context, relevant original wording, or accepted full replies. These may be retained when they provide traceability, recurrence evidence, regression value, conversation continuity, or reply-quality learning.
+GitHub is not used to determine whether the same device has returned. Device-level history, partner conversation and ticket history should be re-read from Nextop / ITR using the current work order/context when needed.
 
-If the user does not explicitly say an item should be excluded, treat supplied information as available for knowledge analysis and retention when useful. Only omit it when the user explicitly says not to record/upload it, when it is irrelevant noise, or when it contains credentials/secrets.
+Do not persist device name, work-order/CaseID, agent name/company, full raw email/chat or full accepted reply merely for traceability. Keep them out unless a specific knowledge/regression rule genuinely depends on that exact field or wording.
 
 ## Daily Case user-output convention
 For normal case handling in the Daily Case window:
@@ -46,7 +45,7 @@ For normal case handling in the Daily Case window:
 
 ## Core boundaries
 - PIE is remote technical support; agent/service staff perform physical repair/testing.
-- Feishu ITR is the business-fact source of truth.
+- Nextop / Feishu ITR / Case History are the full case-fact sources of truth.
 - `机型映射表` is the intended model-resolution business source.
 - Vision is a diagnostic input, not attachment decoration.
 - `already replaced` != `ruled out`.
@@ -54,28 +53,29 @@ For normal case handling in the Daily Case window:
 - `cannot reproduce` != `fault ruled out` and does not automatically mean NFF.
 - Partner reply follows **minimum sufficient response**.
 
-## Priorities
-P0: diagnostic correctness; per-case failures visible; decisive evidence reaches case state.
-P1: Vision/attachments; model mapping; compact ITR review; EN/ZH preload.
-P2: Evidence Router/confidence; error-code/known-fix model; Parts/SBOM strategy.
-
-## Intake/promotion
+## Intake / promotion
 Every Daily Case should be checked for learning value.
-Potential durable learning -> classify (`NEW / REINFORCEMENT / CONFLICT / POSSIBLE_SUPERSEDED / DUPLICATE / INSUFFICIENT / NO_ACTION`).
-Candidate worth retaining -> Issue #1 with enough case provenance/evidence to remain useful.
+
+Classify: `NEW / REINFORCEMENT / CONFLICT / POSSIBLE_SUPERSEDED / DUPLICATE / INSUFFICIENT / NO_ACTION`.
+
+GitHub candidate should preserve the reusable content, not the entire case:
+- model/product scope when relevant;
+- symptom/error/component/path;
+- decisive evidence and validated action/result;
+- reusable diagnostic or service strategy;
+- scope/version/guardrail;
+- Workbench/reply/business-boundary correction.
+
 Stable reusable rule -> relevant `docs/knowledge/` file.
-Representative case -> regression corpus.
+Representative regression assertion -> regression corpus.
 Stable system/workflow/governance change -> architecture/workbench/governance file.
 
-Case traceability metadata and derived rules may coexist. Do not assume identifiers/full replies are useless; retain them when they materially help later lookup, comparison, recurrence analysis, regression or reply learning.
-
 Do not promote a single case into a broad universal rule without sufficient evidence.
-Do not call an Issue #1 comment a formal rule unless the rule has been promoted to the appropriate tracked file.
+Do not call an Issue #1 comment a formal rule unless promoted to the appropriate tracked file.
 
 ## Security
 Never store API keys, tokens, passwords or other credentials.
-If the user explicitly says certain case information must not be recorded, do not upload it.
-Otherwise, evaluate supplied case information for knowledge and traceability value rather than removing it automatically.
+If the user explicitly says certain information must not be recorded, exclude it.
 
 ## Next implementation gate
 When Codex read access is healthy, run a gap audit across local implementation + Issue #1 findings + promoted knowledge/regression/architecture before changing code.
