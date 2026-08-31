@@ -14,46 +14,44 @@ Original source evidence must not be silently rewritten to fit a derived conclus
 
 Source timestamps may only be represented as source timestamps when they were actually parsed from source evidence. Do not manufacture or infer precise source timestamps.
 
-## Repository security
-This repository may contain case-derived working knowledge and traceability metadata when they are useful to PIE learning, regression, or future diagnosis.
+## Repository storage boundary
+GitHub is the durable store for reusable project learning, not for reconstructing complete individual tickets.
 
-Never commit:
-- API keys, tokens, passwords, secrets or credentials;
-- material the user explicitly says must not be recorded or uploaded;
-- fabricated identifiers, timestamps, findings or outcomes.
+Full current-case context should be read from Nextop / Feishu ITR / Case History when needed. Therefore GitHub normally does not need to retain device-level or ticket-level identifiers simply for traceability.
 
-Do not automatically delete or omit information only because the repository is public. The user's standing instruction is that case information may be retained by default unless the user explicitly says a specific item should not be recorded.
-
-## Case-information retention rule
-For Daily Case learning, the following information may be retained when it contributes to traceability, diagnosis, regression, conversation continuity, or reply-quality learning:
+Normally do not persist:
 - device name / device identifier;
-- internal or external ticket / work-order / CaseID reference;
-- agent or partner name/company;
-- model and repair history;
-- exact error codes, logs/tool findings and performed actions;
-- the actual partner question or relevant conversation excerpt;
-- the actual PIE reply that was accepted/sent, especially when reply wording itself is part of the learning;
-- later result/correction that validates or disproves the assessment.
+- internal/external work-order, ticket or CaseID reference;
+- agent personal name;
+- partner/company identity unless its capability/authority is itself relevant to the rule;
+- full raw email/chat or Case History;
+- full accepted/sent reply unless exact wording is the regression object.
 
-These fields are not automatically knowledge by themselves. Their value is to preserve provenance and allow later comparison across cases.
+This is an architecture/noise-control boundary, not a claim that those fields have zero information value. They remain available in the source case and can be re-read there.
 
-## Knowledge abstraction rule
-Each real case should still be processed into the highest-value reusable form rather than merely copied as raw text.
-
-Use two layers when useful:
-1. **Case trace / evidence** — enough original context to reconstruct what happened and why the conclusion was made.
-2. **Derived learning** — the reusable diagnostic rule, repair strategy, reply rule, workflow boundary, regression assertion, or candidate knowledge.
-
-A case can therefore keep identifiers or an exact accepted reply while also producing an abstract reusable rule.
-
-Do not remove identifiers, names, ticket references or full replies solely for sanitization. Remove them when:
-- the user explicitly says not to record them;
-- they add no useful traceability/learning value and only create noise;
-- they are secrets/credentials or otherwise unsafe to publish.
+## What GitHub should preserve
+Retain the technical facts needed to make future similar cases easier to solve:
+- model/product scope when relevant;
+- component / functional path;
+- symptom and exact error code where relevant;
+- decisive evidence;
+- validated action/result;
+- reusable cross-validation or diagnostic method;
+- repair/service strategy;
+- scope/version/currentness boundary;
+- counterexample/guardrail;
+- PIE authority/routing boundary;
+- reusable reply-generation rule or concise regression assertion;
+- explicit user correction that changes system behavior.
 
 ## User override
-The user has final authority over retention of supplied case information.
-- If the user says `不要记录`, `不用上传`, `这个信息不需要沉淀`, or equivalent, exclude that information from GitHub learning artifacts.
-- If the user does not give such an exclusion, default to evaluating the information for knowledge/traceability value rather than discarding it.
+If the user explicitly says specific information should not be recorded/uploaded, exclude it.
+If the user explicitly asks to retain a particular case/example or exact wording for regression, that instruction may override the normal minimization rule.
 
-Feishu ITR / Case History remains the business-fact Source of Truth, while GitHub may retain selected case evidence plus derived rules needed for durable project learning.
+## Security
+Never commit API keys, tokens, passwords, secrets or credentials.
+Do not fabricate identifiers, timestamps, findings or outcomes.
+
+## Source-of-truth principle
+Nextop / Feishu ITR / Case History answer: **what happened in this individual ticket?**
+GitHub Knowledge/Regression/Governance answer: **what should we learn from it for the next similar ticket?**
