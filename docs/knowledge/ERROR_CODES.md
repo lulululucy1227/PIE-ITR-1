@@ -29,6 +29,35 @@ Only promote evidence-backed knowledge. Error codes are not one-code-one-solutio
 - Identify actual offline module/link first, then trace communication/data/power chain.
 - Do not default to mainboard replacement.
 
+## 458 — right cutting-disc motor overcurrent
+- Meaning confirmed by PIE: right cutting-disc motor overcurrent.
+- If it appears together with several wheel-drive hardware-overcurrent codes and battery MOS overtemperature, do not diagnose the cutting motor in isolation first.
+
+## 586 — right-front wheel-hub drive hardware overcurrent
+- Meaning confirmed by PIE: right-front wheel-hub drive hardware overcurrent.
+
+## 362 — left wheel-hub drive overcurrent
+- Meaning confirmed by PIE: left wheel-hub drive overcurrent.
+
+## 2714 — battery MOS temperature high
+- Meaning confirmed by PIE: battery MOS temperature high.
+- When it occurs in the same event as multiple independent motor/drive overcurrent codes, treat it as evidence of a shared high-current / drive-stage event rather than an isolated battery-health reading.
+
+## 554 — left-front wheel-hub drive hardware overcurrent
+- Meaning confirmed by PIE: left-front wheel-hub drive hardware overcurrent.
+
+## 394 — right wheel-hub drive overcurrent
+- Meaning confirmed by PIE: right wheel-hub drive overcurrent.
+
+## Multi-channel overcurrent + Battery MOS high-temperature pattern
+When several motor/drive channels report overcurrent at the same time — for example cutting-disc overcurrent plus multiple wheel-hub drive overcurrent/hardware-overcurrent codes — and battery MOS high-temperature is present in the same event:
+- do not interpret it as several independent motors failing simultaneously;
+- the driverboard / shared drive-power stage becomes a high-priority fault domain;
+- if the driverboard has already failed/replaced repeatedly, do not stop at replacing it again: investigate why it is being damaged or overloaded;
+- high-value upstream checks include confirmed-good battery cross-test, evidence of water ingress/corrosion, main power harness/connectors, and individual motor short/overload isolation;
+- a visually intact wiring harness does not exclude an electrical fault under load;
+- if previous water ingress is confirmed, repeated driverboard failure may be secondary to broader moisture/corrosion damage and the repair strategy should be reassessed rather than continuing blind board replacement.
+
 ## -552 / -392 / -584 — wheel-motor undervoltage
 - `-552`: left front wheel hub motor voltage too low.
 - `-392`: right wheel hub motor voltage too low.
