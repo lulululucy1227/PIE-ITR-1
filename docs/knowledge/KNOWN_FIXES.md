@@ -22,6 +22,6 @@ Historical fixes are evidence, not timeless instructions. Every entry should rem
 - Symptom: cutting/blade motor does not start in **Functional Test**, while the same cutting function works normally in **Auto Run** and/or manual mowing.
 - This pattern should not be treated as proof of cutting-motor hardware failure when real mowing operation is normal.
 - Historical observation: version `1.30.31.10` previously allowed the Function Test cutting item to pass in one instance, but the same symptom later reappeared on `1.30.31.10`. Therefore `1.30.31.10` is not a stable universal fix for this symptom.
-- Current PIE-confirmed handling: when this symptom occurs on `1.30.31.10`, select/reflash software version `1.30.29.19` and repeat the Function Test. Similar cases have passed the test after switching to `1.30.29.19`.
+- Current PIE-confirmed handling: when this symptom occurs on `1.30.31.10`, select software version `1.30.29.19` and update the mower, then repeat the Function Test. Similar cases have passed the test after switching to `1.30.29.19`.
 - Status: reusable version-dependent known fix, with prior `1.30.31.10` interpretation corrected/superseded for this scenario.
 - Guardrail: keep the scope narrow to this Function Test mismatch. If the cutting motor also fails in Auto Run/manual mowing, or other motor/driver faults are present, do not treat it as the same software-only case.
