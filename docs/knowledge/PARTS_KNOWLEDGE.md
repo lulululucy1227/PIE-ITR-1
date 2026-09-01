@@ -17,6 +17,13 @@ Current user-confirmed PIE service strategy:
 
 Use this as a serviceability rule, not as proof that every accessory cable fault in every product family requires whole-unit replacement.
 
+## Chassis structural breach / complete chassis replacement
+Current user-confirmed PIE service strategy:
+- If the mower underside/chassis is broken or chipped through so that the damage creates an opening directly into the inside of the mower, treat this as a **chassis structural breach**, not a cosmetic bottom-shell defect.
+- The repair direction is replacement of the **complete chassis**. Do not describe the repair as replacement of only a `bottom shell` when the breached structure belongs to the complete chassis service assembly.
+- Keep the scope narrow: superficial scratches, chips, or non-penetrating cosmetic damage do not automatically require complete chassis replacement.
+- Confirm the exact model and applicable chassis service part/module through Parts/SBOM before giving an ordering part number.
+
 ## SBOM vs exploded-view consistency rule
 For part-number, compatibility, orderability, replacement-part, or material questions, do not trust the partner-provided part number by default.
 Use this route first:
