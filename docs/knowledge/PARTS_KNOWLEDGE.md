@@ -24,6 +24,14 @@ Current user-confirmed PIE service strategy:
 - Keep the scope narrow: superficial scratches, chips, or non-penetrating cosmetic damage do not automatically require complete chassis replacement.
 - Confirm the exact model and applicable chassis service part/module through Parts/SBOM before giving an ordering part number.
 
+## YUKA 2024 — front omni-wheel socket / retaining-structure damage
+Current user-confirmed PIE serviceability rule:
+- If a new front omni wheel also cannot stay locked in place and falls out, first distinguish `wheel-side damage` from `mower-side socket / retaining-structure damage` with close-up photo evidence.
+- Ask the agent for: (1) clear photos of the front omni wheel itself, and (2) close-up photos inside the mower-side wheel socket/retaining area, specifically looking for wear, cracking, deformation, or missing retaining features.
+- For **YUKA 2024**, if the mower-side socket/retaining structure is confirmed damaged, there is no service spare available to replace the chassis/retaining structure through the normal repair route.
+- Therefore a confirmed mower-side retaining-structure failure on YUKA 2024 is **not normally repairable by standard spare-part replacement**.
+- Do not classify the mower as non-repairable from the symptom alone; first confirm the machine-side structural damage with photo/physical evidence and rule out wheel-side damage.
+
 ## SBOM vs exploded-view consistency rule
 For part-number, compatibility, orderability, replacement-part, or material questions, do not trust the partner-provided part number by default.
 Use this route first:
