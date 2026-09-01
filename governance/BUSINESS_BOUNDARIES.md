@@ -26,5 +26,15 @@ When a partner's latest request is essentially asking whether replacement/warran
 
 For repeated-repair cases with confirmed internal water damage/corrosion, PIE may recommend complete-unit replacement from a technical repair-strategy perspective when further repair is poorly predictable or cannot reasonably ensure long-term reliability. This technical recommendation is not itself a replacement/warranty approval.
 
+### Water-ingress warranty routing rule
+When internal water ingress is confirmed but the photos/evidence do not identify a clear leak point or customer-caused entry path:
+- if the mower is still within warranty, has not previously been opened/repaired, there is no evidence of unauthorized disassembly or misuse, and the customer states it was cleaned according to Mammotion guidance, PIE should not invent or assume a customer-caused exclusion;
+- in that situation, record the technical facts and route the ticket to the Service Manager for in-warranty handling/decision;
+- inability to prove the exact ingress point is not by itself a reason to reject an in-warranty case when there is no evidence supporting customer-caused exclusion;
+- if the mower is already outside the warranty period, handle/route it as out-of-warranty service regardless of who may ultimately have caused the ingress;
+- PIE should not continue collecting low-value technical evidence once the warranty-routing threshold above is already satisfied, unless the Service Manager requests additional evidence.
+
+This routing rule does not give PIE authority to approve an exchange or warranty claim; the authorized service owner remains responsible for the final service-commercial decision.
+
 ## Case vs knowledge
 An ITR records what happened in a case. A Knowledge entry records a reusable, evidence-supported conclusion. A true case statement does not automatically qualify as reusable knowledge.
