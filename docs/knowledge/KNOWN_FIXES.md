@@ -18,9 +18,10 @@ Historical fixes are evidence, not timeless instructions. Every entry should rem
 - Real case: wired upgrade failed; replacing vision module again allowed the upgrade to complete.
 - Status: evidence supporting the rule that replacement history does not prove component health.
 
-## LUBA 2 5000X — Function Test cutting-motor anomaly resolved after software update
-- Symptom: cutting/blade motor did not work in **Functional Test**, while the same cutting function worked normally in **Auto Run** and manual mowing.
-- Verified historical resolution: after updating to software version `1.30.31.10`, the blade/cutting-motor item worked normally in Functional Test.
-- Evidence interpretation: this behavior change supports a software/test-path dependency rather than proving a cutting-motor hardware failure.
-- Status: single-case historical verified fix.
-- Guardrail: do not generalize `blade Function Test failure = update to 1.30.31.10`. First confirm that the cutting function works in other operating modes and compare against the current applicable software version.
+## LUBA 2 5000X — Function Test cutting-motor anomaly / version dependency
+- Symptom: cutting/blade motor does not start in **Functional Test**, while the same cutting function works normally in **Auto Run** and/or manual mowing.
+- This pattern should not be treated as proof of cutting-motor hardware failure when real mowing operation is normal.
+- Historical observation: version `1.30.31.10` previously allowed the Function Test cutting item to pass in one instance, but the same symptom later reappeared on `1.30.31.10`. Therefore `1.30.31.10` is not a stable universal fix for this symptom.
+- Current PIE-confirmed handling: when this symptom occurs on `1.30.31.10`, select/reflash software version `1.30.29.24` and repeat the Function Test. Similar cases have passed the test after switching to `1.30.29.24`.
+- Status: reusable version-dependent known fix, with prior `1.30.31.10` interpretation corrected/superseded for this scenario.
+- Guardrail: keep the scope narrow to this Function Test mismatch. If the cutting motor also fails in Auto Run/manual mowing, or other motor/driver faults are present, do not treat it as the same software-only case.
