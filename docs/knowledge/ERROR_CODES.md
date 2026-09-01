@@ -29,6 +29,15 @@ Only promote evidence-backed knowledge. Error codes are not one-code-one-solutio
 - Identify actual offline module/link first, then trace communication/data/power chain.
 - Do not default to mainboard replacement.
 
+## 1202 — cutting disc blocked
+- Message: `Cutting disc blocked` / German UI `Schneidscheibe blockiert`.
+- First confirm there is no actual mechanical obstruction, tangled material, or debris under the cutting discs.
+- MammoSuite cannot test the left and right cutting-disc motors separately. Do not instruct an agent to isolate left/right cutting motors independently in MammoSuite.
+- If both cutting discs are clean/free and error `1202` remains, current PIE-confirmed service path is to replace the **Upper Shell Adapter Cable**, the connection cable between the upper shell and the mainboard.
+- If error `1202` still remains after replacing the Upper Shell Adapter Cable, replace the **mainboard**.
+- A recently replaced driverboard is repair history and does not by itself change this diagnostic path.
+- Guardrail: if a real physical blockage is present, clear the mechanical obstruction before using the cable/mainboard path.
+
 ## 458 — right cutting-disc motor overcurrent
 - Meaning confirmed by PIE: right cutting-disc motor overcurrent.
 - If it appears together with several wheel-drive hardware-overcurrent codes and battery MOS overtemperature, do not diagnose the cutting motor in isolation first.
