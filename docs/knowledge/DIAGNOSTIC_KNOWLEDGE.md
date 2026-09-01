@@ -129,6 +129,13 @@ A symptom disappearing and a clean/latest log are positive evidence, but they do
 - `latest log has no error` should be treated as supporting evidence, not a substitute for the post-repair test reports.
 - If all post-repair checks are normal and the original fault does not recur, the mower can be considered ready for return.
 
+### YUKA mini 2 Vision map deviation / field remap
+- `YUKA mini 2 Vision` supports **Auto Map Run**; inability to execute the test under a particular workshop environment does not mean the model lacks the capability.
+- For a map-deviation case, if all applicable workshop checks pass and no positioning hardware abnormality is found, the mower may be returned to the customer for field validation.
+- Ask the customer to create/redraw the map in **sunny, well-lit conditions** so Vision has adequate environmental visibility during mapping.
+- If map deviation happens again, ask the customer to upload a fresh log immediately and contact PIE again for positioning/map-deviation analysis.
+- Do not repeatedly reset/remap before capturing the incident log if the fault has already recurred after previous remaps; preserve the failure state long enough to collect useful evidence.
+
 ### Water-ingress / warranty evidence collection
 Do not jump directly from `water marks`, `water-damaged packaging`, `machine will not power on`, or general signs of use to a warranty decision.
 - First collect enough technical evidence to separate: **water-ingress fact**, **possible ingress point**, **repair/disassembly history**, **customer cleaning method**, and only then the later **warranty/service-policy decision**.
