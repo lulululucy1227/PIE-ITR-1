@@ -12,7 +12,7 @@
 - `YUKA mini 2 Vision` supports **Auto Map Run**. Do not infer that the model lacks Auto Map Run capability merely because a workshop attempt is blocked by `not on the lawn`, positioning-mode prompts, indoor conditions, or other test-environment constraints. Separate **model capability** from **current test executability**.
 - When a repair case shows inconsistent test behavior, treat software version as an active variable and compare against known version-specific behavior before replacing hardware.
 - For `LUBA 2 5000X`, a known version-dependent pattern is: cutting/blade motor fails only in **Functional Test** while working normally in **Auto Run** and/or manual mowing. Version `1.30.31.10` has shown inconsistent behavior for this specific test path and should not be treated as a stable fix.
-- Current PIE-confirmed handling for that exact pattern on `1.30.31.10`: select/reflash `1.30.29.19`, then repeat the Functional Test. Similar cases have passed after switching to `1.30.29.19`.
+- Current PIE-confirmed handling for that exact pattern on `1.30.31.10`: select software version `1.30.29.19` and update the mower, then repeat the Functional Test. Similar cases have passed after switching to `1.30.29.19`.
 - Guardrail: if the cutting motor also fails in real operation, or other motor/driver errors remain active, do not classify the issue as this Function Test software/version anomaly.
 
 ## Mammotion Kit
