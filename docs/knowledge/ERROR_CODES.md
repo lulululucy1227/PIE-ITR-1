@@ -29,6 +29,14 @@ Only promote evidence-backed knowledge. Error codes are not one-code-one-solutio
 - Identify actual offline module/link first, then trace communication/data/power chain.
 - Do not default to mainboard replacement.
 
+## 1008 — robot locked / STOP button triggered
+- Meaning confirmed by PIE: the robot is in a locked state; this is commonly triggered when the top STOP button is activated.
+- A customer statement that there was no visible obstacle directly in front of the mower does not rule out accidental contact with the top STOP button from the surrounding environment.
+- If no external trigger can be identified, intermittent keypad-board / STOP-button activation caused by vibration or uneven ground remains a possible hypothesis, not a confirmed diagnosis.
+- If the issue cannot be reproduced at the workshop, do not replace the keypad board from suspicion alone. Complete the three MammoSuite verification tests: **Functional Test**, **Communication Check**, and **Auto Map Run**; retain/send all three reports plus the **Connect Checking** screenshot.
+- If all verification results are normal and the issue does not recur, mark the case internally as **NFF** and return the mower to the customer. The internal NFF classification does not need to be stated in the partner-facing reply.
+- If error `1008` recurs at the customer site, request a video showing the mower and surrounding environment and a fresh log uploaded immediately after the event.
+
 ## 1202 — cutting disc blocked
 - Message: `Cutting disc blocked` / German UI `Schneidscheibe blockiert`.
 - First confirm there is no actual mechanical obstruction, tangled material, or debris under the cutting discs.
