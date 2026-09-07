@@ -4,7 +4,8 @@ Status: Active
 Last updated: 2026-09-07 (Europe/Berlin)
 Owner: ITR主管
 Canonical repository: `lulululucy1227/PIE-ITR-1`
-Canonical local workspace: `C:\Users\Reggie\Desktop\PIE-ITR-1`
+Canonical MAIN local workspace: `C:\Users\Reggie\Desktop\PIE-ITR-1`
+Planned Error Code isolated workspace: `C:\Users\Reggie\Desktop\PIE-ITR-ErrorCode`
 
 ## 0. Authority and recovery order
 
@@ -12,14 +13,14 @@ For a new GPT/Codex window, recover project state in this order:
 
 1. `MASTER_PLAN.md` — current project direction, phase, gates and next priorities.
 2. `AGENT_REGISTRY.md` — authoritative agent topology and responsibilities.
-3. Issue #4 — newest active supervisor task / direction update.
-4. Issue #3 — newest execution report / acceptance state.
+3. For MAIN: Issue #4 newest active task/direction, then Issue #3 newest execution report.
+4. For Error Code Specialist: Issue #5 newest active task/direction, then Issue #6 newest execution report.
 5. `GPT_HANDOFF.md` and `governance/` — durable business, security and execution rules.
 6. Relevant `docs/` only as needed for the task.
 
-If chat memory conflicts with these files, do not invent a merged state. Prefer the newer GitHub control-plane state and verify against the latest Issue #3/#4 comments.
+If chat memory conflicts with these files, do not invent a merged state. Prefer the newer GitHub control-plane state and verify against the task/report channel belonging to the active agent.
 
-Important: the active local implementation can be ahead of remote `main`. The local worktree is intentionally dirty. Do not overwrite newer local code merely because remote GitHub docs are newer.
+Important: the active MAIN local implementation can be ahead of remote `main`. The MAIN worktree is intentionally dirty. Do not overwrite or normalize newer local code merely because remote GitHub docs are newer.
 
 ## 1. Mission
 
@@ -46,6 +47,7 @@ The long-term business outcome is not simply “more tickets processed”. Known
 - `new replacement != known-good`.
 - Vision is evidence, not diagnosis.
 - Error Code is scoped evidence, not a universal fixed answer mapping.
+- Stable real-case patterns may nevertheless justify a simple agent-facing `symptom -> most likely part -> repair -> verification` path when evidence is strong and scope is clear.
 - NFF remains AI candidate -> PIE final confirmation.
 - ITR Todo remains preview -> human confirmation.
 - No automatic production send to Nextop / WhatsApp / Lark / Email.
@@ -115,12 +117,16 @@ The intended gate is:
 
 Synthetic/gate coverage exists; a real production Commit is not a prerequisite for Daily-use usability and must still require explicit final human confirmation. Unknown/blank Workbench values cannot clear existing Feishu values.
 
-## 5. Current active phase
+## 5. Current active phase — two isolated parallel tracks
 
-### ACTIVE MASTER TASK
-`MT-20260907-MAIN-DAILY-USE-RELEASE-006`
+### Track A — MAIN / Workbench
+
+ACTIVE MASTER TASK: `MT-20260907-MAIN-DAILY-USE-RELEASE-006`
 
 Owner: MAIN Agent
+Workspace: `C:\Users\Reggie\Desktop\PIE-ITR-1`
+Task channel: Issue #4
+Report channel: Issue #3
 Current target: `DAILY_USE_MASTER_GREEN`
 
 Current supervisor direction includes:
@@ -136,12 +142,26 @@ Current supervisor direction includes:
 Current execution model for this task: GPT-5.6 Terra / High.
 Current application analyzer model: Terra.
 
+### Track B — Error Code / Agent Repair Assistant
+
+ACTIVE PARALLEL STREAM.
+
+Owner: Error Code Specialist
+Planned isolated workspace: `C:\Users\Reggie\Desktop\PIE-ITR-ErrorCode`
+Task channel: Issue #5
+Report channel: Issue #6
+Initial master task: `EC-MT-20260907-PILOT-001`
+Initial target: `ERROR_CODE_PILOT_GREEN`
+Execution model for the initial one-time architecture/data/product build: GPT-6 / High, because this phase combines heterogeneous source analysis, repair-outcome mining, schema design, product simplification, implementation and verification. Later routine maintenance should use the lowest sufficient model.
+
+The two tracks are intentionally independent. Track B must not write to the MAIN dirty workspace or manipulate the formal Workbench runtime, port 8787, MAIN analyzer config, local case state, Nextop session or Feishu session.
+
 ### Packaging gate
-Packaging is explicitly paused.
+Packaging of the colleague Workbench is explicitly paused.
 
 The package produced by `MT-20260907-MAIN-COLLEAGUE-PACKAGE-005` proved portability/startup but is superseded as a release candidate because real daily-use defects were found afterward. Do not distribute it as the final colleague package.
 
-Only after `DAILY_USE_MASTER_GREEN` is accepted by the supervisor should colleague packaging/release testing reopen.
+Only after `DAILY_USE_MASTER_GREEN` is accepted by the supervisor should colleague packaging/release testing reopen. Error Code Pilot work does not depend on that packaging gate because it runs in an isolated stream.
 
 ## 6. Standard repair / NFF validation rules
 
@@ -156,6 +176,8 @@ Default final validation loop:
 PDF handling is failure-oriented: relevant non-ultrasonic FAIL remains meaningful evidence of an unresolved area. Ultrasonic test failure is not a repair-acceptance blocker by itself.
 
 Burn-in Test means Mammotion Kit aging/stability testing. It is additional stability validation and does not replace the standard validation loop.
+
+For agent self-service, the displayed verification should be the minimum clear set needed for that repair path, while the canonical knowledge retains the full validated requirement and escalation evidence where applicable.
 
 ## 7. Logs
 
@@ -175,27 +197,68 @@ For real at-time tickets, preserve original Prediction; later evidence produces 
 Comparable cohorts must consider model/version, fault domain, error code, actor/location, decisive evidence, previous repair action and result. Correlation is not root cause.
 
 ### Prevent
-Stable, reviewed patterns may become agent-facing Troubleshooting / FAQ / SOP so agents solve repeated low-risk issues themselves. The desired outcome is fewer repeated known tickets without increasing reopen/rework.
+Stable, reviewed patterns may become agent-facing Troubleshooting / FAQ / repair guidance so agents solve repeated low-risk issues themselves. The desired outcome is fewer repeated known tickets without increasing reopen/rework.
 
-## 9. Error Code专项 — planned, not active
+## 9. Error Code专项 — ACTIVE PARALLEL STREAM
 
-Error Code work is a dedicated future stream, not a shortcut from code to fixed repair answer.
+### Product objective
 
-Planned output orientation:
+The external product is an **Agent Repair Assistant**, with Error Code Repair Guide as the first module. It is intentionally simpler than the PIE Workbench.
 
-`Error Code -> observed fault phenomenon -> scoped fault domain/component candidates -> decisive checks -> repair/handling method -> post-repair validation`
+Primary agent-facing flow:
 
-Requirements:
-- exact model/version/tool scope where applicable;
-- distinguish warning/informational codes from repair-driving evidence;
-- evidence strength and currentness;
-- alternative causes and replacement-failed cases;
-- no universal `code -> replace part` behavior;
-- final agent-facing guidance should be self-service oriented only where safe and stable.
+`Error Code / Error Message -> observed fault phenomenon -> most likely faulty part -> recommended repair -> verification -> fixed / still not fixed`
 
-Do not start this stream in the active shared workspace while MAIN is still executing `MT-20260907-MAIN-DAILY-USE-RELEASE-006` unless the supervisor explicitly isolates ownership/worktree.
+Rules:
+- the agent-facing page must be simple, direct, readable and repair-oriented;
+- the normal path should reach a repair answer in at most a small number of clicks;
+- do not expose internal evidence hierarchy, root-cause tree, diagnostic confidence, R&D routing or engineering notes unless an agent genuinely needs a specific instruction;
+- if one code has multiple common real-world manifestations, use a simple symptom choice to separate them;
+- add an extra decisive check only when real evidence shows symptom selection alone cannot safely distinguish the repair path;
+- if a strong, scoped real-case pattern shows that a specific symptom is usually repaired by replacing a specific serviceable part, the page should state that part and action directly;
+- unstable or unsupported relationships must not be converted into confident replacement advice;
+- warning/informational codes that do not require repair should say so plainly;
+- replacement-failed cases must not mechanically repeat the same replacement forever; route to a validated alternative or PIE.
 
-Preferred existing specialist candidate is documented in `AGENT_REGISTRY.md`.
+### Knowledge architecture
+
+Raw Error Code sources remain internal reference data and are not the portal database.
+
+Canonical pilot knowledge orientation:
+
+`ERROR -> SYMPTOM -> PART -> REPAIR -> VERIFICATION -> IF_NOT_FIXED`
+
+Internal metadata may retain:
+- model/product scope;
+- firmware/tool scope when material;
+- source/evidence/currentness;
+- case cohort counts where actually available;
+- knowledge status and agent visibility;
+- alternative causes;
+- replacement-failed behavior;
+- last review / supersession information.
+
+Do not invent success rates or universal `code -> part` mappings when source evidence is incomplete.
+
+### Evidence priority
+
+The Error Code master/reference explains what the software detected. Real ITR / Daily Case outcomes explain what actually repaired machines in practice. Agent-facing repair recommendations should prefer stable, scoped, reviewed real repair outcomes over theoretical completeness.
+
+### Initial implementation posture
+
+Pilot implementation should remain lightweight:
+- static/read-only knowledge where practical;
+- lightweight web SPA;
+- exact code search + exact message search + safe fuzzy candidate results;
+- no LLM runtime required for the first portal;
+- no graph database, large expert system, duplicated Workbench, CMS or production integration unless later evidence requires it;
+- no public deployment during the initial Pilot task.
+
+### Isolation
+
+The specialist may inspect MAIN-local parsed Error Code sources read-only and copy only the minimum needed into its isolated workspace. It may not modify the MAIN worktree.
+
+ITR / case sources are read-only evidence inputs for this stream. Do not copy full ticket histories, PII, device identifiers or raw chats into GitHub or published knowledge.
 
 ## 10. Feishu / production-write posture
 
@@ -203,24 +266,46 @@ Preferred existing specialist candidate is documented in `AGENT_REGISTRY.md`.
 - No bulk write/backfill/delete/schema/taxonomy rewrite is implied by a single-case write authorization.
 - NFF and Todo keep human final gates.
 - The ITR main table remains protected from broad changes unless specifically justified/approved.
+- Error Code Pilot has no production-write authorization to Feishu / ITR / Nextop.
 
 ## 11. Execution discipline
 
-- One MAIN owner for the active shared implementation line.
-- Old specialist agents do not concurrently modify the same dirty workspace unless the supervisor explicitly reactivates them with isolated ownership.
+- MAIN remains the sole owner of the active shared Workbench implementation line.
+- Error Code Specialist owns only the isolated Error Code stream/worktree.
+- MAIN reads Issue #4 and reports to Issue #3.
+- Error Code Specialist reads Issue #5 and reports to Issue #6.
+- Neither agent should consume the other stream’s newest READY task merely because it is newer globally.
+- Historical specialists do not concurrently modify the same dirty workspace unless explicitly assigned an isolated scope.
 - `BLOCKED SUBTASK != BLOCKED PROJECT`.
-- Ordinary bugs/test failures/timeouts are handled autonomously inside the authorized scope.
-- Every terminal MAIN state should be reported to Issue #3; supervisor tasks/direction go to Issue #4.
+- Ordinary bugs/test failures/timeouts are handled autonomously inside authorized scope.
 - Agent identity is not a model identity. Select the lowest sufficient model/effort per task and state `EXECUTION_MODEL / EFFORT / REASON`.
 
-## 12. Next gate
+## 12. Current gates
 
-Do not reopen packaging or start Error Code implementation until one of the following happens:
+### MAIN gate
 
-1. MAIN posts `DAILY_USE_MASTER_GREEN` to Issue #3 and supervisor accepts it; or
-2. supervisor explicitly changes priority/ownership.
+`DAILY_USE_MASTER_GREEN`
 
-At `DAILY_USE_MASTER_GREEN`, next decisions are:
-- colleague package/pilot release;
-- Error Code专项 ownership and isolation;
-- continue real-case operating evidence accumulation for Solve -> Learn -> Prevent.
+After supervisor acceptance, decide:
+- colleague package / pilot release;
+- subsequent Workbench improvements;
+- integration opportunities with stable Error Code knowledge.
+
+### Error Code gate
+
+`ERROR_CODE_PILOT_GREEN`
+
+Requires at minimum:
+- isolated worktree and no MAIN workspace mutation;
+- audited Raw Error Code sources separated from publishable knowledge;
+- high-value initial Error Code set selected from actual support value/evidence rather than raw-master coverage;
+- real symptom -> part -> repair -> verification cards where evidence is adequate;
+- unsupported/ambiguous cases withheld or routed to PIE rather than guessed;
+- warning/informational and replacement-failed behaviors handled;
+- exact/message/fuzzy search behavior verified;
+- simple mobile + desktop web Pilot verified;
+- no raw case/PII leakage;
+- no production write or public deployment;
+- clear future adapter so Workbench can later consume the same canonical Error Code knowledge without requiring runtime coupling during Pilot.
+
+Only after `ERROR_CODE_PILOT_GREEN` should the supervisor decide production hosting/auth, external rollout, broader code coverage, and Workbench integration.
