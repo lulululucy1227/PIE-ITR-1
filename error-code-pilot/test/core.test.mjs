@@ -15,7 +15,7 @@ const board = {...repair,id:'board',directSelectable:false,part:'Test board',act
   ifNotFixed:{kind:'escalate',message:'Contact PIE with the result.'}};
 const card = {
   id:'fixture-a',code:'-552',message:'Test motor voltage too low',aliases:['Motor supply low'],
-  classification:'SELF_SERVICE_SYMPTOM_SPLIT',lifecycle:'CURRENT',publication:'pilot',
+  classification:'SELF_SERVICE_SYMPTOM_SPLIT',lifecycle:'CURRENT',publication:'approved',
   agentVisible:true,scope:{status:'confirmed',models:['Test Model A'],firmware:['1.2.3']},
   evidence:{kind:'promoted_service_rule',refs:['test-fixture#only'],outcome:'recommended',cohortCount:null},
   paths:[repair,board],lastReviewed:'2026-09-07',supersededBy:null
@@ -137,7 +137,8 @@ test('informational normal-function branch gives no repair and abnormal branch e
   assert.equal(resolveCard(c,{pathId:'abnormal'}).kind,'escalate');
 });
 test('Workbench default export withholds pilot candidates and keeps approval distinct from applicability',()=>{
-  assert.deepEqual(exportWorkbench(catalog,ctx).entries,[]);
+  const pilot=copy(catalog);pilot.cards[0].publication='pilot';
+  assert.deepEqual(exportWorkbench(pilot,ctx).entries,[]);
   const approved=copy(catalog);approved.cards[0].publication='approved';
   assert.equal(exportWorkbench(approved,ctx).entries[0].applicable,true);
   assert.equal(exportWorkbench(approved,{model:'wrong'}).entries[0].applicable,false);

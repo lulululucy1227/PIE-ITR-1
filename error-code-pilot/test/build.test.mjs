@@ -10,7 +10,7 @@ test('build emits only agent assets and strips raw provenance and unresolved rep
   const result=await build();
   assert.deepEqual(fs.readdirSync(result.outDir).sort(),['app.mjs','engine.mjs','index.html','knowledge.json','styles.css']);
   const data=fs.readFileSync(path.join(result.outDir,'knowledge.json'),'utf8');
-  for(const forbidden of ['sourceRefs','evidence','local-error-reference','cohortCount','2.3.30.26','C:/Users/','customer','cookie','INTERNAL-CANARY']) assert.equal(data.includes(forbidden),false,forbidden);
+  for(const forbidden of ['sourceRefs','"evidence":','"review":','"label_cn":','"evidence_state":','local-error-reference','cohortCount','2.3.30.26','C:/Users/','customer','cookie','INTERNAL-CANARY']) assert.equal(data.includes(forbidden),false,forbidden);
 });
 test('invalid knowledge fails the build before changing last valid output',async()=>{
   const original=fs.readFileSync(path.join(root,'dist/knowledge.json'),'utf8');

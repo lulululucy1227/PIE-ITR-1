@@ -1,6 +1,6 @@
 {
-  "schemaVersion": 1,
-  "knowledgeVersion": "2026-09-07-pilot.1",
+  "schemaVersion": 2,
+  "knowledgeVersion": "2026-09-08-desktop.1",
   "cards": [
     {
       "id": "ec-1202",
@@ -11,7 +11,7 @@
       ],
       "classification": "NOT_YET_STABLE",
       "lifecycle": "CURRENT",
-      "publication": "pilot",
+      "publication": "approved",
       "agentVisible": true,
       "scope": {
         "status": "unknown",
@@ -29,7 +29,7 @@
         "cohortCount": null,
         "notes": "PIE-confirmed service sequence; model scope absent. No documented cohort or completed outcome. Parts availability does not prove applicability."
       },
-      "lastReviewed": "2026-09-07",
+      "lastReviewed": "2026-09-08",
       "supersededBy": null,
       "paths": [
         {
@@ -58,7 +58,26 @@
           },
           "ifNotFixed": {
             "kind": "escalate",
-            "message": "If the blockage cannot be cleared, stop and contact PIE. A cable replacement requires both discs to be free and the repair scope to be confirmed."
+            "message": "If the blockage cannot be cleared or the error remains, stop and contact PIE. Do not begin a replacement from this guide."
+          },
+          "evidence_state": "SOURCE_RECOMMENDATION",
+          "publication": "approved",
+          "agent_visibility": "P1_DESKTOP_GUIDED",
+          "conflict": false,
+          "supersededBy": null,
+          "review": {
+            "scopeConfirmed": false,
+            "repeatedUse": false,
+            "activeMaintenance": false,
+            "noContradiction": true,
+            "rationale": "Retain the existing approved safety/diagnostic guardrail; this decision does not promote an unscoped hardware replacement.",
+            "history": {
+              "earliestDocumentedUse": null,
+              "lastMaterialChange": null,
+              "reviewedAt": "2026-09-08",
+              "authority": "promoted_service_rule",
+              "independentOutcomeCount": null
+            }
           }
         },
         {
@@ -88,6 +107,25 @@
             "kind": "path",
             "pathId": "mainboard",
             "message": "If the cable replacement failed, use the confirmed mainboard step."
+          },
+          "evidence_state": "CONFLICTING_EVIDENCE",
+          "publication": "withheld",
+          "agent_visibility": "PIE_ONLY",
+          "conflict": true,
+          "supersededBy": null,
+          "review": {
+            "scopeConfirmed": false,
+            "repeatedUse": false,
+            "activeMaintenance": false,
+            "noContradiction": false,
+            "rationale": "Frozen: existing cable/mainboard and Feishu-derived motor/driverboard sequences conflict; model scope unresolved.",
+            "history": {
+              "earliestDocumentedUse": null,
+              "lastMaterialChange": null,
+              "reviewedAt": "2026-09-08",
+              "authority": "promoted_service_rule",
+              "independentOutcomeCount": null
+            }
           }
         },
         {
@@ -117,7 +155,26 @@
             "kind": "escalate",
             "message": "Contact PIE with the exact model, symptom, tests and previous repair results. Do not repeat the same replacement."
           },
-          "directSelectable": false
+          "directSelectable": false,
+          "evidence_state": "CONFLICTING_EVIDENCE",
+          "publication": "withheld",
+          "agent_visibility": "PIE_ONLY",
+          "conflict": true,
+          "supersededBy": null,
+          "review": {
+            "scopeConfirmed": false,
+            "repeatedUse": false,
+            "activeMaintenance": false,
+            "noContradiction": false,
+            "rationale": "Frozen: existing cable/mainboard and Feishu-derived motor/driverboard sequences conflict; model scope unresolved.",
+            "history": {
+              "earliestDocumentedUse": null,
+              "lastMaterialChange": null,
+              "reviewedAt": "2026-09-08",
+              "authority": "promoted_service_rule",
+              "independentOutcomeCount": null
+            }
+          }
         }
       ]
     },
@@ -130,7 +187,7 @@
       ],
       "classification": "SELF_SERVICE_SYMPTOM_SPLIT",
       "lifecycle": "CURRENT",
-      "publication": "pilot",
+      "publication": "approved",
       "agentVisible": true,
       "scope": {
         "status": "unknown",
@@ -145,7 +202,7 @@
         "outcome": "recommended",
         "cohortCount": null
       },
-      "lastReviewed": "2026-09-07",
+      "lastReviewed": "2026-09-08",
       "supersededBy": null,
       "paths": [
         {
@@ -175,6 +232,25 @@
           "ifNotFixed": {
             "kind": "escalate",
             "message": "Contact PIE with the exact model, symptom, tests and previous repair results. Do not repeat the same replacement."
+          },
+          "evidence_state": "SOURCE_RECOMMENDATION",
+          "publication": "approved",
+          "agent_visibility": "P1_DESKTOP_GUIDED",
+          "conflict": false,
+          "supersededBy": null,
+          "review": {
+            "scopeConfirmed": false,
+            "repeatedUse": false,
+            "activeMaintenance": false,
+            "noContradiction": true,
+            "rationale": "Retain the existing approved safety/diagnostic guardrail; this decision does not promote an unscoped hardware replacement.",
+            "history": {
+              "earliestDocumentedUse": null,
+              "lastMaterialChange": null,
+              "reviewedAt": "2026-09-08",
+              "authority": "promoted_service_rule",
+              "independentOutcomeCount": null
+            }
           }
         },
         {
@@ -203,6 +279,25 @@
           "ifNotFixed": {
             "kind": "escalate",
             "message": "Contact PIE with the exact model, symptom, tests and previous repair results. Do not repeat the same replacement."
+          },
+          "evidence_state": "SOURCE_RECOMMENDATION",
+          "publication": "approved",
+          "agent_visibility": "P1_DESKTOP_GUIDED",
+          "conflict": false,
+          "supersededBy": null,
+          "review": {
+            "scopeConfirmed": false,
+            "repeatedUse": false,
+            "activeMaintenance": false,
+            "noContradiction": true,
+            "rationale": "Retain the existing approved safety/diagnostic guardrail; this decision does not promote an unscoped hardware replacement.",
+            "history": {
+              "earliestDocumentedUse": null,
+              "lastMaterialChange": null,
+              "reviewedAt": "2026-09-08",
+              "authority": "promoted_service_rule",
+              "independentOutcomeCount": null
+            }
           }
         },
         {
@@ -232,6 +327,25 @@
           "ifNotFixed": {
             "kind": "escalate",
             "message": "Contact PIE with the exact model, symptom, tests and previous repair results. Do not repeat the same replacement."
+          },
+          "evidence_state": "SOURCE_RECOMMENDATION",
+          "publication": "approved",
+          "agent_visibility": "PIE_ONLY",
+          "conflict": false,
+          "supersededBy": null,
+          "review": {
+            "scopeConfirmed": false,
+            "repeatedUse": false,
+            "activeMaintenance": false,
+            "noContradiction": true,
+            "rationale": "Retain the existing approved safety/diagnostic guardrail; this decision does not promote an unscoped hardware replacement.",
+            "history": {
+              "earliestDocumentedUse": null,
+              "lastMaterialChange": null,
+              "reviewedAt": "2026-09-08",
+              "authority": "promoted_service_rule",
+              "independentOutcomeCount": null
+            }
           }
         }
       ]
@@ -243,7 +357,7 @@
       "aliases": [],
       "classification": "SELF_SERVICE_SYMPTOM_SPLIT",
       "lifecycle": "CURRENT",
-      "publication": "pilot",
+      "publication": "approved",
       "agentVisible": true,
       "scope": {
         "status": "not_required",
@@ -259,7 +373,7 @@
         "cohortCount": null,
         "notes": "Source explicitly says no handling required, record only. Success does not prove whole-machine health. Pilot-only adaptation."
       },
-      "lastReviewed": "2026-09-07",
+      "lastReviewed": "2026-09-08",
       "supersededBy": null,
       "paths": [
         {
@@ -281,6 +395,25 @@
           "ifNotFixed": {
             "kind": "escalate",
             "message": "Contact PIE with the exact model, symptom, tests and previous repair results. Do not repeat the same replacement."
+          },
+          "evidence_state": "SOURCE_RECOMMENDATION",
+          "publication": "approved",
+          "agent_visibility": "P1_DESKTOP_GUIDED",
+          "conflict": false,
+          "supersededBy": null,
+          "review": {
+            "scopeConfirmed": true,
+            "repeatedUse": false,
+            "activeMaintenance": false,
+            "noContradiction": true,
+            "rationale": "Retain the existing approved safety/diagnostic guardrail; this decision does not promote an unscoped hardware replacement.",
+            "history": {
+              "earliestDocumentedUse": null,
+              "lastMaterialChange": null,
+              "reviewedAt": "2026-09-08",
+              "authority": "raw_reference",
+              "independentOutcomeCount": null
+            }
           }
         },
         {
@@ -302,6 +435,25 @@
           "ifNotFixed": {
             "kind": "escalate",
             "message": "Contact PIE with the exact model, symptom, tests and previous repair results. Do not repeat the same replacement."
+          },
+          "evidence_state": "SOURCE_RECOMMENDATION",
+          "publication": "approved",
+          "agent_visibility": "PIE_ONLY",
+          "conflict": false,
+          "supersededBy": null,
+          "review": {
+            "scopeConfirmed": true,
+            "repeatedUse": false,
+            "activeMaintenance": false,
+            "noContradiction": true,
+            "rationale": "Retain the existing approved safety/diagnostic guardrail; this decision does not promote an unscoped hardware replacement.",
+            "history": {
+              "earliestDocumentedUse": null,
+              "lastMaterialChange": null,
+              "reviewedAt": "2026-09-08",
+              "authority": "raw_reference",
+              "independentOutcomeCount": null
+            }
           }
         }
       ]
@@ -313,7 +465,7 @@
       "aliases": [],
       "classification": "PIE_ONLY",
       "lifecycle": "HISTORICAL",
-      "publication": "pilot",
+      "publication": "approved",
       "agentVisible": true,
       "scope": {
         "status": "confirmed",
@@ -332,7 +484,7 @@
         "cohortCount": null,
         "notes": "Historical 2.3.27.23 -> 2.3.30.26 plus restart restored Auto Map Run. Current applicability unavailable. No firmware target in agent view."
       },
-      "lastReviewed": "2026-09-07",
+      "lastReviewed": "2026-09-08",
       "supersededBy": null,
       "paths": [
         {
@@ -361,6 +513,25 @@
           "ifNotFixed": {
             "kind": "escalate",
             "message": "Contact PIE with the exact model, symptom, tests and previous repair results. Do not repeat the same replacement."
+          },
+          "evidence_state": "VERIFIED_RESOLUTION",
+          "publication": "approved",
+          "agent_visibility": "PIE_ONLY",
+          "conflict": false,
+          "supersededBy": null,
+          "review": {
+            "scopeConfirmed": true,
+            "repeatedUse": false,
+            "activeMaintenance": false,
+            "noContradiction": true,
+            "rationale": "Retain the existing approved safety/diagnostic guardrail; this decision does not promote an unscoped hardware replacement.",
+            "history": {
+              "earliestDocumentedUse": null,
+              "lastMaterialChange": null,
+              "reviewedAt": "2026-09-08",
+              "authority": "promoted_case_outcome",
+              "independentOutcomeCount": null
+            }
           }
         }
       ]
@@ -372,7 +543,7 @@
       "aliases": [],
       "classification": "PIE_ONLY",
       "lifecycle": "CURRENT",
-      "publication": "pilot",
+      "publication": "approved",
       "agentVisible": true,
       "scope": {
         "status": "unknown",
@@ -388,7 +559,7 @@
         "outcome": "not_evaluable",
         "cohortCount": null
       },
-      "lastReviewed": "2026-09-07",
+      "lastReviewed": "2026-09-08",
       "supersededBy": null,
       "paths": [
         {
@@ -418,6 +589,25 @@
           "ifNotFixed": {
             "kind": "escalate",
             "message": "Contact PIE with the exact model, symptom, tests and previous repair results. Do not repeat the same replacement."
+          },
+          "evidence_state": "SOURCE_RECOMMENDATION",
+          "publication": "approved",
+          "agent_visibility": "PIE_ONLY",
+          "conflict": false,
+          "supersededBy": null,
+          "review": {
+            "scopeConfirmed": false,
+            "repeatedUse": false,
+            "activeMaintenance": false,
+            "noContradiction": true,
+            "rationale": "Retain the existing approved safety/diagnostic guardrail; this decision does not promote an unscoped hardware replacement.",
+            "history": {
+              "earliestDocumentedUse": null,
+              "lastMaterialChange": null,
+              "reviewedAt": "2026-09-08",
+              "authority": "promoted_diagnostic_pattern",
+              "independentOutcomeCount": null
+            }
           }
         }
       ]
@@ -431,7 +621,7 @@
       ],
       "classification": "PIE_ONLY",
       "lifecycle": "CURRENT",
-      "publication": "pilot",
+      "publication": "approved",
       "agentVisible": true,
       "scope": {
         "status": "unknown",
@@ -449,7 +639,7 @@
         "cohortCount": null,
         "notes": "Upgrade percentage is not proof of network or specific part failure. No unconditional replacement."
       },
-      "lastReviewed": "2026-09-07",
+      "lastReviewed": "2026-09-08",
       "supersededBy": null,
       "paths": [
         {
@@ -479,6 +669,25 @@
           "ifNotFixed": {
             "kind": "escalate",
             "message": "Contact PIE with the exact model, symptom, tests and previous repair results. Do not repeat the same replacement."
+          },
+          "evidence_state": "SOURCE_RECOMMENDATION",
+          "publication": "approved",
+          "agent_visibility": "PIE_ONLY",
+          "conflict": false,
+          "supersededBy": null,
+          "review": {
+            "scopeConfirmed": false,
+            "repeatedUse": false,
+            "activeMaintenance": false,
+            "noContradiction": true,
+            "rationale": "Retain the existing approved safety/diagnostic guardrail; this decision does not promote an unscoped hardware replacement.",
+            "history": {
+              "earliestDocumentedUse": null,
+              "lastMaterialChange": null,
+              "reviewedAt": "2026-09-08",
+              "authority": "promoted_diagnostic_pattern",
+              "independentOutcomeCount": null
+            }
           }
         }
       ]
@@ -490,7 +699,7 @@
       "aliases": [],
       "classification": "PIE_ONLY",
       "lifecycle": "CURRENT",
-      "publication": "pilot",
+      "publication": "approved",
       "agentVisible": true,
       "scope": {
         "status": "unknown",
@@ -508,7 +717,7 @@
         "cohortCount": null,
         "notes": "Historical wired-upgrade success after replacing vision module again. Model scope/cohort unavailable; replacement history does not mean known-good."
       },
-      "lastReviewed": "2026-09-07",
+      "lastReviewed": "2026-09-08",
       "supersededBy": null,
       "paths": [
         {
@@ -538,6 +747,25 @@
           "ifNotFixed": {
             "kind": "escalate",
             "message": "Contact PIE with the exact model, symptom, tests and previous repair results. Do not repeat the same replacement."
+          },
+          "evidence_state": "VERIFIED_RESOLUTION",
+          "publication": "approved",
+          "agent_visibility": "PIE_ONLY",
+          "conflict": false,
+          "supersededBy": null,
+          "review": {
+            "scopeConfirmed": false,
+            "repeatedUse": false,
+            "activeMaintenance": false,
+            "noContradiction": true,
+            "rationale": "Retain the existing approved safety/diagnostic guardrail; this decision does not promote an unscoped hardware replacement.",
+            "history": {
+              "earliestDocumentedUse": null,
+              "lastMaterialChange": null,
+              "reviewedAt": "2026-09-08",
+              "authority": "promoted_case_outcome",
+              "independentOutcomeCount": null
+            }
           }
         }
       ]
@@ -549,7 +777,7 @@
       "aliases": [],
       "classification": "PIE_ONLY",
       "lifecycle": "CURRENT",
-      "publication": "pilot",
+      "publication": "approved",
       "agentVisible": true,
       "scope": {
         "status": "unknown",
@@ -565,7 +793,7 @@
         "cohortCount": null,
         "notes": "Promoted description; absent from raw master. English description is not claimed as an exact device UI string."
       },
-      "lastReviewed": "2026-09-07",
+      "lastReviewed": "2026-09-08",
       "supersededBy": null,
       "paths": [
         {
@@ -595,9 +823,1289 @@
           "ifNotFixed": {
             "kind": "escalate",
             "message": "Contact PIE with the exact model, symptom, tests and previous repair results. Do not repeat the same replacement."
+          },
+          "evidence_state": "SOURCE_RECOMMENDATION",
+          "publication": "approved",
+          "agent_visibility": "PIE_ONLY",
+          "conflict": false,
+          "supersededBy": null,
+          "review": {
+            "scopeConfirmed": false,
+            "repeatedUse": false,
+            "activeMaintenance": false,
+            "noContradiction": true,
+            "rationale": "Retain the existing approved safety/diagnostic guardrail; this decision does not promote an unscoped hardware replacement.",
+            "history": {
+              "earliestDocumentedUse": null,
+              "lastMaterialChange": null,
+              "reviewedAt": "2026-09-08",
+              "authority": "promoted_diagnostic_pattern",
+              "independentOutcomeCount": null
+            }
           }
         }
       ]
+    },
+    {
+      "id": "ec-458",
+      "code": "458",
+      "message": "Right cutting-disc motor overcurrent",
+      "aliases": [],
+      "classification": "PIE_ONLY",
+      "lifecycle": "CURRENT",
+      "publication": "approved",
+      "agentVisible": true,
+      "scope": {
+        "status": "unknown",
+        "models": [],
+        "firmware": []
+      },
+      "evidence": {
+        "kind": "promoted_diagnostic_pattern",
+        "refs": [
+          "docs/knowledge/ERROR_CODES.md#458"
+        ],
+        "outcome": "not_evaluable",
+        "cohortCount": null
+      },
+      "lastReviewed": "2026-09-08",
+      "supersededBy": null,
+      "paths": [
+        {
+          "id": "pie",
+          "symptom": "This message is present",
+          "kind": "escalate",
+          "part": null,
+          "action": [
+            "Contact PIE with all errors from the same event, the exact model and any previous replacement results.",
+            "If several motor/drive overcurrent codes occur together with battery MOS high temperature, report the combined event. Do not assume several motors independently failed or repeat a board replacement without investigating the shared power path.",
+            "Include known water ingress, power-connection checks and previous tests. A visually intact harness does not exclude an electrical fault under load."
+          ],
+          "verification": {
+            "steps": [
+              "Run Functional Test, Communication Check and Auto Map Run.",
+              "Keep all three reports and a Connect Checking screenshot. If a test cannot run or a relevant fault remains, contact PIE."
+            ],
+            "canonical": [
+              "Functional Test",
+              "Communication Check",
+              "Auto Map Run",
+              "Retain all three reports",
+              "Connect Checking screenshot",
+              "Relevant non-ultrasonic FAIL requires PIE review; ultrasonic failure alone is not a blocker",
+              "Burn-in does not replace standard validation"
+            ]
+          },
+          "ifNotFixed": {
+            "kind": "escalate",
+            "message": "Contact PIE with the exact model, observed condition, checks and previous repair results. Do not repeat the same action."
+          },
+          "evidence_state": "SOURCE_RECOMMENDATION",
+          "publication": "approved",
+          "agent_visibility": "PIE_ONLY",
+          "conflict": false,
+          "supersededBy": null,
+          "review": {
+            "scopeConfirmed": false,
+            "repeatedUse": false,
+            "activeMaintenance": false,
+            "noContradiction": true,
+            "rationale": "Retained promoted diagnostic semantics; no hardware action published without model and decisive evidence.",
+            "history": {
+              "earliestDocumentedUse": null,
+              "lastMaterialChange": null,
+              "reviewedAt": "2026-09-08",
+              "authority": "promoted_diagnostic_pattern",
+              "independentOutcomeCount": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ec-586",
+      "code": "586",
+      "message": "Right-front wheel-hub drive hardware overcurrent",
+      "aliases": [],
+      "classification": "PIE_ONLY",
+      "lifecycle": "CURRENT",
+      "publication": "approved",
+      "agentVisible": true,
+      "scope": {
+        "status": "unknown",
+        "models": [],
+        "firmware": []
+      },
+      "evidence": {
+        "kind": "promoted_diagnostic_pattern",
+        "refs": [
+          "docs/knowledge/ERROR_CODES.md#586"
+        ],
+        "outcome": "not_evaluable",
+        "cohortCount": null
+      },
+      "lastReviewed": "2026-09-08",
+      "supersededBy": null,
+      "paths": [
+        {
+          "id": "pie",
+          "symptom": "This message is present",
+          "kind": "escalate",
+          "part": null,
+          "action": [
+            "Contact PIE with all errors from the same event, the exact model and any previous replacement results.",
+            "If several motor/drive overcurrent codes occur together with battery MOS high temperature, report the combined event. Do not assume several motors independently failed or repeat a board replacement without investigating the shared power path.",
+            "Include known water ingress, power-connection checks and previous tests. A visually intact harness does not exclude an electrical fault under load."
+          ],
+          "verification": {
+            "steps": [
+              "Run Functional Test, Communication Check and Auto Map Run.",
+              "Keep all three reports and a Connect Checking screenshot. If a test cannot run or a relevant fault remains, contact PIE."
+            ],
+            "canonical": [
+              "Functional Test",
+              "Communication Check",
+              "Auto Map Run",
+              "Retain all three reports",
+              "Connect Checking screenshot",
+              "Relevant non-ultrasonic FAIL requires PIE review; ultrasonic failure alone is not a blocker",
+              "Burn-in does not replace standard validation"
+            ]
+          },
+          "ifNotFixed": {
+            "kind": "escalate",
+            "message": "Contact PIE with the exact model, observed condition, checks and previous repair results. Do not repeat the same action."
+          },
+          "evidence_state": "SOURCE_RECOMMENDATION",
+          "publication": "approved",
+          "agent_visibility": "PIE_ONLY",
+          "conflict": false,
+          "supersededBy": null,
+          "review": {
+            "scopeConfirmed": false,
+            "repeatedUse": false,
+            "activeMaintenance": false,
+            "noContradiction": true,
+            "rationale": "Retained promoted diagnostic semantics; no hardware action published without model and decisive evidence.",
+            "history": {
+              "earliestDocumentedUse": null,
+              "lastMaterialChange": null,
+              "reviewedAt": "2026-09-08",
+              "authority": "promoted_diagnostic_pattern",
+              "independentOutcomeCount": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ec-362",
+      "code": "362",
+      "message": "Left wheel-hub drive overcurrent",
+      "aliases": [],
+      "classification": "PIE_ONLY",
+      "lifecycle": "CURRENT",
+      "publication": "approved",
+      "agentVisible": true,
+      "scope": {
+        "status": "unknown",
+        "models": [],
+        "firmware": []
+      },
+      "evidence": {
+        "kind": "promoted_diagnostic_pattern",
+        "refs": [
+          "docs/knowledge/ERROR_CODES.md#362"
+        ],
+        "outcome": "not_evaluable",
+        "cohortCount": null
+      },
+      "lastReviewed": "2026-09-08",
+      "supersededBy": null,
+      "paths": [
+        {
+          "id": "pie",
+          "symptom": "This message is present",
+          "kind": "escalate",
+          "part": null,
+          "action": [
+            "Contact PIE with all errors from the same event, the exact model and any previous replacement results.",
+            "If several motor/drive overcurrent codes occur together with battery MOS high temperature, report the combined event. Do not assume several motors independently failed or repeat a board replacement without investigating the shared power path.",
+            "Include known water ingress, power-connection checks and previous tests. A visually intact harness does not exclude an electrical fault under load."
+          ],
+          "verification": {
+            "steps": [
+              "Run Functional Test, Communication Check and Auto Map Run.",
+              "Keep all three reports and a Connect Checking screenshot. If a test cannot run or a relevant fault remains, contact PIE."
+            ],
+            "canonical": [
+              "Functional Test",
+              "Communication Check",
+              "Auto Map Run",
+              "Retain all three reports",
+              "Connect Checking screenshot",
+              "Relevant non-ultrasonic FAIL requires PIE review; ultrasonic failure alone is not a blocker",
+              "Burn-in does not replace standard validation"
+            ]
+          },
+          "ifNotFixed": {
+            "kind": "escalate",
+            "message": "Contact PIE with the exact model, observed condition, checks and previous repair results. Do not repeat the same action."
+          },
+          "evidence_state": "SOURCE_RECOMMENDATION",
+          "publication": "approved",
+          "agent_visibility": "PIE_ONLY",
+          "conflict": false,
+          "supersededBy": null,
+          "review": {
+            "scopeConfirmed": false,
+            "repeatedUse": false,
+            "activeMaintenance": false,
+            "noContradiction": true,
+            "rationale": "Retained promoted diagnostic semantics; no hardware action published without model and decisive evidence.",
+            "history": {
+              "earliestDocumentedUse": null,
+              "lastMaterialChange": null,
+              "reviewedAt": "2026-09-08",
+              "authority": "promoted_diagnostic_pattern",
+              "independentOutcomeCount": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ec-2714",
+      "code": "2714",
+      "message": "Battery MOS temperature high",
+      "aliases": [],
+      "classification": "PIE_ONLY",
+      "lifecycle": "CURRENT",
+      "publication": "approved",
+      "agentVisible": true,
+      "scope": {
+        "status": "unknown",
+        "models": [],
+        "firmware": []
+      },
+      "evidence": {
+        "kind": "promoted_diagnostic_pattern",
+        "refs": [
+          "docs/knowledge/ERROR_CODES.md#2714"
+        ],
+        "outcome": "not_evaluable",
+        "cohortCount": null
+      },
+      "lastReviewed": "2026-09-08",
+      "supersededBy": null,
+      "paths": [
+        {
+          "id": "pie",
+          "symptom": "This message is present",
+          "kind": "escalate",
+          "part": null,
+          "action": [
+            "Contact PIE with all errors from the same event, the exact model and any previous replacement results.",
+            "If several motor/drive overcurrent codes occur together with battery MOS high temperature, report the combined event. Do not assume several motors independently failed or repeat a board replacement without investigating the shared power path.",
+            "Include known water ingress, power-connection checks and previous tests. A visually intact harness does not exclude an electrical fault under load."
+          ],
+          "verification": {
+            "steps": [
+              "Run Functional Test, Communication Check and Auto Map Run.",
+              "Keep all three reports and a Connect Checking screenshot. If a test cannot run or a relevant fault remains, contact PIE."
+            ],
+            "canonical": [
+              "Functional Test",
+              "Communication Check",
+              "Auto Map Run",
+              "Retain all three reports",
+              "Connect Checking screenshot",
+              "Relevant non-ultrasonic FAIL requires PIE review; ultrasonic failure alone is not a blocker",
+              "Burn-in does not replace standard validation"
+            ]
+          },
+          "ifNotFixed": {
+            "kind": "escalate",
+            "message": "Contact PIE with the exact model, observed condition, checks and previous repair results. Do not repeat the same action."
+          },
+          "evidence_state": "SOURCE_RECOMMENDATION",
+          "publication": "approved",
+          "agent_visibility": "PIE_ONLY",
+          "conflict": false,
+          "supersededBy": null,
+          "review": {
+            "scopeConfirmed": false,
+            "repeatedUse": false,
+            "activeMaintenance": false,
+            "noContradiction": true,
+            "rationale": "Retained promoted diagnostic semantics; no hardware action published without model and decisive evidence.",
+            "history": {
+              "earliestDocumentedUse": null,
+              "lastMaterialChange": null,
+              "reviewedAt": "2026-09-08",
+              "authority": "promoted_diagnostic_pattern",
+              "independentOutcomeCount": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ec-554",
+      "code": "554",
+      "message": "Left-front wheel-hub drive hardware overcurrent",
+      "aliases": [],
+      "classification": "PIE_ONLY",
+      "lifecycle": "CURRENT",
+      "publication": "approved",
+      "agentVisible": true,
+      "scope": {
+        "status": "unknown",
+        "models": [],
+        "firmware": []
+      },
+      "evidence": {
+        "kind": "promoted_diagnostic_pattern",
+        "refs": [
+          "docs/knowledge/ERROR_CODES.md#554"
+        ],
+        "outcome": "not_evaluable",
+        "cohortCount": null
+      },
+      "lastReviewed": "2026-09-08",
+      "supersededBy": null,
+      "paths": [
+        {
+          "id": "pie",
+          "symptom": "This message is present",
+          "kind": "escalate",
+          "part": null,
+          "action": [
+            "Contact PIE with all errors from the same event, the exact model and any previous replacement results.",
+            "If several motor/drive overcurrent codes occur together with battery MOS high temperature, report the combined event. Do not assume several motors independently failed or repeat a board replacement without investigating the shared power path.",
+            "Include known water ingress, power-connection checks and previous tests. A visually intact harness does not exclude an electrical fault under load."
+          ],
+          "verification": {
+            "steps": [
+              "Run Functional Test, Communication Check and Auto Map Run.",
+              "Keep all three reports and a Connect Checking screenshot. If a test cannot run or a relevant fault remains, contact PIE."
+            ],
+            "canonical": [
+              "Functional Test",
+              "Communication Check",
+              "Auto Map Run",
+              "Retain all three reports",
+              "Connect Checking screenshot",
+              "Relevant non-ultrasonic FAIL requires PIE review; ultrasonic failure alone is not a blocker",
+              "Burn-in does not replace standard validation"
+            ]
+          },
+          "ifNotFixed": {
+            "kind": "escalate",
+            "message": "Contact PIE with the exact model, observed condition, checks and previous repair results. Do not repeat the same action."
+          },
+          "evidence_state": "SOURCE_RECOMMENDATION",
+          "publication": "approved",
+          "agent_visibility": "PIE_ONLY",
+          "conflict": false,
+          "supersededBy": null,
+          "review": {
+            "scopeConfirmed": false,
+            "repeatedUse": false,
+            "activeMaintenance": false,
+            "noContradiction": true,
+            "rationale": "Retained promoted diagnostic semantics; no hardware action published without model and decisive evidence.",
+            "history": {
+              "earliestDocumentedUse": null,
+              "lastMaterialChange": null,
+              "reviewedAt": "2026-09-08",
+              "authority": "promoted_diagnostic_pattern",
+              "independentOutcomeCount": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ec-394",
+      "code": "394",
+      "message": "Right wheel-hub drive overcurrent",
+      "aliases": [],
+      "classification": "PIE_ONLY",
+      "lifecycle": "CURRENT",
+      "publication": "approved",
+      "agentVisible": true,
+      "scope": {
+        "status": "unknown",
+        "models": [],
+        "firmware": []
+      },
+      "evidence": {
+        "kind": "promoted_diagnostic_pattern",
+        "refs": [
+          "docs/knowledge/ERROR_CODES.md#394"
+        ],
+        "outcome": "not_evaluable",
+        "cohortCount": null
+      },
+      "lastReviewed": "2026-09-08",
+      "supersededBy": null,
+      "paths": [
+        {
+          "id": "pie",
+          "symptom": "This message is present",
+          "kind": "escalate",
+          "part": null,
+          "action": [
+            "Contact PIE with all errors from the same event, the exact model and any previous replacement results.",
+            "If several motor/drive overcurrent codes occur together with battery MOS high temperature, report the combined event. Do not assume several motors independently failed or repeat a board replacement without investigating the shared power path.",
+            "Include known water ingress, power-connection checks and previous tests. A visually intact harness does not exclude an electrical fault under load."
+          ],
+          "verification": {
+            "steps": [
+              "Run Functional Test, Communication Check and Auto Map Run.",
+              "Keep all three reports and a Connect Checking screenshot. If a test cannot run or a relevant fault remains, contact PIE."
+            ],
+            "canonical": [
+              "Functional Test",
+              "Communication Check",
+              "Auto Map Run",
+              "Retain all three reports",
+              "Connect Checking screenshot",
+              "Relevant non-ultrasonic FAIL requires PIE review; ultrasonic failure alone is not a blocker",
+              "Burn-in does not replace standard validation"
+            ]
+          },
+          "ifNotFixed": {
+            "kind": "escalate",
+            "message": "Contact PIE with the exact model, observed condition, checks and previous repair results. Do not repeat the same action."
+          },
+          "evidence_state": "SOURCE_RECOMMENDATION",
+          "publication": "approved",
+          "agent_visibility": "PIE_ONLY",
+          "conflict": false,
+          "supersededBy": null,
+          "review": {
+            "scopeConfirmed": false,
+            "repeatedUse": false,
+            "activeMaintenance": false,
+            "noContradiction": true,
+            "rationale": "Retained promoted diagnostic semantics; no hardware action published without model and decisive evidence.",
+            "history": {
+              "earliestDocumentedUse": null,
+              "lastMaterialChange": null,
+              "reviewedAt": "2026-09-08",
+              "authority": "promoted_diagnostic_pattern",
+              "independentOutcomeCount": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ec--552",
+      "code": "-552",
+      "message": "Left front wheel hub motor voltage too low",
+      "aliases": [],
+      "classification": "PIE_ONLY",
+      "lifecycle": "CURRENT",
+      "publication": "approved",
+      "agentVisible": true,
+      "scope": {
+        "status": "unknown",
+        "models": [],
+        "firmware": []
+      },
+      "evidence": {
+        "kind": "promoted_diagnostic_pattern",
+        "refs": [
+          "docs/knowledge/ERROR_CODES.md#-552"
+        ],
+        "outcome": "not_evaluable",
+        "cohortCount": null
+      },
+      "lastReviewed": "2026-09-08",
+      "supersededBy": null,
+      "paths": [
+        {
+          "id": "pie",
+          "symptom": "This message is present",
+          "kind": "escalate",
+          "part": null,
+          "action": [
+            "Contact PIE with the exact model and all errors from the same event.",
+            "If multiple wheel undervoltage codes coincide with battery protection, report it as a possible shared-power event. Do not assume independent motor failures or repeat the driverboard replacement.",
+            "Include available battery, charging station/adapter, power-harness and communication checks for PIE to choose the scoped next step."
+          ],
+          "verification": {
+            "steps": [
+              "Run Functional Test, Communication Check and Auto Map Run.",
+              "Keep all three reports and a Connect Checking screenshot. If a test cannot run or a relevant fault remains, contact PIE."
+            ],
+            "canonical": [
+              "Functional Test",
+              "Communication Check",
+              "Auto Map Run",
+              "Retain all three reports",
+              "Connect Checking screenshot",
+              "Relevant non-ultrasonic FAIL requires PIE review; ultrasonic failure alone is not a blocker",
+              "Burn-in does not replace standard validation"
+            ]
+          },
+          "ifNotFixed": {
+            "kind": "escalate",
+            "message": "Contact PIE with the exact model, observed condition, checks and previous repair results. Do not repeat the same action."
+          },
+          "evidence_state": "SOURCE_RECOMMENDATION",
+          "publication": "approved",
+          "agent_visibility": "PIE_ONLY",
+          "conflict": false,
+          "supersededBy": null,
+          "review": {
+            "scopeConfirmed": false,
+            "repeatedUse": false,
+            "activeMaintenance": false,
+            "noContradiction": true,
+            "rationale": "Retained promoted diagnostic semantics; no hardware action published without model and decisive evidence.",
+            "history": {
+              "earliestDocumentedUse": null,
+              "lastMaterialChange": null,
+              "reviewedAt": "2026-09-08",
+              "authority": "promoted_diagnostic_pattern",
+              "independentOutcomeCount": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ec--392",
+      "code": "-392",
+      "message": "Right wheel hub motor voltage too low",
+      "aliases": [],
+      "classification": "PIE_ONLY",
+      "lifecycle": "CURRENT",
+      "publication": "approved",
+      "agentVisible": true,
+      "scope": {
+        "status": "unknown",
+        "models": [],
+        "firmware": []
+      },
+      "evidence": {
+        "kind": "promoted_diagnostic_pattern",
+        "refs": [
+          "docs/knowledge/ERROR_CODES.md#-392"
+        ],
+        "outcome": "not_evaluable",
+        "cohortCount": null
+      },
+      "lastReviewed": "2026-09-08",
+      "supersededBy": null,
+      "paths": [
+        {
+          "id": "pie",
+          "symptom": "This message is present",
+          "kind": "escalate",
+          "part": null,
+          "action": [
+            "Contact PIE with the exact model and all errors from the same event.",
+            "If multiple wheel undervoltage codes coincide with battery protection, report it as a possible shared-power event. Do not assume independent motor failures or repeat the driverboard replacement.",
+            "Include available battery, charging station/adapter, power-harness and communication checks for PIE to choose the scoped next step."
+          ],
+          "verification": {
+            "steps": [
+              "Run Functional Test, Communication Check and Auto Map Run.",
+              "Keep all three reports and a Connect Checking screenshot. If a test cannot run or a relevant fault remains, contact PIE."
+            ],
+            "canonical": [
+              "Functional Test",
+              "Communication Check",
+              "Auto Map Run",
+              "Retain all three reports",
+              "Connect Checking screenshot",
+              "Relevant non-ultrasonic FAIL requires PIE review; ultrasonic failure alone is not a blocker",
+              "Burn-in does not replace standard validation"
+            ]
+          },
+          "ifNotFixed": {
+            "kind": "escalate",
+            "message": "Contact PIE with the exact model, observed condition, checks and previous repair results. Do not repeat the same action."
+          },
+          "evidence_state": "SOURCE_RECOMMENDATION",
+          "publication": "approved",
+          "agent_visibility": "PIE_ONLY",
+          "conflict": false,
+          "supersededBy": null,
+          "review": {
+            "scopeConfirmed": false,
+            "repeatedUse": false,
+            "activeMaintenance": false,
+            "noContradiction": true,
+            "rationale": "Retained promoted diagnostic semantics; no hardware action published without model and decisive evidence.",
+            "history": {
+              "earliestDocumentedUse": null,
+              "lastMaterialChange": null,
+              "reviewedAt": "2026-09-08",
+              "authority": "promoted_diagnostic_pattern",
+              "independentOutcomeCount": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ec--584",
+      "code": "-584",
+      "message": "Right front wheel hub motor voltage too low",
+      "aliases": [],
+      "classification": "PIE_ONLY",
+      "lifecycle": "CURRENT",
+      "publication": "approved",
+      "agentVisible": true,
+      "scope": {
+        "status": "unknown",
+        "models": [],
+        "firmware": []
+      },
+      "evidence": {
+        "kind": "promoted_diagnostic_pattern",
+        "refs": [
+          "docs/knowledge/ERROR_CODES.md#-584"
+        ],
+        "outcome": "not_evaluable",
+        "cohortCount": null
+      },
+      "lastReviewed": "2026-09-08",
+      "supersededBy": null,
+      "paths": [
+        {
+          "id": "pie",
+          "symptom": "This message is present",
+          "kind": "escalate",
+          "part": null,
+          "action": [
+            "Contact PIE with the exact model and all errors from the same event.",
+            "If multiple wheel undervoltage codes coincide with battery protection, report it as a possible shared-power event. Do not assume independent motor failures or repeat the driverboard replacement.",
+            "Include available battery, charging station/adapter, power-harness and communication checks for PIE to choose the scoped next step."
+          ],
+          "verification": {
+            "steps": [
+              "Run Functional Test, Communication Check and Auto Map Run.",
+              "Keep all three reports and a Connect Checking screenshot. If a test cannot run or a relevant fault remains, contact PIE."
+            ],
+            "canonical": [
+              "Functional Test",
+              "Communication Check",
+              "Auto Map Run",
+              "Retain all three reports",
+              "Connect Checking screenshot",
+              "Relevant non-ultrasonic FAIL requires PIE review; ultrasonic failure alone is not a blocker",
+              "Burn-in does not replace standard validation"
+            ]
+          },
+          "ifNotFixed": {
+            "kind": "escalate",
+            "message": "Contact PIE with the exact model, observed condition, checks and previous repair results. Do not repeat the same action."
+          },
+          "evidence_state": "SOURCE_RECOMMENDATION",
+          "publication": "approved",
+          "agent_visibility": "PIE_ONLY",
+          "conflict": false,
+          "supersededBy": null,
+          "review": {
+            "scopeConfirmed": false,
+            "repeatedUse": false,
+            "activeMaintenance": false,
+            "noContradiction": true,
+            "rationale": "Retained promoted diagnostic semantics; no hardware action published without model and decisive evidence.",
+            "history": {
+              "earliestDocumentedUse": null,
+              "lastMaterialChange": null,
+              "reviewedAt": "2026-09-08",
+              "authority": "promoted_diagnostic_pattern",
+              "independentOutcomeCount": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ec--2720",
+      "code": "-2720",
+      "message": "Battery short circuit protection triggered",
+      "aliases": [],
+      "classification": "PIE_ONLY",
+      "lifecycle": "CURRENT",
+      "publication": "approved",
+      "agentVisible": true,
+      "scope": {
+        "status": "unknown",
+        "models": [],
+        "firmware": []
+      },
+      "evidence": {
+        "kind": "promoted_diagnostic_pattern",
+        "refs": [
+          "docs/knowledge/ERROR_CODES.md#-2720"
+        ],
+        "outcome": "not_evaluable",
+        "cohortCount": null
+      },
+      "lastReviewed": "2026-09-08",
+      "supersededBy": null,
+      "paths": [
+        {
+          "id": "pie",
+          "symptom": "This message is present",
+          "kind": "escalate",
+          "part": null,
+          "action": [
+            "Contact PIE with the exact model and all errors from the same event.",
+            "If multiple wheel undervoltage codes coincide with battery protection, report it as a possible shared-power event. Do not assume independent motor failures or repeat the driverboard replacement.",
+            "Include available battery, charging station/adapter, power-harness and communication checks for PIE to choose the scoped next step."
+          ],
+          "verification": {
+            "steps": [
+              "Run Functional Test, Communication Check and Auto Map Run.",
+              "Keep all three reports and a Connect Checking screenshot. If a test cannot run or a relevant fault remains, contact PIE."
+            ],
+            "canonical": [
+              "Functional Test",
+              "Communication Check",
+              "Auto Map Run",
+              "Retain all three reports",
+              "Connect Checking screenshot",
+              "Relevant non-ultrasonic FAIL requires PIE review; ultrasonic failure alone is not a blocker",
+              "Burn-in does not replace standard validation"
+            ]
+          },
+          "ifNotFixed": {
+            "kind": "escalate",
+            "message": "Contact PIE with the exact model, observed condition, checks and previous repair results. Do not repeat the same action."
+          },
+          "evidence_state": "SOURCE_RECOMMENDATION",
+          "publication": "approved",
+          "agent_visibility": "PIE_ONLY",
+          "conflict": false,
+          "supersededBy": null,
+          "review": {
+            "scopeConfirmed": false,
+            "repeatedUse": false,
+            "activeMaintenance": false,
+            "noContradiction": true,
+            "rationale": "Retained promoted diagnostic semantics; no hardware action published without model and decisive evidence.",
+            "history": {
+              "earliestDocumentedUse": null,
+              "lastMaterialChange": null,
+              "reviewedAt": "2026-09-08",
+              "authority": "promoted_diagnostic_pattern",
+              "independentOutcomeCount": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ec-minus2000303",
+      "code": "-2000303",
+      "message": "The internal timestamp of the lidar is abnormal",
+      "aliases": [],
+      "classification": "PIE_ONLY",
+      "lifecycle": "CURRENT",
+      "publication": "approved",
+      "agentVisible": true,
+      "scope": {
+        "status": "unknown",
+        "models": [],
+        "firmware": []
+      },
+      "evidence": {
+        "kind": "promoted_diagnostic_pattern",
+        "refs": [
+          "docs/knowledge/ERROR_CODES.md#-2000303"
+        ],
+        "outcome": "not_evaluable",
+        "cohortCount": null
+      },
+      "lastReviewed": "2026-09-08",
+      "supersededBy": null,
+      "paths": [
+        {
+          "id": "pie",
+          "symptom": "This message is present",
+          "kind": "escalate",
+          "part": null,
+          "action": [
+            "Contact PIE with the exact model, same-event errors and module connection status.",
+            "If this accompanies a clear shared-power event, it may be secondary. Do not identify LiDAR as the root cause from this message alone or replace hardware without separate evidence."
+          ],
+          "verification": {
+            "steps": [
+              "Run Functional Test, Communication Check and Auto Map Run.",
+              "Keep all three reports and a Connect Checking screenshot. If a test cannot run or a relevant fault remains, contact PIE."
+            ],
+            "canonical": [
+              "Functional Test",
+              "Communication Check",
+              "Auto Map Run",
+              "Retain all three reports",
+              "Connect Checking screenshot",
+              "Relevant non-ultrasonic FAIL requires PIE review; ultrasonic failure alone is not a blocker",
+              "Burn-in does not replace standard validation"
+            ]
+          },
+          "ifNotFixed": {
+            "kind": "escalate",
+            "message": "Contact PIE with the exact model, observed condition, checks and previous repair results. Do not repeat the same action."
+          },
+          "evidence_state": "SOURCE_RECOMMENDATION",
+          "publication": "approved",
+          "agent_visibility": "PIE_ONLY",
+          "conflict": false,
+          "supersededBy": null,
+          "review": {
+            "scopeConfirmed": false,
+            "repeatedUse": false,
+            "activeMaintenance": false,
+            "noContradiction": true,
+            "rationale": "Retained promoted diagnostic semantics; no hardware action published without model and decisive evidence.",
+            "history": {
+              "earliestDocumentedUse": null,
+              "lastMaterialChange": null,
+              "reviewedAt": "2026-09-08",
+              "authority": "promoted_diagnostic_pattern",
+              "independentOutcomeCount": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "sym-cutting-functional-test",
+      "code": null,
+      "message": "Cutting disc does not spin in Functional Test",
+      "aliases": [],
+      "classification": "SELF_SERVICE_DIRECT",
+      "lifecycle": "CURRENT",
+      "publication": "approved",
+      "agentVisible": true,
+      "scope": {
+        "status": "confirmed",
+        "models": [
+          "LUBA 2 5000X"
+        ],
+        "firmware": [
+          "1.30.31.10"
+        ]
+      },
+      "evidence": {
+        "kind": "promoted_service_rule",
+        "refs": [
+          "docs/knowledge/KNOWN_FIXES.md#luba-2-5000x",
+          "docs/knowledge/TOOL_KNOWLEDGE.md#functional-test",
+          "git:6370b88..7f4b29f",
+          "git:2bd5772..3b13d9c"
+        ],
+        "outcome": "recommended",
+        "cohortCount": null,
+        "notes": "Active correction and repeated similar-case use support narrow maintained operational guidance; no invented cohort or claim of complete case closure."
+      },
+      "lastReviewed": "2026-09-08",
+      "supersededBy": null,
+      "paths": [
+        {
+          "id": "software",
+          "symptom": "Fails only in Functional Test; works normally during mowing",
+          "qualifier": "The cutting function works normally in Auto Run and/or manual mowing, fails only in Functional Test, and no other motor or driver fault is present.",
+          "kind": "repair",
+          "part": "Cutting control software",
+          "action": [
+            "For the selected LUBA 2 5000X on 1.30.31.10 with this exact test-only mismatch, select software 1.30.29.19 and update the mower using the approved service update procedure.",
+            "Repeat the Functional Test cutting item. If the version is unavailable, another version is installed, or mowing also fails, contact PIE instead of substituting a version or replacing the cutting motor."
+          ],
+          "verification": {
+            "steps": [
+              "Run Functional Test, Communication Check and Auto Map Run.",
+              "Keep all three reports and a Connect Checking screenshot. If a test cannot run or a relevant fault remains, contact PIE."
+            ],
+            "canonical": [
+              "Functional Test",
+              "Communication Check",
+              "Auto Map Run",
+              "Retain all three reports",
+              "Connect Checking screenshot",
+              "Relevant non-ultrasonic FAIL requires PIE review; ultrasonic failure alone is not a blocker",
+              "Burn-in does not replace standard validation"
+            ]
+          },
+          "ifNotFixed": {
+            "kind": "escalate",
+            "message": "Contact PIE with the exact model, observed condition, checks and previous repair results. Do not repeat the same action."
+          },
+          "evidence_state": "STABLE_OPERATIONAL_GUIDANCE",
+          "publication": "approved",
+          "agent_visibility": "P1_DESKTOP_GUIDED",
+          "conflict": false,
+          "supersededBy": null,
+          "review": {
+            "scopeConfirmed": true,
+            "repeatedUse": true,
+            "activeMaintenance": true,
+            "noContradiction": true,
+            "rationale": "Current maintained KNOWN_FIXES and TOOL_KNOWLEDGE corrected the earlier target; explicit similar-case reuse supports the narrowly stated version-dependent action. No full-case resolution count inferred.",
+            "history": {
+              "earliestDocumentedUse": "2026-08-31",
+              "lastMaterialChange": "2026-09-01",
+              "reviewedAt": "2026-09-08",
+              "authority": "promoted_service_rule",
+              "independentOutcomeCount": null,
+              "repeatedUseSignal": "Maintained KNOWN_FIXES and TOOL_KNOWLEDGE explicitly report similar cases passed after switching to 1.30.29.19; no numeric cohort or full closure claimed.",
+              "activeMaintenanceSignal": "Version interpretation and target corrected September 1; retained through later tool guidance maintenance September 2 and current remote September 8.",
+              "supersededInterpretation": "1.30.31.10 as universal recovery version; recurrence disproved it."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ec-2000303",
+      "code": "2000303",
+      "message": "LiDAR internal timestamp abnormal",
+      "aliases": [],
+      "classification": "PIE_ONLY",
+      "lifecycle": "CURRENT",
+      "publication": "approved",
+      "agentVisible": true,
+      "scope": {
+        "status": "unknown",
+        "models": [],
+        "firmware": []
+      },
+      "evidence": {
+        "kind": "raw_reference",
+        "refs": [
+          "local-error-reference#ErrorCode!I202:K202"
+        ],
+        "outcome": "recommended",
+        "cohortCount": null,
+        "notes": "Exact unsigned parsed row says upload logs; no false-alarm/no-repair conclusion supported. Scope/currentness unverified; safe PIE route only."
+      },
+      "lastReviewed": "2026-09-08",
+      "supersededBy": null,
+      "paths": [
+        {
+          "id": "pie",
+          "symptom": "This message is present",
+          "kind": "escalate",
+          "part": null,
+          "action": [
+            "Contact PIE with the exact code, mower model and a fresh log. This message alone does not establish a hardware fault or confirm that no repair is needed."
+          ],
+          "verification": {
+            "steps": [
+              "Run Functional Test, Communication Check and Auto Map Run.",
+              "Keep all three reports and a Connect Checking screenshot. If a test cannot run or a relevant fault remains, contact PIE."
+            ],
+            "canonical": [
+              "Functional Test",
+              "Communication Check",
+              "Auto Map Run",
+              "Retain all three reports",
+              "Connect Checking screenshot",
+              "Relevant non-ultrasonic FAIL requires PIE review; ultrasonic failure alone is not a blocker",
+              "Burn-in does not replace standard validation"
+            ]
+          },
+          "ifNotFixed": {
+            "kind": "escalate",
+            "message": "Contact PIE with the exact model, observed condition, checks and previous repair results. Do not repeat the same action."
+          },
+          "evidence_state": "SOURCE_RECOMMENDATION",
+          "publication": "approved",
+          "agent_visibility": "PIE_ONLY",
+          "conflict": false,
+          "supersededBy": null,
+          "review": {
+            "scopeConfirmed": false,
+            "repeatedUse": false,
+            "activeMaintenance": false,
+            "noContradiction": true,
+            "rationale": "Retained promoted diagnostic semantics; no hardware action published without model and decisive evidence.",
+            "history": {
+              "earliestDocumentedUse": null,
+              "lastMaterialChange": null,
+              "reviewedAt": "2026-09-08",
+              "authority": "raw_reference",
+              "independentOutcomeCount": null
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "symptoms": [
+    {
+      "symptom_id": "SYM-001",
+      "observable_area": "Movement",
+      "label_en": "One wheel does not move",
+      "label_cn": "单个轮子不转",
+      "aliases": [],
+      "agent_visibility": "NAVIGATION",
+      "repair_refs": []
+    },
+    {
+      "symptom_id": "SYM-002",
+      "observable_area": "Movement",
+      "label_en": "Multiple wheels not moving",
+      "label_cn": "多个轮子不转",
+      "aliases": [],
+      "agent_visibility": "NAVIGATION",
+      "repair_refs": []
+    },
+    {
+      "symptom_id": "SYM-003",
+      "observable_area": "Movement",
+      "label_en": "Wheel makes unusual noise",
+      "label_cn": "轮子异响",
+      "aliases": [],
+      "agent_visibility": "NAVIGATION",
+      "repair_refs": []
+    },
+    {
+      "symptom_id": "SYM-004",
+      "observable_area": "Cutting",
+      "label_en": "Cutting disc does not spin",
+      "label_cn": "割草盘不转",
+      "aliases": [],
+      "agent_visibility": "NAVIGATION",
+      "repair_refs": [
+        {
+          "card_id": "sym-cutting-functional-test",
+          "repair_path_id": "software"
+        }
+      ]
+    },
+    {
+      "symptom_id": "SYM-005",
+      "observable_area": "Cutting",
+      "label_en": "Cutting height cannot adjust",
+      "label_cn": "切割高度无法调节",
+      "aliases": [],
+      "agent_visibility": "NAVIGATION",
+      "repair_refs": []
+    },
+    {
+      "symptom_id": "SYM-006",
+      "observable_area": "Cutting",
+      "label_en": "Cutting disc makes unusual noise",
+      "label_cn": "割草盘异响",
+      "aliases": [],
+      "agent_visibility": "NAVIGATION",
+      "repair_refs": []
+    },
+    {
+      "symptom_id": "SYM-007",
+      "observable_area": "Charging",
+      "label_en": "Robot does not charge",
+      "label_cn": "不充电",
+      "aliases": [],
+      "agent_visibility": "NAVIGATION",
+      "repair_refs": []
+    },
+    {
+      "symptom_id": "SYM-008",
+      "observable_area": "Charging",
+      "label_en": "Charging stops before full",
+      "label_cn": "充电中断/充不满",
+      "aliases": [],
+      "agent_visibility": "NAVIGATION",
+      "repair_refs": []
+    },
+    {
+      "symptom_id": "SYM-009",
+      "observable_area": "Charging",
+      "label_en": "Charging station not recognized",
+      "label_cn": "无法识别充电桩",
+      "aliases": [],
+      "agent_visibility": "NAVIGATION",
+      "repair_refs": []
+    },
+    {
+      "symptom_id": "SYM-010",
+      "observable_area": "Docking",
+      "label_en": "Cannot return to charging station",
+      "label_cn": "无法回桩",
+      "aliases": [],
+      "agent_visibility": "NAVIGATION",
+      "repair_refs": []
+    },
+    {
+      "symptom_id": "SYM-011",
+      "observable_area": "Power",
+      "label_en": "Robot does not power on",
+      "label_cn": "不开机",
+      "aliases": [],
+      "agent_visibility": "NAVIGATION",
+      "repair_refs": []
+    },
+    {
+      "symptom_id": "SYM-012",
+      "observable_area": "Power",
+      "label_en": "Battery drains quickly",
+      "label_cn": "电池耗电过快",
+      "aliases": [],
+      "agent_visibility": "NAVIGATION",
+      "repair_refs": []
+    },
+    {
+      "symptom_id": "SYM-013",
+      "observable_area": "Power",
+      "label_en": "Robot shuts down unexpectedly",
+      "label_cn": "意外关机",
+      "aliases": [],
+      "agent_visibility": "NAVIGATION",
+      "repair_refs": []
+    },
+    {
+      "symptom_id": "SYM-014",
+      "observable_area": "Positioning",
+      "label_en": "Positioning failed or inaccurate",
+      "label_cn": "定位失败/定位不准",
+      "aliases": [],
+      "agent_visibility": "NAVIGATION",
+      "repair_refs": []
+    },
+    {
+      "symptom_id": "SYM-015",
+      "observable_area": "Positioning",
+      "label_en": "Cannot connect to RTK station",
+      "label_cn": "连不上RTK基站",
+      "aliases": [],
+      "agent_visibility": "NAVIGATION",
+      "repair_refs": []
+    },
+    {
+      "symptom_id": "SYM-016",
+      "observable_area": "Positioning",
+      "label_en": "Map lost or cannot load",
+      "label_cn": "地图丢失/无法加载",
+      "aliases": [],
+      "agent_visibility": "NAVIGATION",
+      "repair_refs": []
+    },
+    {
+      "symptom_id": "SYM-017",
+      "observable_area": "Connectivity",
+      "label_en": "Cannot connect to WiFi",
+      "label_cn": "连不上WiFi",
+      "aliases": [],
+      "agent_visibility": "NAVIGATION",
+      "repair_refs": []
+    },
+    {
+      "symptom_id": "SYM-018",
+      "observable_area": "Connectivity",
+      "label_en": "Cannot connect to 4G/mobile network",
+      "label_cn": "连不上4G/移动网络",
+      "aliases": [],
+      "agent_visibility": "NAVIGATION",
+      "repair_refs": []
+    },
+    {
+      "symptom_id": "SYM-019",
+      "observable_area": "Connectivity",
+      "label_en": "Bluetooth connection fails",
+      "label_cn": "蓝牙连接失败",
+      "aliases": [],
+      "agent_visibility": "NAVIGATION",
+      "repair_refs": []
+    },
+    {
+      "symptom_id": "SYM-020",
+      "observable_area": "Sensors",
+      "label_en": "Bumper triggers falsely",
+      "label_cn": "碰撞传感器误触发",
+      "aliases": [],
+      "agent_visibility": "NAVIGATION",
+      "repair_refs": []
+    },
+    {
+      "symptom_id": "SYM-021",
+      "observable_area": "Sensors",
+      "label_en": "LiDAR not working",
+      "label_cn": "激光雷达不工作",
+      "aliases": [],
+      "agent_visibility": "NAVIGATION",
+      "repair_refs": [
+        {
+          "card_id": "ec-5501",
+          "repair_path_id": "pie"
+        }
+      ]
+    },
+    {
+      "symptom_id": "SYM-022",
+      "observable_area": "Physical",
+      "label_en": "Visible water ingress",
+      "label_cn": "可见进水痕迹",
+      "aliases": [],
+      "agent_visibility": "NAVIGATION",
+      "repair_refs": []
+    },
+    {
+      "symptom_id": "SYM-023",
+      "observable_area": "Physical",
+      "label_en": "Visible cable or harness damage",
+      "label_cn": "线缆/排线可见损坏",
+      "aliases": [],
+      "agent_visibility": "NAVIGATION",
+      "repair_refs": []
+    },
+    {
+      "symptom_id": "SYM-024",
+      "observable_area": "Physical",
+      "label_en": "Visible physical impact damage",
+      "label_cn": "物理撞击损坏",
+      "aliases": [],
+      "agent_visibility": "NAVIGATION",
+      "repair_refs": []
+    },
+    {
+      "symptom_id": "SYM-025",
+      "observable_area": "Software",
+      "label_en": "Firmware update fails",
+      "label_cn": "固件升级失败",
+      "aliases": [],
+      "agent_visibility": "NAVIGATION",
+      "repair_refs": []
+    },
+    {
+      "symptom_id": "SYM-026",
+      "observable_area": "Movement",
+      "label_en": "Abnormal movement or shaking",
+      "label_cn": "行走异常/抖动",
+      "aliases": [],
+      "agent_visibility": "PIE_ONLY",
+      "repair_refs": []
+    },
+    {
+      "symptom_id": "SYM-027",
+      "observable_area": "Sensors",
+      "label_en": "Vision or camera abnormality",
+      "label_cn": "视觉/摄像头异常",
+      "aliases": [],
+      "agent_visibility": "PIE_ONLY",
+      "repair_refs": []
+    },
+    {
+      "symptom_id": "SYM-028",
+      "observable_area": "Software",
+      "label_en": "Unexpected stop during operation",
+      "label_cn": "工作中异常停机",
+      "aliases": [],
+      "agent_visibility": "PIE_ONLY",
+      "repair_refs": []
     }
   ]
 }
