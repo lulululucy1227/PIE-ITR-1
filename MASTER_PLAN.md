@@ -309,3 +309,13 @@ Requires at minimum:
 - clear future adapter so Workbench can later consume the same canonical Error Code knowledge without requiring runtime coupling during Pilot.
 
 Only after `ERROR_CODE_PILOT_GREEN` should the supervisor decide production hosting/auth, external rollout, broader code coverage, and Workbench integration.
+
+### Error Code local specialist checkpoint — 2026-09-07
+
+Local branch checkpoint only; remote MAIN acceptance is unchanged.
+Workspace created: C:\Users\Reggie\Desktop\PIE-ITR-ErrorCode.
+Branch: error-code/ec-mt-20260907-pilot-001-canonical.
+State: TECHNICAL_PILOT_READY / WAITING_BUSINESS_SCOPE; ERROR_CODE_PILOT_GREEN not yet claimed.
+Eight selected code entries and a standalone local web Pilot are implemented. Fresh Node/browser/build/privacy/start/relaunch and extracted-package checks passed; see error-code-pilot/docs/HANDOFF.md.
+Remaining decision: confirm exact model/series and material version limits for the promoted 1202 cable -> mainboard sequence. Replacement prose remains outside agent data until confirmed.
+MAIN implementation/runtime/sessions are untouched by this specialist. Task/report remain Issue #5 / Issue #6.

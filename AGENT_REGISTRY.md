@@ -179,3 +179,11 @@ Update this file when any of these changes:
 - current task ownership materially changes.
 
 At each major milestone, update `MASTER_PLAN.md` and `AGENT_REGISTRY.md` together or explicitly state why only one changed.
+
+## 10. Error Code local checkpoint — 2026-09-07
+
+The planned specialist workspace now exists as an independent clone with separate Git objects at C:\Users\Reggie\Desktop\PIE-ITR-ErrorCode, branch error-code/ec-mt-20260907-pilot-001-canonical.
+Error Code Specialist remains the sole owner of this stream. MAIN is not reassigned.
+Current local state: TECHNICAL_PILOT_READY / WAITING_BUSINESS_SCOPE for EC-MT-20260907-PILOT-001; ERROR_CODE_PILOT_GREEN is not claimed.
+All independent safe audit/implementation/verification/packaging work is complete. The remaining business decision is the exact model/version scope of the promoted 1202 replacement sequence; its replacement advice stays withheld in the agent projection.
+See error-code-pilot/docs/HANDOFF.md and the matching Issue #6 report. These control-file updates remain local to the specialist branch; there was no push or MAIN integration.

@@ -1,0 +1,603 @@
+{
+  "schemaVersion": 1,
+  "knowledgeVersion": "2026-09-07-pilot.1",
+  "cards": [
+    {
+      "id": "ec-1202",
+      "code": "1202",
+      "message": "Cutting disc blocked",
+      "aliases": [
+        "Schneidscheibe blockiert"
+      ],
+      "classification": "NOT_YET_STABLE",
+      "lifecycle": "CURRENT",
+      "publication": "pilot",
+      "agentVisible": true,
+      "scope": {
+        "status": "unknown",
+        "models": [],
+        "firmware": []
+      },
+      "evidence": {
+        "kind": "promoted_service_rule",
+        "refs": [
+          "docs/knowledge/ERROR_CODES.md#1202",
+          "local-error-reference#ErrorCode!A747:K747",
+          "MASTER_PLAN.md#standard-repair-validation"
+        ],
+        "outcome": "recommended",
+        "cohortCount": null,
+        "notes": "PIE-confirmed service sequence; model scope absent. No documented cohort or completed outcome. Parts availability does not prove applicability."
+      },
+      "lastReviewed": "2026-09-07",
+      "supersededBy": null,
+      "paths": [
+        {
+          "id": "blocked",
+          "symptom": "There is debris or a physical blockage",
+          "kind": "check",
+          "part": null,
+          "action": [
+            "Power off the mower before inspecting the cutting discs. Follow the model’s service instructions to remove tangled material or debris.",
+            "If both discs are free but the error remains, contact PIE to confirm the repair for this model."
+          ],
+          "verification": {
+            "steps": [
+              "Run Functional Test, Communication Check and Auto Map Run.",
+              "Keep all three reports and a Connect Checking screenshot. If a test cannot run or a relevant fault remains, contact PIE."
+            ],
+            "canonical": [
+              "Functional Test",
+              "Communication Check",
+              "Auto Map Run",
+              "Retain all three reports",
+              "Connect Checking screenshot",
+              "Relevant non-ultrasonic FAIL requires PIE review; ultrasonic failure alone is not a blocker",
+              "Burn-in does not replace standard validation"
+            ]
+          },
+          "ifNotFixed": {
+            "kind": "escalate",
+            "message": "If the blockage cannot be cleared, stop and contact PIE. A cable replacement requires both discs to be free and the repair scope to be confirmed."
+          }
+        },
+        {
+          "id": "cable",
+          "symptom": "Both cutting discs are free, but the error remains",
+          "kind": "repair",
+          "part": "Upper Shell Adapter Cable",
+          "action": [
+            "Replace the Upper Shell Adapter Cable between the upper shell and the mainboard, using the model’s confirmed service part."
+          ],
+          "verification": {
+            "steps": [
+              "Run Functional Test, Communication Check and Auto Map Run.",
+              "Keep all three reports and a Connect Checking screenshot. If a test cannot run or a relevant fault remains, contact PIE."
+            ],
+            "canonical": [
+              "Functional Test",
+              "Communication Check",
+              "Auto Map Run",
+              "Retain all three reports",
+              "Connect Checking screenshot",
+              "Relevant non-ultrasonic FAIL requires PIE review; ultrasonic failure alone is not a blocker",
+              "Burn-in does not replace standard validation"
+            ]
+          },
+          "ifNotFixed": {
+            "kind": "path",
+            "pathId": "mainboard",
+            "message": "If the cable replacement failed, use the confirmed mainboard step."
+          }
+        },
+        {
+          "id": "mainboard",
+          "symptom": "The confirmed cable replacement did not fix the error",
+          "kind": "repair",
+          "part": "Mainboard",
+          "action": [
+            "Replace the mainboard using the confirmed service procedure for the model."
+          ],
+          "verification": {
+            "steps": [
+              "Run Functional Test, Communication Check and Auto Map Run.",
+              "Keep all three reports and a Connect Checking screenshot. If a test cannot run or a relevant fault remains, contact PIE."
+            ],
+            "canonical": [
+              "Functional Test",
+              "Communication Check",
+              "Auto Map Run",
+              "Retain all three reports",
+              "Connect Checking screenshot",
+              "Relevant non-ultrasonic FAIL requires PIE review; ultrasonic failure alone is not a blocker",
+              "Burn-in does not replace standard validation"
+            ]
+          },
+          "ifNotFixed": {
+            "kind": "escalate",
+            "message": "Contact PIE with the exact model, symptom, tests and previous repair results. Do not repeat the same replacement."
+          },
+          "directSelectable": false
+        }
+      ]
+    },
+    {
+      "id": "ec-1008",
+      "code": "1008",
+      "message": "Robot is locked",
+      "aliases": [
+        "STOP button triggered"
+      ],
+      "classification": "SELF_SERVICE_SYMPTOM_SPLIT",
+      "lifecycle": "CURRENT",
+      "publication": "pilot",
+      "agentVisible": true,
+      "scope": {
+        "status": "unknown",
+        "models": [],
+        "firmware": []
+      },
+      "evidence": {
+        "kind": "promoted_service_rule",
+        "refs": [
+          "docs/knowledge/ERROR_CODES.md#1008"
+        ],
+        "outcome": "recommended",
+        "cohortCount": null
+      },
+      "lastReviewed": "2026-09-07",
+      "supersededBy": null,
+      "paths": [
+        {
+          "id": "stop",
+          "symptom": "Something pressed the top STOP button",
+          "kind": "check",
+          "part": null,
+          "action": [
+            "Check the area around the mower for anything touching the top STOP button.",
+            "Use the model’s normal unlock/restart procedure, then retest the original situation."
+          ],
+          "verification": {
+            "steps": [
+              "Run Functional Test, Communication Check and Auto Map Run.",
+              "Keep all three reports and a Connect Checking screenshot. If a test cannot run or a relevant fault remains, contact PIE."
+            ],
+            "canonical": [
+              "Functional Test",
+              "Communication Check",
+              "Auto Map Run",
+              "Retain all three reports",
+              "Connect Checking screenshot",
+              "Relevant non-ultrasonic FAIL requires PIE review; ultrasonic failure alone is not a blocker",
+              "Burn-in does not replace standard validation"
+            ]
+          },
+          "ifNotFixed": {
+            "kind": "escalate",
+            "message": "Contact PIE with the exact model, symptom, tests and previous repair results. Do not repeat the same replacement."
+          }
+        },
+        {
+          "id": "not-reproduced",
+          "symptom": "The workshop cannot reproduce it",
+          "kind": "check",
+          "part": null,
+          "action": [
+            "Do not replace the keypad board based on suspicion alone. Complete the checks below and send the results to PIE for the case decision."
+          ],
+          "verification": {
+            "steps": [
+              "Run Functional Test, Communication Check and Auto Map Run.",
+              "Keep all three reports and a Connect Checking screenshot. If a test cannot run or a relevant fault remains, contact PIE."
+            ],
+            "canonical": [
+              "Functional Test",
+              "Communication Check",
+              "Auto Map Run",
+              "Retain all three reports",
+              "Connect Checking screenshot",
+              "Relevant non-ultrasonic FAIL requires PIE review; ultrasonic failure alone is not a blocker",
+              "Burn-in does not replace standard validation"
+            ]
+          },
+          "ifNotFixed": {
+            "kind": "escalate",
+            "message": "Contact PIE with the exact model, symptom, tests and previous repair results. Do not repeat the same replacement."
+          }
+        },
+        {
+          "id": "recurring",
+          "symptom": "It happens again without a clear trigger",
+          "kind": "escalate",
+          "part": null,
+          "action": [
+            "Contact PIE with a video of the mower and its surroundings, plus a fresh log uploaded immediately after the event.",
+            "Include previous repair results. A new part or normal workshop test does not rule the fault out."
+          ],
+          "verification": {
+            "steps": [
+              "Run Functional Test, Communication Check and Auto Map Run.",
+              "Keep all three reports and a Connect Checking screenshot. If a test cannot run or a relevant fault remains, contact PIE."
+            ],
+            "canonical": [
+              "Functional Test",
+              "Communication Check",
+              "Auto Map Run",
+              "Retain all three reports",
+              "Connect Checking screenshot",
+              "Relevant non-ultrasonic FAIL requires PIE review; ultrasonic failure alone is not a blocker",
+              "Burn-in does not replace standard validation"
+            ]
+          },
+          "ifNotFixed": {
+            "kind": "escalate",
+            "message": "Contact PIE with the exact model, symptom, tests and previous repair results. Do not repeat the same replacement."
+          }
+        }
+      ]
+    },
+    {
+      "id": "ec-5510",
+      "code": "5510",
+      "message": "Stereo self-calibration succeeded and the parameters were restored.",
+      "aliases": [],
+      "classification": "SELF_SERVICE_SYMPTOM_SPLIT",
+      "lifecycle": "CURRENT",
+      "publication": "pilot",
+      "agentVisible": true,
+      "scope": {
+        "status": "not_required",
+        "models": [],
+        "firmware": []
+      },
+      "evidence": {
+        "kind": "raw_reference",
+        "refs": [
+          "local-error-reference#ErrorCode!I323:K323"
+        ],
+        "outcome": "informational",
+        "cohortCount": null,
+        "notes": "Source explicitly says no handling required, record only. Success does not prove whole-machine health. Pilot-only adaptation."
+      },
+      "lastReviewed": "2026-09-07",
+      "supersededBy": null,
+      "paths": [
+        {
+          "id": "normal",
+          "symptom": "The mower works normally; no other fault is present",
+          "kind": "information",
+          "part": null,
+          "action": [
+            "No repair is needed for this calibration success message."
+          ],
+          "verification": {
+            "steps": [
+              "Confirm normal operation and no other active fault."
+            ],
+            "canonical": [
+              "Success message alone is not repair acceptance. Confirm normal operation and no other active fault."
+            ]
+          },
+          "ifNotFixed": {
+            "kind": "escalate",
+            "message": "Contact PIE with the exact model, symptom, tests and previous repair results. Do not repeat the same replacement."
+          }
+        },
+        {
+          "id": "abnormal",
+          "symptom": "A fault is still present or another error is shown",
+          "kind": "escalate",
+          "part": null,
+          "action": [
+            "Contact PIE about the actual symptom and other error messages. This calibration success message does not explain the fault."
+          ],
+          "verification": {
+            "steps": [
+              "Keep the exact error and observed symptom for PIE."
+            ],
+            "canonical": [
+              "Do not treat successful calibration as whole-machine health."
+            ]
+          },
+          "ifNotFixed": {
+            "kind": "escalate",
+            "message": "Contact PIE with the exact model, symptom, tests and previous repair results. Do not repeat the same replacement."
+          }
+        }
+      ]
+    },
+    {
+      "id": "ec-1000022",
+      "code": "1000022",
+      "message": "Insufficient light at night. This feature is unavailable",
+      "aliases": [],
+      "classification": "PIE_ONLY",
+      "lifecycle": "HISTORICAL",
+      "publication": "pilot",
+      "agentVisible": true,
+      "scope": {
+        "status": "confirmed",
+        "models": [
+          "LUBA mini 2 1000 Vision"
+        ],
+        "firmware": []
+      },
+      "evidence": {
+        "kind": "promoted_case_outcome",
+        "refs": [
+          "docs/knowledge/ERROR_CODES.md#1000022",
+          "docs/knowledge/KNOWN_FIXES.md#1000022"
+        ],
+        "outcome": "resolved",
+        "cohortCount": null,
+        "notes": "Historical 2.3.27.23 -> 2.3.30.26 plus restart restored Auto Map Run. Current applicability unavailable. No firmware target in agent view."
+      },
+      "lastReviewed": "2026-09-07",
+      "supersededBy": null,
+      "paths": [
+        {
+          "id": "pie",
+          "symptom": "Auto Map Run is blocked by this message",
+          "kind": "escalate",
+          "part": null,
+          "action": [
+            "Ask PIE to check current firmware guidance for your exact model. Do not install a historical version from memory."
+          ],
+          "verification": {
+            "steps": [
+              "Run Functional Test, Communication Check and Auto Map Run.",
+              "Keep all three reports and a Connect Checking screenshot. If a test cannot run or a relevant fault remains, contact PIE."
+            ],
+            "canonical": [
+              "Functional Test",
+              "Communication Check",
+              "Auto Map Run",
+              "Retain all three reports",
+              "Connect Checking screenshot",
+              "Relevant non-ultrasonic FAIL requires PIE review; ultrasonic failure alone is not a blocker",
+              "Burn-in does not replace standard validation"
+            ]
+          },
+          "ifNotFixed": {
+            "kind": "escalate",
+            "message": "Contact PIE with the exact model, symptom, tests and previous repair results. Do not repeat the same replacement."
+          }
+        }
+      ]
+    },
+    {
+      "id": "ec-1500",
+      "code": "1500",
+      "message": "Chassis data serial port disconnected",
+      "aliases": [],
+      "classification": "PIE_ONLY",
+      "lifecycle": "CURRENT",
+      "publication": "pilot",
+      "agentVisible": true,
+      "scope": {
+        "status": "unknown",
+        "models": [],
+        "firmware": []
+      },
+      "evidence": {
+        "kind": "promoted_diagnostic_pattern",
+        "refs": [
+          "docs/knowledge/ERROR_CODES.md#1500",
+          "local-error-reference#ErrorCode!I725"
+        ],
+        "outcome": "not_evaluable",
+        "cohortCount": null
+      },
+      "lastReviewed": "2026-09-07",
+      "supersededBy": null,
+      "paths": [
+        {
+          "id": "pie",
+          "symptom": "This message is present",
+          "kind": "escalate",
+          "part": null,
+          "action": [
+            "Contact PIE with the exact mower model, current module firmware versions and Connect Checking screenshot.",
+            "The next step depends on the model’s vision or LiDAR system."
+          ],
+          "verification": {
+            "steps": [
+              "Run Functional Test, Communication Check and Auto Map Run.",
+              "Keep all three reports and a Connect Checking screenshot. If a test cannot run or a relevant fault remains, contact PIE."
+            ],
+            "canonical": [
+              "Functional Test",
+              "Communication Check",
+              "Auto Map Run",
+              "Retain all three reports",
+              "Connect Checking screenshot",
+              "Relevant non-ultrasonic FAIL requires PIE review; ultrasonic failure alone is not a blocker",
+              "Burn-in does not replace standard validation"
+            ]
+          },
+          "ifNotFixed": {
+            "kind": "escalate",
+            "message": "Contact PIE with the exact model, symptom, tests and previous repair results. Do not repeat the same replacement."
+          }
+        }
+      ]
+    },
+    {
+      "id": "ec-5501",
+      "code": "5501",
+      "message": "LIDAR sensor abnormal.",
+      "aliases": [
+        "LiDAR sensor abnormal"
+      ],
+      "classification": "PIE_ONLY",
+      "lifecycle": "CURRENT",
+      "publication": "pilot",
+      "agentVisible": true,
+      "scope": {
+        "status": "unknown",
+        "models": [],
+        "firmware": []
+      },
+      "evidence": {
+        "kind": "promoted_diagnostic_pattern",
+        "refs": [
+          "docs/knowledge/ERROR_CODES.md#5501",
+          "docs/knowledge/KNOWN_FIXES.md#5501",
+          "local-error-reference#ErrorCode!I294"
+        ],
+        "outcome": "not_evaluable",
+        "cohortCount": null,
+        "notes": "Upgrade percentage is not proof of network or specific part failure. No unconditional replacement."
+      },
+      "lastReviewed": "2026-09-07",
+      "supersededBy": null,
+      "paths": [
+        {
+          "id": "pie",
+          "symptom": "LiDAR fault or firmware upgrade failure",
+          "kind": "escalate",
+          "part": null,
+          "action": [
+            "Contact PIE with the exact model, error history, Connect Checking screenshot and upgrade failure stage.",
+            "Include LiDAR replacement or connection-check results. The failure percentage alone does not identify the cause."
+          ],
+          "verification": {
+            "steps": [
+              "Run Functional Test, Communication Check and Auto Map Run.",
+              "Keep all three reports and a Connect Checking screenshot. If a test cannot run or a relevant fault remains, contact PIE."
+            ],
+            "canonical": [
+              "Functional Test",
+              "Communication Check",
+              "Auto Map Run",
+              "Retain all three reports",
+              "Connect Checking screenshot",
+              "Relevant non-ultrasonic FAIL requires PIE review; ultrasonic failure alone is not a blocker",
+              "Burn-in does not replace standard validation"
+            ]
+          },
+          "ifNotFixed": {
+            "kind": "escalate",
+            "message": "Contact PIE with the exact model, symptom, tests and previous repair results. Do not repeat the same replacement."
+          }
+        }
+      ]
+    },
+    {
+      "id": "ec-6401",
+      "code": "6401",
+      "message": "Both the chassis log port and data port are disconnected",
+      "aliases": [],
+      "classification": "PIE_ONLY",
+      "lifecycle": "CURRENT",
+      "publication": "pilot",
+      "agentVisible": true,
+      "scope": {
+        "status": "unknown",
+        "models": [],
+        "firmware": []
+      },
+      "evidence": {
+        "kind": "promoted_case_outcome",
+        "refs": [
+          "docs/knowledge/ERROR_CODES.md#6401",
+          "docs/knowledge/KNOWN_FIXES.md#6401",
+          "local-error-reference#ErrorCode!I726"
+        ],
+        "outcome": "resolved",
+        "cohortCount": null,
+        "notes": "Historical wired-upgrade success after replacing vision module again. Model scope/cohort unavailable; replacement history does not mean known-good."
+      },
+      "lastReviewed": "2026-09-07",
+      "supersededBy": null,
+      "paths": [
+        {
+          "id": "pie",
+          "symptom": "Both ports are disconnected or a wired upgrade fails",
+          "kind": "escalate",
+          "part": null,
+          "action": [
+            "Contact PIE with the exact model, module connection status, current firmware and previous replacement results.",
+            "If a module was replaced, include whether it was proven to work. Do not repeat replacement without PIE’s next step."
+          ],
+          "verification": {
+            "steps": [
+              "Run Functional Test, Communication Check and Auto Map Run.",
+              "Keep all three reports and a Connect Checking screenshot. If a test cannot run or a relevant fault remains, contact PIE."
+            ],
+            "canonical": [
+              "Functional Test",
+              "Communication Check",
+              "Auto Map Run",
+              "Retain all three reports",
+              "Connect Checking screenshot",
+              "Relevant non-ultrasonic FAIL requires PIE review; ultrasonic failure alone is not a blocker",
+              "Burn-in does not replace standard validation"
+            ]
+          },
+          "ifNotFixed": {
+            "kind": "escalate",
+            "message": "Contact PIE with the exact model, symptom, tests and previous repair results. Do not repeat the same replacement."
+          }
+        }
+      ]
+    },
+    {
+      "id": "ec-dt041",
+      "code": "DT-041",
+      "message": "Internal module communication abnormality / timeout",
+      "aliases": [],
+      "classification": "PIE_ONLY",
+      "lifecycle": "CURRENT",
+      "publication": "pilot",
+      "agentVisible": true,
+      "scope": {
+        "status": "unknown",
+        "models": [],
+        "firmware": []
+      },
+      "evidence": {
+        "kind": "promoted_diagnostic_pattern",
+        "refs": [
+          "docs/knowledge/ERROR_CODES.md#DT-041"
+        ],
+        "outcome": "not_evaluable",
+        "cohortCount": null,
+        "notes": "Promoted description; absent from raw master. English description is not claimed as an exact device UI string."
+      },
+      "lastReviewed": "2026-09-07",
+      "supersededBy": null,
+      "paths": [
+        {
+          "id": "pie",
+          "symptom": "A module is offline or communication times out",
+          "kind": "escalate",
+          "part": null,
+          "action": [
+            "Contact PIE with the offline module shown in the service tool and exact mower model.",
+            "Include the Connect Checking screenshot and previous repair results. Do not replace the mainboard from this code alone."
+          ],
+          "verification": {
+            "steps": [
+              "Run Functional Test, Communication Check and Auto Map Run.",
+              "Keep all three reports and a Connect Checking screenshot. If a test cannot run or a relevant fault remains, contact PIE."
+            ],
+            "canonical": [
+              "Functional Test",
+              "Communication Check",
+              "Auto Map Run",
+              "Retain all three reports",
+              "Connect Checking screenshot",
+              "Relevant non-ultrasonic FAIL requires PIE review; ultrasonic failure alone is not a blocker",
+              "Burn-in does not replace standard validation"
+            ]
+          },
+          "ifNotFixed": {
+            "kind": "escalate",
+            "message": "Contact PIE with the exact model, symptom, tests and previous repair results. Do not repeat the same replacement."
+          }
+        }
+      ]
+    }
+  ]
+}

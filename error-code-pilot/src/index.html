@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Agent Repair Assistant · Error Code Guide</title>
+<link rel="stylesheet" href="./styles.css">
+<link rel="icon" href="data:,">
+<script type="module" src="./app.mjs"></script>
+</head>
+<body>
+<a class="skip" href="#search">Skip to search</a>
+<header class="topbar"><a class="brand" href="./"><span class="brand-mark" aria-hidden="true">P</span><span>Agent Repair Assistant</span></a><span class="pilot">LOCAL PILOT</span></header>
+<main>
+<section class="intro"><p class="eyebrow">ERROR CODE REPAIR GUIDE</p><h1>Find the next <br><em>repair step.</em></h1><p class="intro-copy">Start with the code or message on the mower.<br>Choose what you see. Follow the relevant next step.</p></section>
+<section class="search-panel" aria-label="Find a repair guide">
+<form id="search-form"><label for="search">Error code or error message</label><div class="search-row"><input id="search" name="search" type="search" maxlength="500" placeholder="e.g. 1202 or Cutting disc blocked" autocomplete="off" spellcheck="false" required><button class="primary" id="search-button" type="submit" disabled>Find guide <span aria-hidden="true">→</span></button></div></form>
+<div class="examples"><span>Try a guide</span><button type="button" data-code="1202">1202</button><button type="button" data-code="1008">1008</button><button type="button" data-code="5510">5510</button></div>
+</section>
+<p id="status" role="status" class="status">Loading guides…</p>
+<section id="result" tabindex="-1" aria-label="Search result"></section>
+<section id="welcome" class="welcome"><div><span class="step-number">01</span><h2>Find your code</h2><p>Use the exact code or paste the message.</p></div><div><span class="step-number">02</span><h2>Match the symptom</h2><p>Choose the problem you actually see.</p></div><div><span class="step-number">03</span><h2>Check the result</h2><p>Follow the checks. Get help if it persists.</p></div></section>
+<footer><span>For service agents · English pilot</span><span>Local review only. This page does not send or save case information.</span></footer>
+</main>
+</body>
+</html>
