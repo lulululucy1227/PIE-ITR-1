@@ -9,53 +9,79 @@ Canonical repository: `lulululucy1227/PIE-ITR-1`
 
 This file is the authoritative answer to “which PIE-ITR agents exist and what are they responsible for?”.
 
-If a chat/Codex window remembers a different agent set, do not rely on memory. Read this file first, then Issue #4 (tasks) and Issue #3 (reports).
+If a chat/Codex window remembers a different agent set, do not rely on memory. Read this file first, then the task/report channels belonging to the relevant agent.
 
 Agent role != model. A role may use different execution models over time. Every new execution task should state `EXECUTION_MODEL / EFFORT / REASON` separately.
 
-Only one agent should own the active shared implementation line at a time. Historical specialist agents must not start concurrent writes in the same dirty workspace unless the ITR supervisor explicitly reactivates them with isolated ownership/worktree.
+Only one agent should own a given active implementation line/worktree at a time. Parallel work is allowed only when ownership, workspace/runtime and task/report channels are explicitly isolated.
 
 ## 1. Current registry
 
-| Agent / role | Status | Primary responsibility | Local directory / workspace | Current task | Input | Output | Can own Error Code专项? | Running another task now? |
+| Agent / role | Status | Primary responsibility | Local directory / workspace | Current task | Input | Output | Error Code专项 role | Running another task now? |
 |---|---|---|---|---|---|---|---|---|
-| **ITR主管** | ACTIVE | Project direction, business/architecture decisions, task routing, acceptance, GitHub Issue #4 task issuance, Issue #3 report acceptance, knowledge/governance gate | Chat role; canonical repo `lulululucy1227/PIE-ITR-1`; no separate code workspace | Supervise `MT-20260907-MAIN-DAILY-USE-RELEASE-006`; maintain `MASTER_PLAN.md` / `AGENT_REGISTRY.md` | User goals; latest Issue #3 reports; governance/knowledge rules; current project risks | Master tasks/direction in Issue #4; acceptance decisions; master plan/registry; knowledge-promotion decisions | **Architect/approve: YES; implementation owner: NO** | YES — supervisor role is active continuously |
-| **MAIN Agent** | ACTIVE / PRIMARY IMPLEMENTATION OWNER | Single mainline Codex executor: current Workbench implementation, integration, debugging, runtime validation, release-quality closure | `C:\Users\Reggie\Desktop\PIE-ITR-1` | `MT-20260907-MAIN-DAILY-USE-RELEASE-006` -> target `DAILY_USE_MASTER_GREEN` | Issue #4 latest task/directions; local repo/worktree; authorized local technical evidence; existing tests/knowledge | Code changes; tests; runtime acceptance; sanitized Issue #3 terminal report | **YES technically**, but **DO NOT assign while current task active** | **YES** |
-| **Agent A — Diagnostic / Integration specialist** | IDLE / HISTORICAL TASKS SUPERSEDED | Diagnostics, Troubleshooting/NFF logic, prepared-case integration, cross-module diagnostic correctness | Historical work used canonical local workspace; **no dedicated isolated directory is currently authoritative**. If reactivated, assign a new isolated worktree or explicit ownership before writing. | Historical: `MT-20260905-A-TRSH-NFF-002`, `MT-20260905-INTEGRATION-001`; both superseded by newer MAIN acceptance | Diagnostic rules; Troubleshooting/NFF contracts; integration boundary; regression cases | Diagnostic/integration implementation; focused regression evidence; Issue #3 report | **YES — preferred existing specialist candidate for Error Code专项 after MAIN is free**, because the work is diagnostic/evidence-scoping rather than UI/auth | NO |
-| **Agent B — Auth / Session / Runtime specialist** | DEFERRED SPECIALIST | Nextop local auth/session recovery, browser/session boundary, runtime/auth-related UX; can support infrastructure issues | Historical work used canonical workspace; no active isolated directory recorded | Historical: `MT-20260905-B-NEXTOP-LOCAL-AUTH-002`, `MT-20260905-B-AUTH-LIVE-VERIFY-003` | Auth/session state; local runtime/browser behavior; safe preflight requirements | Auth/session fixes and verification; sanitized report | **NO as technical owner. CONDITIONAL support only** for access/runtime required by Error Code tools | NO |
-| **Agent C — PDF / Vision / Evidence specialist** | IDLE / HISTORICAL TASKS SUPERSEDED | PDF Evidence Reader, scanned/image PDF Vision path, evidence provenance, FAIL/page extraction | Historical work used canonical workspace; no active isolated directory recorded | Historical: `MT-20260905-C-PDF-EVIDENCE-002`, `...PDF-INTEGRATION-003`, `...PDF-VISION-VERIFY-004`, `...VISION-CONNECTIVITY-005`; objectives later covered by MAIN | PDF/image/test reports; Vision/evidence contracts; page provenance | Evidence extraction/integration; PDF/Vision regression; sanitized report | **CONDITIONAL SUPPORT, not owner** — useful if Error Code evidence is embedded in PDF/image reports, but should not own code semantics/root-cause rules | NO |
-| **Agent D — paused legacy specialist** | PAUSED | No current validated mainline responsibility; previously intentionally paused because delivery/reporting was not worth blocking product work | No authoritative active directory; do not assume old session/worktree is safe to resume | NONE | Only explicit supervisor re-scope | Only a bounded specialist deliverable if reactivated | **NO by default** | NO |
-| **PIE Daily Case / 案例收集 V2** | ACTIVE AUXILIARY ROLE | Daily real-case analysis in the user’s preferred format; partner reply; reusable-learning classification; discovery of patterns/contradictions | Chat role; no local code directory | Ongoing Daily Case collection, not a Codex implementation task | Partner/customer message thread, screenshots, test/log/PDF evidence, repair history, user correction, later outcome | `当前判断 / 关键依据 / 下一步`; short CN meaning + copyable EN reply when needed; learning classification (`NEW / REINFORCEMENT / CONFLICT / POSSIBLE_SUPERSEDED / DUPLICATE / INSUFFICIENT / NO_ACTION`) | **Candidate discovery: YES; implementation/official rule ownership: NO** | YES — ongoing operational intake |
-| **Feishu / Lark execution agent** | AVAILABLE ON DEMAND | Execute specifically approved Feishu table/content operations and validation; does not decide technical truth | External/connected-agent role; no PIE-ITR local code directory | NONE currently | Supervisor-approved Feishu instructions, explicit fields/table scope, existing Feishu authorization | Feishu table/content changes + execution/acceptance report | **CONDITIONAL** — can implement approved Error Code table/data structure after technical rules are approved; must not own diagnostic semantics | NO |
-| **Error Code Specialist** | PLANNED / UNASSIGNED | Dedicated future stream: scoped error-code -> phenomenon -> fault domain/component candidates -> checks -> handling -> validation; agent self-service output where stable | Not assigned yet | Not active; blocked by current Daily-use closure unless supervisor explicitly changes priority | Error Code source table, local technical knowledge, current technical updates, real-case outcomes, model/version scope, repair/validation evidence | Scoped Error Code knowledge, Troubleshooting candidates, regressions, agent-facing guidance; no universal fixed mapping | N/A — this is the specialist role itself | NO |
+| **ITR主管** | ACTIVE | Project direction, business/architecture decisions, task routing, acceptance, control-plane docs and knowledge/governance gate | Chat role; canonical repo `lulululucy1227/PIE-ITR-1`; no separate code workspace | Supervise MAIN Workbench + Error Code parallel stream; maintain `MASTER_PLAN.md` / `AGENT_REGISTRY.md` | User goals; latest task/report channels; governance/knowledge rules; project risks | Master tasks/direction; acceptance decisions; master plan/registry; knowledge-promotion decisions | **Architect/approve: YES; implementation owner: NO** | YES — supervisor role is active continuously |
+| **MAIN Agent** | ACTIVE / PRIMARY WORKBENCH OWNER | Single mainline Codex executor for current Workbench implementation, integration, debugging, runtime validation and release-quality closure | `C:\Users\Reggie\Desktop\PIE-ITR-1` | `MT-20260907-MAIN-DAILY-USE-RELEASE-006` -> `DAILY_USE_MASTER_GREEN` | Issue #4 latest task/directions; MAIN local repo/worktree; authorized local technical evidence; tests/knowledge | Code changes; tests; runtime acceptance; sanitized Issue #3 report | **NO during current task**; may consume stable shared Error Code knowledge later | **YES** |
+| **Agent A — Diagnostic / Integration specialist** | IDLE / HISTORICAL TASKS SUPERSEDED | Diagnostics, Troubleshooting/NFF logic, prepared-case integration, cross-module diagnostic correctness | No authoritative dedicated workspace; if reactivated, assign isolated worktree/ownership before writing | NONE | Diagnostic rules; Troubleshooting/NFF contracts; integration boundary; regression cases | Bounded diagnostic/integration review or implementation when explicitly reactivated | **REVIEW / FALLBACK SUPPORT** — no longer current owner because a clean dedicated Error Code Specialist is now activated | NO |
+| **Agent B — Auth / Session / Runtime specialist** | DEFERRED SPECIALIST | Nextop local auth/session recovery, browser/session boundary, runtime/auth UX | Historical workspace only; no active isolated directory | NONE | Auth/session state; local runtime/browser behavior; safe preflight requirements | Auth/session fixes and verification | **CONDITIONAL SUPPORT only** if the Error Code product later needs access/runtime/auth infrastructure | NO |
+| **Agent C — PDF / Vision / Evidence specialist** | IDLE / HISTORICAL TASKS SUPERSEDED | PDF Evidence Reader, scanned/image PDF Vision path, evidence provenance, FAIL/page extraction | Historical workspace only; no active isolated directory | NONE | PDF/image/test reports; Vision/evidence contracts; page provenance | Evidence extraction/integration; focused verification | **CONDITIONAL SUPPORT** if Error Code evidence is embedded in PDF/image reports; not semantic owner | NO |
+| **Agent D — paused legacy specialist** | PAUSED | No current validated mainline responsibility | No authoritative active directory | NONE | Only explicit supervisor re-scope | Only bounded specialist deliverable if reactivated | **NO by default** | NO |
+| **PIE Daily Case / 案例收集 V2** | ACTIVE AUXILIARY ROLE | Daily real-case analysis; partner reply; reusable-learning classification; discovery of repair patterns/contradictions | Chat role; no local code directory | Ongoing Daily Case collection | Partner/customer thread, screenshots, test/log/PDF evidence, repair history, user correction, later outcome | `当前判断 / 关键依据 / 下一步`; short CN meaning + copyable EN reply; learning classification | **Candidate/evidence discovery: YES; implementation/official rule ownership: NO** | YES — ongoing operational intake |
+| **Feishu / Lark execution agent** | AVAILABLE ON DEMAND | Execute specifically approved Feishu table/content operations and validation; does not decide technical truth | External/connected-agent role; no PIE-ITR local code directory | NONE currently | Supervisor-approved Feishu instructions and explicit fields/table scope | Feishu content changes + execution/acceptance report | **CONDITIONAL** — can implement an approved data structure later; cannot invent repair semantics | NO |
+| **Error Code Specialist** | **ACTIVE / PARALLEL SPECIALIST OWNER** | Dedicated Agent Repair Assistant stream: audit raw Error Code references and real repair outcomes; build scoped `Error/Error Message -> Symptom -> Part -> Repair -> Verification -> If not fixed` knowledge and a simple agent-facing web Pilot | **Isolated workspace to create:** `C:\Users\Reggie\Desktop\PIE-ITR-ErrorCode`; must not write to MAIN workspace | `EC-MT-20260907-PILOT-001` -> target `ERROR_CODE_PILOT_GREEN` | Issue #5 latest task; `MASTER_PLAN.md`; this registry; raw Error Code sources read-only from MAIN/local references; promoted knowledge; read-only real-case/ITR outcomes when safely available; model/version/repair/validation evidence | Scoped publishable Error Code knowledge; repair cards; lightweight web Pilot; regressions/tests; sanitized Issue #6 report | **OWNER: YES** | **YES — newly activated** |
 
 ## 2. Error Code专项 ownership decision
 
-### Preferred assignment
-When the supervisor starts the Error Code专项 after current Daily-use closure, the preferred existing technical owner is **Agent A**, not because “A remembers the project better”, but because its historical scope is the closest fit:
+### Current decision
 
-- diagnostic routing;
-- Troubleshooting/NFF evidence rules;
-- cross-module prepared-case integration;
-- distinction between evidence, completed repair action, attempted fix and verified solution.
+The supervisor has explicitly activated **Error Code Specialist** as the independent owner instead of waiting for MAIN or reviving Agent A.
 
-### Alternative
-If Agent A’s old session/context is stale or its workspace cannot be safely isolated, create a **new Error Code Specialist Codex session** instead of reviving stale state. The new specialist must bootstrap from `MASTER_PLAN.md`, `AGENT_REGISTRY.md`, current governance, Issue #4 and Issue #3 — not from old chat memory.
+Reason:
+- the stream is expected to become a long-lived independent product, not a temporary Workbench subtask;
+- MAIN will remain continuously occupied with Workbench evolution;
+- a clean specialist session bootstrapped from current canonical control-plane state is safer than reviving stale historical context;
+- work can be isolated at workspace/runtime/task-queue level.
 
-### Do not assign now
-MAIN is currently executing `MT-20260907-MAIN-DAILY-USE-RELEASE-006`. Do not run Error Code implementation concurrently in the same workspace. Either wait for `DAILY_USE_MASTER_GREEN` or explicitly create isolated worktree/ownership with no shared runtime/state conflicts.
+### Execution model for initial Pilot build
 
-## 3. Historical specialist status reconciliation
+`EXECUTION_MODEL: GPT-6`
+`EFFORT: High`
+
+Reason: the first Pilot task combines heterogeneous source analysis, repair-outcome mining, knowledge-model design, product simplification, web implementation and verification. This is a one-time high-reasoning phase. Routine maintenance after the schema/product stabilizes should use the lowest sufficient model.
+
+### Agent A position
+
+Agent A remains a useful diagnostic/integration specialist and may later be asked to review difficult mappings or integration boundaries. It is not the current Error Code implementation owner.
+
+## 3. Parallel isolation model
+
+### MAIN stream
+
+- Workspace: `C:\Users\Reggie\Desktop\PIE-ITR-1`
+- Task queue: Issue #4
+- Report channel: Issue #3
+- Formal Workbench/runtime/8787 ownership remains MAIN-only.
+
+### Error Code stream
+
+- Isolated workspace target: `C:\Users\Reggie\Desktop\PIE-ITR-ErrorCode`
+- Task queue: Issue #5
+- Report channel: Issue #6
+- Must not start/manipulate formal Workbench, port 8787, MAIN analyzer config, MAIN local case state, Nextop session or Feishu session.
+- May inspect MAIN-local parsed Error Code/reference data read-only and copy only the minimum needed into the isolated workspace.
+- Must not modify `C:\Users\Reggie\Desktop\PIE-ITR-1`.
+
+The two agents do not consume each other’s task queues.
+
+## 4. Historical specialist status reconciliation
 
 ### Agent A
-- Previous integration/auth-dependent acceptance was superseded by newer MAIN real Workbench acceptance.
-- Do not reopen historical tasks simply to make old task statuses green.
-- Reactivate only for a new bounded specialist objective.
+- Previous integration/auth-dependent acceptance was superseded by newer MAIN acceptance.
+- Do not reopen historical tasks merely to make old task statuses green.
+- Reactivate only for a new bounded diagnostic/integration review or if the supervisor explicitly transfers a future scope.
 
 ### Agent B
 - Keep as deferred auth/session/runtime specialist.
-- Do not keep it busy when auth is healthy.
-- Reactivate only when auth/session/runtime recovery is an actual user problem or a new scoped task requires it.
+- Reactivate only when auth/session/runtime recovery is an actual problem or an approved Error Code production phase requires it.
 
 ### Agent C
 - PDF/Vision/evidence objectives are integrated into current mainline.
@@ -65,84 +91,91 @@ MAIN is currently executing `MT-20260907-MAIN-DAILY-USE-RELEASE-006`. Do not run
 - Remains paused.
 - Do not restart merely for agent utilization.
 
-## 4. MAIN ownership rule
+## 5. Ownership rules
 
-MAIN is the only active implementation owner by default.
-
-The normal flow is:
+The normal MAIN flow is:
 
 `ITR主管 -> Issue #4 -> MAIN -> Issue #3 -> ITR主管验收`
 
-Specialists are used only when at least one of these is true:
+The Error Code flow is:
+
+`ITR主管 -> Issue #5 -> Error Code Specialist -> Issue #6 -> ITR主管验收`
+
+Parallel specialists are allowed only when at least one is true:
 
 1. the task is genuinely independent and benefits from specialist context;
-2. the task can run in an isolated worktree/runtime without shared-state conflict;
+2. the task runs in an isolated worktree/runtime without shared-state conflict;
 3. MAIN explicitly needs bounded specialist review/evidence support;
-4. the supervisor decides the specialist should become the new owner of a future stream.
+4. the supervisor assigns a specialist as owner of a separate long-lived stream.
 
-Do not assign A/B/C/D tasks merely because they are idle.
+Do not assign agents merely because they are idle.
 
-## 5. Input/output contracts
+## 6. Input/output contracts
 
 ### ITR主管
 Input: user intent + project evidence/status.
 Output: decision, task, acceptance, governance/knowledge promotion.
 
 ### MAIN
-Input: one authorized Master Task + current local state.
+Input: one authorized Workbench Master Task + current MAIN local state.
 Output: completed implementation/verification + one sanitized terminal Issue #3 report.
 
 MAIN should autonomously close ordinary bugs/test failures/timeouts within scope. User interaction is reserved for genuine business decisions, user-only auth/OAuth/MFA, new production-write scope, destructive Git, or true external blockers.
 
+### Error Code Specialist
+Input: one authorized `EC-MASTER_TASK_ID` from Issue #5 + isolated workspace + permitted read-only evidence sources.
+Output: complete Pilot/knowledge implementation and verification + sanitized Issue #6 report.
+
+It must preserve the product principle: **backend may be evidence-rich; agent-facing UX must remain simple and repair-oriented**. Do not convert the Portal into a diagnostic engineer console.
+
 ### Daily Case V2
 Input: natural real case evidence.
-Output to user: concise internal analysis in the preferred format; partner reply only when needed.
-Output to project: only reusable learning/correction/regression value, not raw case history.
+Output to user: concise internal analysis in preferred format; partner reply only when needed.
+Output to project: reusable learning/correction/regression value, not raw case history.
 
 ### Feishu agent
 Input: explicit approved write scope.
 Output: executed Feishu change + verification. No independent technical-rule invention.
 
-## 6. Model routing rule
+## 7. Model routing rule
 
-No agent is permanently tied to GPT-6, Terra, Luna or Spark.
+No agent is permanently tied to GPT-6, Terra, Luna or other execution models.
 
 For each new execution task, the supervisor must state:
-
 - `EXECUTION_MODEL`
 - `EFFORT`
 - `REASON`
 
-Use the lowest sufficient capability consistent with correctness/risk. Do not default to GPT-6 simply because the task is important.
+Use the lowest sufficient capability consistent with correctness/risk.
 
-Current active MAIN task: **GPT-5.6 Terra / High** because it is cross-module Daily-use closure with runtime/regression/usability interactions.
+Current MAIN task: **GPT-5.6 Terra / High** because it is cross-module Daily-use closure with runtime/regression/usability interactions.
+
+Current Error Code initial Pilot task: **GPT-6 / High** because the initial stream must jointly reason over heterogeneous technical references, real repair outcomes, schema/product architecture and implementation. Later routine tasks should normally step down.
 
 `PIE_ANALYZER_MODEL` is a separate application setting and must never be changed merely because an execution task uses a different Codex model.
 
-## 7. Shared-state safety
+## 8. Shared-state safety
 
-The following are shared-state risk areas and should not be manipulated concurrently by multiple agents without explicit isolation:
-
+The following MAIN areas must not be manipulated by Error Code Specialist:
 - `C:\Users\Reggie\Desktop\PIE-ITR-1` dirty worktree;
 - formal Workbench runtime;
 - local API port 8787;
-- frontend runtime;
+- frontend runtime belonging to Workbench;
 - Nextop local auth/session;
 - Feishu auth/session;
-- local learning/case state;
+- MAIN local learning/case state;
 - current analyzer config.
 
-Do not run multiple agents against these simply for parallelism.
+If the specialist needs a local web server for Pilot UX, use its own isolated workspace and a non-conflicting port or a static build/preview path.
 
-## 8. Registry update rule
+## 9. Registry update rule
 
 Update this file when any of these changes:
-
 - a new permanent/specialist agent is created;
 - an agent is retired/paused/reactivated;
-- the primary implementation owner changes;
+- an implementation owner changes;
 - a specialist receives a dedicated local worktree/directory;
-- Error Code专项 ownership is assigned;
+- Error Code专项 ownership/status changes;
 - current task ownership materially changes.
 
 At each major milestone, update `MASTER_PLAN.md` and `AGENT_REGISTRY.md` together or explicitly state why only one changed.
