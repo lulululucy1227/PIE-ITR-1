@@ -1,9 +1,9 @@
 # PIE Troubleshooter — Feishu Build Review
 
-Status: PARTIAL_ACCEPT / REWORK_REQUIRED
+Status: PARTIAL_ACCEPT / EVIDENCE-STATE RECLASSIFICATION REQUIRED
 Reviewer: Troubleshooter｜主管
 Date: 2026-09-08
-Source: PIE Troubleshooter Feishu Knowledge Build Report 2026-09-08
+Source: PIE Troubleshooter Feishu Knowledge Build Report 2026-09-08 + corrected VERIFIED KNOWLEDGE BUILD
 
 ## Accepted as useful evidence
 
@@ -13,75 +13,97 @@ The following parts are useful and may guide product priority:
 - high-frequency symptom-only counts;
 - broad KB coverage gaps, especially connectivity;
 - relevant substantive technical/service content present in 信息同步库;
-- evidence that Error Code cannot be the only product entry.
+- evidence that Error Code cannot be the only product entry;
+- corrected taxonomy separation between observable symptoms, components, causes and internal/business labels;
+- corrected referential integrity of symptom and repair-path IDs;
+- desktop-first product direction.
 
-Important correction: the 信息同步库 field/value `需同步` is only an internal colleague-notification/reminder flag. It is **not** evidence that the technical content is newer, unsynchronized to KB, superseding, stale, or pending knowledge promotion. Do not use this flag for currentness, conflict, KB coverage, or publishability decisions. See `docs/troubleshooter/FEISHU_FIELD_SEMANTICS.md`.
+Important correction: the 信息同步库 field/value `需同步` is only an internal colleague-notification/reminder flag. It is not technical evidence and must not be used for currentness, conflict, KB coverage, or publishability decisions.
 
-## Not accepted as publishable knowledge
+## Evidence-policy correction from Troubleshooter｜主管
 
-Do NOT hand REPORT D/E/F/H directly to Builder as canonical repair knowledge.
+The prior review was too strict in treating lack of explicit partner `solved` feedback as a blocker for mature repair guidance.
 
-### 1. Taxonomy semantic classification is too permissive
-Many labels classified as `OBSERVABLE_AREA` actually encode components or causes, e.g. adapter failure, mainboard/driver-board charging failure, GNSS module abnormality, vision module failure, LiDAR module abnormality, wheel electrical/communication/Hall abnormality, harness/connector abnormality.
-These must be reclassified into COMPONENT / FAULT_CAUSE / AMBIGUOUS, not exposed as agent-facing symptoms.
+For PIE service operations:
+- `VERIFIED_RESOLUTION` remains the strongest evidence;
+- however, a repair method that has remained materially unchanged in maintained operational guidance for a meaningful period, is repeatedly retained/used in PIE/KB/service practice, and has not accumulated contradictory/reopen/superseding evidence may qualify as `STABLE_OPERATIONAL_GUIDANCE` even without explicit partner closure feedback.
 
-### 2. Outcome evidence is insufficient for many replacement paths
-The report itself states that the ITR resolution/outcome field is nearly empty. Therefore repair paths must distinguish:
-- recommended action in a source;
-- action actually performed;
-- verified solution with post-repair outcome.
-A recommendation or `Solutions` text is not automatically a verified repair outcome.
+Therefore:
 
-### 3. Several repair paths are over-scoped or unsupported
-Examples include `ALL` model scope or broad LUBA-family scope without evidence, and direct part/fallback chains inferred beyond the observed cohort. Model/version scope must be evidence-backed.
+`no explicit solved reply != no validation`.
 
-### 4. 1202 is in direct conflict with current specialist evidence
-The Feishu report proposes cutting-motor -> driver-board -> mainboard across broad LUBA scope. The current Troubleshooter Builder checkpoint separately identified a promoted 1202 cable -> mainboard sequence with unresolved model scope. Until reconciled, 1202 must not be promoted from this Feishu report.
+Do not require every repair path to have an explicit post-repair partner confirmation before it can be used in Troubleshooter.
 
-### 5. Controlled symptom library has broken or inconsistent references
-Several symptom rows are marked publishable while their Repair Path IDs are not defined in REPORT F. Product counts are also inconsistent (`Observable Areas (9)` while 10 areas are listed; elsewhere total is 10).
+See `docs/troubleshooter/EVIDENCE_PROMOTION_POLICY.md`.
 
-### 6. Internal-tool content leaks into frontend candidates
-`MammoSuite cannot connect` is included as a controlled symptom while the same report later classifies MammoSuite issues as internal/excluded. Internal-tool troubleshooting must remain separate unless the target user is explicitly authorized to use that tool.
+## Evidence states to use going forward
 
-### 7. Some controlled symptoms are too broad
-Examples such as `Robot moves abnormally / jerky`, `Vision/camera abnormal`, `Map is distorted or lost`, and combined positioning states may lead to materially different repair paths. They require evidence-led splitting or PIE-only fallback.
+1. `VERIFIED_RESOLUTION`
+   - explicit repair success + appropriate verification.
+
+2. `STABLE_OPERATIONAL_GUIDANCE`
+   - long-standing, actively maintained, repeatedly retained/used guidance;
+   - no meaningful contradiction, repeated reopen/rework pattern or superseding rule;
+   - scope sufficiently known;
+   - explicit partner solved feedback is optional.
+
+3. `ACTION_PERFORMED_OUTCOME_UNKNOWN`
+   - action performed, result unclear, and insufficient operational stability yet.
+
+4. `SOURCE_RECOMMENDATION`
+   - recommendation exists but is relatively new/weakly scoped/sparsely used or not yet operationally mature.
+
+5. `CONFLICTING_EVIDENCE`
+   - credible evidence materially conflicts; do not publish as confident self-service until reconciled.
+
+## Current assessment of corrected Feishu build
+
+The corrected report is materially improved and may now be used as a candidate construction dataset, but its evidence labels are not yet final because it classifies all non-explicit-success paths only as `ACTION_PERFORMED_OUTCOME_UNKNOWN` or `SOURCE_RECOMMENDATION`.
+
+This underestimates long-standing operational repair guidance.
+
+Before final Builder publication, the affected high-value Repair Paths should be reviewed for possible upgrade to `STABLE_OPERATIONAL_GUIDANCE` using:
+- age / duration in maintained service guidance;
+- repeated appearance/retention in 工单速查, Solutions, 信息同步库 or PIE operating practice;
+- absence of contradictory/reopen/replacement-failed evidence;
+- known model/version scope;
+- whether PIE has continued to use the same action without correction.
+
+Do not invent explicit success counts that do not exist.
+
+## Items that remain blocked or require care
+
+### 1. 1202 remains frozen
+The Feishu-derived cutting-motor path conflicts with the currently promoted 1202 cable -> mainboard path. Model scope remains unresolved. Keep `CONFLICTING_EVIDENCE / PIE_REVIEW_REQUIRED` until the user supplies the missing scope/decision.
+
+### 2. Over-broad symptoms remain PIE-only
+`行走异常/抖动`, `视觉/摄像头异常`, and `工作中异常停机` remain too broad for one stable repair path unless further split by observable distinctions.
+
+### 3. Scope must remain evidence-backed
+Do not expand a repair path from observed LUBA models to `ALL` products without evidence.
+
+### 4. Internal tools/business areas stay out of the machine-symptom frontend
+MammoSuite, Mammotion Kit, account/permission, warranty/claim and parts lookup remain internal/separate unless a future product decision explicitly includes them.
 
 ## Product architecture decision
 
-For desktop, do not force a preliminary binary choice between `I have an Error Code` and `I do not have an Error Code`.
-
-Preferred desktop home:
+Desktop home remains:
 1. persistent Product/Model context;
-2. prominent Error Code / Error Message search at top;
-3. controlled `Choose by symptom` area visible on the same page below/alongside it;
+2. prominent Error Code / Error Message search;
+3. controlled `Choose by symptom` navigation visible on the same page;
 4. both routes converge on the same canonical Repair Card.
 
 Reason: only 38/737 ITR records contain an Error Code, so symptom navigation is operationally the dominant path while Error Code search remains a fast shortcut.
 
-## Required rework before Builder expansion
+## Builder gate
 
-Feishu agent must produce a corrected `VERIFIED_KNOWLEDGE_BUILD` with these gates:
+Builder expansion no longer requires every P0/P1 path to become `VERIFIED_RESOLUTION`.
 
-1. Reclassify every taxonomy candidate using strict semantic types:
-   `OBSERVABLE_AREA / OBSERVABLE_SYMPTOM / QUALIFIER / COMPONENT / FAULT_CAUSE / ACTION / BUSINESS_INTERNAL / AMBIGUOUS_MIXED`.
-2. No component/cause wording may appear as a Controlled Symptom.
-3. For each Repair Path, explicitly label evidence state:
-   - `SOURCE_RECOMMENDATION`
-   - `ACTION_PERFORMED_OUTCOME_UNKNOWN`
-   - `VERIFIED_RESOLUTION`
-   - `CONFLICTING_EVIDENCE`
-4. Direct part-replacement advice may be `P0/P1` only when model scope and verified outcome evidence are adequate.
-5. Any unsupported `ALL` model scope must be removed or replaced by explicit evidence-backed scope / unknown.
-6. Reconcile 1202 against existing promoted knowledge and leave blocked if scope/semantics conflict.
-7. Every publishable symptom must reference an existing valid Repair Path or an explicit PIE-only fallback.
-8. Separate internal-tool issues (MammoSuite/Kit/account/parts/warranty) from agent-facing machine symptoms.
-9. Normalize all counts/area totals and validate referential integrity.
-10. Canonical verification must preserve the established repair-validation requirements; agent display may be simplified but cannot silently delete required verification.
-11. Do not use workflow/reminder fields such as 信息同步库 `需同步` as technical-currentness or knowledge-promotion evidence. Evaluate the substantive content only.
+A path may be eligible for agent-facing P0/P1 when:
+- symptom and scope are sufficiently clear;
+- action is safe/executable for target agents;
+- verification + fallback exist;
+- evidence is either `VERIFIED_RESOLUTION` or `STABLE_OPERATIONAL_GUIDANCE`;
+- no unresolved conflict/supersession exists.
 
-## Gate
-
-Builder desktop expansion remains blocked on `VERIFIED_KNOWLEDGE_BUILD`, not on the current raw Feishu handoff.
-
-The frequency audit is accepted for prioritization; repair mappings remain candidate data until corrected and reviewed.
+The next evidence task is therefore **reclassification of mature guidance**, not collection of explicit solved feedback for every historical repair recommendation.
