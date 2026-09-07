@@ -14,9 +14,13 @@ Canonical repository: `lulululucy1227/PIE-ITR-1`.
 
 ## Current operating structure
 
-- `GPT_HANDOFF.md` — 精炼项目入口，只保存当前阶段、关键边界、权威来源、优先级和下一步门槛。
+- `MASTER_PLAN.md` — **当前项目总计划与阶段门禁的权威入口**；新 GPT/Codex 窗口先读这里。
+- `AGENT_REGISTRY.md` — **当前 Agent 名称、职责、目录、任务、输入/输出和专项归属的权威清单**；如果聊天记忆中的 Agent 集合不同，以此文件和最新 Issue #3/#4 为准。
+- `GPT_HANDOFF.md` — 精炼项目入口，连接当前阶段、关键边界、权威来源、优先级和下一步门槛。
 - Issue #1 — **Learning Candidate intake**：收集从真实案例中提炼出的新知识、规则修正、冲突、回归发现和 Workbench 缺陷；不保存完整案例历史。
 - Issue #2 — 诊断架构变更的讨论与索引；正式架构以文件为准。
+- Issue #3 — **Codex/MAIN -> ITR主管执行报告**。
+- Issue #4 — **ITR主管 -> Codex/MAIN Master Task / Direction**。
 - `docs/knowledge/` — 已晋升的可复用知识与知识治理规则。
 - `docs/regression/REAL_CASE_REGRESSION.md` — 代表性回归条件与断言，不以完整工单镜像为目标。
 - `docs/architecture/` — 当前系统与诊断架构基线。
