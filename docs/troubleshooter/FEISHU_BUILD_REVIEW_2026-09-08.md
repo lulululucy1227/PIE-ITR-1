@@ -12,8 +12,10 @@ The following parts are useful and may guide product priority:
 - high-frequency Error Code counts as observed in ITR;
 - high-frequency symptom-only counts;
 - broad KB coverage gaps, especially connectivity;
-- existence of information-sync items needing reconciliation;
+- relevant substantive technical/service content present in 信息同步库;
 - evidence that Error Code cannot be the only product entry.
+
+Important correction: the 信息同步库 field/value `需同步` is only an internal colleague-notification/reminder flag. It is **not** evidence that the technical content is newer, unsynchronized to KB, superseding, stale, or pending knowledge promotion. Do not use this flag for currentness, conflict, KB coverage, or publishability decisions. See `docs/troubleshooter/FEISHU_FIELD_SEMANTICS.md`.
 
 ## Not accepted as publishable knowledge
 
@@ -76,6 +78,7 @@ Feishu agent must produce a corrected `VERIFIED_KNOWLEDGE_BUILD` with these gate
 8. Separate internal-tool issues (MammoSuite/Kit/account/parts/warranty) from agent-facing machine symptoms.
 9. Normalize all counts/area totals and validate referential integrity.
 10. Canonical verification must preserve the established repair-validation requirements; agent display may be simplified but cannot silently delete required verification.
+11. Do not use workflow/reminder fields such as 信息同步库 `需同步` as technical-currentness or knowledge-promotion evidence. Evaluate the substantive content only.
 
 ## Gate
 
