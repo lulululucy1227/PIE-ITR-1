@@ -319,3 +319,11 @@ State: TECHNICAL_PILOT_READY / WAITING_BUSINESS_SCOPE; ERROR_CODE_PILOT_GREEN no
 Eight selected code entries and a standalone local web Pilot are implemented. Fresh Node/browser/build/privacy/start/relaunch and extracted-package checks passed; see error-code-pilot/docs/HANDOFF.md.
 Remaining decision: confirm exact model/series and material version limits for the promoted 1202 cable -> mainboard sequence. Replacement prose remains outside agent data until confirmed.
 MAIN implementation/runtime/sessions are untouched by this specialist. Task/report remain Issue #5 / Issue #6.
+
+### Error Code local knowledge checkpoint — 2026-09-08
+
+EC-MT-20260908-KNOWLEDGE-INGEST-004: TROUBLESHOOTER_DESKTOP_KNOWLEDGE_GREEN, local specialist self-approval under the latest Issue #5 task. This supersedes the old local waiting-for-1202-scope project status above; the1202 hardware knowledge item itself remains frozen.
+
+Actual sanitized candidate import19 plus separate frozen1202;0 new full-path promotions,17 PIE_ONLY,2 WITHHELD, frozen extraWITHHELD. Existing desktop behavior preserved. Final64 Node tests,33 browser checks, native125% zoom, two owned lifecycle cycles and extracted eight-entry package/hash/privacy checks passed. Independent review's reciprocal candidate-provenance defect was reproduced, fixed and approved on re-review; no unresolved finding.
+
+Workspace/owner unchanged: C:/Users/Reggie/Desktop/PIE-ITR-ErrorCode, Error Code Specialist. Only the new canonical payload was synced from origin/main1da74aa; no MAIN merge/reset/runtime mutation or production/public/default-branch write. See error-code-pilot/docs/HANDOFF.md. Paired registry update is local only; canonical MAIN acceptance is not asserted. Task/report channels remain Issue #5 / Issue #6.

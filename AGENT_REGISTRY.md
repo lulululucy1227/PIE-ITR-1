@@ -187,3 +187,11 @@ Error Code Specialist remains the sole owner of this stream. MAIN is not reassig
 Current local state: TECHNICAL_PILOT_READY / WAITING_BUSINESS_SCOPE for EC-MT-20260907-PILOT-001; ERROR_CODE_PILOT_GREEN is not claimed.
 All independent safe audit/implementation/verification/packaging work is complete. The remaining business decision is the exact model/version scope of the promoted 1202 replacement sequence; its replacement advice stays withheld in the agent projection.
 See error-code-pilot/docs/HANDOFF.md and the matching Issue #6 report. These control-file updates remain local to the specialist branch; there was no push or MAIN integration.
+
+## 11. Error Code local knowledge checkpoint — 2026-09-08
+
+Error Code Specialist remains sole owner in its independent clone C:/Users/Reggie/Desktop/PIE-ITR-ErrorCode on error-code/ec-mt-20260907-pilot-001-canonical. MAIN ownership and shared state are unchanged.
+
+EC-MT-20260908-KNOWLEDGE-INGEST-004 reached TROUBLESHOOTER_DESKTOP_KNOWLEDGE_GREEN under authorized local self-approval. Actual19 candidate records imported,0 new full promotions,17 PIE_ONLY,2 WITHHELD; extra1202 retained separately frozen.64 automated tests,33 browser checks, native125% zoom, two owned starts/exits and extracted package/privacy verification passed. Independent review is closed with no unresolved finding.
+
+This replaces the earlier local project-wide1202 waiting state; unresolved knowledge remains safely withheld and does not block the local gate under the newer task. No business decision is needed for this completed ingestion. Broader publication/integration needs a separate task. See the paired MASTER_PLAN local checkpoint and error-code-pilot/docs/HANDOFF.md. Final report only Issue #6; no push/default merge or MAIN integration.

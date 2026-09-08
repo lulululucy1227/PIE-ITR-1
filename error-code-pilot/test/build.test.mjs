@@ -19,13 +19,21 @@ test('invalid knowledge fails the build before changing last valid output',async
   await assert.rejects(()=>build({catalog:bad}),/verification/);
   assert.equal(fs.readFileSync(path.join(root,'dist/knowledge.json'),'utf8'),original);
 });
+
+test('invalid private candidate source or promotion fails before changing valid output',async()=>{
+  const original=fs.readFileSync(path.join(root,'dist/knowledge.json'),'utf8');
+  const candidates=JSON.parse(fs.readFileSync(path.join(root,'data/feishu-candidates.json'),'utf8'));
+  candidates.candidates[0].source.action=['Replace every mainboard.'];
+  await assert.rejects(()=>build({candidates}),/source content drift/);
+  assert.equal(fs.readFileSync(path.join(root,'dist/knowledge.json'),'utf8'),original);
+});
 test('local preview rejects write methods, raw paths, traversal and foreign origins',async()=>{
   const server=await createPreview({port:0});
   try {
     const base='http://127.0.0.1:'+server.address().port;
     assert.equal((await fetch(base+'/')).status,200);
     assert.equal((await fetch(base+'/knowledge.json')).status,200);
-    for(const url of ['/data/canonical.json','/.git/config','/../data/canonical.json','/%2e%2e%2fdata%2fcanonical.json','/artifacts/source-audit.json','/docs/KNOWLEDGE_PROMOTION_AUDIT_2026-09-08.md','/.local/desktop-data.mjs','/candidate.json']) assert.equal((await fetch(base+url)).status,404);
+    for(const url of ['/data/canonical.json','/.git/config','/../data/canonical.json','/%2e%2e%2fdata%2fcanonical.json','/artifacts/source-audit.json','/docs/KNOWLEDGE_PROMOTION_AUDIT_2026-09-08.md','/.local/desktop-data.mjs','/candidate.json','/data/feishu-candidates.json','/feishu-candidates.json','/lib/candidates.mjs','/docs/INGEST_EVIDENCE_REVIEW_2026-09-08.md','/docs/troubleshooter/FEISHU_CANDIDATE_PAYLOAD_2026-09-08.md']) assert.equal((await fetch(base+url)).status,404);
     for(const method of ['POST','PUT','PATCH','DELETE','OPTIONS']) assert.equal((await fetch(base+'/',{method})).status,405);
     assert.equal((await fetch(base+'/',{headers:{Origin:'https://outside.invalid'}})).status,403);
     const res=await fetch(base+'/');

@@ -40,7 +40,7 @@ try {
   foreach ($entry in $archive.Entries) {
     $reader = [IO.StreamReader]::new($entry.Open())
     try { $content = $reader.ReadToEnd() } finally { $reader.Dispose() }
-    if ($content -match 'PRIVATE-CANARY|TEST MODEL|local-error-reference|[A-Z]:[\\/]Users[\\/]|sk-[A-Za-z0-9]{20}|ghp_[A-Za-z0-9]{20}|@[A-Za-z0-9.-]+\.(com|net|org)') { throw "Package content review failed: $($entry.FullName)" }
+    if ($content -match 'PRIVATE-CANARY|TEST MODEL|local-error-reference|candidate_refs|REP-[A-Z0-9]+-\d{3}|feishu-candidates|repeated_use_signal|[A-Z]:[\\/]Users[\\/]|sk-[A-Za-z0-9]{20}|ghp_[A-Za-z0-9]{20}|@[A-Za-z0-9.-]+\.(com|net|org)') { throw "Package content review failed: $($entry.FullName)" }
   }
 } finally { $archive.Dispose() }
 $extracted = Join-Path $pilotRoot "artifacts\package-check-$stamp"

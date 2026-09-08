@@ -7,6 +7,7 @@
   "scripts": {
     "test": "node --test test/*.test.mjs",
     "build": "node scripts/build.mjs",
+    "check:candidates": "node scripts/ingest-candidates.mjs --check",
     "start": "node scripts/serve.mjs",
     "test:browser": "node test/browser.mjs",
     "test:zoom": "node test/browser-zoom.mjs"

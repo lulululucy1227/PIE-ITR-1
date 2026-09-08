@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "knowledgeVersion": "2026-09-08-desktop.1",
+  "knowledgeVersion": "2026-09-08-ingest.1",
   "cards": [
     {
       "id": "ec-1202",
@@ -1900,7 +1900,10 @@
       "label_cn": "单个轮子不转",
       "aliases": [],
       "agent_visibility": "NAVIGATION",
-      "repair_refs": []
+      "repair_refs": [],
+      "candidate_refs": [
+        "REP-WHEEL-001"
+      ]
     },
     {
       "symptom_id": "SYM-002",
@@ -1909,7 +1912,10 @@
       "label_cn": "多个轮子不转",
       "aliases": [],
       "agent_visibility": "NAVIGATION",
-      "repair_refs": []
+      "repair_refs": [],
+      "candidate_refs": [
+        "REP-WHEEL-001"
+      ]
     },
     {
       "symptom_id": "SYM-003",
@@ -1918,7 +1924,10 @@
       "label_cn": "轮子异响",
       "aliases": [],
       "agent_visibility": "NAVIGATION",
-      "repair_refs": []
+      "repair_refs": [],
+      "candidate_refs": [
+        "REP-WHEEL-003"
+      ]
     },
     {
       "symptom_id": "SYM-004",
@@ -1932,6 +1941,10 @@
           "card_id": "sym-cutting-functional-test",
           "repair_path_id": "software"
         }
+      ],
+      "candidate_refs": [
+        "REP-CUT-001",
+        "REP-1202-001"
       ]
     },
     {
@@ -1941,7 +1954,10 @@
       "label_cn": "切割高度无法调节",
       "aliases": [],
       "agent_visibility": "NAVIGATION",
-      "repair_refs": []
+      "repair_refs": [],
+      "candidate_refs": [
+        "REP-CUT-002"
+      ]
     },
     {
       "symptom_id": "SYM-006",
@@ -1950,7 +1966,10 @@
       "label_cn": "割草盘异响",
       "aliases": [],
       "agent_visibility": "NAVIGATION",
-      "repair_refs": []
+      "repair_refs": [],
+      "candidate_refs": [
+        "REP-CUT-001"
+      ]
     },
     {
       "symptom_id": "SYM-007",
@@ -1959,7 +1978,10 @@
       "label_cn": "不充电",
       "aliases": [],
       "agent_visibility": "NAVIGATION",
-      "repair_refs": []
+      "repair_refs": [],
+      "candidate_refs": [
+        "REP-CHARGE-001"
+      ]
     },
     {
       "symptom_id": "SYM-008",
@@ -1968,7 +1990,10 @@
       "label_cn": "充电中断/充不满",
       "aliases": [],
       "agent_visibility": "NAVIGATION",
-      "repair_refs": []
+      "repair_refs": [],
+      "candidate_refs": [
+        "REP-CHARGE-002"
+      ]
     },
     {
       "symptom_id": "SYM-009",
@@ -1977,7 +2002,10 @@
       "label_cn": "无法识别充电桩",
       "aliases": [],
       "agent_visibility": "NAVIGATION",
-      "repair_refs": []
+      "repair_refs": [],
+      "candidate_refs": [
+        "REP-CHARGE-001"
+      ]
     },
     {
       "symptom_id": "SYM-010",
@@ -1986,7 +2014,10 @@
       "label_cn": "无法回桩",
       "aliases": [],
       "agent_visibility": "NAVIGATION",
-      "repair_refs": []
+      "repair_refs": [],
+      "candidate_refs": [
+        "REP-DOCK-001"
+      ]
     },
     {
       "symptom_id": "SYM-011",
@@ -1995,7 +2026,10 @@
       "label_cn": "不开机",
       "aliases": [],
       "agent_visibility": "NAVIGATION",
-      "repair_refs": []
+      "repair_refs": [],
+      "candidate_refs": [
+        "REP-POWER-001"
+      ]
     },
     {
       "symptom_id": "SYM-012",
@@ -2004,7 +2038,10 @@
       "label_cn": "电池耗电过快",
       "aliases": [],
       "agent_visibility": "NAVIGATION",
-      "repair_refs": []
+      "repair_refs": [],
+      "candidate_refs": [
+        "REP-POWER-002"
+      ]
     },
     {
       "symptom_id": "SYM-013",
@@ -2013,7 +2050,10 @@
       "label_cn": "意外关机",
       "aliases": [],
       "agent_visibility": "NAVIGATION",
-      "repair_refs": []
+      "repair_refs": [],
+      "candidate_refs": [
+        "REP-POWER-001"
+      ]
     },
     {
       "symptom_id": "SYM-014",
@@ -2022,7 +2062,10 @@
       "label_cn": "定位失败/定位不准",
       "aliases": [],
       "agent_visibility": "NAVIGATION",
-      "repair_refs": []
+      "repair_refs": [],
+      "candidate_refs": [
+        "REP-POS-001"
+      ]
     },
     {
       "symptom_id": "SYM-015",
@@ -2031,7 +2074,10 @@
       "label_cn": "连不上RTK基站",
       "aliases": [],
       "agent_visibility": "NAVIGATION",
-      "repair_refs": []
+      "repair_refs": [],
+      "candidate_refs": [
+        "REP-RTK-001"
+      ]
     },
     {
       "symptom_id": "SYM-016",
@@ -2040,7 +2086,10 @@
       "label_cn": "地图丢失/无法加载",
       "aliases": [],
       "agent_visibility": "NAVIGATION",
-      "repair_refs": []
+      "repair_refs": [],
+      "candidate_refs": [
+        "REP-POS-001"
+      ]
     },
     {
       "symptom_id": "SYM-017",
@@ -2049,7 +2098,10 @@
       "label_cn": "连不上WiFi",
       "aliases": [],
       "agent_visibility": "NAVIGATION",
-      "repair_refs": []
+      "repair_refs": [],
+      "candidate_refs": [
+        "REP-WIFI-001"
+      ]
     },
     {
       "symptom_id": "SYM-018",
@@ -2058,7 +2110,10 @@
       "label_cn": "连不上4G/移动网络",
       "aliases": [],
       "agent_visibility": "NAVIGATION",
-      "repair_refs": []
+      "repair_refs": [],
+      "candidate_refs": [
+        "REP-WIFI-001"
+      ]
     },
     {
       "symptom_id": "SYM-019",
@@ -2067,7 +2122,10 @@
       "label_cn": "蓝牙连接失败",
       "aliases": [],
       "agent_visibility": "NAVIGATION",
-      "repair_refs": []
+      "repair_refs": [],
+      "candidate_refs": [
+        "REP-BT-001"
+      ]
     },
     {
       "symptom_id": "SYM-020",
@@ -2076,7 +2134,10 @@
       "label_cn": "碰撞传感器误触发",
       "aliases": [],
       "agent_visibility": "NAVIGATION",
-      "repair_refs": []
+      "repair_refs": [],
+      "candidate_refs": [
+        "REP-BUMP-001"
+      ]
     },
     {
       "symptom_id": "SYM-021",
@@ -2090,6 +2151,9 @@
           "card_id": "ec-5501",
           "repair_path_id": "pie"
         }
+      ],
+      "candidate_refs": [
+        "REP-LIDAR-001"
       ]
     },
     {
@@ -2099,7 +2163,10 @@
       "label_cn": "可见进水痕迹",
       "aliases": [],
       "agent_visibility": "NAVIGATION",
-      "repair_refs": []
+      "repair_refs": [],
+      "candidate_refs": [
+        "REP-WATER-001"
+      ]
     },
     {
       "symptom_id": "SYM-023",
@@ -2108,7 +2175,10 @@
       "label_cn": "线缆/排线可见损坏",
       "aliases": [],
       "agent_visibility": "NAVIGATION",
-      "repair_refs": []
+      "repair_refs": [],
+      "candidate_refs": [
+        "REP-CABLE-001"
+      ]
     },
     {
       "symptom_id": "SYM-024",
@@ -2117,7 +2187,10 @@
       "label_cn": "物理撞击损坏",
       "aliases": [],
       "agent_visibility": "NAVIGATION",
-      "repair_refs": []
+      "repair_refs": [],
+      "candidate_refs": [
+        "REP-PHY-001"
+      ]
     },
     {
       "symptom_id": "SYM-025",
@@ -2126,7 +2199,10 @@
       "label_cn": "固件升级失败",
       "aliases": [],
       "agent_visibility": "NAVIGATION",
-      "repair_refs": []
+      "repair_refs": [],
+      "candidate_refs": [
+        "REP-FW-001"
+      ]
     },
     {
       "symptom_id": "SYM-026",
@@ -2135,7 +2211,8 @@
       "label_cn": "行走异常/抖动",
       "aliases": [],
       "agent_visibility": "PIE_ONLY",
-      "repair_refs": []
+      "repair_refs": [],
+      "candidate_refs": []
     },
     {
       "symptom_id": "SYM-027",
@@ -2144,7 +2221,8 @@
       "label_cn": "视觉/摄像头异常",
       "aliases": [],
       "agent_visibility": "PIE_ONLY",
-      "repair_refs": []
+      "repair_refs": [],
+      "candidate_refs": []
     },
     {
       "symptom_id": "SYM-028",
@@ -2153,7 +2231,8 @@
       "label_cn": "工作中异常停机",
       "aliases": [],
       "agent_visibility": "PIE_ONLY",
-      "repair_refs": []
+      "repair_refs": [],
+      "candidate_refs": []
     }
   ]
 }

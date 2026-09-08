@@ -36,4 +36,14 @@ The screen retains failure/returned state per card during the current visit acro
 
 Applicable canonical repair validation retains Functional Test, Communication Check, Auto Map Run, all three reports and Connect Checking screenshot. Burn-in is supplemental, never a replacement. Missing verification or fallback fails validation. Operational applicability is reviewed when updating knowledge; prior firmware targets are not timeless recommendations.
 
-The supervisor-reported 19 Feishu candidates have no individual payload in the available handoff/repository. No import or per-record audit of those missing records is claimed. The schema supports receiving them as candidates later; priority alone cannot expose them.
+As of EC-MT-20260908-KNOWLEDGE-INGEST-004, the supervisor's sanitized payload is available and all19 non-1202 records are imported. REP-1202-001 is a separate frozen record. Prior zero-import statements describe task003 only.
+
+## Private candidate contract
+
+`data/feishu-candidates.json` has schemaVersion1, sanitized source path/hash with productionRead/Write=false, candidates[19], frozen[1], and five reconciliation-only Error Code groups. Every source field is preserved exactly from the supplied Markdown; missing facts remain null/empty. Candidate scope is source wording, never parsed into invented universal compatibility. All19 IDs and the extra frozen ID resolve through private symptom `candidate_refs`, separately from approved `repair_refs`. Signed and unsigned codes remain distinct.
+
+Each candidate's independent `review` records evidence_state, visibility, rationale, source_refs, last_reviewed, promoted_refs, known_conflicts_or_reopens, scope/verification/fallback confirmation, active_maintenance and nullable operational history. Flags describe the full imported path, not supported fragments. No observed operational first-use, repeated-use count or full-path maintenance history was supplied, so those facts are not inferred from repository age. Empty conflicts means no listed conflict in this bounded review, not a complete real-case reopen audit.
+
+Promotion requires VERIFIED_RESOLUTION or STABLE_OPERATIONAL_GUIDANCE plus reviewed scope, verification and fallback, no conflict/supersession, and independently approved canonical action references with matching symptom applicability and private parent linkage. Stable guidance additionally needs affirmative maintenance and repeated-use evidence; an explicit partner solved reply is not required. Weak/private records cannot carry promoted references. CONFLICTING_EVIDENCE must be WITHHELD; frozen1202 can never publish a hardware action. Priority is retained only as source metadata.
+
+`parseCandidatePayload` rejects duplicate IDs/fields and unknown source fields. `validateCandidates` enforces exact19+1 IDs, source/hash parity, required reviews and bidirectional references. Build validates canonical and private data before changing dist, then uses the existing allowlist projection. `candidateCounts` reports record decisions, never repair success rates. The importer, private JSON, metadata, source text and build audit manifest are never runtime assets.
