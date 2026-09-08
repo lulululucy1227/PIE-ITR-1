@@ -8,7 +8,7 @@ import {createPreview} from '../scripts/serve.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 test('build emits only agent assets and strips raw provenance and unresolved repair prose',async()=>{
   const result=await build();
-  assert.deepEqual(fs.readdirSync(result.outDir).sort(),['app.mjs','engine.mjs','index.html','knowledge.json','styles.css']);
+  assert.deepEqual(fs.readdirSync(result.outDir).sort(),['app.mjs','engine.mjs','index.html','knowledge.json','service-plan.mjs','styles.css']);
   const data=fs.readFileSync(path.join(result.outDir,'knowledge.json'),'utf8');
   for(const forbidden of ['sourceRefs','"evidence":','"review":','"label_cn":','"evidence_state":','local-error-reference','cohortCount','2.3.30.26','C:/Users/','customer','cookie','INTERNAL-CANARY']) assert.equal(data.includes(forbidden),false,forbidden);
 });

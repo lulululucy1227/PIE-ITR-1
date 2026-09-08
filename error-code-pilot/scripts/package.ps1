@@ -8,7 +8,7 @@ $stage = Join-Path $pilotRoot "artifacts\package-$stamp"
 $zip = Join-Path $pilotRoot "artifacts\error-code-pilot-$stamp.zip"
 $runtimeNode = 'C:\Users\Reggie\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe'
 if (-not (Test-Path -LiteralPath $runtimeNode)) { throw 'Bundled runtime is unavailable; do not produce a partial colleague package.' }
-$allow = @('dist/index.html','dist/styles.css','dist/app.mjs','dist/engine.mjs','dist/knowledge.json','scripts/serve.mjs','run-pilot.cmd','LOCAL_README.txt','runtime/node.exe')
+$allow = @('dist/index.html','dist/styles.css','dist/app.mjs','dist/engine.mjs','dist/service-plan.mjs','dist/knowledge.json','scripts/serve.mjs','run-pilot.cmd','LOCAL_README.txt','runtime/node.exe')
 New-Item -ItemType Directory -Path (Join-Path $stage 'dist'),(Join-Path $stage 'scripts'),(Join-Path $stage 'runtime') -Force | Out-Null
 foreach ($relative in $allow) {
   if ($relative -eq 'LOCAL_README.txt' -or $relative -eq 'runtime/node.exe') { continue }
@@ -20,7 +20,7 @@ PIE Troubleshooter — desktop local review
 No Node.js installation is required. The package includes its local runtime.
 Double-click run-pilot.cmd.
 Open http://127.0.0.1:8796 and use Ctrl+C to stop this preview.
-If 8796 is occupied, run node scripts/serve.mjs 8797. Never use 8787.
+If 8796 is occupied, run runtime\node.exe scripts/serve.mjs 8797. Never use 8787.
 
 This package is for local service-agent/supervisor review only. No external deployment is authorized.
 Page 1: choose the supported mower model and problem area, then a filtered controlled symptom.

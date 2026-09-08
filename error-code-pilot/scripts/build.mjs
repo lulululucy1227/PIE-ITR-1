@@ -13,7 +13,7 @@ export async function build({catalog,candidates}={}) {
   const candidateErrors=validateCandidates(privateCandidates,input,{payloadText});
   if(candidateErrors.length)throw new Error(candidateErrors.join('\n'));
   const files=new Map();
-  for(const name of ['index.html','styles.css','app.mjs','engine.mjs']) files.set(name,fs.readFileSync(path.join(root,'src',name)));
+  for(const name of ['index.html','styles.css','app.mjs','engine.mjs','service-plan.mjs']) files.set(name,fs.readFileSync(path.join(root,'src',name)));
   files.set('knowledge.json',Buffer.from(JSON.stringify(agent,null,2)+'\n'));
   const outDir=path.join(root,'dist');
   if(fs.existsSync(outDir)) {

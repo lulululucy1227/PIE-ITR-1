@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../dist');
-const mime={'index.html':'text/html; charset=utf-8','styles.css':'text/css; charset=utf-8','app.mjs':'text/javascript; charset=utf-8','engine.mjs':'text/javascript; charset=utf-8','knowledge.json':'application/json; charset=utf-8'};
+const mime={'index.html':'text/html; charset=utf-8','styles.css':'text/css; charset=utf-8','app.mjs':'text/javascript; charset=utf-8','engine.mjs':'text/javascript; charset=utf-8','service-plan.mjs':'text/javascript; charset=utf-8','knowledge.json':'application/json; charset=utf-8'};
 export async function createPreview({port=8796}={}) {
   if(!Number.isInteger(port)||port<0||port>65535||port===8787)throw new Error('Invalid pilot port; 8787 belongs to MAIN.');
   if(!fs.existsSync(path.join(root,'index.html')))throw new Error('Build first: node scripts/build.mjs');

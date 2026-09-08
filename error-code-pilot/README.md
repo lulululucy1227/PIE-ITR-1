@@ -41,3 +41,5 @@ The actual 19 sanitized Feishu candidates and separate frozen1202 are retained i
 This is a local review product. External rollout, hosting/authentication and integration into MAIN need a separate task. No default/main push or merge is part of this release.
 
 The latest [visual refinement and taxonomy vocabulary audit](docs/UI_REFINEMENT_TAXONOMY_2026-09-08.md) records the user-approved snapshot reference. Run `node test/refinement-browser.mjs` for the desktop picker/keyboard and basic mobile checks. Desktop browsers supporting customizable native selects show the styled green picker; other browsers retain standard controlled selects.
+
+The [service guidance architecture](docs/SERVICE_GUIDANCE_ARCHITECTURE_2026-09-08.md) explains the numbered action/verification layout and the reserved step-level interfaces for future parts, tools, reasoning and disassembly. No resource provider is connected and empty resources produce no UI. Run `node test/service-browser.mjs` for the presentation and content-preservation checks.

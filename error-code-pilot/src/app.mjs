@@ -1,4 +1,5 @@
 import {searchCards,resolveCard,recordOutcome,OBSERVABLE_AREAS,controlledModels,controlledSymptoms,controlledReferences,controlledRepairAllowed,validControlledSelection} from './engine.mjs';
+import {buildServicePlan} from './service-plan.mjs';
 const $=id=>document.getElementById(id);
 // Presentation vocabulary follows the reviewed local ITR taxonomy snapshot.
 // Keep catalog IDs/areas and repair scope unchanged; labels are not diagnoses.
@@ -90,6 +91,35 @@ function displaySolution(){const result=resolved();if(!result||['choose_symptom'
 }
 function viewSolution(){const result=resolved();if(!result){invalidate();clearSelection();setStage('category');return;}if(['choose_symptom','qualifier_required','choose_path'].includes(result.kind)){renderIdentification();return;}history.replaceState(marker('identify'),'','#identify');history.pushState(marker('solution'),'','#solution');displaySolution();}
 function restoreNavigation(){const entry=history.state;if(entry?.session===navigationSession&&entry.revision===revision&&entry.page==='solution'&&location.hash==='#solution')displaySolution();else{showIdentify();if(!valid()){clearSelection();setStage('category');}history.replaceState(marker('identify'),'','#identify');}}
+function renderStepSupport(step){
+ if(!step.support.length)return null;
+ const group=el('div',undefined,'step-support');
+ const headings={parts:'Parts for this step',tools:'Tools and how to use them',reasoning:'Why this check matters',disassembly:'How to access and remove',verification:'What you should see'};
+ for(const resource of step.support){
+  const details=el('details',undefined,'support-disclosure');details.append(el('summary',headings[resource.kind]));
+  details.append(el('h4',resource.title));
+  if(resource.kind==='parts')details.append(el('p',resource.partNumber+' · Quantity '+resource.quantity));
+  for(const line of resource.lines)details.append(el('p',line));
+  group.append(details);
+ }
+ return group;
+}
+function renderServicePlan(result){
+ const plan=buildServicePlan(result,{...mower,cardId:selected.id,knowledgeVersion:catalog.knowledgeVersion});
+ if(!plan)return null;
+ const grid=el('div',undefined,'answer-grid service-plan');
+ if(result.part||result.kind==='information'){
+  const part=el('section',undefined,'part-box');part.append(el('h3','Most likely faulty part / target area'),el('strong',result.part||'No repair needed for this message'));grid.append(part);
+ }
+ const actions=el('section',undefined,'answer-block service-actions');actions.append(el('h3','What to do'));
+ const steps=el('ol',undefined,'service-steps');
+ for(const step of plan.steps){const row=el('li',undefined,'service-step');row.dataset.stepId=step.id;row.append(el('p',step.instruction,'step-instruction'));const support=renderStepSupport(step);if(support)row.append(support);steps.append(row);}
+ actions.append(steps);grid.append(actions);
+ const verification=el('section',undefined,'answer-block service-verification');verification.append(el('h3','After repair / verification'));
+ const checks=el('ol');for(const text of plan.verification)checks.append(el('li',text));verification.append(checks);grid.append(verification);
+ const fallback=el('section',undefined,'fallback');fallback.append(el('h3','Still not fixed'),el('p',plan.fallback));grid.append(fallback);
+ return grid;
+}
 window.addEventListener('popstate',restoreNavigation);window.addEventListener('hashchange',()=>{if((pageName==='solution')!==(location.hash==='#solution'))restoreNavigation();});
 history.replaceState(marker('identify'),'','#identify');showIdentify();
 function renderCard(override){if(!valid()||resolutionKey!==inputsKey()){invalidate();clearSelection();setStage('category');return;}clearResult();const box=el('article',undefined,'card');box.dataset.card=selected.id;const top=el('div',undefined,'card-top');top.append(el('span',selected.code?'ERROR '+selected.code:'SYMPTOM GUIDE','code-label'),button('Edit issue',editIssue,'text-button'));box.append(top,el('h2',selected.message));
@@ -99,7 +129,7 @@ function renderCard(override){if(!valid()||resolutionKey!==inputsKey()){invalida
  }else if(current.kind==='reported_fixed'){const success=el('div',undefined,'success');success.append(el('h3','You reported it fixed'),el('p',current.message));box.append(success);
  }else if(current.kind==='qualifier_required'){box.append(note('Confirm the observed condition',[current.prompt]));const choices=el('div',undefined,'choices');for(const c of current.choices)choices.append(button(c.label,()=>{Object.assign(state,{qualifierConfirmed:c.id==='yes',qualifierRejected:c.id!=='yes'});renderCard();}));box.append(choices);
  }else if(['escalate','scope_required'].includes(current.kind)){box.append(note(current.kind==='scope_required'?'Confirm the mower details':'Next step with PIE',current.action||['Contact PIE for the current next step.']));if(current.kind==='scope_required'){const details=[];if(selected.scope.models.length)details.push('Guide model: '+selected.scope.models.join(', '));if(selected.scope.firmware.length)details.push('Guide firmware: '+selected.scope.firmware.join(', '));box.append(el('p',details.join(' · '),'hint'));}
- }else if(['repair','check','information'].includes(current.kind)){const grid=el('div',undefined,'answer-grid');const part=el('section',undefined,'part-box');part.append(el('h3','Most likely faulty part / target area'),el('strong',current.part||(current.kind==='information'?'No repair needed for this message':'Start with the observed condition')));if(current.part||current.kind==='information')grid.append(part);for(const [heading,items] of [['What to do',current.action],['After repair / verification',current.verification.steps]]){const block=el('section',undefined,'answer-block');block.append(el('h3',heading));const list=el('ol');for(const text of items)list.append(el('li',text));block.append(list);grid.append(block);}const fallback=el('section',undefined,'fallback');fallback.append(el('h3','Still not fixed'),el('p',current.ifNotFixed.message));grid.append(fallback);box.append(grid);
+ }else if(['repair','check','information'].includes(current.kind)){const grid=renderServicePlan(current);if(!grid){box.append(note('Next step with PIE',['Contact PIE to confirm the complete instructions.']));$('result').append(box);return;}box.append(grid);
  const outcome=el('div',undefined,'outcome'),label=el('label',undefined,'check-label'),check=el('input');check.type='checkbox';check.id='verification';label.append(check,el('span','I completed the checks above and confirmed the result.'));const buttons=el('div',undefined,'buttons');const outcomeKey=inputsKey(),outcomeCard=selected,outcomePath=current.pathId;const act=choice=>{if(!valid()||outcomeKey!==inputsKey()||selected!==outcomeCard||current?.pathId!==outcomePath){invalidate();clearSelection();setStage('symptom');return;}const pathId=current.pathId;const next=recordOutcome(selected,pathId,choice,{...context(),verificationComplete:check.checked});if(next.kind==='verification_required'){status(next.message,true);check.focus();return;}if(choice==='not_fixed')state.completedRepairs=[...new Set([...state.completedRepairs,pathId])];if(choice==='returned')state.returned=true;if(next.pathId)state.pathId=next.pathId;else if(!state.pathId)state.pathId=pathId;if(choice!=='fixed')state.qualifierConfirmed=false;renderCard(next);status(choice==='fixed'?'Result shown for this visit only. No case record was changed.':'Use the next step shown below.');focusResult();};buttons.append(button('Fixed',()=>act('fixed'),'primary'),button('Still not fixed',()=>act('not_fixed'),'secondary'));if(current.kind!=='information')buttons.append(button('The issue returned after repair',()=>act('returned'),'text-button'));outcome.append(label,buttons);box.append(outcome);
  }else box.append(note('Next step with PIE',['Contact PIE to confirm the next action.']));
  if(!['choose_symptom','reported_fixed'].includes(current.kind)&&selected.paths.filter(p=>p.directSelectable!==false).length>1)box.append(button('Change symptom',()=>{Object.assign(state,{pathId:undefined,qualifierConfirmed:false,qualifierRejected:false});editIssue();invalidate();renderIdentification();},'text-button change-symptom'));
