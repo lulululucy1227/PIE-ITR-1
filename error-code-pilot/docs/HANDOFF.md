@@ -43,3 +43,9 @@ Package: artifacts/error-code-pilot-20260908-150015.zip. SHA256: dd5c63faa87a6ec
 ## Isolation and handoff
 
 The Error Code Specialist remains sole stream owner. No MAIN workspace/runtime/8787/shared session/case/analyzer state changed. No production Feishu/Nextop/ITR writes, public deployment, default-branch push or merge occurred. Task/report channels remain Issue #5 / Issue #6. Paired MASTER_PLAN and AGENT_REGISTRY checkpoints are local specialist records only. The final remote report is sanitized and specific to task 007, not the superseded plain-text UI report. No unresolved engineering or business decision blocks this bounded local gate.
+
+## Latest user-directed visual refinement — 2026-09-08
+
+The user subsequently requested polished controls and reference to the ITR label system, explicitly accepting the 2026-09-07 local snapshot. This has been completed: compact centered form, styled native desktop dropdowns, soft green selected rows/checkmarks, consistent focus/spacing, and source-referenced category vocabulary. Controlled IDs, knowledge, repair scope and all safety decisions remain unchanged. See UI_REFINEMENT_TAXONOMY_2026-09-08.md for the reference mapping, limitations and fresh evidence.
+
+The newest package supersedes the earlier package above: artifacts/error-code-pilot-20260908-162529.zip; SHA256 b06f3a41004281d83deb8c4d5ea1578380541e9d8d0961a29dada5c0eb9e008a. Fresh 75 Node, 3 visual/keyboard viewport scenarios, 17 controlled-selection, 32 two-page and 21 stable-guidance browser checks passed, together with actual 125% zoom/open pickers, source/privacy, lifecycle and extracted standalone validation. Targeted self-review completed; prior independent review is not misattributed to the visual follow-up.

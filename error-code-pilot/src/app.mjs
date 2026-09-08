@@ -1,5 +1,9 @@
 import {searchCards,resolveCard,recordOutcome,OBSERVABLE_AREAS,controlledModels,controlledSymptoms,controlledReferences,controlledRepairAllowed,validControlledSelection} from './engine.mjs';
 const $=id=>document.getElementById(id);
+// Presentation vocabulary follows the reviewed local ITR taxonomy snapshot.
+// Keep catalog IDs/areas and repair scope unchanged; labels are not diagnoses.
+const areaLabel={Movement:'Wheels & movement',Cutting:'Cutting disc & height',Charging:'Charging',Docking:'Returning to the station',Power:'Power & battery',Positioning:'Positioning & maps',Connectivity:'Connections',Sensors:'Safety & obstacle sensors',Physical:'Body & visible damage',Software:'App & firmware'};
+const symptomLabel=s=>s?.symptom_id==='SYM-005'?'Cutting height does not adjust':s?.label_en;
 let catalog=null,selected=null,current=null,pendingPIE=null,issueTitle='',selectedSymptom=null,stage='category',resolutionKey='';
 const mower={model:'',firmware:''},visits=new Map();
 const visit=card=>{if(!visits.has(card.id))visits.set(card.id,{completedRepairs:[]});return visits.get(card.id);};
@@ -17,15 +21,15 @@ function focusResult(){const n=pageName==='solution'?$('solution-page'):$(stage+
 function note(title,lines){const box=el('div',undefined,'alert');box.append(el('h3',title));const list=el('ul');for(const line of lines)list.append(el('li',line));box.append(list);return box;}
 function setStage(next){stage=next;for(const id of ['category','symptom','confirm'])$(id+'-stage').hidden=id!==next;
  if(next==='symptom')$('search-form').insertBefore($('more-details'),$('detail-buttons'));
- $('context-summary').textContent=[fields().model,fields().area].filter(Boolean).join(' · ');
- $('confirmation-summary').textContent=[fields().model,catalog?.symptoms.find(s=>s.symptom_id===fields().symptomId)?.label_en||'Other / None of these'].join(' · ');
+ $('context-summary').textContent=[fields().model,areaLabel[fields().area]].filter(Boolean).join(' · ');
+ $('confirmation-summary').textContent=[fields().model,symptomLabel(catalog?.symptoms.find(s=>s.symptom_id===fields().symptomId))||'Other / None of these'].join(' · ');
 }
 function showIdentify(){pageName='identify';$('identify-page').hidden=false;$('solution-page').hidden=true;clearResult();$('solution-summary').replaceChildren();setStage(stage);status('');}
 function invalidate(){revision++;current=null;resolutionKey='';showIdentify();history.replaceState(marker('identify'),'','#identify');}
 function clearSelection(){selected=null;pendingPIE=null;selectedSymptom=null;issueTitle='';$('selection').replaceChildren();}
 function editIssue(){if(pageName==='solution'&&history.state?.session===navigationSession)history.back();else{showIdentify();history.replaceState(marker('identify'),'','#identify');}}
 function resetQualifiers(){for(const state of visits.values()){state.qualifierConfirmed=false;state.qualifierRejected=false;}}
-function refreshSymptoms(){const select=$('observed-symptom');select.replaceChildren(new Option('Select a symptom',''));for(const s of controlledSymptoms(catalog,fields()))select.append(new Option(s.label_en,s.symptom_id));select.append(new Option('Other / None of these','__other__'));$('other-field').hidden=true;$('other-description').value='';}
+function refreshSymptoms(){const select=$('observed-symptom');select.replaceChildren(new Option('Select a symptom',''));for(const s of controlledSymptoms(catalog,fields()))select.append(new Option(symptomLabel(s),s.symptom_id));select.append(new Option('Other / None of these','__other__'));$('other-field').hidden=true;$('other-description').value='';}
 function categoryChanged(modelChanged){invalidate();clearSelection();mower.model=controlledModels(catalog).includes(fields().model)?fields().model:'';if(modelChanged){$('firmware').value='';mower.firmware='';}resetQualifiers();refreshSymptoms();setStage('category');history.replaceState(marker('identify'),'','#identify');}
 function nextCategory(){if(!catalog||!controlledModels(catalog).includes(fields().model)||!OBSERVABLE_AREAS.includes(fields().area)){status('Choose a model and a problem from the list.',true);return;}setStage('symptom');history.replaceState(marker('identify'),'','#identify');focusResult();}
 function detailsEdited(){invalidate();clearSelection();resetQualifiers();$('other-field').hidden=fields().symptomId!=='__other__';if(stage==='confirm')setStage('symptom');history.replaceState(marker('identify'),'','#identify');}
@@ -36,7 +40,7 @@ function prepareIdentification(){if(!valid()){invalidate();clearSelection();setS
  if($('search').value.trim()){showCandidates();return;}openSymptom();
 }
 function beginIdentification(){prepareIdentification();const result=resolved();if(result&&!['scope_required','choose_symptom','qualifier_required','choose_path'].includes(result.kind)){setStage('symptom');viewSolution();}}
-function openSymptom(){if(!valid()||fields().symptomId==='__other__')return;selectedSymptom=fields().symptomId;const s=catalog.symptoms.find(s=>s.symptom_id===selectedSymptom);issueTitle=s.label_en;const refs=controlledReferences(catalog,fields());
+function openSymptom(){if(!valid()||fields().symptomId==='__other__')return;selectedSymptom=fields().symptomId;const s=catalog.symptoms.find(s=>s.symptom_id===selectedSymptom);issueTitle=symptomLabel(s);const refs=controlledReferences(catalog,fields());
  if(!refs.length){safePIE(issueTitle);return;}
  if(refs.length===1){const r=refs[0];openCard(catalog.cards.find(c=>c.id===r.card_id),r.repair_path_id,true);return;}
  const box=el('article',undefined,'card');box.append(el('h3','Which condition matches?'));for(const r of refs){const card=catalog.cards.find(c=>c.id===r.card_id),path=card.paths.find(p=>p.id===r.repair_path_id);box.append(button(path.symptom,()=>openCard(card,path.id,true)));}showConfirmation(box);
@@ -71,7 +75,7 @@ function renderIdentification(){const result=resolved();if(!result){clearSelecti
  if(result.kind==='choose_symptom'){box.append(el('h3','Which condition matches?'));for(const c of result.choices)box.append(button(c.symptom,()=>{if(!valid()||resolutionKey!==inputsKey())return;Object.assign(state,{pathId:c.id,qualifierConfirmed:false,qualifierRejected:false});renderIdentification();}));}
  else if(result.kind==='qualifier_required'){box.append(note('Does this match what you see?',[result.prompt]));for(const c of result.choices)box.append(button(c.label,()=>{if(!valid()||resolutionKey!==inputsKey())return;Object.assign(state,{qualifierConfirmed:c.id==='yes',qualifierRejected:c.id!=='yes'});renderIdentification();}));}
  else{if(result.kind==='scope_required')box.append(el('h3','Confirm the guide details'),el('p',selected.scope.firmware.length?'This guide needs the current firmware version.':'The selected model needs further confirmation.'));
- else box.append(el('p',selected?.paths.find(p=>p.id===state.pathId)?.symptom||catalog.symptoms.find(s=>s.symptom_id===fields().symptomId)?.label_en||'Other / None of these'));
+ else box.append(el('p',selected?.paths.find(p=>p.id===state.pathId)?.symptom||symptomLabel(catalog.symptoms.find(s=>s.symptom_id===fields().symptomId))||'Other / None of these'));
  const next=button('Continue',viewSolution,'primary');next.id='continue';box.append(next);
  if(selected&&selected.paths.filter(p=>p.directSelectable!==false).length>1)box.append(button('Change condition',()=>{Object.assign(state,{pathId:undefined,qualifierConfirmed:false,qualifierRejected:false});renderIdentification();},'text-button'));
  }
@@ -80,7 +84,7 @@ function renderIdentification(){const result=resolved();if(!result){clearSelecti
 }
 function displaySolution(){const result=resolved();if(!result||['choose_symptom','qualifier_required','choose_path'].includes(result.kind)){showIdentify();if(result)renderIdentification();else{clearSelection();setStage('category');}history.replaceState(marker('identify'),'','#identify');return;}
  pageName='solution';$('identify-page').hidden=true;$('solution-page').hidden=false;
- const symptom=catalog.symptoms.find(s=>s.symptom_id===fields().symptomId);$('solution-summary').replaceChildren(el('p',symptom?.label_en||'Other / None of these','issue-summary'),el('p',[mower.model,fields().area,mower.firmware].filter(Boolean).join(' · '),'hint'));
+ const symptom=catalog.symptoms.find(s=>s.symptom_id===fields().symptomId);$('solution-summary').replaceChildren(el('p',symptomLabel(symptom)||'Other / None of these','issue-summary'),el('p',[mower.model,areaLabel[fields().area],mower.firmware].filter(Boolean).join(' · '),'hint'));
  if(fields().symptomId==='__other__'&&$('other-description').value.trim())$('solution-summary').append(el('p',$('other-description').value.trim(),'other-description'));
  if(selected)renderCard(result);else{clearResult();const box=el('article',undefined,'card');box.append(el('h2',issueTitle),note('Next step with PIE',result.action));$('result').append(box);}status('');focusResult();
 }
@@ -113,6 +117,6 @@ const strings=value=>Array.isArray(value)&&value.every(v=>typeof v==='string');
 function validCatalog(data){if(data?.schemaVersion!==2||typeof data.knowledgeVersion!=='string'||!Array.isArray(data.cards)||!Array.isArray(data.symptoms))return false;return data.cards.every(c=>typeof c.id==='string'&&(c.code===null||typeof c.code==='string')&&typeof c.message==='string'&&strings(c.aliases)&&strings(c.scope?.models)&&strings(c.scope?.firmware)&&Array.isArray(c.paths)&&c.paths.length&&c.paths.every(p=>typeof p.id==='string'&&typeof p.symptom==='string'&&['repair','check','information','escalate'].includes(p.kind)&&strings(p.action)&&p.action.length&&strings(p.verification?.steps)&&p.verification.steps.length&&typeof p.ifNotFixed?.message==='string'))&&data.symptoms.every(s=>typeof s.symptom_id==='string'&&/^SYM-0(0[1-9]|1[0-9]|2[0-5])$/.test(s.symptom_id)&&OBSERVABLE_AREAS.includes(s.observable_area)&&typeof s.label_en==='string'&&strings(s.aliases)&&Array.isArray(s.repair_refs)&&s.repair_refs.every(r=>data.cards.some(c=>c.id===r.card_id&&c.paths.some(p=>p.id===r.repair_path_id))));}
 
 try{const response=await fetch('./knowledge.json',{cache:'no-store'});if(!response.ok)throw new Error('Guide load failed');const data=await response.json();if(!validCatalog(data))throw new Error('Invalid guide data');catalog=data;
- for(const model of controlledModels(catalog))$('model').append(new Option(model,model));for(const area of OBSERVABLE_AREAS)$('observable-area').append(new Option(area,area));
+ for(const model of controlledModels(catalog))$('model').append(new Option(model,model));for(const area of OBSERVABLE_AREAS)$('observable-area').append(new Option(areaLabel[area],area));
  for(const id of ['model','observable-area','observed-symptom','firmware','category-next','search-button','search'])$(id).disabled=false;status('');
 }catch{catalog=null;status('Guides could not load. Restart the local pilot, or contact PIE for help.',true);}

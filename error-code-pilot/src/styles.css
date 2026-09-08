@@ -12,3 +12,33 @@
 #identify-page{text-align:center}#identify-page input{text-align:center}#identify-page summary{margin-inline:auto}#more-details label{margin-inline:auto}.status{text-align:center}#selection .choice{text-align:center}#selection .alert ul{padding-left:0;list-style:none}
 /* Progressive identification: only the current question is visible. */
 .identify-stage:focus{outline:none}.identify-form>label+label{margin-top:22px}.identify-form>label{font-size:13px}#category-next{margin-top:28px}#identify-page select{width:100%;text-align:center}#context-summary,#confirmation-summary{font-size:13px;color:var(--muted);margin-top:12px}#symptom-stage #search-button{display:inline-block!important;margin:0}.step-buttons{display:flex;justify-content:space-between;align-items:center;margin-top:24px}#other-field{margin-top:20px}textarea{font:inherit;color:inherit;width:100%;margin-top:8px;padding:12px;border:1px solid #bdcbbf;border-radius:6px;resize:vertical}#other-field+label{margin-top:22px}#confirmation-firmware{margin:20px auto;max-width:310px}#confirmation-firmware input{text-align:center}#confirm-stage>.text-button{margin-top:16px}
+
+/* Refined desktop controls: the browser still owns selection and keyboard semantics. */
+:root{--green:#245b49;--ink:#233e35;--muted:#63756c;--line:#dfe7e1;background:#f6f8f5;color:var(--ink)}
+.topbar{max-width:1120px;padding:20px 28px;border-color:#e3e9e3}.brand{gap:11px;font-size:16px;letter-spacing:-.2px}.brand-mark{width:32px;height:32px;border-radius:10px}
+main{padding-top:36px}#identify-page{max-width:620px}#identify-page .intro{margin-bottom:24px}.intro h1{font-size:29px;font-weight:600;letter-spacing:-.8px}#context-summary,#confirmation-summary{margin-top:9px!important;font-size:13px!important}
+.identify-form{padding:26px 30px 24px;border-radius:18px;border-color:#e1e8e2;box-shadow:0 3px 5px #244b3510,0 16px 40px -28px #244b3540}
+.identify-form>label{font-weight:600;font-size:12px;letter-spacing:.1px}input,select,textarea{border-color:#cdd9d0;border-radius:10px;font-size:14px;background:#fff}input,select{height:48px;padding:11px 36px;margin-top:9px}input::placeholder,textarea::placeholder{color:#7b8881;font-weight:400;font-size:13px}input:hover,select:hover,textarea:hover{border-color:#94b19f}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible,textarea:focus-visible{outline:2px solid #38775d;outline-offset:3px}#identify-page select:open{border-color:#38775d;box-shadow:0 0 0 3px #38775d14}
+.optional{font-size:11px;color:#728178;margin-left:7px}#more-details{margin-top:15px}summary{font-size:11px;min-height:28px;color:#667b6e}summary:hover{color:var(--green)}#more-details[open]{padding-bottom:4px}#more-details label{max-width:280px}
+.primary{min-height:44px;padding:10px 24px;border-radius:9px;font-size:13px;box-shadow:0 2px 3px #244b3512}.primary:hover{background:#1e493c;box-shadow:0 3px 7px #244b3520}.primary:active{box-shadow:none}.primary:disabled{box-shadow:none}.secondary{border-radius:9px}.step-buttons{margin-top:22px;padding-top:18px;border-top:1px solid #edf1ec}.step-buttons .text-button{text-decoration:none;border-radius:8px;padding:8px 14px;margin-left:-14px;min-height:40px;font-size:12px}.step-buttons .text-button:hover{background:#f0f5f0}#category-next{margin-top:24px;min-width:128px}footer{padding-top:20px;margin-top:14px;font-size:10px;color:#718078}
+/* Styled native pickers in supporting desktop browsers; other browsers retain native selects. */
+@supports (appearance:base-select){
+ @media(min-width:601px){
+  #identify-page select,#identify-page select::picker(select){appearance:base-select}
+  #identify-page select{position:relative;display:block;text-align:center;text-align-last:center;cursor:pointer;line-height:24px}
+  #identify-page select:disabled{cursor:default}
+  #identify-page select::picker-icon{position:absolute;right:16px;top:13px;color:#647d6e;font-size:12px;line-height:20px}
+  #identify-page select:open::picker-icon{rotate:180deg;color:var(--green)}
+  #identify-page select::picker(select){border:1px solid #d8e3da;border-radius:12px;padding:6px;background:#fff;color:var(--ink);box-shadow:0 10px 28px -6px #203c3326;margin-top:7px;max-height:min(320px,55dvh);overflow:auto;font:400 14px/1.4 'Segoe UI',Arial,sans-serif}
+  #identify-page option{position:relative;display:flex;align-items:center;justify-content:center;min-height:40px;padding:10px 34px;border-radius:7px;white-space:normal;text-align:center;cursor:pointer;background:#fff;color:var(--ink)}
+  #identify-page option:hover{background:#f2f6f1}
+  #identify-page option:checked{background:#eaf3ec;color:#1b573e;font-weight:600}
+  #identify-page option:focus-visible{outline:1px solid #669a7a;outline-offset:-1px;background:#f1f6f0}
+  #identify-page option::checkmark{position:absolute;left:13px;color:#2b7450;font-size:13px}
+  #identify-page option[value='']{color:#7a8a80;font-weight:400}
+  #identify-page option[value='__other__']{margin-top:5px;border-top:1px solid #edf1ec;border-radius:0 0 7px 7px;color:#62736a;font-size:13px}
+ }
+}
+@media(max-width:600px){.topbar{padding:18px 20px}main{padding-top:28px}.identify-form{padding:22px 20px}.intro h1{font-size:26px}input,select{padding-inline:16px}#identify-page{max-width:100%}.step-buttons{margin-top:20px}footer{font-size:10px}}
+@media(prefers-reduced-motion:no-preference){input,select,textarea{transition:border-color .15s,box-shadow .15s}select::picker-icon{transition:rotate .15s}}

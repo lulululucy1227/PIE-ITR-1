@@ -35,7 +35,7 @@ try{
    const dimensions=await page.evaluate(()=>({width:innerWidth,dpr:devicePixelRatio,overflow:document.documentElement.scrollWidth>innerWidth}));
    assert.equal(dimensions.overflow,false);assert.equal(await page.locator('select').count(),3);
    await capture(`zoom125-${size.width}-home.png`);
-   await choose(page,'SYM-004','LUBA 2 5000X');await capture(`zoom125-${size.width}-details.png`);await page.locator('#search').fill('');await page.locator('#search-button').click();await enterFirmware(page,'1.30.31.10');await page.getByRole('button',{name:'Yes, this matches',exact:true}).click();
+   await choose(page,'SYM-004','LUBA 2 5000X');await capture(`zoom125-${size.width}-details.png`);await page.locator('#observed-symptom').click();await capture(`zoom125-${size.width}-picker.png`);assert.equal(await page.locator('#observed-symptom').evaluate(e=>e.matches(':open')),true);await page.keyboard.press('Escape');assert.equal(await page.locator('#observed-symptom').inputValue(),'SYM-004');assert.equal(await page.locator('#search-button').evaluate(e=>e.getBoundingClientRect().bottom<=innerHeight),true);await page.locator('#search').fill('');await page.locator('#search-button').click();await enterFirmware(page,'1.30.31.10');await page.getByRole('button',{name:'Yes, this matches',exact:true}).click();
    assert.equal(await page.locator('#result').innerText(),'');assert.equal(await page.locator('#solution-page').isVisible(),false);
    await capture(`zoom125-${size.width}-identify-selection.png`);
    await page.locator('#continue').click();
@@ -57,7 +57,7 @@ try{
     await page.locator('#edit-issue').click();await page.locator('#identify-page:visible').waitFor();
    }
    assert.deepEqual(errors,[]);assert.deepEqual(external,[]);
-   results.push({viewport:size,zoom,dimensions,homeAndRepairPassed:true,failedRepairPassed:true,newGuidedPathsChecked:guided.length,pageErrors:errors,externalRequests:0});
+   results.push({viewport:size,zoom,dimensions,homeAndRepairPassed:true,styledPickerPassed:true,failedRepairPassed:true,newGuidedPathsChecked:guided.length,pageErrors:errors,externalRequests:0});
    console.log('PASS native 125% zoom '+size.width+'x'+size.height);
   }finally{await ctx.close();}
  }
