@@ -2,7 +2,7 @@
 
 Task: EC-MT-20260908-CONTROLLED-SELECTION-UI-007. Workspace: `C:\Users\Reggie\Desktop\PIE-ITR-ErrorCode`. Task/report channels: Issue #5 / Issue #6.
 
-Open `run-pilot.cmd`, or run `node scripts/serve.mjs` inside this folder, then visit http://127.0.0.1:8796. Requires Node 22+; no npm install, account, database or cloud service. If that port is occupied, use `node scripts/serve.mjs 8797`. Stop your own preview with Ctrl+C. Port 8787 is refused.
+For workspace development, open `run-pilot.cmd`, or run `node scripts/serve.mjs` inside this folder, then visit http://127.0.0.1:8796. Requires Node 22+; no npm install, account, database or cloud service. The colleague ZIP includes its own local runtime, so recipients only need to extract it and double-click `run-pilot.cmd`. If that port is occupied, use `node scripts/serve.mjs 8797`. Stop your own preview with Ctrl+C. Port 8787 is refused.
 
 Page 1 progressively asks for a supported mower model and broad problem, then a model/area-filtered controlled symptom. Error Code / Message remains optional auxiliary text. Only an ambiguous candidate, decisive condition or firmware scope adds confirmation; otherwise Continue goes directly to Page 2. This supersedes the earlier all-text homepage proposal. Other / None of these accepts text for PIE contact only, never repair inference.
 

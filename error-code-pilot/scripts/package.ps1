@@ -6,16 +6,19 @@ if ($pilotRoot -ne $expectedRoot) { throw 'Packaging writes are restricted to th
 $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
 $stage = Join-Path $pilotRoot "artifacts\package-$stamp"
 $zip = Join-Path $pilotRoot "artifacts\error-code-pilot-$stamp.zip"
-$allow = @('dist/index.html','dist/styles.css','dist/app.mjs','dist/engine.mjs','dist/knowledge.json','scripts/serve.mjs','run-pilot.cmd','LOCAL_README.txt')
-New-Item -ItemType Directory -Path (Join-Path $stage 'dist'),(Join-Path $stage 'scripts') -Force | Out-Null
+$runtimeNode = 'C:\Users\Reggie\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe'
+if (-not (Test-Path -LiteralPath $runtimeNode)) { throw 'Bundled runtime is unavailable; do not produce a partial colleague package.' }
+$allow = @('dist/index.html','dist/styles.css','dist/app.mjs','dist/engine.mjs','dist/knowledge.json','scripts/serve.mjs','run-pilot.cmd','LOCAL_README.txt','runtime/node.exe')
+New-Item -ItemType Directory -Path (Join-Path $stage 'dist'),(Join-Path $stage 'scripts'),(Join-Path $stage 'runtime') -Force | Out-Null
 foreach ($relative in $allow) {
-  if ($relative -eq 'LOCAL_README.txt') { continue }
+  if ($relative -eq 'LOCAL_README.txt' -or $relative -eq 'runtime/node.exe') { continue }
   Copy-Item -LiteralPath (Join-Path $pilotRoot $relative) -Destination (Join-Path $stage $relative)
 }
+Copy-Item -LiteralPath $runtimeNode -Destination (Join-Path $stage 'runtime\node.exe')
 @'
 PIE Troubleshooter — desktop local review
-Requires Node.js 22 or later. No npm install.
-Double-click run-pilot.cmd, or run: node scripts/serve.mjs
+No Node.js installation is required. The package includes its local runtime.
+Double-click run-pilot.cmd.
 Open http://127.0.0.1:8796 and use Ctrl+C to stop this preview.
 If 8796 is occupied, run node scripts/serve.mjs 8797. Never use 8787.
 
@@ -42,7 +45,7 @@ $archive = [IO.Compression.ZipFile]::OpenRead($zip)
 try {
   $entries = @($archive.Entries | ForEach-Object {$_.FullName.Replace('\','/')})
   if (Compare-Object ($allow | Sort-Object) ($entries | Sort-Object)) { throw 'ZIP allowlist mismatch' }
-  foreach ($entry in $archive.Entries) {
+  foreach ($entry in $archive.Entries | Where-Object { $_.FullName -ne 'runtime/node.exe' }) {
     $reader = [IO.StreamReader]::new($entry.Open())
     try { $content = $reader.ReadToEnd() } finally { $reader.Dispose() }
     if ($content -match 'PRIVATE-CANARY|TEST MODEL|local-error-reference|candidate_refs|REP-[A-Z0-9]+-\d{3}|feishu-candidates|repeated_use_signal|[A-Z]:[\\/]Users[\\/]|sk-[A-Za-z0-9]{20}|ghp_[A-Za-z0-9]{20}|@[A-Za-z0-9.-]+\.(com|net|org)') { throw "Package content review failed: $($entry.FullName)" }
@@ -52,8 +55,7 @@ $extracted = Join-Path $pilotRoot "artifacts\package-check-$stamp"
 Expand-Archive -LiteralPath $zip -DestinationPath $extracted
 $stdout = Join-Path $pilotRoot "artifacts\package-check-$stamp.stdout.txt"
 $stderr = Join-Path $pilotRoot "artifacts\package-check-$stamp.stderr.txt"
-$node = (Get-Command node).Source
-$owned = Start-Process -FilePath $node -ArgumentList @('scripts/serve.mjs','8797') -WorkingDirectory $extracted -WindowStyle Hidden -PassThru -RedirectStandardOutput $stdout -RedirectStandardError $stderr
+$owned = Start-Process -FilePath (Join-Path $extracted 'runtime\node.exe') -ArgumentList @('scripts/serve.mjs','8797') -WorkingDirectory $extracted -WindowStyle Hidden -PassThru -RedirectStandardOutput $stdout -RedirectStandardError $stderr
 try {
   $ready = $false
   for ($attempt=0; $attempt -lt 80; $attempt++) {
