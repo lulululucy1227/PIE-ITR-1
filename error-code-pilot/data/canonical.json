@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "knowledgeVersion": "2026-09-08-ingest.1",
+  "knowledgeVersion": "2026-09-08-stable-guidance.1",
   "cards": [
     {
       "id": "ec-1202",
@@ -1890,6 +1890,819 @@
           }
         }
       ]
+    },
+    {
+      "id": "guide-wheel-movement",
+      "code": null,
+      "message": "Wheel movement is absent",
+      "aliases": [],
+      "classification": "SELF_SERVICE_DIRECT",
+      "lifecycle": "CURRENT",
+      "publication": "approved",
+      "agentVisible": true,
+      "scope": {
+        "status": "confirmed",
+        "models": [
+          "LUBA 2",
+          "LUBA 2X",
+          "LUBA 3"
+        ],
+        "firmware": []
+      },
+      "evidence": {
+        "kind": "promoted_service_rule",
+        "refs": [
+          "docs/troubleshooter/OPERATIONAL_MATURITY_DECISION_2026-09-08.md",
+          "docs/troubleshooter/FEISHU_CANDIDATE_PAYLOAD_2026-09-08.md",
+          "docs/knowledge/DIAGNOSTIC_KNOWLEDGE.md",
+          "docs/knowledge/TOOL_KNOWLEDGE.md",
+          "docs/knowledge/PARTS_KNOWLEDGE.md"
+        ],
+        "outcome": "recommended",
+        "cohortCount": null,
+        "notes": "Model-supported wheel-motor/driver-board isolation only; simultaneous motor failures require shared-power review. Original automatic mainboard fallback excluded. No production read or independent success count inferred."
+      },
+      "lastReviewed": "2026-09-08",
+      "supersededBy": null,
+      "paths": [
+        {
+          "id": "guided",
+          "symptom": "One or more wheels do not move",
+          "kind": "repair",
+          "part": "Wheel motor or its driver-board path",
+          "action": [
+            "Use the model-supported Motor Test in MammoSuite to distinguish the wheel motor from its driver-board path. If several wheels or other motors fail together, stop individual-part replacement and contact PIE for shared-power checks.",
+            "Replace the confirmed failing wheel hub motor with the correct model part. Use a driver-board replacement only when that model-specific board fault is established; a motor passing its test alone does not prove a driver-board fault.",
+            "If the test is unsupported, the fault cannot be isolated, or serviceability is unclear, contact PIE. Do not use mainboard replacement as the next automatic step."
+          ],
+          "verification": {
+            "steps": [
+              "Confirm normal movement of the affected wheel(s) and repeat the applicable Motor Test.",
+              "Complete the model-applicable Functional Test, Communication Check and Auto Map Run. Keep all three reports and a Connect Checking screenshot; contact PIE if a required check cannot run or a relevant fault remains."
+            ],
+            "canonical": [
+              "Functional Test",
+              "Communication Check",
+              "Auto Map Run",
+              "Retain all three reports",
+              "Connect Checking screenshot",
+              "Apply the model-supported tests; any unavailable required test or unresolved relevant fault requires PIE review.",
+              "Burn-in is additional and does not replace standard validation."
+            ]
+          },
+          "ifNotFixed": {
+            "kind": "escalate",
+            "message": "If the issue remains or returns after this supported step, contact PIE with the model, observations, checks and repair result. Do not repeat the same replacement or move to another board without a confirmed next step."
+          },
+          "evidence_state": "STABLE_OPERATIONAL_GUIDANCE",
+          "publication": "approved",
+          "agent_visibility": "P1_DESKTOP_GUIDED",
+          "conflict": false,
+          "supersededBy": null,
+          "candidate_refs": [
+            "REP-WHEEL-001"
+          ],
+          "review": {
+            "scopeConfirmed": true,
+            "repeatedUse": true,
+            "activeMaintenance": true,
+            "noContradiction": true,
+            "rationale": "Supervisor accepted maintained operational maturity for this scoped portion. Model-supported wheel-motor/driver-board isolation only; simultaneous motor failures require shared-power review. Original automatic mainboard fallback excluded."
+          }
+        }
+      ]
+    },
+    {
+      "id": "guide-cutting-operation",
+      "code": null,
+      "message": "Cutting disc problem during mowing or manual operation",
+      "aliases": [],
+      "classification": "SELF_SERVICE_DIRECT",
+      "lifecycle": "CURRENT",
+      "publication": "approved",
+      "agentVisible": true,
+      "scope": {
+        "status": "confirmed",
+        "models": [
+          "LUBA 1",
+          "LUBA 2",
+          "LUBA 2X",
+          "LUBA 3"
+        ],
+        "firmware": []
+      },
+      "evidence": {
+        "kind": "promoted_service_rule",
+        "refs": [
+          "docs/troubleshooter/OPERATIONAL_MATURITY_DECISION_2026-09-08.md",
+          "docs/troubleshooter/FEISHU_CANDIDATE_PAYLOAD_2026-09-08.md",
+          "docs/knowledge/DIAGNOSTIC_KNOWLEDGE.md",
+          "docs/knowledge/TOOL_KNOWLEDGE.md",
+          "docs/knowledge/PARTS_KNOWLEDGE.md"
+        ],
+        "outcome": "recommended",
+        "cohortCount": null,
+        "notes": "Explicit non1202 actual-operation branch. Test-only software mismatch remains a separate existing path; driver-board/cable fallback excluded. No production read or independent success count inferred."
+      },
+      "lastReviewed": "2026-09-08",
+      "supersededBy": null,
+      "paths": [
+        {
+          "id": "guided",
+          "symptom": "The cutting problem occurs during actual mowing or manual operation",
+          "kind": "repair",
+          "part": "Cutting-disc blockage or confirmed failed cutting-motor assembly",
+          "action": [
+            "Power off the mower before inspecting the cutting area. Remove actual debris or physical blockage safely, then recheck cutting operation.",
+            "If the problem remains, evaluate the cutting motor with the model-supported test and actual operation. MammoSuite does not independently isolate left and right cutting motors; a Functional Test failure alone is not proof of motor failure.",
+            "Replace the cutting-motor assembly only when failure is confirmed and the correct model-serviceable assembly is identified. If Error 1202 is present, use its separate guide and contact PIE; this procedure does not authorize its frozen hardware path."
+          ],
+          "verification": {
+            "steps": [
+              "Confirm normal disc movement/noise in the actual operating mode and repeat the applicable motor/cutting checks.",
+              "Complete the model-applicable Functional Test, Communication Check and Auto Map Run. Keep all three reports and a Connect Checking screenshot; contact PIE if a required check cannot run or a relevant fault remains."
+            ],
+            "canonical": [
+              "Functional Test",
+              "Communication Check",
+              "Auto Map Run",
+              "Retain all three reports",
+              "Connect Checking screenshot",
+              "Apply the model-supported tests; any unavailable required test or unresolved relevant fault requires PIE review.",
+              "Burn-in is additional and does not replace standard validation."
+            ]
+          },
+          "ifNotFixed": {
+            "kind": "escalate",
+            "message": "If the issue remains or returns after this supported step, contact PIE with the model, observations, checks and repair result. Do not repeat the same replacement or move to another board without a confirmed next step."
+          },
+          "evidence_state": "STABLE_OPERATIONAL_GUIDANCE",
+          "publication": "approved",
+          "agent_visibility": "P1_DESKTOP_GUIDED",
+          "conflict": false,
+          "supersededBy": null,
+          "candidate_refs": [
+            "REP-CUT-001"
+          ],
+          "review": {
+            "scopeConfirmed": true,
+            "repeatedUse": true,
+            "activeMaintenance": true,
+            "noContradiction": true,
+            "rationale": "Supervisor accepted maintained operational maturity for this scoped portion. Explicit non1202 actual-operation branch. Test-only software mismatch remains a separate existing path; driver-board/cable fallback excluded."
+          },
+          "qualifier": "No Error 1202 is present, and the cutting problem occurs during actual mowing or manual operation, not only in Functional Test."
+        }
+      ]
+    },
+    {
+      "id": "guide-no-charge",
+      "code": null,
+      "message": "Robot does not charge",
+      "aliases": [],
+      "classification": "SELF_SERVICE_DIRECT",
+      "lifecycle": "CURRENT",
+      "publication": "approved",
+      "agentVisible": true,
+      "scope": {
+        "status": "confirmed",
+        "models": [
+          "LUBA 1",
+          "LUBA 2",
+          "LUBA 2X",
+          "LUBA 3"
+        ],
+        "firmware": []
+      },
+      "evidence": {
+        "kind": "promoted_service_rule",
+        "refs": [
+          "docs/troubleshooter/OPERATIONAL_MATURITY_DECISION_2026-09-08.md",
+          "docs/troubleshooter/FEISHU_CANDIDATE_PAYLOAD_2026-09-08.md",
+          "docs/knowledge/DIAGNOSTIC_KNOWLEDGE.md",
+          "docs/knowledge/TOOL_KNOWLEDGE.md",
+          "docs/knowledge/PARTS_KNOWLEDGE.md"
+        ],
+        "outcome": "recommended",
+        "cohortCount": null,
+        "notes": "No-charge scope includes LUBA1; distinct station-recognition branch excludes it. Controlled compatible source comparison, no automatic board chain. No production read or independent success count inferred."
+      },
+      "lastReviewed": "2026-09-08",
+      "supersededBy": null,
+      "paths": [
+        {
+          "id": "guided",
+          "symptom": "Robot does not charge",
+          "kind": "repair",
+          "part": "Confirmed faulty charging adapter or station",
+          "action": [
+            "Use confirmed-good, compatible charging hardware to compare the original charging behavior. Check the adapter and station according to the model service procedure.",
+            "Replace only the adapter or charging station confirmed faulty by the controlled comparison. If both are changed together, improvement identifies the charging-source domain; isolate the individual component before replacing it.",
+            "If the charging source is normal or the result is unclear, contact PIE with the comparison results. Do not proceed automatically to a driver board or mainboard."
+          ],
+          "verification": {
+            "steps": [
+              "Confirm normal charging indication and model-applicable charging current/behavior with the repaired charging source.",
+              "Complete the model-applicable Functional Test, Communication Check and Auto Map Run. Keep all three reports and a Connect Checking screenshot; contact PIE if a required check cannot run or a relevant fault remains."
+            ],
+            "canonical": [
+              "Functional Test",
+              "Communication Check",
+              "Auto Map Run",
+              "Retain all three reports",
+              "Connect Checking screenshot",
+              "Apply the model-supported tests; any unavailable required test or unresolved relevant fault requires PIE review.",
+              "Burn-in is additional and does not replace standard validation."
+            ]
+          },
+          "ifNotFixed": {
+            "kind": "escalate",
+            "message": "If the issue remains or returns after this supported step, contact PIE with the model, observations, checks and repair result. Do not repeat the same replacement or move to another board without a confirmed next step."
+          },
+          "evidence_state": "STABLE_OPERATIONAL_GUIDANCE",
+          "publication": "approved",
+          "agent_visibility": "P1_DESKTOP_GUIDED",
+          "conflict": false,
+          "supersededBy": null,
+          "candidate_refs": [
+            "REP-CHARGE-001"
+          ],
+          "review": {
+            "scopeConfirmed": true,
+            "repeatedUse": true,
+            "activeMaintenance": true,
+            "noContradiction": true,
+            "rationale": "Supervisor accepted maintained operational maturity for this scoped portion. No-charge scope includes LUBA1; distinct station-recognition branch excludes it. Controlled compatible source comparison, no automatic board chain."
+          }
+        }
+      ]
+    },
+    {
+      "id": "guide-station-recognition",
+      "code": null,
+      "message": "Charging station not recognized",
+      "aliases": [],
+      "classification": "SELF_SERVICE_DIRECT",
+      "lifecycle": "CURRENT",
+      "publication": "approved",
+      "agentVisible": true,
+      "scope": {
+        "status": "confirmed",
+        "models": [
+          "LUBA 2",
+          "LUBA 2X",
+          "LUBA 3"
+        ],
+        "firmware": []
+      },
+      "evidence": {
+        "kind": "promoted_service_rule",
+        "refs": [
+          "docs/troubleshooter/OPERATIONAL_MATURITY_DECISION_2026-09-08.md",
+          "docs/troubleshooter/FEISHU_CANDIDATE_PAYLOAD_2026-09-08.md",
+          "docs/knowledge/DIAGNOSTIC_KNOWLEDGE.md",
+          "docs/knowledge/TOOL_KNOWLEDGE.md",
+          "docs/knowledge/PARTS_KNOWLEDGE.md"
+        ],
+        "outcome": "recommended",
+        "cohortCount": null,
+        "notes": "Station-not-recognized only, LUBA2/2X/3; no expansion of LUBA1 no-charge evidence to this observation. No production read or independent success count inferred."
+      },
+      "lastReviewed": "2026-09-08",
+      "supersededBy": null,
+      "paths": [
+        {
+          "id": "guided",
+          "symptom": "Charging station is not recognized",
+          "kind": "repair",
+          "part": "Confirmed faulty station or its power adapter",
+          "action": [
+            "Check station power/indication and compare recognition using confirmed-good, model-compatible station/adapter hardware.",
+            "Replace only the station or adapter isolated as faulty. A combined swap does not identify which component failed; separate the comparison before deciding on a part.",
+            "If source-side hardware is normal or the mower still does not recognize the station, contact PIE. Do not infer a driver-board or mainboard replacement."
+          ],
+          "verification": {
+            "steps": [
+              "Repeat station recognition and confirm the relevant charging indication/behavior for this model.",
+              "Complete the model-applicable Functional Test, Communication Check and Auto Map Run. Keep all three reports and a Connect Checking screenshot; contact PIE if a required check cannot run or a relevant fault remains."
+            ],
+            "canonical": [
+              "Functional Test",
+              "Communication Check",
+              "Auto Map Run",
+              "Retain all three reports",
+              "Connect Checking screenshot",
+              "Apply the model-supported tests; any unavailable required test or unresolved relevant fault requires PIE review.",
+              "Burn-in is additional and does not replace standard validation."
+            ]
+          },
+          "ifNotFixed": {
+            "kind": "escalate",
+            "message": "If the issue remains or returns after this supported step, contact PIE with the model, observations, checks and repair result. Do not repeat the same replacement or move to another board without a confirmed next step."
+          },
+          "evidence_state": "STABLE_OPERATIONAL_GUIDANCE",
+          "publication": "approved",
+          "agent_visibility": "P1_DESKTOP_GUIDED",
+          "conflict": false,
+          "supersededBy": null,
+          "candidate_refs": [
+            "REP-CHARGE-001"
+          ],
+          "review": {
+            "scopeConfirmed": true,
+            "repeatedUse": true,
+            "activeMaintenance": true,
+            "noContradiction": true,
+            "rationale": "Supervisor accepted maintained operational maturity for this scoped portion. Station-not-recognized only, LUBA2/2X/3; no expansion of LUBA1 no-charge evidence to this observation."
+          }
+        }
+      ]
+    },
+    {
+      "id": "guide-docking",
+      "code": null,
+      "message": "Robot cannot return to the charging station",
+      "aliases": [],
+      "classification": "SELF_SERVICE_DIRECT",
+      "lifecycle": "CURRENT",
+      "publication": "approved",
+      "agentVisible": true,
+      "scope": {
+        "status": "confirmed",
+        "models": [
+          "LUBA 2",
+          "LUBA 2X",
+          "LUBA 3"
+        ],
+        "firmware": []
+      },
+      "evidence": {
+        "kind": "promoted_service_rule",
+        "refs": [
+          "docs/troubleshooter/OPERATIONAL_MATURITY_DECISION_2026-09-08.md",
+          "docs/troubleshooter/FEISHU_CANDIDATE_PAYLOAD_2026-09-08.md",
+          "docs/knowledge/DIAGNOSTIC_KNOWLEDGE.md",
+          "docs/knowledge/TOOL_KNOWLEDGE.md",
+          "docs/knowledge/PARTS_KNOWLEDGE.md"
+        ],
+        "outcome": "recommended",
+        "cohortCount": null,
+        "notes": "Approved first-line docking/IR process only; no universal station or robot-side component replacement. No production read or independent success count inferred."
+      },
+      "lastReviewed": "2026-09-08",
+      "supersededBy": null,
+      "paths": [
+        {
+          "id": "guided",
+          "symptom": "Robot cannot return to the charging station",
+          "kind": "check",
+          "part": null,
+          "action": [
+            "Clean the docking contacts and IR window, remove any actual obstruction, then repeat docking.",
+            "If docking still fails, evaluate the station/IR path using the model-supported service checks. Retain the docking behavior and station-side results.",
+            "If supported station-side checks do not resolve the issue, contact PIE. Do not replace a robot-side IR module, harness or board without a confirmed model-specific fault."
+          ],
+          "verification": {
+            "steps": [
+              "Repeat docking and confirm reliable station approach, recognition and charging contact for the model.",
+              "Complete the model-applicable Functional Test, Communication Check and Auto Map Run. Keep all three reports and a Connect Checking screenshot; contact PIE if a required check cannot run or a relevant fault remains."
+            ],
+            "canonical": [
+              "Functional Test",
+              "Communication Check",
+              "Auto Map Run",
+              "Retain all three reports",
+              "Connect Checking screenshot",
+              "Apply the model-supported tests; any unavailable required test or unresolved relevant fault requires PIE review.",
+              "Burn-in is additional and does not replace standard validation."
+            ]
+          },
+          "ifNotFixed": {
+            "kind": "escalate",
+            "message": "If the issue remains or returns after this supported step, contact PIE with the model, observations, checks and repair result. Do not repeat the same replacement or move to another board without a confirmed next step."
+          },
+          "evidence_state": "STABLE_OPERATIONAL_GUIDANCE",
+          "publication": "approved",
+          "agent_visibility": "P1_DESKTOP_GUIDED",
+          "conflict": false,
+          "supersededBy": null,
+          "candidate_refs": [
+            "REP-DOCK-001"
+          ],
+          "review": {
+            "scopeConfirmed": true,
+            "repeatedUse": true,
+            "activeMaintenance": true,
+            "noContradiction": true,
+            "rationale": "Supervisor accepted maintained operational maturity for this scoped portion. Approved first-line docking/IR process only; no universal station or robot-side component replacement."
+          }
+        }
+      ]
+    },
+    {
+      "id": "guide-power",
+      "code": null,
+      "message": "Robot will not power on or shuts down unexpectedly",
+      "aliases": [],
+      "classification": "SELF_SERVICE_DIRECT",
+      "lifecycle": "CURRENT",
+      "publication": "approved",
+      "agentVisible": true,
+      "scope": {
+        "status": "confirmed",
+        "models": [
+          "LUBA 2",
+          "LUBA 2X",
+          "LUBA 3"
+        ],
+        "firmware": []
+      },
+      "evidence": {
+        "kind": "promoted_service_rule",
+        "refs": [
+          "docs/troubleshooter/OPERATIONAL_MATURITY_DECISION_2026-09-08.md",
+          "docs/troubleshooter/FEISHU_CANDIDATE_PAYLOAD_2026-09-08.md",
+          "docs/knowledge/DIAGNOSTIC_KNOWLEDGE.md",
+          "docs/knowledge/TOOL_KNOWLEDGE.md",
+          "docs/knowledge/PARTS_KNOWLEDGE.md"
+        ],
+        "outcome": "recommended",
+        "cohortCount": null,
+        "notes": "Model-applicable battery/power checks; no invented voltage/SOH threshold or generic battery/mainboard mapping. No production read or independent success count inferred."
+      },
+      "lastReviewed": "2026-09-08",
+      "supersededBy": null,
+      "paths": [
+        {
+          "id": "guided",
+          "symptom": "Robot will not power on or shuts down unexpectedly",
+          "kind": "check",
+          "part": null,
+          "action": [
+            "Check the battery supply using the model-supported voltage/battery procedure. Inspect the power button and power connections using the appropriate safe service procedure.",
+            "Distinguish no-power from shutdown after starting. Use the observed indicators and supported checks to establish the failing element; do not infer battery failure from the symptom alone.",
+            "Repair or replace an element only after its fault and model serviceability are established. If the faulty element, replacement criterion or test support is unclear, contact PIE. Mainboard replacement is not an automatic fallback."
+          ],
+          "verification": {
+            "steps": [
+              "Confirm stable power-on and operation, including the condition that previously caused the shutdown.",
+              "Complete the model-applicable Functional Test, Communication Check and Auto Map Run. Keep all three reports and a Connect Checking screenshot; contact PIE if a required check cannot run or a relevant fault remains."
+            ],
+            "canonical": [
+              "Functional Test",
+              "Communication Check",
+              "Auto Map Run",
+              "Retain all three reports",
+              "Connect Checking screenshot",
+              "Apply the model-supported tests; any unavailable required test or unresolved relevant fault requires PIE review.",
+              "Burn-in is additional and does not replace standard validation."
+            ]
+          },
+          "ifNotFixed": {
+            "kind": "escalate",
+            "message": "If the issue remains or returns after this supported step, contact PIE with the model, observations, checks and repair result. Do not repeat the same replacement or move to another board without a confirmed next step."
+          },
+          "evidence_state": "STABLE_OPERATIONAL_GUIDANCE",
+          "publication": "approved",
+          "agent_visibility": "P1_DESKTOP_GUIDED",
+          "conflict": false,
+          "supersededBy": null,
+          "candidate_refs": [
+            "REP-POWER-001"
+          ],
+          "review": {
+            "scopeConfirmed": true,
+            "repeatedUse": true,
+            "activeMaintenance": true,
+            "noContradiction": true,
+            "rationale": "Supervisor accepted maintained operational maturity for this scoped portion. Model-applicable battery/power checks; no invented voltage/SOH threshold or generic battery/mainboard mapping."
+          }
+        }
+      ]
+    },
+    {
+      "id": "guide-rtk-connection",
+      "code": null,
+      "message": "Robot cannot connect to the RTK station",
+      "aliases": [],
+      "classification": "SELF_SERVICE_DIRECT",
+      "lifecycle": "CURRENT",
+      "publication": "approved",
+      "agentVisible": true,
+      "scope": {
+        "status": "confirmed",
+        "models": [
+          "LUBA 2",
+          "LUBA 2X",
+          "LUBA 3"
+        ],
+        "firmware": []
+      },
+      "evidence": {
+        "kind": "promoted_service_rule",
+        "refs": [
+          "docs/troubleshooter/OPERATIONAL_MATURITY_DECISION_2026-09-08.md",
+          "docs/troubleshooter/FEISHU_CANDIDATE_PAYLOAD_2026-09-08.md",
+          "docs/knowledge/DIAGNOSTIC_KNOWLEDGE.md",
+          "docs/knowledge/TOOL_KNOWLEDGE.md",
+          "docs/knowledge/PARTS_KNOWLEDGE.md"
+        ],
+        "outcome": "recommended",
+        "cohortCount": null,
+        "notes": "Station-side power/adapter fault isolation only; mower-side GNSS/LoRa remains PIE. No production read or independent success count inferred."
+      },
+      "lastReviewed": "2026-09-08",
+      "supersededBy": null,
+      "paths": [
+        {
+          "id": "guided",
+          "symptom": "Robot cannot connect to the RTK station",
+          "kind": "repair",
+          "part": "Confirmed faulty RTK station power adapter or station",
+          "action": [
+            "Check RTK station power, indicators and its adapter first using the model-applicable procedure and compatible hardware.",
+            "Replace the adapter or station only when the station-side fault is confirmed and the correct model part is established.",
+            "If the station-side path is normal but connection still fails, contact PIE for the mower-side GNSS/LoRa path. Do not turn a connection symptom into a universal antenna or mainboard replacement."
+          ],
+          "verification": {
+            "steps": [
+              "Confirm stable connection to the applicable RTK station and repeat the relevant positioning/map operation.",
+              "Complete the model-applicable Functional Test, Communication Check and Auto Map Run. Keep all three reports and a Connect Checking screenshot; contact PIE if a required check cannot run or a relevant fault remains."
+            ],
+            "canonical": [
+              "Functional Test",
+              "Communication Check",
+              "Auto Map Run",
+              "Retain all three reports",
+              "Connect Checking screenshot",
+              "Apply the model-supported tests; any unavailable required test or unresolved relevant fault requires PIE review.",
+              "Burn-in is additional and does not replace standard validation."
+            ]
+          },
+          "ifNotFixed": {
+            "kind": "escalate",
+            "message": "If the issue remains or returns after this supported step, contact PIE with the model, observations, checks and repair result. Do not repeat the same replacement or move to another board without a confirmed next step."
+          },
+          "evidence_state": "STABLE_OPERATIONAL_GUIDANCE",
+          "publication": "approved",
+          "agent_visibility": "P1_DESKTOP_GUIDED",
+          "conflict": false,
+          "supersededBy": null,
+          "candidate_refs": [
+            "REP-RTK-001"
+          ],
+          "review": {
+            "scopeConfirmed": true,
+            "repeatedUse": true,
+            "activeMaintenance": true,
+            "noContradiction": true,
+            "rationale": "Supervisor accepted maintained operational maturity for this scoped portion. Station-side power/adapter fault isolation only; mower-side GNSS/LoRa remains PIE."
+          }
+        }
+      ]
+    },
+    {
+      "id": "guide-bumper",
+      "code": null,
+      "message": "Bumper triggers without an obstacle",
+      "aliases": [],
+      "classification": "SELF_SERVICE_DIRECT",
+      "lifecycle": "CURRENT",
+      "publication": "approved",
+      "agentVisible": true,
+      "scope": {
+        "status": "confirmed",
+        "models": [
+          "LUBA 2",
+          "LUBA 2X",
+          "LUBA 3"
+        ],
+        "firmware": []
+      },
+      "evidence": {
+        "kind": "promoted_service_rule",
+        "refs": [
+          "docs/troubleshooter/OPERATIONAL_MATURITY_DECISION_2026-09-08.md",
+          "docs/troubleshooter/FEISHU_CANDIDATE_PAYLOAD_2026-09-08.md",
+          "docs/knowledge/DIAGNOSTIC_KNOWLEDGE.md",
+          "docs/knowledge/TOOL_KNOWLEDGE.md",
+          "docs/knowledge/PARTS_KNOWLEDGE.md"
+        ],
+        "outcome": "recommended",
+        "cohortCount": null,
+        "notes": "Clear mechanism plus persistent confirmed bumper/sensor fault; Hall/chassis sensing and serviceability remain distinct. No production read or independent success count inferred."
+      },
+      "lastReviewed": "2026-09-08",
+      "supersededBy": null,
+      "paths": [
+        {
+          "id": "guided",
+          "symptom": "Bumper triggers without an obstacle",
+          "kind": "repair",
+          "part": "Confirmed faulty serviceable bumper or sensor",
+          "action": [
+            "Confirm that nothing obstructs the bumper and its mechanism moves freely. Clear an actual stuck mechanism before deciding on a part.",
+            "If false triggers remain with a clear mechanism, confirm the bumper/sensor fault using the model-supported check or compatible cross-check. Replace the confirmed faulty, serviceable bumper/sensor with the correct model part.",
+            "If the fault is mower-side Hall/chassis sensing, the component is not separately serviceable, or the result is unclear, contact PIE. Do not automatically replace a harness or mainboard."
+          ],
+          "verification": {
+            "steps": [
+              "Confirm correct bumper response and no false trigger during the relevant model-supported operating test.",
+              "Complete the model-applicable Functional Test, Communication Check and Auto Map Run. Keep all three reports and a Connect Checking screenshot; contact PIE if a required check cannot run or a relevant fault remains."
+            ],
+            "canonical": [
+              "Functional Test",
+              "Communication Check",
+              "Auto Map Run",
+              "Retain all three reports",
+              "Connect Checking screenshot",
+              "Apply the model-supported tests; any unavailable required test or unresolved relevant fault requires PIE review.",
+              "Burn-in is additional and does not replace standard validation."
+            ]
+          },
+          "ifNotFixed": {
+            "kind": "escalate",
+            "message": "If the issue remains or returns after this supported step, contact PIE with the model, observations, checks and repair result. Do not repeat the same replacement or move to another board without a confirmed next step."
+          },
+          "evidence_state": "STABLE_OPERATIONAL_GUIDANCE",
+          "publication": "approved",
+          "agent_visibility": "P1_DESKTOP_GUIDED",
+          "conflict": false,
+          "supersededBy": null,
+          "candidate_refs": [
+            "REP-BUMP-001"
+          ],
+          "review": {
+            "scopeConfirmed": true,
+            "repeatedUse": true,
+            "activeMaintenance": true,
+            "noContradiction": true,
+            "rationale": "Supervisor accepted maintained operational maturity for this scoped portion. Clear mechanism plus persistent confirmed bumper/sensor fault; Hall/chassis sensing and serviceability remain distinct."
+          }
+        }
+      ]
+    },
+    {
+      "id": "guide-visible-cable-damage",
+      "code": null,
+      "message": "Visible cable or harness damage",
+      "aliases": [],
+      "classification": "SELF_SERVICE_DIRECT",
+      "lifecycle": "CURRENT",
+      "publication": "approved",
+      "agentVisible": true,
+      "scope": {
+        "status": "confirmed",
+        "models": [
+          "LUBA 2",
+          "LUBA 2X",
+          "LUBA 3"
+        ],
+        "firmware": []
+      },
+      "evidence": {
+        "kind": "promoted_service_rule",
+        "refs": [
+          "docs/troubleshooter/OPERATIONAL_MATURITY_DECISION_2026-09-08.md",
+          "docs/troubleshooter/FEISHU_CANDIDATE_PAYLOAD_2026-09-08.md",
+          "docs/knowledge/DIAGNOSTIC_KNOWLEDGE.md",
+          "docs/knowledge/TOOL_KNOWLEDGE.md",
+          "docs/knowledge/PARTS_KNOWLEDGE.md"
+        ],
+        "outcome": "recommended",
+        "cohortCount": null,
+        "notes": "Visible damage plus correct model/serviceable part; not universal harness replacement or downstream component repair. No production read or independent success count inferred."
+      },
+      "lastReviewed": "2026-09-08",
+      "supersededBy": null,
+      "paths": [
+        {
+          "id": "guided",
+          "symptom": "Cable or harness damage is visible",
+          "kind": "repair",
+          "part": "The confirmed visibly damaged serviceable cable or harness",
+          "action": [
+            "Identify the visibly damaged cable/harness and confirm the correct model-specific serviceable replacement part.",
+            "Replace that confirmed damaged cable/harness using the model service procedure. If it is visually/electrically normal, do not replace it based on this guide.",
+            "If the cable is not separately serviceable, damage extends beyond it, or the fault remains after replacement, contact PIE rather than replacing downstream components speculatively."
+          ],
+          "verification": {
+            "steps": [
+              "Verify the repaired cable path and relevant function/communication with the correctly installed part.",
+              "Complete the model-applicable Functional Test, Communication Check and Auto Map Run. Keep all three reports and a Connect Checking screenshot; contact PIE if a required check cannot run or a relevant fault remains."
+            ],
+            "canonical": [
+              "Functional Test",
+              "Communication Check",
+              "Auto Map Run",
+              "Retain all three reports",
+              "Connect Checking screenshot",
+              "Apply the model-supported tests; any unavailable required test or unresolved relevant fault requires PIE review.",
+              "Burn-in is additional and does not replace standard validation."
+            ]
+          },
+          "ifNotFixed": {
+            "kind": "escalate",
+            "message": "If the issue remains or returns after this supported step, contact PIE with the model, observations, checks and repair result. Do not repeat the same replacement or move to another board without a confirmed next step."
+          },
+          "evidence_state": "STABLE_OPERATIONAL_GUIDANCE",
+          "publication": "approved",
+          "agent_visibility": "P1_DESKTOP_GUIDED",
+          "conflict": false,
+          "supersededBy": null,
+          "candidate_refs": [
+            "REP-CABLE-001"
+          ],
+          "review": {
+            "scopeConfirmed": true,
+            "repeatedUse": true,
+            "activeMaintenance": true,
+            "noContradiction": true,
+            "rationale": "Supervisor accepted maintained operational maturity for this scoped portion. Visible damage plus correct model/serviceable part; not universal harness replacement or downstream component repair."
+          }
+        }
+      ]
+    },
+    {
+      "id": "guide-update-failure",
+      "code": null,
+      "message": "Firmware update fails",
+      "aliases": [],
+      "classification": "SELF_SERVICE_DIRECT",
+      "lifecycle": "CURRENT",
+      "publication": "approved",
+      "agentVisible": true,
+      "scope": {
+        "status": "confirmed",
+        "models": [
+          "LUBA 2",
+          "LUBA 2X",
+          "LUBA 3"
+        ],
+        "firmware": []
+      },
+      "evidence": {
+        "kind": "promoted_service_rule",
+        "refs": [
+          "docs/troubleshooter/OPERATIONAL_MATURITY_DECISION_2026-09-08.md",
+          "docs/troubleshooter/FEISHU_CANDIDATE_PAYLOAD_2026-09-08.md",
+          "docs/knowledge/DIAGNOSTIC_KNOWLEDGE.md",
+          "docs/knowledge/TOOL_KNOWLEDGE.md",
+          "docs/knowledge/PARTS_KNOWLEDGE.md"
+        ],
+        "outcome": "recommended",
+        "cohortCount": null,
+        "notes": "Current model/tool remediation process only; no universal firmware target or blind repeated board replacement. No production read or independent success count inferred."
+      },
+      "lastReviewed": "2026-09-08",
+      "supersededBy": null,
+      "paths": [
+        {
+          "id": "guided",
+          "symptom": "Firmware update fails",
+          "kind": "check",
+          "part": null,
+          "action": [
+            "Confirm the current service-tool version, mower firmware and relevant component/module versions. Identify the exact failing step and any displayed error.",
+            "Reconcile those versions and use the current update method applicable to this model and service tool. This guide does not prescribe a universal target version or an undocumented recovery procedure.",
+            "If the update fails again, retain the exact step, versions and error and contact PIE for module/data-path investigation. Do not automatically replace the mainboard or infer a cause from a failure percentage."
+          ],
+          "verification": {
+            "steps": [
+              "Repeat the originally failing update/connection step and confirm the expected model-applicable module/version state.",
+              "Complete the model-applicable Functional Test, Communication Check and Auto Map Run. Keep all three reports and a Connect Checking screenshot; contact PIE if a required check cannot run or a relevant fault remains."
+            ],
+            "canonical": [
+              "Functional Test",
+              "Communication Check",
+              "Auto Map Run",
+              "Retain all three reports",
+              "Connect Checking screenshot",
+              "Apply the model-supported tests; any unavailable required test or unresolved relevant fault requires PIE review.",
+              "Burn-in is additional and does not replace standard validation."
+            ]
+          },
+          "ifNotFixed": {
+            "kind": "escalate",
+            "message": "If the issue remains or returns after this supported step, contact PIE with the model, observations, checks and repair result. Do not repeat the same replacement or move to another board without a confirmed next step."
+          },
+          "evidence_state": "STABLE_OPERATIONAL_GUIDANCE",
+          "publication": "approved",
+          "agent_visibility": "P1_DESKTOP_GUIDED",
+          "conflict": false,
+          "supersededBy": null,
+          "candidate_refs": [
+            "REP-FW-001"
+          ],
+          "review": {
+            "scopeConfirmed": true,
+            "repeatedUse": true,
+            "activeMaintenance": true,
+            "noContradiction": true,
+            "rationale": "Supervisor accepted maintained operational maturity for this scoped portion. Current model/tool remediation process only; no universal firmware target or blind repeated board replacement."
+          }
+        }
+      ]
     }
   ],
   "symptoms": [
@@ -1900,7 +2713,12 @@
       "label_cn": "单个轮子不转",
       "aliases": [],
       "agent_visibility": "NAVIGATION",
-      "repair_refs": [],
+      "repair_refs": [
+        {
+          "card_id": "guide-wheel-movement",
+          "repair_path_id": "guided"
+        }
+      ],
       "candidate_refs": [
         "REP-WHEEL-001"
       ]
@@ -1912,7 +2730,12 @@
       "label_cn": "多个轮子不转",
       "aliases": [],
       "agent_visibility": "NAVIGATION",
-      "repair_refs": [],
+      "repair_refs": [
+        {
+          "card_id": "guide-wheel-movement",
+          "repair_path_id": "guided"
+        }
+      ],
       "candidate_refs": [
         "REP-WHEEL-001"
       ]
@@ -1940,6 +2763,10 @@
         {
           "card_id": "sym-cutting-functional-test",
           "repair_path_id": "software"
+        },
+        {
+          "card_id": "guide-cutting-operation",
+          "repair_path_id": "guided"
         }
       ],
       "candidate_refs": [
@@ -1966,7 +2793,12 @@
       "label_cn": "割草盘异响",
       "aliases": [],
       "agent_visibility": "NAVIGATION",
-      "repair_refs": [],
+      "repair_refs": [
+        {
+          "card_id": "guide-cutting-operation",
+          "repair_path_id": "guided"
+        }
+      ],
       "candidate_refs": [
         "REP-CUT-001"
       ]
@@ -1978,7 +2810,12 @@
       "label_cn": "不充电",
       "aliases": [],
       "agent_visibility": "NAVIGATION",
-      "repair_refs": [],
+      "repair_refs": [
+        {
+          "card_id": "guide-no-charge",
+          "repair_path_id": "guided"
+        }
+      ],
       "candidate_refs": [
         "REP-CHARGE-001"
       ]
@@ -2002,7 +2839,12 @@
       "label_cn": "无法识别充电桩",
       "aliases": [],
       "agent_visibility": "NAVIGATION",
-      "repair_refs": [],
+      "repair_refs": [
+        {
+          "card_id": "guide-station-recognition",
+          "repair_path_id": "guided"
+        }
+      ],
       "candidate_refs": [
         "REP-CHARGE-001"
       ]
@@ -2014,7 +2856,12 @@
       "label_cn": "无法回桩",
       "aliases": [],
       "agent_visibility": "NAVIGATION",
-      "repair_refs": [],
+      "repair_refs": [
+        {
+          "card_id": "guide-docking",
+          "repair_path_id": "guided"
+        }
+      ],
       "candidate_refs": [
         "REP-DOCK-001"
       ]
@@ -2026,7 +2873,12 @@
       "label_cn": "不开机",
       "aliases": [],
       "agent_visibility": "NAVIGATION",
-      "repair_refs": [],
+      "repair_refs": [
+        {
+          "card_id": "guide-power",
+          "repair_path_id": "guided"
+        }
+      ],
       "candidate_refs": [
         "REP-POWER-001"
       ]
@@ -2050,7 +2902,12 @@
       "label_cn": "意外关机",
       "aliases": [],
       "agent_visibility": "NAVIGATION",
-      "repair_refs": [],
+      "repair_refs": [
+        {
+          "card_id": "guide-power",
+          "repair_path_id": "guided"
+        }
+      ],
       "candidate_refs": [
         "REP-POWER-001"
       ]
@@ -2074,7 +2931,12 @@
       "label_cn": "连不上RTK基站",
       "aliases": [],
       "agent_visibility": "NAVIGATION",
-      "repair_refs": [],
+      "repair_refs": [
+        {
+          "card_id": "guide-rtk-connection",
+          "repair_path_id": "guided"
+        }
+      ],
       "candidate_refs": [
         "REP-RTK-001"
       ]
@@ -2134,7 +2996,12 @@
       "label_cn": "碰撞传感器误触发",
       "aliases": [],
       "agent_visibility": "NAVIGATION",
-      "repair_refs": [],
+      "repair_refs": [
+        {
+          "card_id": "guide-bumper",
+          "repair_path_id": "guided"
+        }
+      ],
       "candidate_refs": [
         "REP-BUMP-001"
       ]
@@ -2175,7 +3042,12 @@
       "label_cn": "线缆/排线可见损坏",
       "aliases": [],
       "agent_visibility": "NAVIGATION",
-      "repair_refs": [],
+      "repair_refs": [
+        {
+          "card_id": "guide-visible-cable-damage",
+          "repair_path_id": "guided"
+        }
+      ],
       "candidate_refs": [
         "REP-CABLE-001"
       ]
@@ -2199,7 +3071,12 @@
       "label_cn": "固件升级失败",
       "aliases": [],
       "agent_visibility": "NAVIGATION",
-      "repair_refs": [],
+      "repair_refs": [
+        {
+          "card_id": "guide-update-failure",
+          "repair_path_id": "guided"
+        }
+      ],
       "candidate_refs": [
         "REP-FW-001"
       ]

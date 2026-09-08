@@ -201,3 +201,9 @@ This replaces the earlier local project-wide1202 waiting state; unresolved knowl
 Error Code Specialist remains sole owner of C:/Users/Reggie/Desktop/PIE-ITR-ErrorCode, branch error-code/ec-mt-20260907-pilot-001-canonical. EC-MT-20260908-DESKTOP-TWO-PAGE-005 reached TROUBLESHOOTER_DESKTOP_TWO_PAGE_GREEN: strict identify/solution pages, preserved canonical semantics/freeze, restored Back state and invalidated stale solution history.64Node,30browser,native125%,two owned8806 lifecycle cycles and final package/privacy checks passed. Independent60 DOM assertions; no unresolvedCritical/Important/Minor.
 
 MAIN ownership/state and Issue #5/#6 isolation unchanged. Existing8796 listener preserved. No production access, public deployment or default/main integration. See paired MASTER_PLAN and current specialist handoff; this checkpoint is local pending supervisor acceptance.
+
+## 13. Error Code local stable-guidance checkpoint — 2026-09-08
+
+Error Code Specialist remains owner of C:/Users/Reggie/Desktop/PIE-ITR-ErrorCode on error-code/ec-mt-20260907-pilot-001-canonical. EC-MT-20260908-STABLE-GUIDANCE-PROMOTION-006 reached TROUBLESHOOTER_STABLE_GUIDANCE_GREEN:9 approved scoped candidate portions in10 Page2 cards;10private/PIE candidates and separate frozen1202 retained.69Node,30+21browser,native125%,owned8806 lifecycle and extracted package/privacy checks passed; no unresolved independent-review findings.
+
+No MAIN ownership/shared-state changes, production access, public deployment or default/main integration. Task/report remain Issue #5/#6. See paired MASTER_PLAN and current handoff; supervisor acceptance remains external to this local checkpoint.

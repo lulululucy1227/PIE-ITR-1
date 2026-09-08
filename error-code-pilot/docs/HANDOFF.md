@@ -1,32 +1,39 @@
-# Desktop two-page handoff
+# Stable guidance handoff
 
-Task: EC-MT-20260908-DESKTOP-TWO-PAGE-005. Gate: TROUBLESHOOTER_DESKTOP_TWO_PAGE_GREEN. Execution: GPT-6 / Medium, bounded product/state-flow change under the supervisor's approved specification. Local review and self-approval completed.
+Task: EC-MT-20260908-STABLE-GUIDANCE-PROMOTION-006. Gate: TROUBLESHOOTER_STABLE_GUIDANCE_GREEN. Execution: GPT-6 / Medium. Local self-approval completed after fresh acceptance and independent content/UI review.
 
-Workspace: C:/Users/Reggie/Desktop/PIE-ITR-ErrorCode. Branch: error-code/ec-mt-20260907-pilot-001-canonical. Accepted baseline:241c1f5de04de9740a2dac0300c526de006c92e2. New authoritative UX decision copied from canonical GitHub without merging unrelated history. Task/report remain Issue #5 / Issue #6.
+Workspace: C:/Users/Reggie/Desktop/PIE-ITR-ErrorCode. Branch: error-code/ec-mt-20260907-pilot-001-canonical. Baseline:32c83b4248d1ed6819eb1cc1782671ffbeed5fc8. Latest supervisor two-page acceptance and operational-maturity decision reviewed. Only the new decision document was copied from canonical GitHub; no unrelated history merge or MAIN access. Task/report channels remain Issue #5 / Issue #6.
 
-## Delivered behavior
+## Delivered knowledge
 
-Page1 identifies the issue using persistent visit model/version state, exact or fuzzy Error Code/Message selection, controlled area/symptom choice and a relevant qualifier. It never renders resolved part, action, verification or fallback content. Continue explicitly enters Page2 for the same canonical Repair Card or safe next step. Unsupported, conflicting, PIE-only and insufficient-scope outcomes do not acquire fabricated repair guidance.
+Nine approved candidate portions are now AGENT_GUIDED/STABLE_OPERATIONAL_GUIDANCE: WHEEL-001, CUT-001, CHARGE-001, DOCK-001, POWER-001, RTK-001, BUMP-001, CABLE-001, FW-001. They produce10 new scoped Page2 cards:7 repair and3 check/process cards. CHARGE is split into no-charge (LUBA1/2/2X/3) and station-recognition (LUBA2/2X/3), preserving the supplied scope difference.
 
-Browser Back and Back to identify restore the chosen model, query and symptom/path. All input edits invalidate earlier solution history. Per-load session/revision markers fail safe on stale Forward, refresh and direct solution links. Selection and failed/returned state remain in memory; URL/history contain no case or repair payload. Returning to Page1 removes solution contents from DOM. Fixed still requires verification and remains self-reported; failure/return handling still prevents repeated replacement loops.
+POS/WIFI/LIDAR have accepted process maturity but no new direct split is published: existing evidence does not establish a sufficiently precise hardware branch. WATER/PHY remain mature PIE-controlled assessment. WHEEL-003, CUT-002, CHARGE-002, POWER-002 and BT-001 remain weaker PIE_ONLY recommendations. All19 records remain private with exact source fields. Totals:9 AGENT_GUIDED,10 PIE_ONLY;14 STABLE_OPERATIONAL_GUIDANCE,5 SOURCE_RECOMMENDATION. Extra1202 stays separately CONFLICTING_EVIDENCE/WITHHELD. No scope inference or hardware release for1202.
 
-The engine, canonical records, private19+1 import and publication decisions are unchanged. Public21 cards,27 paths and25 normal symptoms remain;3 reserved symptoms remain PIE-only. The1202 hardware freeze and exact model/version/condition guards remain in force. No new router framework, backend, storage, LLM runtime or production integration.
+Current product:31 canonical/public cards,37 paths,28 symptoms (25 normal navigation,3 reservedPIE). Existing21 cards/27 paths are unchanged. New canonical references are reciprocal with the reviewed candidate portions. Original fallback chains are not wholesale publication approval. Every new step ends safely in PIE if unresolved; no speculative next-board chain, fabricated threshold, success count or universal firmware target.
 
-## Fresh evidence
+See STABLE_GUIDANCE_AUDIT_2026-09-08.md for the per-candidate table and scope limits. Current publication_scope and previous_review distinguish approved portions from original source wording and historical reservations. The repeated/maintained-use signal is attributed to the accepted supervisor decision; operational first-use dates and counts remain unknown.
 
-- Node:64/64 passed, covering canonical/projection/privacy/signed-code/failure/qualifier contracts and candidate build validation.
-- Browser:30/30 passed at1366x768,1920x1080 and390x844. Covers Page1 DOM exclusion, correct Page2, exact code/message, fuzzy, every normal symptom, all ten Other escapes, qualifiers/scope, PIE/unsupported/conflicts, signed/historical codes, input invalidation, Back/Forward, refresh/direct access, verification-before-Fixed, failed/returned behavior, synthetic two-step fallback, injection-safe unsupported text and catalog load failure.
-- Native Edge125% passed both desktop sizes; no horizontal overflow/page errors/external UI requests. Fresh identify/selection/solution/verification screenshots inspected; action and verification are readable on Page2 and absent on Page1.
-- Independent reviewer used an isolated in-memory server to exercise all21 current public cards and every current symptom branch:60 DOM/navigation assertions, zero page errors. Final review counts:Critical0 / Important0 / Minor0. See FINAL_TWO_PAGE_REVIEW_2026-09-08.md. Its checkpoint30-test and earlier-package notes were subsequently completed by root as recorded here.
-- Initial8796 lifecycle start found EADDRINUSE. The existing unowned listener was preserved. Added an optional validated specialist test port; two owned8806 start/stop/relaunch cycles passed.8787 is rejected and no existing process was stopped.
-- Final build:exactly5 public assets. Final ZIP:8 allowed entries, content/privacy scan passed, extracted standalone8797 HTTP and exact knowledge readback passed, all extracted entry hashes match; owned process exited. Candidate/private files stay outside package and HTTP routes.
+## Two-page preservation and fixes
 
-Final artifact: artifacts/error-code-pilot-20260908-100409.zip.
-SHA256:283c27b11ef5495c99762c27cb02b5545739250a29a08c0d9b93843c9e13c2e7.
-The final package follows the review checkpoint package only to clarify the two-page flow in LOCAL_README.txt; app/runtime assets are unchanged.
+Page1 still renders identification only; Page2 alone renders approved actions and verification. Non1202 actual-operation cutting is distinct from the existing narrow Function-Test-only software branch. Unknown/wrong models and unanswered/negative qualifiers cannot expose a repair. Model-family labels do not imply capacity or component compatibility; the action still requires supported tools and correct serviceability.
 
-## Boundaries and operation
+Two browser defects were reproduced and fixed: check paths with no faulty-part conclusion no longer show a generic part placeholder; multi-path symptom choices survive model edits before a branch is selected. No engine, routing framework, backend or storage was added. Failed/returned handling, verification-before-Fixed, Back/Forward and refresh/direct-link invalidation remain intact.
 
-No MAIN workspace/runtime/8787/auth/session/case/analyzer mutation, Feishu/Nextop/ITR production read/write, public deployment, default/main merge or push. No knowledge promotion changes. Only specialist-owned test processes were stopped; the existing8796 listener was untouched. No business decision is needed for this local gate.
+## Fresh final acceptance
 
-See README.md for start, validation, alternate-port lifecycle and rollback. Preserve earlier ZIPs and use a separate extraction directory. HANDOFF_KNOWLEDGE_INGEST_004.md preserves the accepted preceding gate. Future source-side maturity/promotion work remains a separate task; this UX change does not reopen it.
+- 69/69 Node tests: schema, references, source parity, evidence states, reciprocal promotion, published scope, canonical verification, failed/returned non-looping and privacy/frozen boundaries.
+- 30/30 existing two-page browser checks, plus21/21 new stable-guidance browser checks. Every new card checked at1366x768 and1920x1080 for actual Page1 DOM exclusion, wrong-model withholding, correct Page2 action, exact-message/symptom parity and failed-step reentry. Existing regression includes390x844 mobile, all25 normal symptoms,10 Other escapes, exact/signed/fuzzy/unsupported, scope/qualifier, verification, Back/Forward, refresh and load failure.
+- Native Edge125% passed at both desktop sizes for the existing software path and all10 new cards per size. No horizontal overflow, page errors or external UI requests. Root visually inspected representative repair, check and zoomed cutting screenshots.
+- Two owned8806 start/stop/relaunch cycles passed. Existing8796 listener was preserved; only owned test children exited.
+- Private source/import check passed19+1 with unchanged normalized source digest. Final build emits5 public assets; final ZIP8 allowed entries passed privacy scan, extracted8797 standalone HTTP, exact knowledge readback and all-entry hash parity. All owned package test processes exited.
+- Independent source/content review,5-test contract run and bounded UI re-review passed; unresolvedCritical0/Important0/Minor0. See FINAL_STABLE_GUIDANCE_REVIEW_2026-09-08.md. Browser/package runs are root evidence, not attributed to the independent reviewer.
+
+Artifact:artifacts/error-code-pilot-20260908-103728.zip.
+SHA256:5b20d513dd01d93205066d018d6ba4ff7185b56208a8963f20de197a25a5cfd0.
+
+## Isolation and next scope
+
+No production Feishu/Nextop/ITR access/write, MAIN workspace/runtime/8787/auth/session/case/analyzer change, default/main push/merge or public deployment. No business answer blocks this local gate. Later precise POS/WIFI/LIDAR branches and damage-specific serviceability mappings require a separate evidence/task review; they are safely retained rather than blocking approved work.
+
+README.md documents validation and operation. Earlier accepted two-page handoff is preserved in HANDOFF_TWO_PAGE_005.md. Detailed paths, hashes and local evidence remain in this local handoff; the authorized Issue #6 report is sanitized and omits machine-specific metadata.

@@ -1,12 +1,14 @@
 # PIE Troubleshooter — local desktop review
 
-Task: EC-MT-20260908-DESKTOP-TWO-PAGE-005. Workspace: `C:\Users\Reggie\Desktop\PIE-ITR-ErrorCode`. Task/report channels: Issue #5 / Issue #6.
+Task: EC-MT-20260908-STABLE-GUIDANCE-PROMOTION-006. Workspace: `C:\Users\Reggie\Desktop\PIE-ITR-ErrorCode`. Task/report channels: Issue #5 / Issue #6.
 
 Open `run-pilot.cmd`, or run `node scripts/serve.mjs` inside this folder, then visit http://127.0.0.1:8796. Requires Node 22+; no npm install, account, database or cloud service. If that port is occupied, use `node scripts/serve.mjs 8797`. Stop your own preview with Ctrl+C. Port 8787 is refused.
 
 Page 1 identifies the problem: model/version, exact Error Code / Message search, candidate selection and controlled symptom/qualifier choices. It contains no repair recommendation or verification steps. Click Continue to open Page 2 for the approved action and verification, or a safe PIE next step. Both entries use the same canonical repair card. Browser Back or Back to identify restores your selections; changing inputs invalidates old solutions. Refresh/direct solution links return safely to identification. Fixed is a local self-report; the app does not diagnose arbitrary text, write tickets, close cases or assign NFF.
 
 See [candidate ingestion decisions](docs/KNOWLEDGE_INGEST_AUDIT_2026-09-08.md), [existing knowledge decisions](docs/KNOWLEDGE_PROMOTION_AUDIT_2026-09-08.md), [data contract](docs/DATA_CONTRACT.md) and [current gate evidence](docs/HANDOFF.md). The original pilot evidence remains in [EVIDENCE_AUDIT.md](docs/EVIDENCE_AUDIT.md). The current task permits local completion with conflicting 1202 hardware paths frozen.
+
+The newer [stable-guidance audit](docs/STABLE_GUIDANCE_AUDIT_2026-09-08.md) records nine supervisor-approved candidate portions now available through ten scoped Page2 cards. No-charge and station-recognition retain separate model scopes. The remaining ten candidates stay PIE-only;1202 is separately frozen. Historical zero-promotion reports describe the earlier evidence stage.
 
 ## Verify and package
 
@@ -16,6 +18,7 @@ Run from this folder:
 node scripts/ingest-candidates.mjs --check
 node --test test/*.test.mjs
 node test/browser.mjs
+node test/stable-browser.mjs
 node test/browser-zoom.mjs
 node scripts/lifecycle-check.mjs
 node scripts/build.mjs

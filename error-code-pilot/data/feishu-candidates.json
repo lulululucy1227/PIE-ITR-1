@@ -35,25 +35,46 @@
         "prohibited": null
       },
       "review": {
-        "evidence_state": "ACTION_PERFORMED_OUTCOME_UNKNOWN",
-        "visibility": "PIE_ONLY",
-        "rationale": "Preserve the supplied performed/unknown label without inventing outcomes. One-wheel and multiple-wheel symptoms do not establish the same failure mechanism. Promoted simultaneous motor undervoltage/overcurrent and battery-protection patterns prioritize shared power diagnosis; a Motor Test result alone does not justify the supplied motor-then-driverboard tree across LUBA 2/2X/3. Applicable functional/communication/map verification is maintained, but the candidate mainboard fallback lacks independent scope and decision criteria.",
+        "evidence_state": "STABLE_OPERATIONAL_GUIDANCE",
+        "visibility": "AGENT_GUIDED",
+        "rationale": "Supervisor-approved stable portion only. Model-supported wheel-motor/driver-board isolation only; simultaneous motor failures require shared-power review. Original automatic mainboard fallback excluded.",
         "source_refs": [
+          "docs/troubleshooter/OPERATIONAL_MATURITY_DECISION_2026-09-08.md",
           "docs/troubleshooter/FEISHU_CANDIDATE_PAYLOAD_2026-09-08.md",
           "docs/troubleshooter/EVIDENCE_PROMOTION_POLICY.md",
           "error-code-pilot/docs/INGEST_EVIDENCE_REVIEW_2026-09-08.md"
         ],
         "last_reviewed": "2026-09-08",
-        "promoted_refs": [],
+        "promoted_refs": [
+          {
+            "card_id": "guide-wheel-movement",
+            "repair_path_id": "guided"
+          }
+        ],
         "known_conflicts_or_reopens": [],
-        "scope_confirmed": false,
-        "verification_confirmed": false,
-        "fallback_confirmed": false,
-        "active_maintenance": false,
+        "scope_confirmed": true,
+        "verification_confirmed": true,
+        "fallback_confirmed": true,
+        "active_maintenance": true,
         "first_seen": null,
         "last_material_change": null,
-        "repeated_use_signal": null,
-        "superseded_by": null
+        "repeated_use_signal": "The supervisor accepted the Feishu operational-maturity audit as evidence of maintained/repeated use for the scoped process; no numerical use count or earliest-use date was supplied.",
+        "superseded_by": null,
+        "previous_review": {
+          "evidence_state": "ACTION_PERFORMED_OUTCOME_UNKNOWN",
+          "visibility": "PIE_ONLY",
+          "rationale": "Preserve the supplied performed/unknown label without inventing outcomes. One-wheel and multiple-wheel symptoms do not establish the same failure mechanism. Promoted simultaneous motor undervoltage/overcurrent and battery-protection patterns prioritize shared power diagnosis; a Motor Test result alone does not justify the supplied motor-then-driverboard tree across LUBA 2/2X/3. Applicable functional/communication/map verification is maintained, but the candidate mainboard fallback lacks independent scope and decision criteria."
+        },
+        "publication_scope": [
+          {
+            "card_id": "guide-wheel-movement",
+            "symptom_ids": [
+              "SYM-001",
+              "SYM-002"
+            ],
+            "scope_note": "Model-supported wheel-motor/driver-board isolation only; simultaneous motor failures require shared-power review. Original automatic mainboard fallback excluded."
+          }
+        ]
       }
     },
     {
@@ -130,27 +151,46 @@
         "prohibited": null
       },
       "review": {
-        "evidence_state": "CONFLICTING_EVIDENCE",
-        "visibility": "WITHHELD",
-        "rationale": "SYM-004 overlaps the frozen 1202 domain: promoted cable/mainboard handling differs materially from the candidate cutting-motor replacement path. MammoSuite cannot independently isolate left/right cutting motors. LUBA 2 5000X Functional Test failure with normal real mowing has a corrected version-dependent explanation, so a test failure is not sufficient hardware confirmation. Retain physical-blockage inspection as a guardrail only; neither candidate hardware sequence nor the frozen cable/mainboard path becomes universal. SYM-006 mechanical noise also does not prove cutting motor failure.",
+        "evidence_state": "STABLE_OPERATIONAL_GUIDANCE",
+        "visibility": "AGENT_GUIDED",
+        "rationale": "Supervisor-approved stable portion only. Explicit non1202 actual-operation branch. Test-only software mismatch remains a separate existing path; driver-board/cable fallback excluded.",
         "source_refs": [
+          "docs/troubleshooter/OPERATIONAL_MATURITY_DECISION_2026-09-08.md",
           "docs/troubleshooter/FEISHU_CANDIDATE_PAYLOAD_2026-09-08.md",
           "docs/troubleshooter/EVIDENCE_PROMOTION_POLICY.md",
           "error-code-pilot/docs/INGEST_EVIDENCE_REVIEW_2026-09-08.md"
         ],
         "last_reviewed": "2026-09-08",
-        "promoted_refs": [],
-        "known_conflicts_or_reopens": [
-          "SYM-004 overlaps the frozen 1202 domain: promoted cable/mainboard handling differs materially from the candidate cutting-motor replacement path. MammoSuite cannot independently isolate left/right cutting motors. LUBA 2 5000X Functional Test failure with normal real mowing has a corrected version-dependent explanation, so a test failure is not sufficient hardware confirmation. Retain physical-blockage inspection as a guardrail only; neither candidate hardware sequence nor the frozen cable/mainboard path becomes universal. SYM-006 mechanical noise also does not prove cutting motor failure."
+        "promoted_refs": [
+          {
+            "card_id": "guide-cutting-operation",
+            "repair_path_id": "guided"
+          }
         ],
-        "scope_confirmed": false,
-        "verification_confirmed": false,
-        "fallback_confirmed": false,
-        "active_maintenance": false,
+        "known_conflicts_or_reopens": [],
+        "scope_confirmed": true,
+        "verification_confirmed": true,
+        "fallback_confirmed": true,
+        "active_maintenance": true,
         "first_seen": null,
         "last_material_change": null,
-        "repeated_use_signal": null,
-        "superseded_by": null
+        "repeated_use_signal": "The supervisor accepted the Feishu operational-maturity audit as evidence of maintained/repeated use for the scoped process; no numerical use count or earliest-use date was supplied.",
+        "superseded_by": null,
+        "previous_review": {
+          "evidence_state": "CONFLICTING_EVIDENCE",
+          "visibility": "WITHHELD",
+          "rationale": "SYM-004 overlaps the frozen 1202 domain: promoted cable/mainboard handling differs materially from the candidate cutting-motor replacement path. MammoSuite cannot independently isolate left/right cutting motors. LUBA 2 5000X Functional Test failure with normal real mowing has a corrected version-dependent explanation, so a test failure is not sufficient hardware confirmation. Retain physical-blockage inspection as a guardrail only; neither candidate hardware sequence nor the frozen cable/mainboard path becomes universal. SYM-006 mechanical noise also does not prove cutting motor failure."
+        },
+        "publication_scope": [
+          {
+            "card_id": "guide-cutting-operation",
+            "symptom_ids": [
+              "SYM-004",
+              "SYM-006"
+            ],
+            "scope_note": "Explicit non1202 actual-operation branch. Test-only software mismatch remains a separate existing path; driver-board/cable fallback excluded."
+          }
+        ]
       }
     },
     {
@@ -223,25 +263,56 @@
         "prohibited": null
       },
       "review": {
-        "evidence_state": "ACTION_PERFORMED_OUTCOME_UNKNOWN",
-        "visibility": "PIE_ONLY",
-        "rationale": "A strong maintained **diagnostic subset** supports controlled compatible known-good station/adapter comparison, but that does not approve the whole supplied two-symptom, four-family replacement path. A combined station/adapter swap localizes a domain, not necessarily which component failed. Charging-station recognition and failure to charge require separate scope. Verify the original symptom and applicable charging measurements; driverboard-then-mainboard fallback has no independently established universal order. See derivative D-CHARGE below.",
+        "evidence_state": "STABLE_OPERATIONAL_GUIDANCE",
+        "visibility": "AGENT_GUIDED",
+        "rationale": "Supervisor-approved stable portion only. No-charge scope includes LUBA1; distinct station-recognition branch excludes it. Controlled compatible source comparison, no automatic board chain. Station-not-recognized only, LUBA2/2X/3; no expansion of LUBA1 no-charge evidence to this observation.",
         "source_refs": [
+          "docs/troubleshooter/OPERATIONAL_MATURITY_DECISION_2026-09-08.md",
           "docs/troubleshooter/FEISHU_CANDIDATE_PAYLOAD_2026-09-08.md",
           "docs/troubleshooter/EVIDENCE_PROMOTION_POLICY.md",
           "error-code-pilot/docs/INGEST_EVIDENCE_REVIEW_2026-09-08.md"
         ],
         "last_reviewed": "2026-09-08",
-        "promoted_refs": [],
+        "promoted_refs": [
+          {
+            "card_id": "guide-no-charge",
+            "repair_path_id": "guided"
+          },
+          {
+            "card_id": "guide-station-recognition",
+            "repair_path_id": "guided"
+          }
+        ],
         "known_conflicts_or_reopens": [],
-        "scope_confirmed": false,
-        "verification_confirmed": false,
-        "fallback_confirmed": false,
-        "active_maintenance": false,
+        "scope_confirmed": true,
+        "verification_confirmed": true,
+        "fallback_confirmed": true,
+        "active_maintenance": true,
         "first_seen": null,
         "last_material_change": null,
-        "repeated_use_signal": null,
-        "superseded_by": null
+        "repeated_use_signal": "The supervisor accepted the Feishu operational-maturity audit as evidence of maintained/repeated use for the scoped process; no numerical use count or earliest-use date was supplied.",
+        "superseded_by": null,
+        "previous_review": {
+          "evidence_state": "ACTION_PERFORMED_OUTCOME_UNKNOWN",
+          "visibility": "PIE_ONLY",
+          "rationale": "A strong maintained **diagnostic subset** supports controlled compatible known-good station/adapter comparison, but that does not approve the whole supplied two-symptom, four-family replacement path. A combined station/adapter swap localizes a domain, not necessarily which component failed. Charging-station recognition and failure to charge require separate scope. Verify the original symptom and applicable charging measurements; driverboard-then-mainboard fallback has no independently established universal order. See derivative D-CHARGE below."
+        },
+        "publication_scope": [
+          {
+            "card_id": "guide-no-charge",
+            "symptom_ids": [
+              "SYM-007"
+            ],
+            "scope_note": "No-charge scope includes LUBA1; distinct station-recognition branch excludes it. Controlled compatible source comparison, no automatic board chain."
+          },
+          {
+            "card_id": "guide-station-recognition",
+            "symptom_ids": [
+              "SYM-009"
+            ],
+            "scope_note": "Station-not-recognized only, LUBA2/2X/3; no expansion of LUBA1 no-charge evidence to this observation."
+          }
+        ]
       }
     },
     {
@@ -315,25 +386,45 @@
         "prohibited": null
       },
       "review": {
-        "evidence_state": "SOURCE_RECOMMENDATION",
-        "visibility": "PIE_ONLY",
-        "rationale": "Promoted charging-path evidence is not an independently scoped IR docking/station replacement SOP. Cleaning/retry is a recommendation, and station versus robot-side IR causality remains unproved. Require the actual docking behavior, model IR architecture, confirmation of the faulty side, and repeat docking validation before an agent repair path.",
+        "evidence_state": "STABLE_OPERATIONAL_GUIDANCE",
+        "visibility": "AGENT_GUIDED",
+        "rationale": "Supervisor-approved stable portion only. Approved first-line docking/IR process only; no universal station or robot-side component replacement.",
         "source_refs": [
+          "docs/troubleshooter/OPERATIONAL_MATURITY_DECISION_2026-09-08.md",
           "docs/troubleshooter/FEISHU_CANDIDATE_PAYLOAD_2026-09-08.md",
           "docs/troubleshooter/EVIDENCE_PROMOTION_POLICY.md",
           "error-code-pilot/docs/INGEST_EVIDENCE_REVIEW_2026-09-08.md"
         ],
         "last_reviewed": "2026-09-08",
-        "promoted_refs": [],
+        "promoted_refs": [
+          {
+            "card_id": "guide-docking",
+            "repair_path_id": "guided"
+          }
+        ],
         "known_conflicts_or_reopens": [],
-        "scope_confirmed": false,
-        "verification_confirmed": false,
-        "fallback_confirmed": false,
-        "active_maintenance": false,
+        "scope_confirmed": true,
+        "verification_confirmed": true,
+        "fallback_confirmed": true,
+        "active_maintenance": true,
         "first_seen": null,
         "last_material_change": null,
-        "repeated_use_signal": null,
-        "superseded_by": null
+        "repeated_use_signal": "The supervisor accepted the Feishu operational-maturity audit as evidence of maintained/repeated use for the scoped process; no numerical use count or earliest-use date was supplied.",
+        "superseded_by": null,
+        "previous_review": {
+          "evidence_state": "SOURCE_RECOMMENDATION",
+          "visibility": "PIE_ONLY",
+          "rationale": "Promoted charging-path evidence is not an independently scoped IR docking/station replacement SOP. Cleaning/retry is a recommendation, and station versus robot-side IR causality remains unproved. Require the actual docking behavior, model IR architecture, confirmation of the faulty side, and repeat docking validation before an agent repair path."
+        },
+        "publication_scope": [
+          {
+            "card_id": "guide-docking",
+            "symptom_ids": [
+              "SYM-010"
+            ],
+            "scope_note": "Approved first-line docking/IR process only; no universal station or robot-side component replacement."
+          }
+        ]
       }
     },
     {
@@ -361,25 +452,46 @@
         "prohibited": null
       },
       "review": {
-        "evidence_state": "ACTION_PERFORMED_OUTCOME_UNKNOWN",
-        "visibility": "PIE_ONLY",
-        "rationale": "Maintained staged no-boot isolation is meaningful partial guidance. It does not verify all unexpected-shutdown cases or universal battery-voltage/replacement rules for LUBA 2/2X/3. Promoted no-boot guidance includes compatible known-good battery, LED/connector evidence, and controlled board/upper-shell isolation; candidate voltage checking is not equivalent to completing that diagnosis. Require exact symptom/model/capability and stable boot plus applicable final tests; no automatic mainboard purchase.",
+        "evidence_state": "STABLE_OPERATIONAL_GUIDANCE",
+        "visibility": "AGENT_GUIDED",
+        "rationale": "Supervisor-approved stable portion only. Model-applicable battery/power checks; no invented voltage/SOH threshold or generic battery/mainboard mapping.",
         "source_refs": [
+          "docs/troubleshooter/OPERATIONAL_MATURITY_DECISION_2026-09-08.md",
           "docs/troubleshooter/FEISHU_CANDIDATE_PAYLOAD_2026-09-08.md",
           "docs/troubleshooter/EVIDENCE_PROMOTION_POLICY.md",
           "error-code-pilot/docs/INGEST_EVIDENCE_REVIEW_2026-09-08.md"
         ],
         "last_reviewed": "2026-09-08",
-        "promoted_refs": [],
+        "promoted_refs": [
+          {
+            "card_id": "guide-power",
+            "repair_path_id": "guided"
+          }
+        ],
         "known_conflicts_or_reopens": [],
-        "scope_confirmed": false,
-        "verification_confirmed": false,
-        "fallback_confirmed": false,
-        "active_maintenance": false,
+        "scope_confirmed": true,
+        "verification_confirmed": true,
+        "fallback_confirmed": true,
+        "active_maintenance": true,
         "first_seen": null,
         "last_material_change": null,
-        "repeated_use_signal": null,
-        "superseded_by": null
+        "repeated_use_signal": "The supervisor accepted the Feishu operational-maturity audit as evidence of maintained/repeated use for the scoped process; no numerical use count or earliest-use date was supplied.",
+        "superseded_by": null,
+        "previous_review": {
+          "evidence_state": "ACTION_PERFORMED_OUTCOME_UNKNOWN",
+          "visibility": "PIE_ONLY",
+          "rationale": "Maintained staged no-boot isolation is meaningful partial guidance. It does not verify all unexpected-shutdown cases or universal battery-voltage/replacement rules for LUBA 2/2X/3. Promoted no-boot guidance includes compatible known-good battery, LED/connector evidence, and controlled board/upper-shell isolation; candidate voltage checking is not equivalent to completing that diagnosis. Require exact symptom/model/capability and stable boot plus applicable final tests; no automatic mainboard purchase."
+        },
+        "publication_scope": [
+          {
+            "card_id": "guide-power",
+            "symptom_ids": [
+              "SYM-011",
+              "SYM-013"
+            ],
+            "scope_note": "Model-applicable battery/power checks; no invented voltage/SOH threshold or generic battery/mainboard mapping."
+          }
+        ]
       }
     },
     {
@@ -454,10 +566,11 @@
         "prohibited": null
       },
       "review": {
-        "evidence_state": "SOURCE_RECOMMENDATION",
+        "evidence_state": "STABLE_OPERATIONAL_GUIDANCE",
         "visibility": "PIE_ONLY",
-        "rationale": "Promoted low vehicle-GNSS guidance and staged evidence collection are useful, but SYM-014 positioning failure and SYM-016 lost/unloadable map must remain distinct. A normal GNSS Antenna Check does not confirm GNSS hardware failure; RTK/base status is another state. No evidence supports a universal LUBA 2/2X/3 map-loss-to-LiDAR/mainboard route. Require exact architecture and actor/tool capability; verify the actual positioning or map symptom and applicable Auto Map Run; PIE fallback when these remain unresolved.",
+        "rationale": "Maturity accepted for the domain, but positioning/map/GNSS/RTK are not a single scoped repair. No new split is sufficiently supported by this decision; existing safe guidance remains PIE.",
         "source_refs": [
+          "docs/troubleshooter/OPERATIONAL_MATURITY_DECISION_2026-09-08.md",
           "docs/troubleshooter/FEISHU_CANDIDATE_PAYLOAD_2026-09-08.md",
           "docs/troubleshooter/EVIDENCE_PROMOTION_POLICY.md",
           "error-code-pilot/docs/INGEST_EVIDENCE_REVIEW_2026-09-08.md"
@@ -468,11 +581,17 @@
         "scope_confirmed": false,
         "verification_confirmed": false,
         "fallback_confirmed": false,
-        "active_maintenance": false,
+        "active_maintenance": true,
         "first_seen": null,
         "last_material_change": null,
-        "repeated_use_signal": null,
-        "superseded_by": null
+        "repeated_use_signal": "The supervisor accepted the Feishu operational-maturity audit as evidence of maintained/repeated use for the scoped process; no numerical use count or earliest-use date was supplied.",
+        "superseded_by": null,
+        "previous_review": {
+          "evidence_state": "SOURCE_RECOMMENDATION",
+          "visibility": "PIE_ONLY",
+          "rationale": "Promoted low vehicle-GNSS guidance and staged evidence collection are useful, but SYM-014 positioning failure and SYM-016 lost/unloadable map must remain distinct. A normal GNSS Antenna Check does not confirm GNSS hardware failure; RTK/base status is another state. No evidence supports a universal LUBA 2/2X/3 map-loss-to-LiDAR/mainboard route. Require exact architecture and actor/tool capability; verify the actual positioning or map symptom and applicable Auto Map Run; PIE fallback when these remain unresolved."
+        },
+        "publication_scope": []
       }
     },
     {
@@ -499,25 +618,45 @@
         "prohibited": null
       },
       "review": {
-        "evidence_state": "SOURCE_RECOMMENDATION",
-        "visibility": "PIE_ONLY",
-        "rationale": "Station power/indicator/adapter checks are supplied recommendations, not a separately established stable station replacement path across the stated series. Do not use mower GNSS evidence or a different model's antenna part as station-fault proof. Verify actual base power and the applicable mower-to-base connection state; keep station versus mower GNSS/LoRa fault domains separate and escalate if unresolved.",
+        "evidence_state": "STABLE_OPERATIONAL_GUIDANCE",
+        "visibility": "AGENT_GUIDED",
+        "rationale": "Supervisor-approved stable portion only. Station-side power/adapter fault isolation only; mower-side GNSS/LoRa remains PIE.",
         "source_refs": [
+          "docs/troubleshooter/OPERATIONAL_MATURITY_DECISION_2026-09-08.md",
           "docs/troubleshooter/FEISHU_CANDIDATE_PAYLOAD_2026-09-08.md",
           "docs/troubleshooter/EVIDENCE_PROMOTION_POLICY.md",
           "error-code-pilot/docs/INGEST_EVIDENCE_REVIEW_2026-09-08.md"
         ],
         "last_reviewed": "2026-09-08",
-        "promoted_refs": [],
+        "promoted_refs": [
+          {
+            "card_id": "guide-rtk-connection",
+            "repair_path_id": "guided"
+          }
+        ],
         "known_conflicts_or_reopens": [],
-        "scope_confirmed": false,
-        "verification_confirmed": false,
-        "fallback_confirmed": false,
-        "active_maintenance": false,
+        "scope_confirmed": true,
+        "verification_confirmed": true,
+        "fallback_confirmed": true,
+        "active_maintenance": true,
         "first_seen": null,
         "last_material_change": null,
-        "repeated_use_signal": null,
-        "superseded_by": null
+        "repeated_use_signal": "The supervisor accepted the Feishu operational-maturity audit as evidence of maintained/repeated use for the scoped process; no numerical use count or earliest-use date was supplied.",
+        "superseded_by": null,
+        "previous_review": {
+          "evidence_state": "SOURCE_RECOMMENDATION",
+          "visibility": "PIE_ONLY",
+          "rationale": "Station power/indicator/adapter checks are supplied recommendations, not a separately established stable station replacement path across the stated series. Do not use mower GNSS evidence or a different model's antenna part as station-fault proof. Verify actual base power and the applicable mower-to-base connection state; keep station versus mower GNSS/LoRa fault domains separate and escalate if unresolved."
+        },
+        "publication_scope": [
+          {
+            "card_id": "guide-rtk-connection",
+            "symptom_ids": [
+              "SYM-015"
+            ],
+            "scope_note": "Station-side power/adapter fault isolation only; mower-side GNSS/LoRa remains PIE."
+          }
+        ]
       }
     },
     {
@@ -547,10 +686,11 @@
         "prohibited": null
       },
       "review": {
-        "evidence_state": "SOURCE_RECOMMENDATION",
+        "evidence_state": "STABLE_OPERATIONAL_GUIDANCE",
         "visibility": "PIE_ONLY",
-        "rationale": "SYM-017 Wi-Fi and SYM-018 4G/mobile network require separate hardware and capability branches. Maintained Wi-Fi `--` interpretation only establishes the need to distinguish not-connected from cannot-connect; it does not prove antenna failure or cover 4G. LUBA 2 post-mainboard software/process reports require version/operation evidence before a standard workflow. Retest the specific target network, preserve module/model identity, and use PIE/version reconciliation rather than universal antenna/mainboard replacement.",
+        "rationale": "Maturity accepted for connectivity support. Wi-Fi and4G/SIM remain separate symptoms. No precise hardware branch supplied; retain both as PIE rather than invent an antenna/mainboard rule.",
         "source_refs": [
+          "docs/troubleshooter/OPERATIONAL_MATURITY_DECISION_2026-09-08.md",
           "docs/troubleshooter/FEISHU_CANDIDATE_PAYLOAD_2026-09-08.md",
           "docs/troubleshooter/EVIDENCE_PROMOTION_POLICY.md",
           "error-code-pilot/docs/INGEST_EVIDENCE_REVIEW_2026-09-08.md"
@@ -561,11 +701,17 @@
         "scope_confirmed": false,
         "verification_confirmed": false,
         "fallback_confirmed": false,
-        "active_maintenance": false,
+        "active_maintenance": true,
         "first_seen": null,
         "last_material_change": null,
-        "repeated_use_signal": null,
-        "superseded_by": null
+        "repeated_use_signal": "The supervisor accepted the Feishu operational-maturity audit as evidence of maintained/repeated use for the scoped process; no numerical use count or earliest-use date was supplied.",
+        "superseded_by": null,
+        "previous_review": {
+          "evidence_state": "SOURCE_RECOMMENDATION",
+          "visibility": "PIE_ONLY",
+          "rationale": "SYM-017 Wi-Fi and SYM-018 4G/mobile network require separate hardware and capability branches. Maintained Wi-Fi `--` interpretation only establishes the need to distinguish not-connected from cannot-connect; it does not prove antenna failure or cover 4G. LUBA 2 post-mainboard software/process reports require version/operation evidence before a standard workflow. Retest the specific target network, preserve module/model identity, and use PIE/version reconciliation rather than universal antenna/mainboard replacement."
+        },
+        "publication_scope": []
       }
     },
     {
@@ -637,25 +783,45 @@
         "prohibited": null
       },
       "review": {
-        "evidence_state": "ACTION_PERFORMED_OUTCOME_UNKNOWN",
-        "visibility": "PIE_ONLY",
-        "rationale": "Preserve performed/unknown status. A generic replace-bumper-sensor path omits promoted compatible-mower cross-validation and the distinction between bumper component and mower-side Hall/chassis sensing. Confirm actual model serviceability; a non-serviceable confirmed Hall-sensor fault may require a different assembly, but that must not be generalized from a likely diagnosis. Verify no false trigger and applicable functional tests; harness/mainboard remains investigation, not a replacement rule.",
+        "evidence_state": "STABLE_OPERATIONAL_GUIDANCE",
+        "visibility": "AGENT_GUIDED",
+        "rationale": "Supervisor-approved stable portion only. Clear mechanism plus persistent confirmed bumper/sensor fault; Hall/chassis sensing and serviceability remain distinct.",
         "source_refs": [
+          "docs/troubleshooter/OPERATIONAL_MATURITY_DECISION_2026-09-08.md",
           "docs/troubleshooter/FEISHU_CANDIDATE_PAYLOAD_2026-09-08.md",
           "docs/troubleshooter/EVIDENCE_PROMOTION_POLICY.md",
           "error-code-pilot/docs/INGEST_EVIDENCE_REVIEW_2026-09-08.md"
         ],
         "last_reviewed": "2026-09-08",
-        "promoted_refs": [],
+        "promoted_refs": [
+          {
+            "card_id": "guide-bumper",
+            "repair_path_id": "guided"
+          }
+        ],
         "known_conflicts_or_reopens": [],
-        "scope_confirmed": false,
-        "verification_confirmed": false,
-        "fallback_confirmed": false,
-        "active_maintenance": false,
+        "scope_confirmed": true,
+        "verification_confirmed": true,
+        "fallback_confirmed": true,
+        "active_maintenance": true,
         "first_seen": null,
         "last_material_change": null,
-        "repeated_use_signal": null,
-        "superseded_by": null
+        "repeated_use_signal": "The supervisor accepted the Feishu operational-maturity audit as evidence of maintained/repeated use for the scoped process; no numerical use count or earliest-use date was supplied.",
+        "superseded_by": null,
+        "previous_review": {
+          "evidence_state": "ACTION_PERFORMED_OUTCOME_UNKNOWN",
+          "visibility": "PIE_ONLY",
+          "rationale": "Preserve performed/unknown status. A generic replace-bumper-sensor path omits promoted compatible-mower cross-validation and the distinction between bumper component and mower-side Hall/chassis sensing. Confirm actual model serviceability; a non-serviceable confirmed Hall-sensor fault may require a different assembly, but that must not be generalized from a likely diagnosis. Verify no false trigger and applicable functional tests; harness/mainboard remains investigation, not a replacement rule."
+        },
+        "publication_scope": [
+          {
+            "card_id": "guide-bumper",
+            "symptom_ids": [
+              "SYM-020"
+            ],
+            "scope_note": "Clear mechanism plus persistent confirmed bumper/sensor fault; Hall/chassis sensing and serviceability remain distinct."
+          }
+        ]
       }
     },
     {
@@ -682,27 +848,32 @@
         "prohibited": null
       },
       "review": {
-        "evidence_state": "CONFLICTING_EVIDENCE",
-        "visibility": "WITHHELD",
-        "rationale": "Candidate scope explicitly needs architecture reconciliation. 5501 supports a LiDAR/IMU body/data-path diagnostic domain; 6401 includes a vision-module replacement case and cannot be relabeled as a universal LiDAR replacement. 2401/2407 remain reconciliation candidates with persistence/current-firmware questions. Unsigned 2000303's LUBA 3 false-alarm claim is candidate-only; signed -2000303 retains its shared-power/secondary-effect rule. LUBA 3 LiDAR families explicitly must not be mixed; series/capacity alone cannot establish part compatibility. Require exact family/SBOM, actual fault evidence, applicable data/map validation and PIE fallback; no module replacement publication.",
+        "evidence_state": "STABLE_OPERATIONAL_GUIDANCE",
+        "visibility": "PIE_ONLY",
+        "rationale": "Maturity accepted for the domain, not a universal module replacement. Exact architecture/capability and code contexts remain unresolved; retain existing scoped code guides and PIE.",
         "source_refs": [
+          "docs/troubleshooter/OPERATIONAL_MATURITY_DECISION_2026-09-08.md",
           "docs/troubleshooter/FEISHU_CANDIDATE_PAYLOAD_2026-09-08.md",
           "docs/troubleshooter/EVIDENCE_PROMOTION_POLICY.md",
           "error-code-pilot/docs/INGEST_EVIDENCE_REVIEW_2026-09-08.md"
         ],
         "last_reviewed": "2026-09-08",
         "promoted_refs": [],
-        "known_conflicts_or_reopens": [
-          "Candidate scope explicitly needs architecture reconciliation. 5501 supports a LiDAR/IMU body/data-path diagnostic domain; 6401 includes a vision-module replacement case and cannot be relabeled as a universal LiDAR replacement. 2401/2407 remain reconciliation candidates with persistence/current-firmware questions. Unsigned 2000303's LUBA 3 false-alarm claim is candidate-only; signed -2000303 retains its shared-power/secondary-effect rule. LUBA 3 LiDAR families explicitly must not be mixed; series/capacity alone cannot establish part compatibility. Require exact family/SBOM, actual fault evidence, applicable data/map validation and PIE fallback; no module replacement publication."
-        ],
+        "known_conflicts_or_reopens": [],
         "scope_confirmed": false,
         "verification_confirmed": false,
         "fallback_confirmed": false,
-        "active_maintenance": false,
+        "active_maintenance": true,
         "first_seen": null,
         "last_material_change": null,
-        "repeated_use_signal": null,
-        "superseded_by": null
+        "repeated_use_signal": "The supervisor accepted the Feishu operational-maturity audit as evidence of maintained/repeated use for the scoped process; no numerical use count or earliest-use date was supplied.",
+        "superseded_by": null,
+        "previous_review": {
+          "evidence_state": "CONFLICTING_EVIDENCE",
+          "visibility": "WITHHELD",
+          "rationale": "Candidate scope explicitly needs architecture reconciliation. 5501 supports a LiDAR/IMU body/data-path diagnostic domain; 6401 includes a vision-module replacement case and cannot be relabeled as a universal LiDAR replacement. 2401/2407 remain reconciliation candidates with persistence/current-firmware questions. Unsigned 2000303's LUBA 3 false-alarm claim is candidate-only; signed -2000303 retains its shared-power/secondary-effect rule. LUBA 3 LiDAR families explicitly must not be mixed; series/capacity alone cannot establish part compatibility. Require exact family/SBOM, actual fault evidence, applicable data/map validation and PIE fallback; no module replacement publication."
+        },
+        "publication_scope": []
       }
     },
     {
@@ -731,10 +902,11 @@
         "prohibited": null
       },
       "review": {
-        "evidence_state": "SOURCE_RECOMMENDATION",
+        "evidence_state": "STABLE_OPERATIONAL_GUIDANCE",
         "visibility": "PIE_ONLY",
-        "rationale": "Keep the explicit PIE-only default. Promoted ingress/entry-point/corrosion and repair-history assessment is valuable, but visible marks do not establish cause, customer misuse, warranty outcome, or the damaged component. Candidate component replacement depends on actual damage and supported serviceability. Require targeted evidence and applicable full final validation after an independently determined repair. Do not publish a generic mainboard path or turn old deleted strategy text into current policy.",
+        "rationale": "Mature PIE-controlled assessment process, not a generic self-service component replacement. Retain assessment internally; no new agent repair published.",
         "source_refs": [
+          "docs/troubleshooter/OPERATIONAL_MATURITY_DECISION_2026-09-08.md",
           "docs/troubleshooter/FEISHU_CANDIDATE_PAYLOAD_2026-09-08.md",
           "docs/troubleshooter/EVIDENCE_PROMOTION_POLICY.md",
           "error-code-pilot/docs/INGEST_EVIDENCE_REVIEW_2026-09-08.md"
@@ -745,11 +917,17 @@
         "scope_confirmed": false,
         "verification_confirmed": false,
         "fallback_confirmed": false,
-        "active_maintenance": false,
+        "active_maintenance": true,
         "first_seen": null,
         "last_material_change": null,
-        "repeated_use_signal": null,
-        "superseded_by": null
+        "repeated_use_signal": "The supervisor accepted the Feishu operational-maturity audit as evidence of maintained/repeated use for the scoped process; no numerical use count or earliest-use date was supplied.",
+        "superseded_by": null,
+        "previous_review": {
+          "evidence_state": "SOURCE_RECOMMENDATION",
+          "visibility": "PIE_ONLY",
+          "rationale": "Keep the explicit PIE-only default. Promoted ingress/entry-point/corrosion and repair-history assessment is valuable, but visible marks do not establish cause, customer misuse, warranty outcome, or the damaged component. Candidate component replacement depends on actual damage and supported serviceability. Require targeted evidence and applicable full final validation after an independently determined repair. Do not publish a generic mainboard path or turn old deleted strategy text into current policy."
+        },
+        "publication_scope": []
       }
     },
     {
@@ -776,25 +954,45 @@
         "prohibited": null
       },
       "review": {
-        "evidence_state": "ACTION_PERFORMED_OUTCOME_UNKNOWN",
-        "visibility": "PIE_ONLY",
-        "rationale": "Visible cable damage plus a confirmed correct serviceable part is meaningful, but the source does not establish the entire family-wide replacement/verification path as stable. Maintained LUBA 3 front signal cable identification is part evidence, not proof that every visibly damaged harness is separately replaceable. Accessory nonrepairable-internal-wiring rules must remain scoped. Require exact damaged cable and model/SBOM/serviceability; verify the affected path plus applicable functional/communication/final tests; unresolved downstream component effects go to investigation.",
+        "evidence_state": "STABLE_OPERATIONAL_GUIDANCE",
+        "visibility": "AGENT_GUIDED",
+        "rationale": "Supervisor-approved stable portion only. Visible damage plus correct model/serviceable part; not universal harness replacement or downstream component repair.",
         "source_refs": [
+          "docs/troubleshooter/OPERATIONAL_MATURITY_DECISION_2026-09-08.md",
           "docs/troubleshooter/FEISHU_CANDIDATE_PAYLOAD_2026-09-08.md",
           "docs/troubleshooter/EVIDENCE_PROMOTION_POLICY.md",
           "error-code-pilot/docs/INGEST_EVIDENCE_REVIEW_2026-09-08.md"
         ],
         "last_reviewed": "2026-09-08",
-        "promoted_refs": [],
+        "promoted_refs": [
+          {
+            "card_id": "guide-visible-cable-damage",
+            "repair_path_id": "guided"
+          }
+        ],
         "known_conflicts_or_reopens": [],
-        "scope_confirmed": false,
-        "verification_confirmed": false,
-        "fallback_confirmed": false,
-        "active_maintenance": false,
+        "scope_confirmed": true,
+        "verification_confirmed": true,
+        "fallback_confirmed": true,
+        "active_maintenance": true,
         "first_seen": null,
         "last_material_change": null,
-        "repeated_use_signal": null,
-        "superseded_by": null
+        "repeated_use_signal": "The supervisor accepted the Feishu operational-maturity audit as evidence of maintained/repeated use for the scoped process; no numerical use count or earliest-use date was supplied.",
+        "superseded_by": null,
+        "previous_review": {
+          "evidence_state": "ACTION_PERFORMED_OUTCOME_UNKNOWN",
+          "visibility": "PIE_ONLY",
+          "rationale": "Visible cable damage plus a confirmed correct serviceable part is meaningful, but the source does not establish the entire family-wide replacement/verification path as stable. Maintained LUBA 3 front signal cable identification is part evidence, not proof that every visibly damaged harness is separately replaceable. Accessory nonrepairable-internal-wiring rules must remain scoped. Require exact damaged cable and model/SBOM/serviceability; verify the affected path plus applicable functional/communication/final tests; unresolved downstream component effects go to investigation."
+        },
+        "publication_scope": [
+          {
+            "card_id": "guide-visible-cable-damage",
+            "symptom_ids": [
+              "SYM-023"
+            ],
+            "scope_note": "Visible damage plus correct model/serviceable part; not universal harness replacement or downstream component repair."
+          }
+        ]
       }
     },
     {
@@ -821,10 +1019,11 @@
         "prohibited": null
       },
       "review": {
-        "evidence_state": "SOURCE_RECOMMENDATION",
+        "evidence_state": "STABLE_OPERATIONAL_GUIDANCE",
         "visibility": "PIE_ONLY",
-        "rationale": "Preserve PIE-only default. Strong promoted **narrow** physical-damage rules exist, including a penetrating chassis breach requiring the complete chassis assembly, but not every impact/cosmetic defect meets that condition. YUKA 2024 retaining-structure nonrepairability is also model-specific. Confirm actual damage, exact model and serviceable part; verify the repaired function and applicable final tests. Assessment/repairability and warranty authorization remain separate.",
+        "rationale": "Mature physical-damage assessment, but no specific new observable-damage/serviceable-part mapping supplied. Retain PIE-controlled scope; no generic replacement published.",
         "source_refs": [
+          "docs/troubleshooter/OPERATIONAL_MATURITY_DECISION_2026-09-08.md",
           "docs/troubleshooter/FEISHU_CANDIDATE_PAYLOAD_2026-09-08.md",
           "docs/troubleshooter/EVIDENCE_PROMOTION_POLICY.md",
           "error-code-pilot/docs/INGEST_EVIDENCE_REVIEW_2026-09-08.md"
@@ -835,11 +1034,17 @@
         "scope_confirmed": false,
         "verification_confirmed": false,
         "fallback_confirmed": false,
-        "active_maintenance": false,
+        "active_maintenance": true,
         "first_seen": null,
         "last_material_change": null,
-        "repeated_use_signal": null,
-        "superseded_by": null
+        "repeated_use_signal": "The supervisor accepted the Feishu operational-maturity audit as evidence of maintained/repeated use for the scoped process; no numerical use count or earliest-use date was supplied.",
+        "superseded_by": null,
+        "previous_review": {
+          "evidence_state": "SOURCE_RECOMMENDATION",
+          "visibility": "PIE_ONLY",
+          "rationale": "Preserve PIE-only default. Strong promoted **narrow** physical-damage rules exist, including a penetrating chassis breach requiring the complete chassis assembly, but not every impact/cosmetic defect meets that condition. YUKA 2024 retaining-structure nonrepairability is also model-specific. Confirm actual damage, exact model and serviceable part; verify the repaired function and applicable final tests. Assessment/repairability and warranty authorization remain separate."
+        },
+        "publication_scope": []
       }
     },
     {
@@ -866,25 +1071,45 @@
         "prohibited": null
       },
       "review": {
-        "evidence_state": "SOURCE_RECOMMENDATION",
-        "visibility": "PIE_ONLY",
-        "rationale": "Candidate wording correctly avoids a universal version or mainboard fallback, but its full three-family repair scope is not a verified or demonstrably stable whole path. Maintained diagnostic rules are strong: module communication, current tool/firmware evidence, compatible wired workflow, and cross-validation. 1000022's historical target is only scoped historical evidence; cutting Function Test version guidance was corrected after recurrence. No update-failure percentage proves network fault. See derivative D-FW below for a bounded usable evidence-collection path.",
+        "evidence_state": "STABLE_OPERATIONAL_GUIDANCE",
+        "visibility": "AGENT_GUIDED",
+        "rationale": "Supervisor-approved stable portion only. Current model/tool remediation process only; no universal firmware target or blind repeated board replacement.",
         "source_refs": [
+          "docs/troubleshooter/OPERATIONAL_MATURITY_DECISION_2026-09-08.md",
           "docs/troubleshooter/FEISHU_CANDIDATE_PAYLOAD_2026-09-08.md",
           "docs/troubleshooter/EVIDENCE_PROMOTION_POLICY.md",
           "error-code-pilot/docs/INGEST_EVIDENCE_REVIEW_2026-09-08.md"
         ],
         "last_reviewed": "2026-09-08",
-        "promoted_refs": [],
+        "promoted_refs": [
+          {
+            "card_id": "guide-update-failure",
+            "repair_path_id": "guided"
+          }
+        ],
         "known_conflicts_or_reopens": [],
-        "scope_confirmed": false,
-        "verification_confirmed": false,
-        "fallback_confirmed": false,
-        "active_maintenance": false,
+        "scope_confirmed": true,
+        "verification_confirmed": true,
+        "fallback_confirmed": true,
+        "active_maintenance": true,
         "first_seen": null,
         "last_material_change": null,
-        "repeated_use_signal": null,
-        "superseded_by": null
+        "repeated_use_signal": "The supervisor accepted the Feishu operational-maturity audit as evidence of maintained/repeated use for the scoped process; no numerical use count or earliest-use date was supplied.",
+        "superseded_by": null,
+        "previous_review": {
+          "evidence_state": "SOURCE_RECOMMENDATION",
+          "visibility": "PIE_ONLY",
+          "rationale": "Candidate wording correctly avoids a universal version or mainboard fallback, but its full three-family repair scope is not a verified or demonstrably stable whole path. Maintained diagnostic rules are strong: module communication, current tool/firmware evidence, compatible wired workflow, and cross-validation. 1000022's historical target is only scoped historical evidence; cutting Function Test version guidance was corrected after recurrence. No update-failure percentage proves network fault. See derivative D-FW below for a bounded usable evidence-collection path."
+        },
+        "publication_scope": [
+          {
+            "card_id": "guide-update-failure",
+            "symptom_ids": [
+              "SYM-025"
+            ],
+            "scope_note": "Current model/tool remediation process only; no universal firmware target or blind repeated board replacement."
+          }
+        ]
       }
     }
   ],

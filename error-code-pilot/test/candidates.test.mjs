@@ -40,7 +40,7 @@ test('all imported records retain exact source fields and independent per-record
  assert.deepEqual(input.candidates.map(({review,...source})=>source),parsed.candidates);
  assert.deepEqual(input.frozen.map(({review,...source})=>source),parsed.frozen);
  assert.deepEqual(input.error_reconciliation.map(({review,...source})=>source),parsed.error_reconciliation);
- for(const record of [...input.candidates,...input.frozen]){assert.ok(record.review.rationale.length>30);assert.equal(record.review.first_seen,null);assert.equal(record.review.repeated_use_signal,null);}
+ for(const record of [...input.candidates,...input.frozen]){assert.ok(record.review.rationale.length>30);assert.equal(record.review.first_seen,null);if(record.review.evidence_state==='STABLE_OPERATIONAL_GUIDANCE')assert.match(record.review.repeated_use_signal,/supervisor/);else assert.equal(record.review.repeated_use_signal,null);}
 });
 test('candidate validation rejects orphan IDs, missing records, review defects and source drift',()=>{
  for(const mutate of [
@@ -61,10 +61,10 @@ test('private symptom crosswalk cannot leak candidate actions or replace approve
  for(const id of [...CANDIDATE_IDS,'REP-1202-001'])assert.equal(publicText.includes(id),false,id);
  for(const key of ['candidate_refs','source_fields','feishu','repeated_use_signal'])assert.equal(publicText.includes(key),false,key);
  const refs=canonical.symptoms.flatMap(s=>s.candidate_refs||[]);assert.equal(new Set(refs).size,20);
- assert.equal(resolveSymptom(publicData,'SYM-007').kind,'escalate');
+ assert.equal(resolveSymptom(publicData,'SYM-008').kind,'escalate');
  for(const s of canonical.symptoms.slice(25))assert.equal(resolveSymptom(canonical,s.symptom_id).kind,'escalate');
  assert.equal(data.frozen[0].review.evidence_state,'CONFLICTING_EVIDENCE');
- assert.equal(publicData.cards.filter(c=>c.paths.some(p=>p.kind==='repair')).length,1);
+ assert.equal(publicData.cards.filter(c=>c.paths.some(p=>p.kind==='repair')).length,8);
 });
 
 test('canonical action provenance cannot point at private, dangling or nonreciprocal candidates',()=>{

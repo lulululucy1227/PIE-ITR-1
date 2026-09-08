@@ -333,3 +333,9 @@ Workspace/owner unchanged: C:/Users/Reggie/Desktop/PIE-ITR-ErrorCode, Error Code
 EC-MT-20260908-DESKTOP-TWO-PAGE-005 reached TROUBLESHOOTER_DESKTOP_TWO_PAGE_GREEN. Page1 identifies only; Continue opens Page2 for approved action/verification or safePIE. Back restores selections; edits/refresh/deep links invalidate stale results. Knowledge/promotion decisions and1202 freeze unchanged.64Node,30browser,native125%,two owned8806 lifecycle cycles and extracted8-entry package/privacy checks passed. Independent review60 assertions; unresolvedCritical/Important/Minor0.
 
 Specialist owner/workspace/branch and Issue #5/#6 channels unchanged. Existing8796 listener preserved; no MAIN or production/default-branch/public deployment mutation. See error-code-pilot/docs/HANDOFF.md. This paired local checkpoint does not assert remote supervisor acceptance.
+
+### Error Code local stable-guidance checkpoint — 2026-09-08
+
+EC-MT-20260908-STABLE-GUIDANCE-PROMOTION-006 reached TROUBLESHOOTER_STABLE_GUIDANCE_GREEN.9 supervisor-approved candidate portions publish10 scoped Page2 cards (CHARGE scope split);10 candidates remainPIE_ONLY, extra1202frozen. Canonical31cards/37paths; original21cards unchanged. StrictPage1 identification remains intact.69Node,30existing+21newbrowser, native125% for all10newcards at both desktop sizes, owned8806 lifecycle and extracted8-entry package/privacy checks passed. Independent review unresolvedCritical/Important/Minor0.
+
+Owner/workspace/branch and Issue #5/#6 boundaries unchanged. No MAIN, production/default-branch/public deployment mutation. See current specialist handoff and paired registry checkpoint. Local approval does not assert remote supervisor acceptance.
