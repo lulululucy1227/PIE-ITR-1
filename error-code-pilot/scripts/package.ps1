@@ -20,8 +20,9 @@ Open http://127.0.0.1:8796 and use Ctrl+C to stop this preview.
 If 8796 is occupied, run node scripts/serve.mjs 8797. Never use 8787.
 
 This package is for local service-agent/supervisor review only. No external deployment is authorized.
-Page 1: type the observed symptom (required). Model, Error Code / Message and firmware provide context.
-All fields are text inputs. Error Code / Message is optional; firmware is initially folded away.
+Page 1: choose the supported mower model and problem area, then a filtered controlled symptom.
+Model, area and symptom are controlled selections. Error Code / Message is optional auxiliary text.
+Only necessary conditions/firmware scope add a confirmation. Other text is for PIE contact only.
 Open the local HTTP address above, not src/index.html or dist/index.html directly.
 Click Continue for Page 2: the approved next action and verification, or safe PIE guidance.
 Back to identify restores selections. Refresh starts a new identification; solution links do not save cases.

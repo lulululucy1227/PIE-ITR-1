@@ -207,3 +207,9 @@ MAIN ownership/state and Issue #5/#6 isolation unchanged. Existing8796 listener 
 Error Code Specialist remains owner of C:/Users/Reggie/Desktop/PIE-ITR-ErrorCode on error-code/ec-mt-20260907-pilot-001-canonical. EC-MT-20260908-STABLE-GUIDANCE-PROMOTION-006 reached TROUBLESHOOTER_STABLE_GUIDANCE_GREEN:9 approved scoped candidate portions in10 Page2 cards;10private/PIE candidates and separate frozen1202 retained.69Node,30+21browser,native125%,owned8806 lifecycle and extracted package/privacy checks passed; no unresolved independent-review findings.
 
 No MAIN ownership/shared-state changes, production access, public deployment or default/main integration. Task/report remain Issue #5/#6. See paired MASTER_PLAN and current handoff; supervisor acceptance remains external to this local checkpoint.
+
+## 14. Error Code local controlled-selection checkpoint — 2026-09-08
+
+Error Code Specialist remains sole stream owner in C:/Users/Reggie/Desktop/PIE-ITR-ErrorCode. EC-MT-20260908-CONTROLLED-SELECTION-UI-007 reached TROUBLESHOOTER_CONTROLLED_SELECTION_GREEN: progressive controlled identification, optional auxiliary code, precise repair-path authorization, restored Back selection and invalidated stale results. The rejected all-text homepage is superseded. Nine approved portions / ten scoped guidance cards, PIE_ONLY and frozen 1202 remain unchanged.
+
+Fresh 75 Node, 17 controlled-selection, 32 two-page and 21 stable-guidance tests passed; native 125% desktop zoom, mobile basics, privacy/projection, lifecycle and extracted package checks passed. Independent review has no unresolved findings. Task/report remain Issue #5/#6. MAIN ownership/shared state are untouched; no production, public deployment or default-branch integration. See paired MASTER_PLAN and current handoff. This is local self-approval, pending supervisor acceptance.

@@ -1,4 +1,6 @@
-# Centered text-input homepage — user follow-up
+# Centered text-input homepage — historical, superseded
+
+Status: NOT_ACCEPTED / SUPERSEDED by EC-MT-20260908-CONTROLLED-SELECTION-UI-007. Retained only as historical evidence; this is not the current product or final report.
 
 Authorization: direct user request after task 006. The user requested a simpler homepage, a mandatory observed symptom, optional error code, centered content, and explicitly rejected dropdowns. This refinement does not claim a new Issue #5 task or change the accepted knowledge-promotion gate.
 

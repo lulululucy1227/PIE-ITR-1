@@ -1,30 +1,28 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light">
-<title>PIE Troubleshooter</title><link rel="stylesheet" href="./styles.css"><link rel="icon" href="data:,"><script type="module" src="./app.mjs"></script>
-</head>
-<body>
-<a class="skip" href="#observed-symptom">Skip to problem details</a>
-<header class="topbar"><a class="brand" href="./"><span class="brand-mark" aria-hidden="true">P</span><span>PIE Troubleshooter</span></a></header>
-<main>
-<p id="status" role="status" class="status">Loading guides…</p>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>PIE Troubleshooter</title><link rel="stylesheet" href="./styles.css"><link rel="icon" href="data:,"><script type="module" src="./app.mjs"></script></head>
+<body><a class="skip" href="#model">Skip to problem details</a><header class="topbar"><a class="brand" href="./"><span class="brand-mark" aria-hidden="true">P</span><span>PIE Troubleshooter</span></a></header>
+<main><p id="status" role="status" class="status">Loading guides…</p>
 <div id="identify-page">
-<section class="intro"><h1>What’s the problem?</h1><p>Describe what you see.</p></section>
+<section id="category-stage" class="identify-stage" tabindex="-1">
+<div class="intro"><h1>What’s the problem?</h1></div>
+<form id="category-form" class="identify-form">
+<label for="model">Mower model<select id="model" required disabled><option value="">Select your model</option></select></label>
+<label for="observable-area">Where do you notice the problem?<select id="observable-area" required disabled><option value="">Choose a problem</option></select></label>
+<button class="primary" id="category-next" type="submit" disabled>Next →</button>
+</form></section>
+<section id="symptom-stage" class="identify-stage" tabindex="-1" hidden>
+<div class="intro"><h1>What exactly happens?</h1><p id="context-summary"></p></div>
 <form id="search-form" class="identify-form">
-<label for="observed-symptom">Observed symptom <span class="required-label">Required</span></label>
-<input id="observed-symptom" type="text" required maxlength="500" placeholder="e.g. The mower does not charge" autocomplete="off" disabled>
-<div class="detail-row">
-<label for="model">Mower model<input id="model" type="text" maxlength="80" placeholder="e.g. LUBA 2" autocomplete="off" spellcheck="false" disabled></label>
-<label for="search">Error code or message <span class="optional">Optional</span><input id="search" name="search" type="search" maxlength="500" placeholder="e.g. 1202" autocomplete="off" spellcheck="false" disabled></label>
-</div>
+<label for="observed-symptom">Choose the matching symptom<select id="observed-symptom" required disabled><option value="">Select a symptom</option></select></label>
+<div id="other-field" hidden><label for="other-description">Anything else to add? <span class="optional">Optional</span><textarea id="other-description" maxlength="500" placeholder="Describe what you see for PIE" rows="3"></textarea></label></div>
+<label for="search">Error code or message <span class="optional">Optional</span><input id="search" name="search" type="search" maxlength="500" placeholder="If shown, enter the code or message" autocomplete="off" spellcheck="false" disabled></label>
 <details id="more-details"><summary>Firmware version <span class="optional">Optional</span></summary><label for="firmware">Current firmware<input id="firmware" type="text" maxlength="80" placeholder="Enter exact version" autocomplete="off" spellcheck="false" disabled></label></details>
-<button class="primary" id="search-button" type="submit" disabled>Continue <span aria-hidden="true">→</span></button>
-</form>
-<section id="selection" tabindex="-1" aria-label="Confirm observed condition"></section>
-</div>
-<section id="solution-page" tabindex="-1" aria-label="Solution and verification" hidden><div class="intro"><div><p class="eyebrow">STEP 2 OF 2 · SOLUTION</p><h1>Repair and verification.</h1></div><button id="edit-issue" class="secondary" type="button">Back to identify</button></div><div id="solution-summary"></div><section id="result" aria-label="Repair guide"></section></section>
-<footer>Local session · No case data saved or sent</footer>
-</main>
-</body>
-</html>
+<div class="step-buttons" id="detail-buttons"><button id="category-back" class="text-button" type="button">Back</button><button class="primary" id="search-button" type="submit" disabled>Continue →</button></div>
+</form></section>
+<section id="confirm-stage" class="identify-stage" tabindex="-1" hidden>
+<div class="intro"><h1>Confirm the details</h1><p id="confirmation-summary"></p></div>
+<div id="scope-details" hidden></div><section id="selection" tabindex="-1" aria-label="Confirm observed condition"></section>
+<button id="details-back" class="text-button" type="button">Back to symptoms</button>
+</section></div>
+<section id="solution-page" tabindex="-1" aria-label="Solution and verification" hidden><div class="intro"><div><h1>What to do next</h1></div><button id="edit-issue" class="secondary" type="button">Back to identify</button></div><div id="solution-summary"></div><section id="result" aria-label="Repair guide"></section></section>
+<footer>Local session · No case data saved or sent</footer></main></body></html>

@@ -252,3 +252,43 @@ export function exportWorkbench(catalog,context={}) {
       result:resolveCard(c,context)
     }))};
 }
+
+// Selection controls use catalog identities, never free text or inferred model families.
+export function controlledModels(catalog) {
+  return [...new Set(catalog.cards.flatMap(c=>c.scope.models))].sort();
+}
+const selectionRefFits=(catalog,ref,model)=>{
+ const card=catalog.cards.find(c=>c.id===ref.card_id),path=card?.paths.find(p=>p.id===ref.repair_path_id);
+ if(!card||!path||path.directSelectable===false)return false;
+ if(card.scope.status==='confirmed')return card.scope.models.includes(model);
+ return path.kind!=='repair'&&(!card.scope.models.length||card.scope.models.includes(model));
+};
+export function controlledSymptoms(catalog,{model,area}) {
+  if(!controlledModels(catalog).includes(model)||!OBSERVABLE_AREAS.includes(area))return [];
+  return catalog.symptoms.filter(s=>navigable(s)&&s.observable_area===area&&(
+    !s.repair_refs.length||s.repair_refs.some(r=>selectionRefFits(catalog,r,model))));
+}
+export function validControlledSelection(catalog,selection) {
+  return controlledModels(catalog).includes(selection.model)&&OBSERVABLE_AREAS.includes(selection.area)&&(
+    selection.symptomId==='__other__'||controlledSymptoms(catalog,selection).some(s=>s.symptom_id===selection.symptomId));
+}
+export function controlledReferences(catalog,selection) {
+  const symptom=controlledSymptoms(catalog,selection).find(s=>s.symptom_id===selection.symptomId);
+  return symptom? symptom.repair_refs.filter(r=>selectionRefFits(catalog,r,selection.model)):[];
+}
+export function controlledRepairAllowed(catalog,selection,cardId,pathId,completed=[]) {
+ const card=catalog.cards.find(c=>c.id===cardId),target=card?.paths.find(p=>p.id===pathId);
+ if(!target)return false;
+ const refs=controlledReferences(catalog,selection).filter(r=>r.card_id===cardId);
+ if(refs.some(r=>r.repair_path_id===pathId))return true;
+ if(target.directSelectable!==false)return false;
+ return refs.some(ref=>{
+  let cursor=ref.repair_path_id;const seen=new Set();
+  while(!seen.has(cursor)&&completed.includes(cursor)){
+   seen.add(cursor);const predecessor=card.paths.find(p=>p.id===cursor);
+   if(predecessor?.ifNotFixed?.kind!=='path')return false;
+   cursor=predecessor.ifNotFixed.pathId;if(cursor===pathId)return true;
+  }
+  return false;
+ });
+}

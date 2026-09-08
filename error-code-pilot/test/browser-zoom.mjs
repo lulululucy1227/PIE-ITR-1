@@ -1,4 +1,4 @@
-import {enterSymptom,enterFirmware,enterSearch} from './input-helpers.mjs';
+import {enterSymptom,enterFirmware,enterSearch,choose} from './input-helpers.mjs';
 // Actual Chromium browser zoom, not CSS zoom or pinch-scale emulation.
 // The test-only extension/profile is isolated under ignored artifacts and is never packaged.
 import fs from 'node:fs';
@@ -28,15 +28,14 @@ try{
    const cdp=await ctx.newCDPSession(page);
    const capture=async name=>{const shot=await cdp.send('Page.captureScreenshot',{format:'png',fromSurface:true,captureBeyondViewport:false});fs.writeFileSync(path.join(artifact,name),Buffer.from(shot.data,'base64'));};
    page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>{if(!r.url().startsWith(base)&&!r.url().startsWith('data:'))external.push(r.url());});
-   await page.goto(base);await page.locator('#search-button:enabled').waitFor();
+   await page.goto(base);await page.locator('#model:enabled').waitFor();
    const zoom=await worker.evaluate(async base=>{const tabs=await chrome.tabs.query({});const tab=tabs.find(t=>t.url.startsWith(base));await chrome.tabs.setZoom(tab.id,1.25);return chrome.tabs.getZoom(tab.id);},base);
    assert.equal(zoom,1.25);
    await page.waitForFunction(()=>devicePixelRatio===1.25);
    const dimensions=await page.evaluate(()=>({width:innerWidth,dpr:devicePixelRatio,overflow:document.documentElement.scrollWidth>innerWidth}));
-   assert.equal(dimensions.overflow,false);assert.equal(await page.locator('select,datalist').count(),0);
+   assert.equal(dimensions.overflow,false);assert.equal(await page.locator('select').count(),3);
    await capture(`zoom125-${size.width}-home.png`);
-   await page.locator('#model').fill('LUBA 2 5000X');await enterFirmware(page,'1.30.31.10');await page.locator('#firmware').press('Tab');
-   await enterSymptom(page,'SYM-004');await page.getByRole('button',{name:'Fails only in Functional Test; works normally during mowing',exact:true}).click();await page.getByRole('button',{name:'Yes, this matches',exact:true}).click();
+   await choose(page,'SYM-004','LUBA 2 5000X');await capture(`zoom125-${size.width}-details.png`);await page.locator('#search').fill('');await page.locator('#search-button').click();await enterFirmware(page,'1.30.31.10');await page.getByRole('button',{name:'Yes, this matches',exact:true}).click();
    assert.equal(await page.locator('#result').innerText(),'');assert.equal(await page.locator('#solution-page').isVisible(),false);
    await capture(`zoom125-${size.width}-identify-selection.png`);
    await page.locator('#continue').click();
@@ -50,7 +49,7 @@ try{
    const knowledge=await(await page.request.get(base+'/knowledge.json')).json();
    const guided=knowledge.cards.filter(c=>c.id.startsWith('guide-'));assert.equal(guided.length,10);
    for(const card of guided){
-    await page.locator('#model').fill(card.scope.models[0]);await enterSearch(page,card.message);
+    await enterSearch(page,card.message,undefined,card.scope.models[0]);
     if(card.paths[0].qualifier)await page.getByRole('button',{name:'Yes, this matches',exact:true}).click();
     assert.equal(await page.locator('#result').innerText(),'');await page.locator('#continue').click();await page.getByRole('heading',{name:'What to do',exact:true}).waitFor();
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,card.id);

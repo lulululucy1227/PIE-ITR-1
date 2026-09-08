@@ -339,3 +339,11 @@ Specialist owner/workspace/branch and Issue #5/#6 channels unchanged. Existing87
 EC-MT-20260908-STABLE-GUIDANCE-PROMOTION-006 reached TROUBLESHOOTER_STABLE_GUIDANCE_GREEN.9 supervisor-approved candidate portions publish10 scoped Page2 cards (CHARGE scope split);10 candidates remainPIE_ONLY, extra1202frozen. Canonical31cards/37paths; original21cards unchanged. StrictPage1 identification remains intact.69Node,30existing+21newbrowser, native125% for all10newcards at both desktop sizes, owned8806 lifecycle and extracted8-entry package/privacy checks passed. Independent review unresolvedCritical/Important/Minor0.
 
 Owner/workspace/branch and Issue #5/#6 boundaries unchanged. No MAIN, production/default-branch/public deployment mutation. See current specialist handoff and paired registry checkpoint. Local approval does not assert remote supervisor acceptance.
+
+### Error Code local controlled-selection checkpoint — 2026-09-08
+
+EC-MT-20260908-CONTROLLED-SELECTION-UI-007 reached TROUBLESHOOTER_CONTROLLED_SELECTION_GREEN under authorized local self-approval. A centered progressive identification window asks for supported model/problem area, then controlled specific symptom and optional error code; only necessary confirmation precedes Page 2 actions and verification. Catalog membership, exact symptom/path authorization, stale-input guards and Other-to-PIE handling prevent free-text repair routing. This supersedes the all-text homepage proposal.
+
+Knowledge remains unchanged: nine approved portions / ten scoped guidance cards, remaining PIE_ONLY and frozen 1202 preserved. Fresh 75 Node, 17 controlled-selection, 32 two-page and 21 stable-guidance checks passed, plus native 125% zoom at both desktop sizes, basic mobile, public projection/privacy, owned lifecycle and extracted standalone package checks. Independent review and final addendum have no unresolved findings.
+
+Owner/workspace and Issue #5/#6 isolation remain unchanged. No MAIN/production/public-deployment/default-branch mutation. See error-code-pilot/docs/HANDOFF.md and paired registry checkpoint. Supervisor acceptance is not asserted by this local record.
