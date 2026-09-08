@@ -5,18 +5,26 @@
 <title>PIE Troubleshooter</title><link rel="stylesheet" href="./styles.css"><link rel="icon" href="data:,"><script type="module" src="./app.mjs"></script>
 </head>
 <body>
-<a class="skip" href="#search">Skip to search</a>
-<header class="topbar"><a class="brand" href="./"><span class="brand-mark" aria-hidden="true">P</span><span>PIE Troubleshooter</span></a><span class="pilot">SERVICE DESK · LOCAL</span></header>
+<a class="skip" href="#observed-symptom">Skip to problem details</a>
+<header class="topbar"><a class="brand" href="./"><span class="brand-mark" aria-hidden="true">P</span><span>PIE Troubleshooter</span></a></header>
 <main>
 <p id="status" role="status" class="status">Loading guides…</p>
 <div id="identify-page">
-<section class="intro"><div><p class="eyebrow">STEP 1 OF 2 · IDENTIFY</p><h1>Identify the problem.</h1></div><p>Search a message or choose what you see.<br>Then continue to the next step.</p></section>
-<section class="context-panel" aria-label="Mower details"><div class="product-context"><span class="eyebrow">PRODUCT</span><strong>Robotic mower</strong></div><label for="model">Mower model<select id="model" disabled><option value="">Select model / unknown</option></select></label><label for="firmware">Current firmware <span class="optional">if known</span><input id="firmware" type="text" maxlength="80" placeholder="Enter exact version" autocomplete="off" spellcheck="false" disabled></label><p>Details stay with you as you browse.</p></section>
-<section class="search-panel" aria-label="Find a repair guide"><form id="search-form"><label for="search">Error code or error message</label><div class="search-row"><input id="search" name="search" type="search" maxlength="500" placeholder="e.g. 1202 or Cutting disc blocked" autocomplete="off" spellcheck="false" required><button class="primary" id="search-button" type="submit" disabled>Find guide <span aria-hidden="true">→</span></button></div></form><div class="examples"><span>Quick lookup</span><button type="button" data-code="1202" disabled>1202</button><button type="button" data-code="1008" disabled>1008</button><button type="button" data-code="5510" disabled>5510</button></div></section>
-<div class="workspace"><section class="navigation" aria-labelledby="symptom-title"><div class="section-heading"><div><p class="eyebrow">OBSERVED PROBLEM</p><h2 id="symptom-title">Choose by symptom</h2></div><p>Start with the area where you notice the problem.</p></div><div id="areas" class="areas"></div><div id="symptoms"></div></section><section id="selection" tabindex="-1" aria-label="Selected issue"></section></div>
+<section class="intro"><h1>What’s the problem?</h1><p>Describe what you see.</p></section>
+<form id="search-form" class="identify-form">
+<label for="observed-symptom">Observed symptom <span class="required-label">Required</span></label>
+<input id="observed-symptom" type="text" required maxlength="500" placeholder="e.g. The mower does not charge" autocomplete="off" disabled>
+<div class="detail-row">
+<label for="model">Mower model<input id="model" type="text" maxlength="80" placeholder="e.g. LUBA 2" autocomplete="off" spellcheck="false" disabled></label>
+<label for="search">Error code or message <span class="optional">Optional</span><input id="search" name="search" type="search" maxlength="500" placeholder="e.g. 1202" autocomplete="off" spellcheck="false" disabled></label>
+</div>
+<details id="more-details"><summary>Firmware version <span class="optional">Optional</span></summary><label for="firmware">Current firmware<input id="firmware" type="text" maxlength="80" placeholder="Enter exact version" autocomplete="off" spellcheck="false" disabled></label></details>
+<button class="primary" id="search-button" type="submit" disabled>Continue <span aria-hidden="true">→</span></button>
+</form>
+<section id="selection" tabindex="-1" aria-label="Confirm observed condition"></section>
 </div>
 <section id="solution-page" tabindex="-1" aria-label="Solution and verification" hidden><div class="intro"><div><p class="eyebrow">STEP 2 OF 2 · SOLUTION</p><h1>Repair and verification.</h1></div><button id="edit-issue" class="secondary" type="button">Back to identify</button></div><div id="solution-summary"></div><section id="result" aria-label="Repair guide"></section></section>
-<footer><span>For service agents · English</span><span>This page does not send or save case information. Outcomes apply to this visit only.</span></footer>
+<footer>Local session · No case data saved or sent</footer>
 </main>
 </body>
 </html>

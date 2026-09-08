@@ -1,3 +1,4 @@
+import {enterSymptom,enterFirmware,enterSearch} from './input-helpers.mjs';
 // Actual Chromium browser zoom, not CSS zoom or pinch-scale emulation.
 // The test-only extension/profile is isolated under ignored artifacts and is never packaged.
 import fs from 'node:fs';
@@ -32,10 +33,10 @@ try{
    assert.equal(zoom,1.25);
    await page.waitForFunction(()=>devicePixelRatio===1.25);
    const dimensions=await page.evaluate(()=>({width:innerWidth,dpr:devicePixelRatio,overflow:document.documentElement.scrollWidth>innerWidth}));
-   assert.equal(dimensions.overflow,false);assert.equal(await page.locator('[data-area]').count(),10);
+   assert.equal(dimensions.overflow,false);assert.equal(await page.locator('select,datalist').count(),0);
    await capture(`zoom125-${size.width}-home.png`);
-   await page.locator('#model').selectOption('LUBA 2 5000X');await page.locator('#firmware').fill('1.30.31.10');await page.locator('#firmware').press('Tab');
-   await page.locator('[data-area="Cutting"]').click();await page.locator('[data-symptom="SYM-004"]').click();await page.getByRole('button',{name:'Fails only in Functional Test; works normally during mowing',exact:true}).click();await page.getByRole('button',{name:'Yes, this matches',exact:true}).click();
+   await page.locator('#model').fill('LUBA 2 5000X');await enterFirmware(page,'1.30.31.10');await page.locator('#firmware').press('Tab');
+   await enterSymptom(page,'SYM-004');await page.getByRole('button',{name:'Fails only in Functional Test; works normally during mowing',exact:true}).click();await page.getByRole('button',{name:'Yes, this matches',exact:true}).click();
    assert.equal(await page.locator('#result').innerText(),'');assert.equal(await page.locator('#solution-page').isVisible(),false);
    await capture(`zoom125-${size.width}-identify-selection.png`);
    await page.locator('#continue').click();
@@ -49,7 +50,7 @@ try{
    const knowledge=await(await page.request.get(base+'/knowledge.json')).json();
    const guided=knowledge.cards.filter(c=>c.id.startsWith('guide-'));assert.equal(guided.length,10);
    for(const card of guided){
-    await page.locator('#model').selectOption(card.scope.models[0]);await page.locator('#search').fill(card.message);await page.locator('#search').press('Enter');
+    await page.locator('#model').fill(card.scope.models[0]);await enterSearch(page,card.message);
     if(card.paths[0].qualifier)await page.getByRole('button',{name:'Yes, this matches',exact:true}).click();
     assert.equal(await page.locator('#result').innerText(),'');await page.locator('#continue').click();await page.getByRole('heading',{name:'What to do',exact:true}).waitFor();
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,card.id);

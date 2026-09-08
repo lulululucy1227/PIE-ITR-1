@@ -1,0 +1,54 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {createRequire} from 'node:module';
+import {build} from '../scripts/build.mjs';
+import {createPreview} from '../scripts/serve.mjs';
+const require=createRequire(import.meta.url);
+const {chromium}=require('C:/Users/Reggie/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+await build();
+const server=await createPreview({port:0}),base='http://127.0.0.1:'+server.address().port;
+const browser=await chromium.launch({headless:true,executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'});
+const checks=[],errors=[];
+try{
+ const page=await browser.newPage();page.setDefaultTimeout(5000);page.on('pageerror',e=>errors.push(e.message));
+ await page.goto(base);await page.locator('#search-button:enabled').waitFor();
+ await page.locator('#search').fill('5501');await page.locator('#search').press('Enter');
+ assert.equal(await page.locator('#continue').count(),0,'a code alone must not offer a solution');
+ assert.equal(await page.locator('#result').innerText(),'');checks.push('code alone cannot bypass required symptom');
+ assert.equal(await page.locator('#observed-symptom').getAttribute('required'),'');
+ assert.equal(await page.locator('#search').getAttribute('required'),null);
+ assert.equal(await page.locator('#firmware').isVisible(),false);
+ assert.equal(await page.locator('[data-code],.area-tile,.product-context').count(),0);
+ assert.equal(await page.locator('select,datalist').count(),0,'all fields are plain text inputs');
+ assert.equal(await page.locator('#observed-symptom').evaluate(e=>e.tagName),'INPUT');
+ checks.push('required symptom text input with optional code and folded firmware');
+ await page.locator('#search').fill('');await page.locator('#observed-symptom').fill('Charging stops before full');await page.locator('#search-button').click();
+ await page.locator('#continue').click();await page.getByRole('heading',{name:'Next step with PIE',exact:true}).waitFor();
+ await page.goBack();assert.equal(await page.locator('#observed-symptom').inputValue(),'Charging stops before full');
+ await page.locator('#observed-symptom').fill('');await page.goForward();
+ assert.equal(await page.locator('#solution-page').isVisible(),false);assert.equal(await page.locator('#result').innerText(),'');
+ checks.push('symptom alone works; clearing it invalidates forward history');
+ await page.locator('#observed-symptom').fill('   ');await page.locator('#observed-symptom').press('Enter');
+ assert.equal(await page.locator('#continue').count(),0);checks.push('whitespace is not an observed symptom');
+ await page.locator('#observed-symptom').fill('charging');await page.locator('#observed-symptom').press('Enter');
+ await page.getByRole('heading',{name:'Which symptom matches?',exact:true}).waitFor();
+ assert.equal(await page.locator('#continue').count(),0);assert.equal(await page.locator('#result').innerText(),'');
+ await page.getByRole('button',{name:'None of these',exact:true}).click();await page.locator('#continue').click();
+ await page.getByRole('heading',{name:'Next step with PIE',exact:true}).waitFor();checks.push('free text offers explicit matches and a safe unlisted exit');
+ await page.goBack();await page.locator('#observed-symptom').fill('Charging stops before full');
+ const knowledge=await(await page.request.get(base+'/knowledge.json')).json();
+ await page.locator('#search').fill(knowledge.cards.find(c=>c.id==='guide-wheel-movement').message);
+ await page.locator('#search').press('Enter');await page.locator('#continue').click();
+ await page.getByRole('heading',{name:'Next step with PIE',exact:true}).waitFor();
+ assert.equal(await page.locator('#result .answer-grid').count(),0);checks.push('conflicting known symptom and guidance message remain PIE');
+ for(const width of [1366,1920,390]){
+  await page.setViewportSize({width,height:width===1920?1080:width===390?844:768});await page.goto(base);await page.locator('#search-button:enabled').waitFor();
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
+  assert.equal(await page.locator('#status').isVisible(),false);
+  const form=await page.locator('.identify-form').boundingBox();assert.ok(Math.abs(form.x+form.width/2-width/2)<2,'form centered');
+  assert.equal(await page.locator('#observed-symptom').evaluate(e=>getComputedStyle(e).textAlign),'center');
+  await page.screenshot({path:`artifacts/simple-home-${width}.png`,fullPage:true});
+  checks.push(width+' clean home without overflow');
+ }
+ assert.deepEqual(errors,[]);fs.writeFileSync('artifacts/simple-home-verification.json',JSON.stringify({checks,errors},null,2));console.log('SIMPLE HOME GREEN '+checks.length);
+}finally{await browser.close();await new Promise(r=>server.close(r));}
