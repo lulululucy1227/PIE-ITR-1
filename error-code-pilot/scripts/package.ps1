@@ -1,3 +1,4 @@
+#Requires -Version 7.0
 $ErrorActionPreference = 'Stop'
 $pilotRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $expectedRoot = 'C:\Users\Reggie\Desktop\PIE-ITR-ErrorCode\error-code-pilot'
@@ -12,15 +13,16 @@ foreach ($relative in $allow) {
   Copy-Item -LiteralPath (Join-Path $pilotRoot $relative) -Destination (Join-Path $stage $relative)
 }
 @'
-Agent Repair Assistant — local review Pilot
+PIE Troubleshooter — desktop local review
 Requires Node.js 22 or later. No npm install.
 Double-click run-pilot.cmd, or run: node scripts/serve.mjs
 Open http://127.0.0.1:8796 and use Ctrl+C to stop this preview.
 If 8796 is occupied, run node scripts/serve.mjs 8797. Never use 8787.
 
-This package is for local supervisor review only. Do not publish or expose it to agents.
-8 selected guides; no support-frequency or repair-success-rate claims.
-1202 hardware scope is awaiting PIE confirmation. Its replacement steps are withheld.
+This package is for local service-agent/supervisor review only. No external deployment is authorized.
+Use Product / model context, Error Code / Message search, or Choose by symptom.
+Only reviewed paths are shown; unconfirmed repairs route to PIE. No repair-success-rate claims.
+1202 replacement steps are frozen. A frozen knowledge item does not block the local product.
 Fixed is user-reported, not verified ticket closure/NFF. No case data is stored or sent.
 Raw references, canonical evidence and tests are intentionally outside this package.
 
@@ -57,8 +59,14 @@ try {
   if (-not $ready) { throw 'Extracted pilot startup timeout' }
   $page = Invoke-WebRequest -Uri 'http://127.0.0.1:8797/' -UseBasicParsing
   $knowledge = Invoke-WebRequest -Uri 'http://127.0.0.1:8797/knowledge.json' -UseBasicParsing
-  if ($page.StatusCode -ne 200 -or $page.Content -notmatch 'Agent Repair Assistant') { throw 'Extracted pilot page failed' }
-  if (($knowledge.Content | ConvertFrom-Json).cards.Count -ne 8) { throw 'Extracted pilot knowledge failed' }
+  if ($page.StatusCode -ne 200 -or $page.Content -notmatch 'Troubleshooter') { throw 'Extracted pilot page failed' }
+  $expectedKnowledge = Get-Content -Raw -LiteralPath (Join-Path $pilotRoot 'dist/knowledge.json')
+  if ($knowledge.Content -cne $expectedKnowledge) { throw 'Extracted pilot knowledge differs from validated build' }
+  $projected = $knowledge.Content | ConvertFrom-Json
+  if ($projected.schemaVersion -ne 2 -or $projected.symptoms.Count -ne 25) { throw 'Extracted desktop symptom contract failed' }
+  foreach ($relative in $allow) {
+    if ((Get-FileHash -LiteralPath (Join-Path $stage $relative)).Hash -ne (Get-FileHash -LiteralPath (Join-Path $extracted $relative)).Hash) { throw "Extracted content mismatch: $relative" }
+  }
 } finally {
   if (-not $owned.HasExited) { Stop-Process -Id $owned.Id; $owned.WaitForExit() }
 }
@@ -71,6 +79,9 @@ $report = @{
   publicDeployment = $false
   extractedStandaloneHttpPassed = $true
   extractedOwnedProcessExited = $true
+  cardCount = $projected.cards.Count
+  navigationSymptomCount = $projected.symptoms.Count
+  extractedAllEntryHashesMatched = $true
 }
 $report | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $pilotRoot 'artifacts\package-verification.json') -Encoding utf8
 $report | ConvertTo-Json -Depth 4

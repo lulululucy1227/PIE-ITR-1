@@ -47,3 +47,6 @@ Other raw-master entries are EXCLUDE_FROM_PILOT by default until reviewed for op
 Confirm exact models/series and material firmware/tool limits for the promoted 1202 free-disc -> Upper Shell Adapter Cable -> mainboard sequence. Alternatively provide a promoted repair path with adequate scope. Until then, there are ZERO real direct replacement paths in the agent build; two 1202 hardware steps remain canonical candidates. Synthetic fixture tests prove the engine capability but are not evidence of real repair efficacy.
 
 S2 full-cohort coverage remains an explicit data limitation, not a reason to stop other work. No business data, service-frequency or outcome certainty has been invented.
+
+## Desktop continuation (2026-09-08)
+The current task's per-path promotion decisions, explicit source limitations and 1202 freeze are in KNOWLEDGE_PROMOTION_AUDIT_2026-09-08.md. Prior pilot ranking/outcome notes remain historical; they do not define the new desktop gate.

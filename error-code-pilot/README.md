@@ -1,49 +1,30 @@
-# Agent Repair Assistant — Error Code local Pilot
+# PIE Troubleshooter — local desktop review
 
-Task: EC-MT-20260907-PILOT-001. Local review only; no external deployment or production integration.
+Task: EC-MT-20260908-DESKTOP-LONGRUN-003. Workspace: `C:\Users\Reggie\Desktop\PIE-ITR-ErrorCode`. Task/report channels: Issue #5 / Issue #6.
 
-## Run
+Open `run-pilot.cmd`, or run `node scripts/serve.mjs` inside this folder, then visit http://127.0.0.1:8796. Requires Node 22+; no npm install, account, database or cloud service. If that port is occupied, use `node scripts/serve.mjs 8797`. Stop your own preview with Ctrl+C. Port 8787 is refused.
 
-Requires Node.js 22 or later. No npm install is needed.
+The desktop home combines persistent product/model context, exact Error Code / Message search, and controlled symptom navigation. Both routes use the same repair card. Model/version/observable-condition checks protect narrowly applicable guidance. A PIE result means the next action needs case-specific review. This page does not diagnose from arbitrary free text, write tickets, close cases or assign NFF. Fixed is a local self-report.
 
-From this directory:
+See [knowledge decisions](docs/KNOWLEDGE_PROMOTION_AUDIT_2026-09-08.md), [data contract](docs/DATA_CONTRACT.md) and [current gate evidence](docs/HANDOFF.md). The original pilot evidence remains in [EVIDENCE_AUDIT.md](docs/EVIDENCE_AUDIT.md). The current desktop task supersedes the original project-wide 1202 blocker: its conflicting hardware paths stay frozen.
 
-    node scripts/build.mjs
-    node scripts/serve.mjs
+## Verify and package
 
-Open http://127.0.0.1:8796. Stop the owned preview with Ctrl+C. If the port is already occupied, choose another unused local port with node scripts/serve.mjs 8797. Port 8787 is explicitly refused. Do not stop an unrelated process to free a port.
+Run from this folder:
 
-On this machine, if node is not on PATH, the launcher also checks the bundled Codex Node runtime. Double-click run-pilot.cmd after building. The portable ZIP contains a ready build and the launcher; rebuilding requires the full specialist source folder.
+```powershell
+node --test test/*.test.mjs
+node test/browser.mjs
+node test/browser-zoom.mjs
+node scripts/lifecycle-check.mjs
+node scripts/build.mjs
+pwsh -NoProfile -File scripts/package.ps1
+```
 
-## What is available
-
-Eight selected code entries: 1202, 1008, 5510, 1000022, 1500, 5501, 6401 and DT-041. Exact code, exact message and candidate-only fuzzy search work offline after local startup. Observed symptoms lead to a concise safe action or PIE. Fixed is a user-reported result after checks, not verified closure or automatic NFF. Nothing is saved or sent.
-
-The 1202 cable/mainboard sequence remains withheld from the agent data until its exact model scope is confirmed. Its canonical recommendation is not a measured success cohort. Historical firmware targets and single-case replacement outcomes are not current universal advice.
-
-## Verify
-
-    node --test test/core.test.mjs test/data.test.mjs test/build.test.mjs
-    node test/browser.mjs
-    node scripts/lifecycle-check.mjs
-
-Browser tests use the bundled Playwright module and installed Edge; optionally set PLAYWRIGHT_MODULE and PILOT_BROWSER to your local installations. These are test-only dependencies, not portal dependencies. Synthetic replacement examples exist only inside tests.
-
-Evidence, candidate ranking and scope gaps: docs/EVIDENCE_AUDIT.md.
-Schema, projection and future read-only adapter: docs/DATA_CONTRACT.md.
-Latest local handoff: docs/HANDOFF.md.
-Generated evidence/screenshots/build manifest: artifacts/.
+Browser tests use locally installed Edge and the bundled Playwright runtime; `PILOT_BROWSER` and `PLAYWRIGHT_MODULE` can override their paths. Packaging is restricted to the isolated specialist directory and verifies an extracted standalone copy on port 8797. Generated `dist/` and `artifacts/` stay local and ignored by Git.
 
 ## Update and rollback
 
-1. Preserve the previous ZIP and canonical knowledge revision.
-2. Edit data/canonical.json with minimal source-backed facts. Do not add raw cases, identities, credentials or whole reference rows.
-3. Confirm model/version applicability and failure/verification behavior. Keep unconfirmed knowledge pilot-only or withheld; formal approval is a separate PIE gate.
-4. Run all checks, build, inspect the public projection and package using scripts/package.ps1.
-5. Stop this Pilot's server before replacing a build. Start and verify the replacement. To roll back, extract a previous ZIP into a new directory and run that version; do not reset MAIN or delete history.
+Edit internal `data/canonical.json`, verify scope and evidence under the current promotion policy, run the full checks, rebuild, inspect the generated projection and create a new ZIP. Never hand-edit dist or assume P0/P1 is approval. Keep prior ZIPs. To roll back, stop only this preview, extract a prior ZIP into a separate local directory and run its launcher. Do not overwrite MAIN or reset its Git/runtime/case state.
 
-## Boundaries
-
-This is the Error Code Specialist workspace, with its own Git objects and branch. It does not import MAIN code, access MAIN case state, change analyzer settings, use Nextop/Feishu sessions, write production records, send messages or provide public hosting. Only the five allowlisted files in dist are web-served. Internal canonical knowledge, source audit, tests and Git files are outside the served directory.
-
-For later production, use a private HTTPS host behind the organization's existing identity provider, versioned reviewed knowledge releases and rollback. Do not expose this localhost preview server to the internet. Hosting/auth, external rollout and MAIN integration require a separate supervisor decision after the pilot gate.
+This is a local review product. External rollout, hosting/authentication and integration into MAIN need a separate task. No default/main push or merge is part of this release.

@@ -1,65 +1,40 @@
-# EC-MT-20260907-PILOT-001 local handoff
+# Desktop long-run handoff
 
-Status: TECHNICAL_PILOT_READY / WAITING_BUSINESS_SCOPE.
-ERROR_CODE_PILOT_GREEN has NOT been claimed.
+Task: EC-MT-20260908-DESKTOP-LONGRUN-003. Status: fresh engineering gates passed; final independent whole-branch review pending. No final green claim yet.
 
 Workspace: C:/Users/Reggie/Desktop/PIE-ITR-ErrorCode.
 Branch: error-code/ec-mt-20260907-pilot-001-canonical.
-Base: 34b4cd242962b33b4cb2de0fe1daa02f5cf0448e.
-Task/report: Issue #5 / Issue #6 only.
-Execution model: GPT-6, High; one-time evidence, architecture and product implementation. No application analyzer model change.
+Canonical supervisor docs fetched at origin/main 36a1fea and merged into this independent clone. MAIN remained read-only for this execution; task/report channels Issue #5 / Issue #6 only. Execution GPT-6 / High.
 
-## Delivered locally
+## Product and knowledge
 
-- Existing parsed-source audit and candidate ranking, with hashes and explicit unknowns.
-- Eight real code entries, 13 canonical paths: two proposed hardware steps withheld until 1202 scope is confirmed; no real direct replacement instructions in the current agent build.
-- Standalone English static app: exact signed-code and message search, explicit fuzzy candidate choice, symptom split, informational normal/abnormal behavior, PIE fallback, verification before self-reported Fixed and non-looping failed/returned paths.
-- Canonical/internal -> allowlisted agent data. Nested privacy canaries verify that unknown metadata cannot leak. No raw-row/ticket/identity/credential import.
-- Approved-only future Workbench adapter, currently returning zero entries. No MAIN integration.
-- Local startup, update, rollback, package and test scripts. No npm installation or LLM runtime.
+Desktop homepage combines persistent model/version context, prominent Error Code / Message search and all ten symptom areas without an entry toggle. Both routes converge on one canonical card in part/target → action → verification → fallback order. Failed/returned history persists within the visit across routes and models. Fixed is only self-reported and does not close or write a case.
 
-## Fresh verification
+Canonical: 21 cards, 27 paths, 28 controlled symptoms. Public navigation: 25 symptoms; SYM-026/027/028 stay PIE-only. Evidence-state counts: VERIFIED_RESOLUTION 2 (historical observations), STABLE_OPERATIONAL_GUIDANCE 1, SOURCE_RECOMMENDATION 22, ACTION_PERFORMED_OUTCOME_UNKNOWN 0, CONFLICTING_EVIDENCE 2. Publication: 25 reviewed paths, two withheld. Visibility: 5 guided paths (four nonrepair safety/information paths plus one narrow software repair), 22 PIE-only including the two withheld candidates. Counts are knowledge records, not repair outcomes or effectiveness rates.
 
-- 30 Node tests passed (core, real data, build, preview privacy).
-- 20 browser checks passed at 1366×1000, 390×844 and 320×740; no page errors, no external network requests and no horizontal overflow.
-- Real browser exercised exact/message/fuzzy/unsupported inputs, informational and fault branches, Fixed prerequisites, failure/returned routing, reset and load failure.
-- Direct cable -> mainboard -> PIE and model/version restrictions were verified using a clearly synthetic test-only fixture. This is implementation evidence, not a real repair-success claim.
-- Two default-port 8796 start -> owned exit -> relaunch cycles passed.
-- Local ZIP allowlist is 8 files. ZIP extracted into a separate specialist artifacts directory, launched independently on 8797, served page/data correctly, and its owned process exited.
-- Final ZIP: artifacts/error-code-pilot-20260907-231405.zip.
-- ZIP SHA256: 4e46a54f6a4ecd4788e1562ceaa7e7d871f07aaef7819d6cdb18c084d8dd2ad9.
-- Source table hash was rechecked unchanged.
-- Independent review found three Important issues; each was reproduced and fixed: failure/returned state lost on rerender, nested metadata leakage, and uncleared blockage advancing to replacement. Follow-up review found no remaining same-level issue in that scope.
+Only the narrow LUBA 2 5000X Function Test software path is a published repair action; exact model, source firmware and observable qualifier are required. 1202 remains searchable with safe obstruction/free-disc escalation; its cable/mainboard candidate steps remain frozen. Historical1000022 targets and unscoped hardware actions remain withheld. The unsupported positive2000303 no-repair claim was not introduced. Full per-path decisions are in KNOWLEDGE_PROMOTION_AUDIT_2026-09-08.md.
 
-## Subtask state
+## Fresh acceptance — 2026-09-08
 
-| Subtask | State | Evidence or remaining boundary |
-|---|---|---|
-| S0 | COMPLETE | Independent clone/Git objects; canonical branch; MAIN untouched by this agent |
-| S1 | COMPLETE | Existing parsed 791 valid codes audited; no XLSX reparse |
-| S2 | COMPLETE within available evidence | Promoted repair outcomes/relevant learning inspected; full live ITR cohort unavailable and not required to continue |
-| S3 | COMPLETE | Prioritized by documented service value, no arbitrary coverage target or fabricated frequency |
-| S4 | COMPLETE | Minimal validated schema with scope/currentness/fallback |
-| S5 | WAITING_USER_DECISION | 1202 exact model/version scope needed before real replacement cards can be shown |
-| S6 | COMPLETE | Independent responsive English static application |
-| S7 | COMPLETE implementation / scope-dependent content withheld | Required edge behaviors tested; direct replacement uses synthetic fixture until S5 scope decision |
-| S8 | COMPLETE | Read-only approved-only adapter contract |
-| S9 | COMPLETE | Fresh Node/browser/build/start/relaunch acceptance |
-| S10 | COMPLETE | Allowlisted web root/package, metadata canaries, no raw cases/production/public operations |
-| S11 | COMPLETE local artifact and handoff | Sanitized terminal state reported only to Issue #6; no external rollout |
+- `node --test test/*.test.mjs`: 54/54 pass, including source projection, signed identity, malformed/ineligible paths, qualifier transitions, supersession, candidate leakage and read-only routes/methods.
+- `node test/browser.mjs`: 33/33 pass at1366x768,1920x1080,390x844; no page errors, external requests or horizontal overflow. Exact/fuzzy/unknown, controlled symptoms, scope/qualifiers, failure/reentry and load errors covered.
+- `node test/browser-zoom.mjs`: native125% Edge zoom pass at1366x768 and1920x1080 (getZoom=1.25, measured dpr1.25 and effective width1093/1536). Isolated test profiles/extensions never packaged. Actual home, repair and verification screenshots inspected.
+- `node scripts/lifecycle-check.mjs`: two owned port8796 start → exit → relaunch cycles pass.
+- `node scripts/build.mjs`: five public assets, reviewed projection only.
+- `scripts/package.ps1` under PowerShell7: eight-entry ZIP allowlist, content scan, extracted standalone localhost8797 run and exact knowledge readback pass; all extracted entry hashes match staging; owned process stopped.
 
-## Only remaining blocking business decision
+Artifact: `artifacts/error-code-pilot-20260908-020233.zip`.
+SHA256: `0287f841565919209394e9ae66612520b4015445901ba1ca964970f72992b933`.
+Reports/logs/screenshots under ignored artifacts/. Source, canonical records, tests, Git metadata, audit files, temporary extensions/profiles and raw/private case data are outside the package.
 
-Which exact models/series does the promoted 1202 service sequence apply to, and are there material firmware/tool limitations?
+## Review and refinements
 
-Current formal rule: free cutting discs + persistent 1202 -> Upper Shell Adapter Cable -> if failed, mainboard. Its machine scope is absent. Cable availability in a parts table is not evidence that this sequence applies to every listed model. A recommendation is not an observed verified outcome or measured cohort.
+Independent evidence review supported the narrowly maintained software rule, distinguished signed/unsigned timestamp evidence, and verified that the handoff's19Feishu count is not an embedded payload (actual imported records0). Root did not fabricate candidates or success counts.
 
-After PIE confirms scope: add a minimal non-identifying source reference; update only the canonical scope/classification and relevant real-data acceptance; run tests/build/browser/privacy/package checks; verify real direct repair content; then reevaluate ERROR_CODE_PILOT_GREEN and report to Issue #6.
+Independent engine review identified candidate symptom prose leakage, qualifier reuse during completed-step traversal and card supersession not suppressing nonrepair instructions. All three were reproduced, fixed and approved on scoped re-review; three new regressions pass. Earlier review also preserved explicit approved PIE escalation prose. Browser visual review removed stale code text beside a new symptom card and corrected screenshot capture artifacts. Final broad review remains pending.
 
-The separate full-cohort access gap is documented, not used as a project-wide blocker. No further engineering work is known to depend on that data.
+## Local operation and boundaries
 
-## Repository/control-plane handling
+See README.md for start/update/rollback. Keep prior ZIPs and stop only your owned preview. No production writes, external deployment, hosting/auth rollout, default/main push or MAIN runtime/case/analyzer/session changes occurred. The final execution report goes only to Issue #6.
 
-Local MASTER_PLAN.md and AGENT_REGISTRY.md are updated together only for this specialist checkpoint. Remote main, MAIN local files, MAIN runtime, 8787, frontend, analyzer config, case state, Nextop and Feishu sessions were not modified. No reset, clean, stash, rebase, destructive history, push, merge to default branch, production write or public deployment occurred. The original unrelated MAIN local history remains preserved in the specialist clone's earlier bootstrap branch.
-
-Do not package or distribute MAIN Workbench as part of this handoff. Keep this local review branch/package. Future hosting/auth, external agent rollout and Workbench integration are supervisor decisions after acceptance.
+No business answer is needed to keep unresolved knowledge safely withheld. Future work may supply the missing Feishu candidate payload, reconcile1202scope, and separately authorize broader rollout/integration. These are not local product blockers under the latest task.

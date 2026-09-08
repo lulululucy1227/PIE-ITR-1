@@ -19,6 +19,7 @@ All approved nonrepair checks/information/escalation are reviewed safety or diag
 | Card / repair_path_id | Evidence state | Scope | Visibility / publication | Conflict, currentness and rationale | Verification / fallback |
 | --- | --- | --- | --- | --- | --- |
 | ec-1202 / blocked | SOURCE_RECOMMENDATION | unknown | P1_DESKTOP_GUIDED / approved | Retained promoted safe guardrail; no unscoped part recommendation | Present / escalate |
+| ec-1202 / free | SOURCE_RECOMMENDATION | unknown | PIE_ONLY / approved | Separately reviewed free-disc escalation; no hardware action | Present / escalate |
 | ec-1202 / cable | CONFLICTING_EVIDENCE | unknown | PIE_ONLY / withheld | FROZEN; conflicting cable/mainboard vs Feishu motor/driverboard paths; scope unresolved | Present / path |
 | ec-1202 / mainboard | CONFLICTING_EVIDENCE | unknown | PIE_ONLY / withheld | FROZEN; conflicting cable/mainboard vs Feishu motor/driverboard paths; scope unresolved | Present / escalate |
 | ec-1008 / stop | SOURCE_RECOMMENDATION | unknown | P1_DESKTOP_GUIDED / approved | Retained promoted safe guardrail; no unscoped part recommendation | Present / escalate |
@@ -50,19 +51,19 @@ All approved nonrepair checks/information/escalation are reviewed safety or diag
 ```json
 {
   "cards": 21,
-  "paths": 26,
+  "paths": 27,
   "evidenceStates": {
-    "SOURCE_RECOMMENDATION": 21,
+    "SOURCE_RECOMMENDATION": 22,
     "CONFLICTING_EVIDENCE": 2,
     "VERIFIED_RESOLUTION": 2,
     "STABLE_OPERATIONAL_GUIDANCE": 1
   },
   "visibility": {
     "P1_DESKTOP_GUIDED": 5,
-    "PIE_ONLY": 21
+    "PIE_ONLY": 22
   },
   "publication": {
-    "approved": 24,
+    "approved": 25,
     "withheld": 2
   }
 }

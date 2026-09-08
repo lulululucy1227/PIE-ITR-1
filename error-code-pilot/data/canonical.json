@@ -81,6 +81,53 @@
           }
         },
         {
+          "id": "free",
+          "symptom": "Both cutting discs are free, but the error remains",
+          "kind": "escalate",
+          "part": null,
+          "action": [
+            "Contact PIE to confirm the next action for the exact model. Do not replace a part from this error alone."
+          ],
+          "verification": {
+            "steps": [
+              "Run Functional Test, Communication Check and Auto Map Run.",
+              "Keep all three reports and a Connect Checking screenshot. If a test cannot run or a relevant fault remains, contact PIE."
+            ],
+            "canonical": [
+              "Functional Test",
+              "Communication Check",
+              "Auto Map Run",
+              "Retain all three reports",
+              "Connect Checking screenshot",
+              "Relevant non-ultrasonic FAIL requires PIE review; ultrasonic failure alone is not a blocker",
+              "Burn-in does not replace standard validation"
+            ]
+          },
+          "ifNotFixed": {
+            "kind": "escalate",
+            "message": "Contact PIE with the exact model, symptom, tests and previous repair results. Do not repeat the same replacement."
+          },
+          "evidence_state": "SOURCE_RECOMMENDATION",
+          "publication": "approved",
+          "agent_visibility": "PIE_ONLY",
+          "conflict": false,
+          "supersededBy": null,
+          "review": {
+            "scopeConfirmed": false,
+            "repeatedUse": false,
+            "activeMaintenance": false,
+            "noContradiction": true,
+            "rationale": "Separately approved safe escalation for a free mechanism; preserves the observable branch without publishing the conflicting hardware candidates.",
+            "history": {
+              "earliestDocumentedUse": null,
+              "lastMaterialChange": null,
+              "reviewedAt": "2026-09-08",
+              "authority": "promoted_diagnostic_pattern",
+              "independentOutcomeCount": null
+            }
+          }
+        },
+        {
           "id": "cable",
           "symptom": "Both cutting discs are free, but the error remains",
           "kind": "repair",
@@ -126,7 +173,8 @@
               "authority": "promoted_service_rule",
               "independentOutcomeCount": null
             }
-          }
+          },
+          "directSelectable": false
         },
         {
           "id": "mainboard",

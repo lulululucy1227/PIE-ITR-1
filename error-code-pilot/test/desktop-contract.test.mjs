@@ -160,3 +160,40 @@ test('PIE-only repair, check and information paths never become direct self-serv
     assert.equal(JSON.stringify(projected).includes('PRIVATE-CANARY'),false);
   }
 });
+test('direct completed-repair traversal requires the next qualifier on canonical and projected cards',()=>{
+  const c=copy(catalog);c.cards[0].paths[0].qualifier='First condition';
+  c.cards[0].paths.push({...copy(path),id:'next',directSelectable:false,qualifier:'Different next condition',action:['NEXT-REPAIR-CANARY']});
+  c.cards[0].paths[0].ifNotFixed={kind:'path',pathId:'next',message:'Continue to the next check.'};
+  for(const current of [c.cards[0],engine.projectAgentCatalog(c).cards[0]]) {
+    const result=engine.resolveCard(current,{...context,completedRepairs:['cable'],qualifierConfirmed:true});
+    assert.equal(result.kind,'qualifier_required');assert.equal(result.pathId,'next');
+    assert.equal(JSON.stringify(result).includes('NEXT-REPAIR-CANARY'),false);
+    assert.equal(engine.resolveCard(current,{...context,pathId:'next',completedRepairs:['cable'],qualifierConfirmed:true}).kind,'repair');
+  }
+});
+test('candidate symptom prose is withheld from projection and canonical symptom choices',()=>{
+  const c=copy(catalog);
+  c.cards[0].paths.push({...copy(path),id:'candidate',publication:'candidate',symptom:'PRIVATE-CANDIDATE symptom',action:['PRIVATE-CANDIDATE action']});
+  c.symptoms[0].repair_refs.push({card_id:'motion',repair_path_id:'candidate'});
+  const projected=engine.projectAgentCatalog(c);
+  assert.equal(JSON.stringify(projected).includes('PRIVATE-CANDIDATE'),false);
+  assert.equal(JSON.stringify(engine.resolveCard(c.cards[0],context)).includes('PRIVATE-CANDIDATE'),false);
+  assert.equal(JSON.stringify(engine.resolveSymptom(c,'SYM-001',context)).includes('PRIVATE-CANDIDATE'),false);
+  c.cards[0].paths[1].directSelectable=false;
+  c.cards[0].paths[0].ifNotFixed={kind:'path',pathId:'candidate',message:'Continue.'};
+  assert.equal(JSON.stringify(engine.projectAgentCatalog(c)).includes('PRIVATE-CANDIDATE'),false);
+  assert.equal(JSON.stringify(engine.resolveCard(c.cards[0],{...context,pathId:'candidate',completedRepairs:['cable']})).includes('PRIVATE-CANDIDATE'),false);
+});
+test('a CURRENT card carrying supersededBy cannot publish or execute any action kind',()=>{
+  for(const kind of ['repair','check','information','escalate']) {
+    const c=copy(catalog);c.cards[0].supersededBy='newer-card';
+    Object.assign(c.cards[0].paths[0],{kind,part:kind==='repair'?'Fixture cable':null,action:['SUPERSEDED-CANARY']});
+    assert.deepEqual(engine.validateCatalog(c),[]);
+    const projected=engine.projectAgentCatalog(c);
+    assert.equal(projected.cards.length,0);
+    assert.deepEqual(projected.symptoms[0].repair_refs,[]);
+    assert.equal(JSON.stringify(engine.resolveCard(c.cards[0],context)).includes('SUPERSEDED-CANARY'),false);
+    assert.equal(engine.resolveCard(c.cards[0],context).kind,'escalate');
+    assert.deepEqual(engine.exportWorkbench(c,context).entries,[]);
+  }
+});

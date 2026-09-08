@@ -10,7 +10,7 @@ const evidenceStates=['VERIFIED_RESOLUTION','STABLE_OPERATIONAL_GUIDANCE','ACTIO
 const publicVisibility=['P0_DESKTOP_SELF_SERVICE','P1_DESKTOP_GUIDED'];
 const canonicalCard=c=>Object.hasOwn(c,'publication')||Object.hasOwn(c,'evidence');
 const v2Card=c=>c.paths.some(p=>Object.hasOwn(p,'evidence_state')||Object.hasOwn(p,'review'));
-const approvedCard=c=>visible(c)&&c.publication==='approved';
+const approvedCard=c=>visible(c)&&c.publication==='approved'&&!c.supersededBy;
 const reservedSymptom=s=>/^SYM-02[678]$/.test(s.symptom_id);
 const navigable=s=>!reservedSymptom(s)&&(!Object.hasOwn(s,'agent_visibility')||s.agent_visibility==='NAVIGATION');
 const validReview=review=>review&&['scopeConfirmed','repeatedUse','activeMaintenance','noContradiction'].every(k=>typeof review[k]==='boolean')&&text(review.rationale);
@@ -29,7 +29,7 @@ function pathEligible(card,path) {
 }
 
 function safePath(path) {
-  return {id:path.id,symptom:path.symptom,directSelectable:path.directSelectable??true,kind:'escalate',part:null,
+  return {id:path.id,symptom:'The issue remains after the available checks',directSelectable:path.directSelectable??true,kind:'escalate',part:null,
     action:['Contact PIE to confirm the next action for this symptom and model.'],
     verification:{steps:['Confirm the next action with PIE.']},
     ifNotFixed:{kind:'escalate',message:'Contact PIE; do not repeat an unconfirmed replacement.'}};
@@ -189,10 +189,10 @@ export function resolveCard(card,context={}) {
   path=path||choices[0];
   if(!path) return escalate();
   if(path.directSelectable===false&&!card.paths.some(p=>completed.includes(p.id)&&p.ifNotFixed.kind==='path'&&p.ifNotFixed.pathId===path.id)) return escalate('Confirm the previous repair result with PIE before using this next step.');
-  const visited=new Set();
+  const visited=new Set();let qualifierConfirmed=context.qualifierConfirmed===true;
   while(completed.includes(path.id)) {
     if(visited.has(path.id)||path.ifNotFixed.kind!=='path') return escalate(path.ifNotFixed.message);
-    visited.add(path.id);path=card.paths.find(p=>p.id===path.ifNotFixed.pathId);
+    visited.add(path.id);path=card.paths.find(p=>p.id===path.ifNotFixed.pathId);qualifierConfirmed=false;
     if(!path) return escalate();
   }
   if(!pathEligible(card,path)&&!canonicalCard(card)) return escalate();
@@ -201,7 +201,7 @@ export function resolveCard(card,context={}) {
     const problem=scopeProblem(card,context);
     if(problem) return card.scope.status==='unknown'?escalate(problem):{kind:'scope_required',part:null,action:[problem]};
   }
-  if(path.kind!=='escalate'&&text(path.qualifier)&&context.qualifierConfirmed!==true) return {
+  if(path.kind!=='escalate'&&text(path.qualifier)&&!qualifierConfirmed) return {
     kind:'qualifier_required',part:null,pathId:path.id,prompt:path.qualifier,
     choices:[{id:'yes',label:'Yes, this matches'},{id:'no',label:'No / unsure — contact PIE'}]
   };
@@ -220,10 +220,11 @@ export function resolveSymptom(catalog,symptomId,context={}) {
   if(!symptom||!navigable(symptom)) return escalate();
   const refs=symptom.repair_refs.filter(ref=>catalog.cards.some(c=>c.id===ref.card_id&&(!canonicalCard(c)||approvedCard(c))&&c.paths.some(p=>p.id===ref.repair_path_id)));
   if(!refs.length) return escalate();
-  if(refs.length>1) return {kind:'choose_path',part:null,choices:refs.map(ref=>({
-    cardId:ref.card_id,pathId:ref.repair_path_id,
-    label:catalog.cards.find(c=>c.id===ref.card_id).paths.find(p=>p.id===ref.repair_path_id).symptom
-  }))};
+  if(refs.length>1) return {kind:'choose_path',part:null,choices:refs.map(ref=>{
+    const card=catalog.cards.find(c=>c.id===ref.card_id);
+    const path=card.paths.find(p=>p.id===ref.repair_path_id);
+    return {cardId:ref.card_id,pathId:ref.repair_path_id,label:(canonicalCard(card)?publicPath(card,path):path).symptom};
+  })};
   const ref=refs[0];
   return resolveCard(catalog.cards.find(c=>c.id===ref.card_id),{...context,pathId:ref.repair_path_id});
 }
@@ -245,7 +246,7 @@ export function recordOutcome(card,pathId,choice,context={}) {
 export function exportWorkbench(catalog,context={}) {
   const errors=validateCatalog(catalog);if(errors.length) throw new Error(errors.join('\n'));
   return {contract:'pie.error-code.readonly.v1',knowledgeVersion:catalog.knowledgeVersion,readOnly:true,
-    entries:catalog.cards.filter(c=>c.publication==='approved'&&visible(c)&&c.lifecycle==='CURRENT').map(c=>({
+    entries:catalog.cards.filter(c=>approvedCard(c)&&c.lifecycle==='CURRENT').map(c=>({
       id:c.id,code:c.code,sourceRefs:[...c.evidence.refs],scope:structuredClone(c.scope),
       applicable:!scopeProblem(c,context),decisive:false,
       result:resolveCard(c,context)

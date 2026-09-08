@@ -29,6 +29,7 @@ Fresh baseline in `error-code-pilot`: `node --test test/*.test.mjs` (30/30), `no
 | test/build.test.mjs | Asset and local server security regression |
 | test/desktop-contract.test.mjs | New schema, controlled symptoms and evidence policy tests |
 | test/browser.mjs | Actual desktop/mobile/zoom routes and local privacy acceptance |
+| test/browser-zoom.mjs | Native Chromium 125% zoom in a separate test profile; measured zoom and screenshots |
 | docs/KNOWLEDGE_PROMOTION_AUDIT_2026-09-08.md | Sanitized per-path classification and promotion decisions |
 | docs/DATA_CONTRACT.md | Versioned symptom/evidence/public contract |
 | docs/HANDOFF.md | Local gate evidence, packaging and operational handoff |

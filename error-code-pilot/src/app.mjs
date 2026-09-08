@@ -1,98 +1,45 @@
-import {searchCards,resolveCard,recordOutcome} from './engine.mjs';
+import {searchCards,searchSymptoms,resolveCard,resolveSymptom,recordOutcome,OBSERVABLE_AREAS} from './engine.mjs';
 const $=id=>document.getElementById(id);
-let cards=[],selected=null,context={},current=null,lastSearch=null;
-function el(tag,text,className) {const node=document.createElement(tag);if(text!==undefined)node.textContent=text;if(className)node.className=className;return node;}
+let catalog=null,selected=null,current=null,activeArea=null;
+const mower={model:'',firmware:''};
+// Per-card visit history survives either entry route and changes to mower details.
+const visits=new Map();
+const visit=card=>{if(!visits.has(card.id))visits.set(card.id,{completedRepairs:[]});return visits.get(card.id);};
+const context=()=>({...visit(selected),...mower});
+function el(tag,text,className){const node=document.createElement(tag);if(text!==undefined)node.textContent=text;if(className)node.className=className;return node;}
 function button(text,action,className='choice'){const n=el('button',text,className);n.type='button';n.addEventListener('click',action);return n;}
-function status(text){$('status').textContent=text;}
-function focusResult(){$('result').focus({preventScroll:true});$('result').scrollIntoView({block:'nearest',behavior:'instant'});}
-function clearResult(){$('result').replaceChildren();$('welcome').hidden=true;document.body.classList.add('has-result');}
-function note(title,lines){const box=el('div',undefined,'alert');box.append(el('h3',title));const list=el('ul');for(const s of lines)list.append(el('li',s));box.append(list);return box;}
-function showSearch() {
-  selected=null;context={};current=null;
-  const result=searchCards(cards,$('search').value);lastSearch=result;clearResult();
-  if(result.kind==='empty'){status('Enter an error code or message.');return;}
-  if(result.kind==='unsupported'){
-    status('No guide found for that code or message.');
-    $('result').append(note('Ask PIE for the next step',['Keep the exact error code, mower model and what happened. Include any repair already tried.','Do not choose a similar code as a replacement instruction.']));
-    focusResult();return;
-  }
-  if(result.matches.length===1&&result.kind.startsWith('exact')) {openCard(result.matches[0]);return;}
-  status('Possible matches — select the exact message you see.');
-  const box=el('div',undefined,'card');box.append(el('h2','Which message matches?'));
-  const choices=el('div',undefined,'choices');
-  for(const c of result.matches){const n=button('',()=>openCard(c));n.append(el('strong',c.code),el('span',c.message));choices.append(n);}
-  box.append(choices);$('result').append(box);focusResult();
+function status(text,error=false){$('status').textContent=text;$('status').classList.toggle('error',error);}
+function focusResult(){$('result').focus({preventScroll:true});if(window.innerWidth<900)$('result').scrollIntoView({block:'start',behavior:'instant'});}
+function clearResult(){$('result').replaceChildren();document.body.classList.add('has-result');}
+function note(title,lines){const box=el('div',undefined,'alert');box.append(el('h3',title));const list=el('ul');for(const line of lines)list.append(el('li',line));box.append(list);return box;}
+function backHome(){selected=null;current=null;$('result').replaceChildren();document.body.classList.remove('has-result');status('Choose a symptom or search the exact code or message.');$('search').focus();}
+function safePIE(title='Other issue',result){selected=null;current=null;clearResult();const box=el('article',undefined,'card');box.append(el('h2',title),note('Next step with PIE',result?.action||['Contact PIE with the exact model, observed symptom and any checks or repairs already tried.']),button('Back to guides',backHome,'text-button'));$('result').append(box);status('PIE can confirm the next action for this issue.');focusResult();}
+function chooseArea(area){if(!catalog)return;activeArea=area;document.querySelectorAll('[data-area]').forEach(n=>n.setAttribute('aria-pressed',String(n.dataset.area===area)));const box=$('symptoms');box.replaceChildren();box.append(el('h3',area+' symptoms'));const list=el('div',undefined,'choices');for(const s of catalog.symptoms.filter(s=>s.observable_area===area)){const b=button(s.label_en,()=>openSymptom(s));b.dataset.symptom=s.symptom_id;list.append(b);}list.append(button('None of these / Other issue',()=>safePIE('Other '+area.toLowerCase()+' issue'),'choice other-choice'));box.append(list);}
+function renderAreas(){const descriptions={Movement:'Wheels & motion',Cutting:'Discs & cutting height',Charging:'Charge & station detection',Docking:'Return to station',Power:'Start, battery & shutdown',Positioning:'Location, RTK & maps',Connectivity:'WiFi, mobile & Bluetooth',Sensors:'Bumper & LiDAR',Physical:'Visible damage & water',Software:'Firmware updates'};for(const area of OBSERVABLE_AREAS){const b=button('',()=>chooseArea(area),'area-tile');b.dataset.area=area;b.setAttribute('aria-pressed','false');b.append(el('strong',area),el('span',descriptions[area]));$('areas').append(b);}}
+function openSymptom(symptom){if(!catalog)return;$('search').value='';const result=resolveSymptom(catalog,symptom.symptom_id,mower);if(result.kind==='choose_path'){selected=null;clearResult();const box=el('article',undefined,'card');box.append(el('h2',symptom.label_en),el('p','Choose the condition that matches.'));const choices=el('div',undefined,'choices');for(const c of result.choices)choices.append(button(c.label,()=>openCard(catalog.cards.find(x=>x.id===c.cardId),c.pathId)));box.append(choices,button('None of these / Other issue',()=>safePIE(symptom.label_en),'text-button'));$('result').append(box);focusResult();return;}
+ const ref=symptom.repair_refs[0];const card=ref&&catalog.cards.find(c=>c.id===ref.card_id);if(card)openCard(card,ref.repair_path_id);else safePIE(symptom.label_en,result);
 }
-function openCard(card) {
-  selected=card;context={};current=null;renderCard();
-  status('Guide found. Check the symptom before taking action.');focusResult();
+function showSearch(){if(!catalog)return;selected=null;current=null;const result=searchCards(catalog.cards,$('search').value);const symptoms=searchSymptoms(catalog.symptoms,$('search').value);clearResult();
+ if(result.kind==='empty'){status('Enter an error code or message.');return;}
+ if(result.matches.length===1&&result.kind.startsWith('exact')){openCard(result.matches[0]);return;}
+ if(!result.matches.length&&!symptoms.matches.length){safePIE('No guide found for that code or message.',{action:['Keep the exact error code, mower model and what happened. Include any repair already tried.','Contact PIE for the next step. Do not choose a similar code as a replacement instruction.']});status('No guide found for that code or message.');return;}
+ status('Possible matches — select the exact message or observed symptom.');const box=el('article',undefined,'card');box.append(el('h2','Which message matches?'));const choices=el('div',undefined,'choices');for(const c of result.matches){const b=button('',()=>openCard(c));if(c.code)b.append(el('strong',c.code+' '));b.append(el('span',c.message));choices.append(b);}for(const s of symptoms.matches)choices.append(button(s.label_en,()=>openSymptom(s)));box.append(choices);$('result').append(box);focusResult();
 }
-function renderCard(resultOverride) {
-  clearResult();
-  const box=el('article',undefined,'card');
-  const top=el('div',undefined,'card-top');top.append(el('span','ERROR '+selected.code,'code-label'),button('New search',()=>{$('result').replaceChildren();selected=null;context={};current=null;$('welcome').hidden=false;document.body.classList.remove('has-result');status('Ready to find a guide.');$('search').focus();},'text-button'));
-  box.append(top,el('h2',selected.message));
-  const scoped=selected.scope.status==='confirmed';
-  if(scoped&&selected.lifecycle==='CURRENT'&&selected.paths.some(p=>p.kind==='repair')){
-    const row=el('div',undefined,'scope-row');
-    const addSelect=(label,key,values)=>{
-      const wrap=el('label',label),input=el('select');input.id='scope-'+key;input.append(new Option('Select '+label.toLowerCase(),''));
-      values.forEach(v=>input.append(new Option(v,v)));input.value=context[key]||'';
-      input.addEventListener('change',()=>{context={...context,[key]:input.value,verificationComplete:false};renderCard();});
-      wrap.append(input);row.append(wrap);
-    };
-    addSelect('Mower model','model',selected.scope.models);
-    if(selected.scope.firmware.length)addSelect('Firmware version','firmware',selected.scope.firmware);
-    box.append(row);
-  } else if(scoped) box.append(el('p','Documented model: '+selected.scope.models.join(', '),'hint'));
-  current=resultOverride||resolveCard(selected,context);
-  if(current.kind==='choose_symptom'){
-    box.append(el('h3','What problem do you see?','choices-title'));
-    const list=el('div',undefined,'choices');
-    current.choices.forEach(c=>list.append(button(c.symptom,()=>{context={...context,pathId:c.id,verificationComplete:false};renderCard();})));
-    box.append(list);
-  } else if(current.kind==='reported_fixed') {
-    const success=el('div',undefined,'success');success.append(el('h3','You reported it fixed'),el('p',current.message));box.append(success);
-  } else if(['escalate','scope_required'].includes(current.kind)) {
-    box.append(note(current.kind==='scope_required'?'Confirm the mower details':'Next step with PIE',current.action||['Contact PIE for the current next step.']));
-    if(selected.paths.filter(p=>p.directSelectable!==false).length>1)box.append(button('Change symptom',()=>{context={...context,pathId:undefined,verificationComplete:false};renderCard();},'text-button'));
-  } else {
-    if(selected.paths.filter(p=>p.directSelectable!==false).length>1)box.append(button('Change symptom',()=>{context={...context,pathId:undefined,verificationComplete:false};renderCard();},'text-button'));
-    const grid=el('div',undefined,'answer-grid'),part=el('div',undefined,'part-box');
-    part.append(el('h3',current.kind==='repair'?'Most likely faulty part':'Repair guidance'),el('strong',current.part||(current.kind==='information'?'No repair needed for this message':'Start with the observed condition')));
-    grid.append(part);
-    for(const [heading,items] of [['What to do',current.action],['After repair',current.verification.steps]]){
-      const block=el('section',undefined,'answer-block');block.append(el('h3',heading));
-      const list=el('ol');items.forEach(s=>list.append(el('li',s)));block.append(list);grid.append(block);
-    }
-    box.append(grid);
-    const outcome=el('div',undefined,'outcome'),label=el('label',undefined,'check-label'),check=el('input');check.type='checkbox';check.id='verification';check.checked=false;
-    label.append(check,el('span','I completed the checks above and confirmed the result.'));
-    const buttons=el('div',undefined,'buttons');
-    const act=choice=>{
-      const pathId=current.pathId;
-      const next=recordOutcome(selected,pathId,choice,{...context,verificationComplete:check.checked});
-      if(next.kind==='verification_required'){status(next.message);$('status').classList.add('error');check.focus();return;}
-      $('status').classList.remove('error');
-      const failed=choice==='not_fixed'?[...new Set([...(context.completedRepairs||[]),pathId])]:context.completedRepairs||[];
-      context={...context,completedRepairs:failed,returned:context.returned||choice==='returned',pathId:next.pathId||context.pathId,verificationComplete:false};
-      renderCard(next);status(choice==='fixed'?'Result shown for this visit only. No case record was changed.':'Use the next step shown below.');focusResult();
-    };
-    buttons.append(button('Fixed',()=>act('fixed'),'primary'),button('Still not fixed',()=>act('not_fixed'),'secondary'));
-    if(current.kind!=='information')buttons.append(button('The issue returned after repair',()=>act('returned'),'text-button'));
-    outcome.append(label,buttons);box.append(outcome);
-  }
-  $('result').append(box);
+function openCard(card,pathId){selected=card;if(pathId)visit(card).pathId=pathId;renderCard();status('Guide found. Confirm the observed condition before taking action.');focusResult();}
+function renderCard(override){clearResult();const box=el('article',undefined,'card');box.dataset.card=selected.id;const top=el('div',undefined,'card-top');top.append(el('span',selected.code?'ERROR '+selected.code:'SYMPTOM GUIDE','code-label'),button('Back to guides',backHome,'text-button'));box.append(top,el('h2',selected.message));
+ const state=visit(selected);current=override||(state.qualifierRejected?{kind:'escalate',action:['The observed condition does not match this guide. Contact PIE with the exact model, firmware and what happens during mowing and Functional Test.']}:resolveCard(selected,context()));
+ if(current.kind==='choose_symptom'){box.append(el('h3','What problem do you see?','choices-title'));const choices=el('div',undefined,'choices');for(const c of current.choices)choices.append(button(c.symptom,()=>{Object.assign(state,{pathId:c.id,qualifierConfirmed:false,qualifierRejected:false});renderCard();}));box.append(choices);
+ }else if(current.kind==='reported_fixed'){const success=el('div',undefined,'success');success.append(el('h3','You reported it fixed'),el('p',current.message));box.append(success);
+ }else if(current.kind==='qualifier_required'){box.append(note('Confirm the observed condition',[current.prompt]));const choices=el('div',undefined,'choices');for(const c of current.choices)choices.append(button(c.label,()=>{Object.assign(state,{qualifierConfirmed:c.id==='yes',qualifierRejected:c.id!=='yes'});renderCard();}));box.append(choices);
+ }else if(['escalate','scope_required'].includes(current.kind)){box.append(note(current.kind==='scope_required'?'Confirm the mower details':'Next step with PIE',current.action||['Contact PIE for the current next step.']));if(current.kind==='scope_required'){const details=[];if(selected.scope.models.length)details.push('Guide model: '+selected.scope.models.join(', '));if(selected.scope.firmware.length)details.push('Guide firmware: '+selected.scope.firmware.join(', '));box.append(el('p',details.join(' · '),'hint'));}
+ }else if(['repair','check','information'].includes(current.kind)){const grid=el('div',undefined,'answer-grid');const part=el('section',undefined,'part-box');part.append(el('h3','Most likely faulty part / target area'),el('strong',current.part||(current.kind==='information'?'No repair needed for this message':'Start with the observed condition')));grid.append(part);for(const [heading,items] of [['What to do',current.action],['After repair / verification',current.verification.steps]]){const block=el('section',undefined,'answer-block');block.append(el('h3',heading));const list=el('ol');for(const text of items)list.append(el('li',text));block.append(list);grid.append(block);}const fallback=el('section',undefined,'fallback');fallback.append(el('h3','Still not fixed'),el('p',current.ifNotFixed.message));grid.append(fallback);box.append(grid);
+ const outcome=el('div',undefined,'outcome'),label=el('label',undefined,'check-label'),check=el('input');check.type='checkbox';check.id='verification';label.append(check,el('span','I completed the checks above and confirmed the result.'));const buttons=el('div',undefined,'buttons');const act=choice=>{const pathId=current.pathId;const next=recordOutcome(selected,pathId,choice,{...context(),verificationComplete:check.checked});if(next.kind==='verification_required'){status(next.message,true);check.focus();return;}if(choice==='not_fixed')state.completedRepairs=[...new Set([...state.completedRepairs,pathId])];if(choice==='returned')state.returned=true;if(next.pathId)state.pathId=next.pathId;else if(!state.pathId)state.pathId=pathId;if(choice!=='fixed')state.qualifierConfirmed=false;renderCard(next);status(choice==='fixed'?'Result shown for this visit only. No case record was changed.':'Use the next step shown below.');focusResult();};buttons.append(button('Fixed',()=>act('fixed'),'primary'),button('Still not fixed',()=>act('not_fixed'),'secondary'));if(current.kind!=='information')buttons.append(button('The issue returned after repair',()=>act('returned'),'text-button'));outcome.append(label,buttons);box.append(outcome);
+ }else box.append(note('Next step with PIE',['Contact PIE to confirm the next action.']));
+ if(!['choose_symptom','reported_fixed'].includes(current.kind)&&selected.paths.filter(p=>p.directSelectable!==false).length>1)box.append(button('Change symptom',()=>{Object.assign(state,{pathId:undefined,qualifierConfirmed:false,qualifierRejected:false});renderCard();},'text-button change-symptom'));
+ $('result').append(box);
 }
-$('search-form').addEventListener('submit',e=>{e.preventDefault();$('status').classList.remove('error');showSearch();});
-document.querySelectorAll('[data-code]').forEach(b=>{b.disabled=true;b.addEventListener('click',()=>{$('search').value=b.dataset.code;showSearch();});});
-try {
-  const response=await fetch('./knowledge.json',{cache:'no-store'});
-  if(!response.ok)throw new Error('Guide load failed');
-  const data=await response.json();
-  if(data.schemaVersion!==1||!Array.isArray(data.cards)||!data.cards.every(c=>typeof c.message==='string'&&Array.isArray(c.paths)))throw new Error('Invalid guide data');
-  cards=data.cards;$('search-button').disabled=false;document.querySelectorAll('[data-code]').forEach(b=>b.disabled=false);
-  status('Ready · '+cards.length+' selected guides');
-} catch {
-  status('Guides could not load. Restart the local pilot, or contact PIE for help.');$('status').classList.add('error');
-}
+function detailsChanged(modelChanged=false){mower.model=$('model').value;if(modelChanged)$('firmware').value='';mower.firmware=$('firmware').value.trim();for(const state of visits.values()){state.qualifierConfirmed=false;state.qualifierRejected=false;}if(selected){renderCard();status('Mower details updated. Check the guide before taking action.');}}
+$('model').addEventListener('change',()=>detailsChanged(true));$('firmware').addEventListener('input',()=>detailsChanged());$('search-form').addEventListener('submit',event=>{event.preventDefault();showSearch();});document.querySelectorAll('[data-code]').forEach(b=>b.addEventListener('click',()=>{$('search').value=b.dataset.code;showSearch();}));
+const strings=value=>Array.isArray(value)&&value.every(v=>typeof v==='string');
+function validCatalog(data){if(data?.schemaVersion!==2||typeof data.knowledgeVersion!=='string'||!Array.isArray(data.cards)||!Array.isArray(data.symptoms))return false;return data.cards.every(c=>typeof c.id==='string'&&(c.code===null||typeof c.code==='string')&&typeof c.message==='string'&&strings(c.aliases)&&strings(c.scope?.models)&&strings(c.scope?.firmware)&&Array.isArray(c.paths)&&c.paths.length&&c.paths.every(p=>typeof p.id==='string'&&typeof p.symptom==='string'&&['repair','check','information','escalate'].includes(p.kind)&&strings(p.action)&&p.action.length&&strings(p.verification?.steps)&&p.verification.steps.length&&typeof p.ifNotFixed?.message==='string'))&&data.symptoms.every(s=>typeof s.symptom_id==='string'&&/^SYM-0(0[1-9]|1[0-9]|2[0-5])$/.test(s.symptom_id)&&OBSERVABLE_AREAS.includes(s.observable_area)&&typeof s.label_en==='string'&&strings(s.aliases)&&Array.isArray(s.repair_refs)&&s.repair_refs.every(r=>data.cards.some(c=>c.id===r.card_id&&c.paths.some(p=>p.id===r.repair_path_id))));}
+try{const response=await fetch('./knowledge.json',{cache:'no-store'});if(!response.ok)throw new Error('Guide load failed');const data=await response.json();if(!validCatalog(data))throw new Error('Invalid guide data');catalog=data;for(const model of [...new Set(data.cards.flatMap(c=>c.scope.models))].sort())$('model').append(new Option(model,model));$('model').append(new Option('Other model','__other__'));$('model').disabled=false;$('firmware').disabled=false;$('search-button').disabled=false;document.querySelectorAll('[data-code]').forEach(b=>b.disabled=false);renderAreas();status('Choose a symptom or search the exact code or message.');}catch{catalog=null;status('Guides could not load. Restart the local pilot, or contact PIE for help.',true);}
