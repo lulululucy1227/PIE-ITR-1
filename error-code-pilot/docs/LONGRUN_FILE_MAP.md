@@ -48,4 +48,6 @@ Generated `dist/`, `artifacts/` and `.local/` remain ignored. No raw input or pr
 ## Progress
 
 - Task 1 complete: gate A passed; file map created before implementation edits.
-- Tasks 2–13 in progress.
+- Tasks 2–12 complete: schema, knowledge, navigation, common card, desktop/mobile/native zoom, privacy, lifecycle, extracted package and independent review passed. Gates A–H self-approved under the latest task. Final gate: TROUBLESHOOTER_DESKTOP_LOCAL_GREEN.
+- Task 13: final execution report channel is Issue #6 only. The Issue report is the authoritative external completion record.
+

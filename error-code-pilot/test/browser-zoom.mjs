@@ -24,6 +24,8 @@ try{
   try{
    const worker=ctx.serviceWorkers()[0]||await ctx.waitForEvent('serviceworker',{timeout:10000});
    const page=await ctx.newPage();const errors=[],external=[];page.setDefaultTimeout(7000);
+   const cdp=await ctx.newCDPSession(page);
+   const capture=async name=>{const shot=await cdp.send('Page.captureScreenshot',{format:'png',fromSurface:true,captureBeyondViewport:false});fs.writeFileSync(path.join(artifact,name),Buffer.from(shot.data,'base64'));};
    page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>{if(!r.url().startsWith(base)&&!r.url().startsWith('data:'))external.push(r.url());});
    await page.goto(base);await page.locator('#search-button:enabled').waitFor();
    const zoom=await worker.evaluate(async base=>{const tabs=await chrome.tabs.query({});const tab=tabs.find(t=>t.url.startsWith(base));await chrome.tabs.setZoom(tab.id,1.25);return chrome.tabs.getZoom(tab.id);},base);
@@ -31,14 +33,14 @@ try{
    await page.waitForFunction(()=>devicePixelRatio===1.25);
    const dimensions=await page.evaluate(()=>({width:innerWidth,dpr:devicePixelRatio,overflow:document.documentElement.scrollWidth>innerWidth}));
    assert.equal(dimensions.overflow,false);assert.equal(await page.locator('[data-area]').count(),10);
-   await page.screenshot({path:path.join(artifact,`zoom125-${size.width}-home.png`)});
+   await capture(`zoom125-${size.width}-home.png`);
    await page.locator('#model').selectOption('LUBA 2 5000X');await page.locator('#firmware').fill('1.30.31.10');await page.locator('#firmware').press('Tab');
    await page.locator('[data-area="Cutting"]').click();await page.locator('[data-symptom="SYM-004"]').click();await page.getByRole('button',{name:'Yes, this matches',exact:true}).click();
    await page.getByRole('heading',{name:'What to do',exact:true}).waitFor();assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
    await page.evaluate(()=>scrollTo(0,0));
-   await page.screenshot({path:path.join(artifact,`zoom125-${size.width}-repair.png`)});
+   await capture(`zoom125-${size.width}-repair.png`);
    await page.locator('#verification').scrollIntoViewIfNeeded();
-   await page.screenshot({path:path.join(artifact,`zoom125-${size.width}-verification.png`)});
+   await capture(`zoom125-${size.width}-verification.png`);
    await page.getByRole('button',{name:'Still not fixed',exact:true}).click();await page.getByRole('heading',{name:'Next step with PIE',exact:true}).waitFor();
    assert.deepEqual(errors,[]);assert.deepEqual(external,[]);
    results.push({viewport:size,zoom,dimensions,homeAndRepairPassed:true,failedRepairPassed:true,pageErrors:errors,externalRequests:0});

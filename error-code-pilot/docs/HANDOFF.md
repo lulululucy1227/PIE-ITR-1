@@ -1,6 +1,6 @@
 # Desktop long-run handoff
 
-Task: EC-MT-20260908-DESKTOP-LONGRUN-003. Status: fresh engineering gates passed; final independent whole-branch review pending. No final green claim yet.
+Task: EC-MT-20260908-DESKTOP-LONGRUN-003. Status: TROUBLESHOOTER_DESKTOP_LOCAL_GREEN. All local engineering, knowledge, browser, privacy, package and independent review gates passed.
 
 Workspace: C:/Users/Reggie/Desktop/PIE-ITR-ErrorCode.
 Branch: error-code/ec-mt-20260907-pilot-001-canonical.
@@ -31,10 +31,11 @@ Reports/logs/screenshots under ignored artifacts/. Source, canonical records, te
 
 Independent evidence review supported the narrowly maintained software rule, distinguished signed/unsigned timestamp evidence, and verified that the handoff's19Feishu count is not an embedded payload (actual imported records0). Root did not fabricate candidates or success counts.
 
-Independent engine review identified candidate symptom prose leakage, qualifier reuse during completed-step traversal and card supersession not suppressing nonrepair instructions. All three were reproduced, fixed and approved on scoped re-review; three new regressions pass. Earlier review also preserved explicit approved PIE escalation prose. Browser visual review removed stale code text beside a new symptom card and corrected screenshot capture artifacts. Final broad review remains pending.
+Independent engine review identified candidate symptom prose leakage, qualifier reuse during completed-step traversal and card supersession not suppressing nonrepair instructions. All three were reproduced, fixed and approved on scoped re-review; three new regressions pass. Earlier review also preserved explicit approved PIE escalation prose. Browser visual review removed stale code text beside a new symptom card and corrected screenshot capture artifacts. Final independent whole-branch review approved: zero Critical, Important or Minor findings. Its independent 21-test contract run, source/projection parity, package hash/inventory scan and screenshot inspection passed. See FINAL_REVIEW_2026-09-08.md and DESKTOP_USABILITY_REVIEW_2026-09-08.md.
 
 ## Local operation and boundaries
 
 See README.md for start/update/rollback. Keep prior ZIPs and stop only your owned preview. No production writes, external deployment, hosting/auth rollout, default/main push or MAIN runtime/case/analyzer/session changes occurred. The final execution report goes only to Issue #6.
 
 No business answer is needed to keep unresolved knowledge safely withheld. Future work may supply the missing Feishu candidate payload, reconcile1202scope, and separately authorize broader rollout/integration. These are not local product blockers under the latest task.
+
