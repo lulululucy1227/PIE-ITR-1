@@ -36,12 +36,16 @@ try{
    await capture(`zoom125-${size.width}-home.png`);
    await page.locator('#model').selectOption('LUBA 2 5000X');await page.locator('#firmware').fill('1.30.31.10');await page.locator('#firmware').press('Tab');
    await page.locator('[data-area="Cutting"]').click();await page.locator('[data-symptom="SYM-004"]').click();await page.getByRole('button',{name:'Yes, this matches',exact:true}).click();
+   assert.equal(await page.locator('#result').innerText(),'');assert.equal(await page.locator('#solution-page').isVisible(),false);
+   await capture(`zoom125-${size.width}-identify-selection.png`);
+   await page.locator('#continue').click();
    await page.getByRole('heading',{name:'What to do',exact:true}).waitFor();assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
    await page.evaluate(()=>scrollTo(0,0));
    await capture(`zoom125-${size.width}-repair.png`);
    await page.locator('#verification').scrollIntoViewIfNeeded();
    await capture(`zoom125-${size.width}-verification.png`);
    await page.getByRole('button',{name:'Still not fixed',exact:true}).click();await page.getByRole('heading',{name:'Next step with PIE',exact:true}).waitFor();
+   await page.goBack();await page.locator('#identify-page:visible').waitFor();assert.equal(await page.locator('#result').innerText(),'');assert.equal(await page.locator('#model').inputValue(),'LUBA 2 5000X');
    assert.deepEqual(errors,[]);assert.deepEqual(external,[]);
    results.push({viewport:size,zoom,dimensions,homeAndRepairPassed:true,failedRepairPassed:true,pageErrors:errors,externalRequests:0});
    console.log('PASS native 125% zoom '+size.width+'x'+size.height);

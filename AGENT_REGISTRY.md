@@ -195,3 +195,9 @@ Error Code Specialist remains sole owner in its independent clone C:/Users/Reggi
 EC-MT-20260908-KNOWLEDGE-INGEST-004 reached TROUBLESHOOTER_DESKTOP_KNOWLEDGE_GREEN under authorized local self-approval. Actual19 candidate records imported,0 new full promotions,17 PIE_ONLY,2 WITHHELD; extra1202 retained separately frozen.64 automated tests,33 browser checks, native125% zoom, two owned starts/exits and extracted package/privacy verification passed. Independent review is closed with no unresolved finding.
 
 This replaces the earlier local project-wide1202 waiting state; unresolved knowledge remains safely withheld and does not block the local gate under the newer task. No business decision is needed for this completed ingestion. Broader publication/integration needs a separate task. See the paired MASTER_PLAN local checkpoint and error-code-pilot/docs/HANDOFF.md. Final report only Issue #6; no push/default merge or MAIN integration.
+
+## 12. Error Code local two-page checkpoint — 2026-09-08
+
+Error Code Specialist remains sole owner of C:/Users/Reggie/Desktop/PIE-ITR-ErrorCode, branch error-code/ec-mt-20260907-pilot-001-canonical. EC-MT-20260908-DESKTOP-TWO-PAGE-005 reached TROUBLESHOOTER_DESKTOP_TWO_PAGE_GREEN: strict identify/solution pages, preserved canonical semantics/freeze, restored Back state and invalidated stale solution history.64Node,30browser,native125%,two owned8806 lifecycle cycles and final package/privacy checks passed. Independent60 DOM assertions; no unresolvedCritical/Important/Minor.
+
+MAIN ownership/state and Issue #5/#6 isolation unchanged. Existing8796 listener preserved. No production access, public deployment or default/main integration. See paired MASTER_PLAN and current specialist handoff; this checkpoint is local pending supervisor acceptance.

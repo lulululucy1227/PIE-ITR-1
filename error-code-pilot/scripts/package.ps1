@@ -20,7 +20,9 @@ Open http://127.0.0.1:8796 and use Ctrl+C to stop this preview.
 If 8796 is occupied, run node scripts/serve.mjs 8797. Never use 8787.
 
 This package is for local service-agent/supervisor review only. No external deployment is authorized.
-Use Product / model context, Error Code / Message search, or Choose by symptom.
+Page 1: identify the issue using model context, Error Code / Message, or Choose by symptom.
+Click Continue for Page 2: the approved next action and verification, or safe PIE guidance.
+Back to identify restores selections. Refresh starts a new identification; solution links do not save cases.
 Only reviewed paths are shown; unconfirmed repairs route to PIE. No repair-success-rate claims.
 1202 replacement steps are frozen. A frozen knowledge item does not block the local product.
 Fixed is user-reported, not verified ticket closure/NFF. No case data is stored or sent.

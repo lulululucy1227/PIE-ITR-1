@@ -8,11 +8,14 @@
 <a class="skip" href="#search">Skip to search</a>
 <header class="topbar"><a class="brand" href="./"><span class="brand-mark" aria-hidden="true">P</span><span>PIE Troubleshooter</span></a><span class="pilot">SERVICE DESK · LOCAL</span></header>
 <main>
-<section class="intro"><div><p class="eyebrow">MOWER SERVICE</p><h1>Find the next repair step.</h1></div><p>Search a message or choose what you see.<br>Follow the guide for your mower.</p></section>
+<p id="status" role="status" class="status">Loading guides…</p>
+<div id="identify-page">
+<section class="intro"><div><p class="eyebrow">STEP 1 OF 2 · IDENTIFY</p><h1>Identify the problem.</h1></div><p>Search a message or choose what you see.<br>Then continue to the next step.</p></section>
 <section class="context-panel" aria-label="Mower details"><div class="product-context"><span class="eyebrow">PRODUCT</span><strong>Robotic mower</strong></div><label for="model">Mower model<select id="model" disabled><option value="">Select model / unknown</option></select></label><label for="firmware">Current firmware <span class="optional">if known</span><input id="firmware" type="text" maxlength="80" placeholder="Enter exact version" autocomplete="off" spellcheck="false" disabled></label><p>Details stay with you as you browse.</p></section>
 <section class="search-panel" aria-label="Find a repair guide"><form id="search-form"><label for="search">Error code or error message</label><div class="search-row"><input id="search" name="search" type="search" maxlength="500" placeholder="e.g. 1202 or Cutting disc blocked" autocomplete="off" spellcheck="false" required><button class="primary" id="search-button" type="submit" disabled>Find guide <span aria-hidden="true">→</span></button></div></form><div class="examples"><span>Quick lookup</span><button type="button" data-code="1202" disabled>1202</button><button type="button" data-code="1008" disabled>1008</button><button type="button" data-code="5510" disabled>5510</button></div></section>
-<p id="status" role="status" class="status">Loading guides…</p>
-<div class="workspace"><section class="navigation" aria-labelledby="symptom-title"><div class="section-heading"><div><p class="eyebrow">OBSERVED PROBLEM</p><h2 id="symptom-title">Choose by symptom</h2></div><p>Start with the area where you notice the problem.</p></div><div id="areas" class="areas"></div><div id="symptoms"></div></section><section id="result" tabindex="-1" aria-label="Repair guide"></section></div>
+<div class="workspace"><section class="navigation" aria-labelledby="symptom-title"><div class="section-heading"><div><p class="eyebrow">OBSERVED PROBLEM</p><h2 id="symptom-title">Choose by symptom</h2></div><p>Start with the area where you notice the problem.</p></div><div id="areas" class="areas"></div><div id="symptoms"></div></section><section id="selection" tabindex="-1" aria-label="Selected issue"></section></div>
+</div>
+<section id="solution-page" tabindex="-1" aria-label="Solution and verification" hidden><div class="intro"><div><p class="eyebrow">STEP 2 OF 2 · SOLUTION</p><h1>Repair and verification.</h1></div><button id="edit-issue" class="secondary" type="button">Back to identify</button></div><div id="solution-summary"></div><section id="result" aria-label="Repair guide"></section></section>
 <footer><span>For service agents · English</span><span>This page does not send or save case information. Outcomes apply to this visit only.</span></footer>
 </main>
 </body>

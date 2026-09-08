@@ -1,10 +1,10 @@
 # PIE Troubleshooter — local desktop review
 
-Task: EC-MT-20260908-KNOWLEDGE-INGEST-004. Workspace: `C:\Users\Reggie\Desktop\PIE-ITR-ErrorCode`. Task/report channels: Issue #5 / Issue #6.
+Task: EC-MT-20260908-DESKTOP-TWO-PAGE-005. Workspace: `C:\Users\Reggie\Desktop\PIE-ITR-ErrorCode`. Task/report channels: Issue #5 / Issue #6.
 
 Open `run-pilot.cmd`, or run `node scripts/serve.mjs` inside this folder, then visit http://127.0.0.1:8796. Requires Node 22+; no npm install, account, database or cloud service. If that port is occupied, use `node scripts/serve.mjs 8797`. Stop your own preview with Ctrl+C. Port 8787 is refused.
 
-The desktop home combines persistent product/model context, exact Error Code / Message search, and controlled symptom navigation. Both routes use the same repair card. Model/version/observable-condition checks protect narrowly applicable guidance. A PIE result means the next action needs case-specific review. This page does not diagnose from arbitrary free text, write tickets, close cases or assign NFF. Fixed is a local self-report.
+Page 1 identifies the problem: model/version, exact Error Code / Message search, candidate selection and controlled symptom/qualifier choices. It contains no repair recommendation or verification steps. Click Continue to open Page 2 for the approved action and verification, or a safe PIE next step. Both entries use the same canonical repair card. Browser Back or Back to identify restores your selections; changing inputs invalidates old solutions. Refresh/direct solution links return safely to identification. Fixed is a local self-report; the app does not diagnose arbitrary text, write tickets, close cases or assign NFF.
 
 See [candidate ingestion decisions](docs/KNOWLEDGE_INGEST_AUDIT_2026-09-08.md), [existing knowledge decisions](docs/KNOWLEDGE_PROMOTION_AUDIT_2026-09-08.md), [data contract](docs/DATA_CONTRACT.md) and [current gate evidence](docs/HANDOFF.md). The original pilot evidence remains in [EVIDENCE_AUDIT.md](docs/EVIDENCE_AUDIT.md). The current task permits local completion with conflicting 1202 hardware paths frozen.
 
@@ -23,6 +23,8 @@ pwsh -NoProfile -File scripts/package.ps1
 ```
 
 Browser tests use locally installed Edge and the bundled Playwright runtime; `PILOT_BROWSER` and `PLAYWRIGHT_MODULE` can override their paths. Packaging is restricted to the isolated specialist directory and verifies an extracted standalone copy on port 8797. Generated `dist/` and `artifacts/` stay local and ignored by Git.
+
+If8796 is occupied, preserve the existing process and test an unused specialist port with `node scripts/lifecycle-check.mjs 8806`. The two-page browser suite is `test/two-page.mjs`, called by the standard browser entry above. It includes a synthetic multi-step fixture solely to verify fallback behavior; that fixture is never packaged.
 
 ## Update and rollback
 

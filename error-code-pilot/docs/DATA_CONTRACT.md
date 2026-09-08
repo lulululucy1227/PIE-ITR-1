@@ -32,6 +32,12 @@ Symptom: `symptom_id`, `observable_area`, `label_en`, `label_cn`, aliases, NAVIG
 
 The screen retains failure/returned state per card during the current visit across route and model changes. Model context is persistent within the visit; this is not a service-case database. Reload starts a new local visit.
 
+## Two-page interaction boundary — task005
+
+Page1 renders issue/message, controlled symptom, optional qualifier and model/version identification only. It does not read resolved part/action/verification/fallback fields into the identification DOM. Continue resolves the same canonical path again before Page2 displays its approved repair/check/information or safe escalation. Scope-required results never display a speculative repair.
+
+Browser history stores only a per-load session token, page marker and input revision. It contains no model, search, symptom, case or repair data. Selection and per-card failed/returned outcomes stay in memory. Back restores the current identification selection and removes solution content from the DOM; input edits increment the revision so stale forward entries fail safe. Reload/direct solution access starts with empty selection. A new page load cannot reuse a prior qualifier. No router framework, backend, storage or external service was added, and no canonical knowledge decision changed.
+
 ## Verification and source updates
 
 Applicable canonical repair validation retains Functional Test, Communication Check, Auto Map Run, all three reports and Connect Checking screenshot. Burn-in is supplemental, never a replacement. Missing verification or fallback fails validation. Operational applicability is reviewed when updating knowledge; prior firmware targets are not timeless recommendations.

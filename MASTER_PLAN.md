@@ -327,3 +327,9 @@ EC-MT-20260908-KNOWLEDGE-INGEST-004: TROUBLESHOOTER_DESKTOP_KNOWLEDGE_GREEN, loc
 Actual sanitized candidate import19 plus separate frozen1202;0 new full-path promotions,17 PIE_ONLY,2 WITHHELD, frozen extraWITHHELD. Existing desktop behavior preserved. Final64 Node tests,33 browser checks, native125% zoom, two owned lifecycle cycles and extracted eight-entry package/hash/privacy checks passed. Independent review's reciprocal candidate-provenance defect was reproduced, fixed and approved on re-review; no unresolved finding.
 
 Workspace/owner unchanged: C:/Users/Reggie/Desktop/PIE-ITR-ErrorCode, Error Code Specialist. Only the new canonical payload was synced from origin/main1da74aa; no MAIN merge/reset/runtime mutation or production/public/default-branch write. See error-code-pilot/docs/HANDOFF.md. Paired registry update is local only; canonical MAIN acceptance is not asserted. Task/report channels remain Issue #5 / Issue #6.
+
+### Error Code local two-page checkpoint — 2026-09-08
+
+EC-MT-20260908-DESKTOP-TWO-PAGE-005 reached TROUBLESHOOTER_DESKTOP_TWO_PAGE_GREEN. Page1 identifies only; Continue opens Page2 for approved action/verification or safePIE. Back restores selections; edits/refresh/deep links invalidate stale results. Knowledge/promotion decisions and1202 freeze unchanged.64Node,30browser,native125%,two owned8806 lifecycle cycles and extracted8-entry package/privacy checks passed. Independent review60 assertions; unresolvedCritical/Important/Minor0.
+
+Specialist owner/workspace/branch and Issue #5/#6 channels unchanged. Existing8796 listener preserved; no MAIN or production/default-branch/public deployment mutation. See error-code-pilot/docs/HANDOFF.md. This paired local checkpoint does not assert remote supervisor acceptance.
