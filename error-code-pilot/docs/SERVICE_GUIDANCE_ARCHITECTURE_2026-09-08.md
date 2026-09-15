@@ -4,7 +4,7 @@ Date: 2026-09-08. Scope: isolated Error Code specialist UI, following task 007 a
 
 ## Implemented now
 
-The identification flow remains a supported model and broad observable problem, followed by a filtered controlled symptom and optional error text. Necessary conditions still precede the result. No repair instructions appear during identification.
+The identification flow remains a supported model and broad observable problem, followed by a filtered controlled symptom and optional error text. These questions now progressively reveal inside one identification panel: selecting the model and area exposes the symptom, and the existing selections remain visible in a compact summary. Necessary conditions still precede the result. No repair instructions appear during identification.
 
 Page 2 presents the target area, numbered approved actions and an adjacent verification section on desktop. Narrow screens stack those sections. All approved action and verification text remains visible, in its original order. The fallback and existing verified-before-reporting-Fixed interaction remain. Reading an instruction is not treated as completing it, and a user-reported outcome is not a verified case closure.
 

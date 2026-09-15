@@ -14,8 +14,8 @@ try{
  assert.equal(await page.locator('#model').evaluate(e=>e.tagName),'SELECT','model must be controlled');
  assert.equal(await page.locator('#observable-area').evaluate(e=>e.tagName),'SELECT');
  assert.equal(await page.locator('#symptom-stage').isVisible(),false);checks.push('home presents model and broad problem only');
- await page.locator('#model').selectOption('LUBA 2');await page.locator('#observable-area').selectOption('Charging');await page.locator('#category-next').click();
- assert.equal(await page.locator('#category-stage').isVisible(),false);assert.equal(await page.locator('#observed-symptom').evaluate(e=>e.tagName),'SELECT');
+ await page.locator('#model').selectOption('LUBA 2');await page.locator('#observable-area').selectOption('Charging');
+ assert.equal(await page.locator('#category-stage').isVisible(),true);assert.equal(await page.locator('#observed-symptom').evaluate(e=>e.tagName),'SELECT');
  assert.equal(await page.locator('#firmware').isVisible(),false);
  await page.locator('#search').fill('1202');await page.locator('#search-button').click();assert.equal(await page.locator('#result').innerText(),'');assert.equal(await page.locator('#confirm-stage').isVisible(),false);
  checks.push('optional code cannot bypass specific controlled symptom');
@@ -29,11 +29,11 @@ try{
  assert.equal(await page.locator('#continue').count(),0);assert.equal(await page.locator('#result').innerText(),'');checks.push('constructed symptom ID is rejected');
  await page.goto(base);await page.locator('#model:enabled').waitFor();
  await page.locator('#model').evaluate(e=>{e.append(new Option('Invented','FAKE MODEL'));e.value='FAKE MODEL';e.dispatchEvent(new Event('change',{bubbles:true}));});
- await page.locator('#observable-area').selectOption('Charging');await page.locator('#category-next').click();
+ await page.locator('#observable-area').selectOption('Charging');
  assert.equal(await page.locator('#category-stage').isVisible(),true);assert.equal(await page.locator('#continue').count(),0);checks.push('injected model option cannot enter symptom stage');
- await page.locator('#model').selectOption('LUBA 1');await page.locator('#category-next').click();
+ await page.locator('#model').selectOption('LUBA 1');
  assert.equal(await page.locator('#observed-symptom option[value="SYM-009"]').count(),0);
- await page.locator('#category-back').click();await page.locator('#model').selectOption('LUBA 2');await page.locator('#category-next').click();
+ await page.locator('#category-back').click();await page.locator('#model').selectOption('LUBA 2');
  assert.equal(await page.locator('#observed-symptom option[value="SYM-009"]').count(),1);checks.push('model changes filter station recognition and clear stale selection');
  await enterSearch(page,'Robot does not charge','SYM-007','LUBA 2');await solve(page);await page.goBack();
  await page.locator('#observed-symptom').evaluate(e=>{e.append(new Option('Forged','SYM-999'));e.value='SYM-999';});
@@ -53,6 +53,6 @@ try{
  await page.route('**/knowledge.json',r=>r.fulfill({json:multi}));await page.reload();await page.locator('#model:enabled').waitFor();await choose(page,'SYM-007','LUBA 2');await page.locator('#search').fill('999777');await page.locator('#search-button').click();await page.getByRole('button',{name:'999777 · Scoped path fixture',exact:true}).click();await page.getByRole('button',{name:'Unrelated condition',exact:true}).click();await solve(page);await page.getByRole('heading',{name:'Next step with PIE',exact:true}).waitFor();
  await enterSymptom(page,'SYM-007','LUBA 2');await solve(page);await page.getByRole('button',{name:'Still not fixed',exact:true}).click();await page.getByText('Follow-up fixture',{exact:true}).waitFor();await page.getByRole('button',{name:'Still not fixed',exact:true}).click();await page.getByRole('heading',{name:'Next step with PIE',exact:true}).waitFor();checks.push('exact referenced path only; completed non-direct fallback advances once');
  first.ifNotFixed.pathId='unrelated';await page.reload();await page.locator('#model:enabled').waitFor();await enterSymptom(page,'SYM-007','LUBA 2');await solve(page);await page.getByRole('button',{name:'Still not fixed',exact:true}).click();assert.equal(await page.locator('#result .answer-grid').count(),0,'unreferenced direct repair cannot be reached via failure');await page.getByRole('heading',{name:'Next step with PIE',exact:true}).waitFor();checks.push('fallback cannot authorize an unreferenced direct repair');await page.unroute('**/knowledge.json');
- for(const width of [1366,1920,390]){await page.setViewportSize({width,height:width===1920?1080:width===390?844:768});await page.goto(base);await page.locator('#model:enabled').waitFor();assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);await page.screenshot({path:`artifacts/controlled-${width}-home.png`,fullPage:true});await choose(page,'SYM-007','LUBA 2');assert.equal(await page.locator('#category-stage').isVisible(),false);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);await page.screenshot({path:`artifacts/controlled-${width}-details.png`,fullPage:true});checks.push(width+' progressive home and detail layout');}
+ for(const width of [1366,1920,390]){await page.setViewportSize({width,height:width===1920?1080:width===390?844:768});await page.goto(base);await page.locator('#model:enabled').waitFor();assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);await page.screenshot({path:`artifacts/controlled-${width}-home.png`,fullPage:true});await choose(page,'SYM-007','LUBA 2');assert.equal(await page.locator('#category-stage').isVisible(),true);assert.equal(await page.locator('#symptom-stage').isVisible(),true);await page.screenshot({path:`artifacts/controlled-${width}-details.png`,fullPage:true});checks.push(width+' single-panel progressive identification layout');}
  assert.deepEqual(errors,[]);fs.writeFileSync('artifacts/controlled-browser-verification.json',JSON.stringify({passed:checks.length,checks,errors},null,2));console.log('CONTROLLED BROWSER GREEN '+checks.length);
 }finally{await browser.close();await new Promise(r=>server.close(r));}

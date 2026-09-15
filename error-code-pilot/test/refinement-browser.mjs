@@ -18,7 +18,7 @@ try {
   assert.equal(await page.locator('#observable-area option').count(),11);
   await page.locator('#model').selectOption('LUBA 2');await page.locator('#observable-area').selectOption('Cutting');
   await page.screenshot({path:`artifacts/refinement-${width}-home.png`});
-  await page.locator('#category-next').click();
+  await page.locator('#observed-symptom:visible').waitFor();
   const symptoms=page.locator('#observed-symptom');
   assert.deepEqual(await symptoms.locator('option').evaluateAll(xs=>xs.map(x=>x.value)),['','SYM-004','SYM-005','SYM-006','__other__']);
   await symptoms.selectOption('SYM-005');

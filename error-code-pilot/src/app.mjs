@@ -20,10 +20,16 @@ function status(text,error=false){$('status').textContent=error?text:'';$('statu
 function clearResult(){$('result').replaceChildren();}
 function focusResult(){const n=pageName==='solution'?$('solution-page'):$(stage+'-stage');n.focus({preventScroll:true});n.scrollIntoView({block:'start',behavior:'instant'});}
 function note(title,lines){const box=el('div',undefined,'alert');box.append(el('h3',title));const list=el('ul');for(const line of lines)list.append(el('li',line));box.append(list);return box;}
+function updateSelectionSummary(){const values=[fields().model,areaLabel[fields().area],symptomLabel(catalog?.symptoms.find(s=>s.symptom_id===fields().symptomId))].filter(Boolean);$('selection-summary').textContent=values.length?values.join(' · '):'Choose the model and problem area to begin.';}
 function setStage(next){stage=next;for(const id of ['category','symptom','confirm'])$(id+'-stage').hidden=id!==next;
- if(next==='symptom')$('search-form').insertBefore($('more-details'),$('detail-buttons'));
+ const categoryReady=!!(fields().model&&fields().area);
+ $('category-stage').hidden=false;
+ $('symptom-stage').hidden=!categoryReady;
+ $('confirm-stage').hidden=next!=='confirm';
+ if(next==='symptom'||next==='confirm')$('search-form').insertBefore($('more-details'),$('detail-buttons'));
  $('context-summary').textContent=[fields().model,areaLabel[fields().area]].filter(Boolean).join(' · ');
  $('confirmation-summary').textContent=[fields().model,symptomLabel(catalog?.symptoms.find(s=>s.symptom_id===fields().symptomId))||'Other / None of these'].join(' · ');
+ updateSelectionSummary();
 }
 function showIdentify(){pageName='identify';$('identify-page').hidden=false;$('solution-page').hidden=true;clearResult();$('solution-summary').replaceChildren();setStage(stage);status('');}
 function invalidate(){revision++;current=null;resolutionKey='';showIdentify();history.replaceState(marker('identify'),'','#identify');}
@@ -31,9 +37,9 @@ function clearSelection(){selected=null;pendingPIE=null;selectedSymptom=null;iss
 function editIssue(){if(pageName==='solution'&&history.state?.session===navigationSession)history.back();else{showIdentify();history.replaceState(marker('identify'),'','#identify');}}
 function resetQualifiers(){for(const state of visits.values()){state.qualifierConfirmed=false;state.qualifierRejected=false;}}
 function refreshSymptoms(){const select=$('observed-symptom');select.replaceChildren(new Option('Select a symptom',''));for(const s of controlledSymptoms(catalog,fields()))select.append(new Option(symptomLabel(s),s.symptom_id));select.append(new Option('Other / None of these','__other__'));$('other-field').hidden=true;$('other-description').value='';}
-function categoryChanged(modelChanged){invalidate();clearSelection();mower.model=controlledModels(catalog).includes(fields().model)?fields().model:'';if(modelChanged){$('firmware').value='';mower.firmware='';}resetQualifiers();refreshSymptoms();setStage('category');history.replaceState(marker('identify'),'','#identify');}
+function categoryChanged(modelChanged){invalidate();clearSelection();mower.model=controlledModels(catalog).includes(fields().model)?fields().model:'';if(modelChanged){$('firmware').value='';mower.firmware='';}resetQualifiers();refreshSymptoms();setStage(fields().model&&fields().area?'symptom':'category');history.replaceState(marker('identify'),'','#identify');}
 function nextCategory(){if(!catalog||!controlledModels(catalog).includes(fields().model)||!OBSERVABLE_AREAS.includes(fields().area)){status('Choose a model and a problem from the list.',true);return;}setStage('symptom');history.replaceState(marker('identify'),'','#identify');focusResult();}
-function detailsEdited(){invalidate();clearSelection();resetQualifiers();$('other-field').hidden=fields().symptomId!=='__other__';if(stage==='confirm')setStage('symptom');history.replaceState(marker('identify'),'','#identify');}
+function detailsEdited(){invalidate();clearSelection();resetQualifiers();$('other-field').hidden=fields().symptomId!=='__other__';if(stage==='confirm')setStage('symptom');else updateSelectionSummary();history.replaceState(marker('identify'),'','#identify');}
 function safePIE(title='Your selected issue',result){if(!valid())return;selected=null;selectedSymptom=fields().symptomId;issueTitle=title;pendingPIE=result||{action:['Contact PIE with the selected model, observed symptom, exact message and any checks or repairs already tried.']};resolutionKey=inputsKey();renderIdentification();}
 function prepareIdentification(){if(!valid()){invalidate();clearSelection();setStage('symptom');status('Choose a symptom from the list.',true);return;}
  invalidate();clearSelection();mower.model=fields().model;mower.firmware=$('firmware').value.trim();
@@ -148,5 +154,5 @@ function validCatalog(data){if(data?.schemaVersion!==2||typeof data.knowledgeVer
 
 try{const response=await fetch('./knowledge.json',{cache:'no-store'});if(!response.ok)throw new Error('Guide load failed');const data=await response.json();if(!validCatalog(data))throw new Error('Invalid guide data');catalog=data;
  for(const model of controlledModels(catalog))$('model').append(new Option(model,model));for(const area of OBSERVABLE_AREAS)$('observable-area').append(new Option(areaLabel[area],area));
- for(const id of ['model','observable-area','observed-symptom','firmware','category-next','search-button','search'])$(id).disabled=false;status('');
+ for(const id of ['model','observable-area','observed-symptom','firmware','search-button','search'])$(id).disabled=false;status('');
 }catch{catalog=null;status('Guides could not load. Restart the local pilot, or contact PIE for help.',true);}

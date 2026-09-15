@@ -4,11 +4,10 @@
 <main><p id="status" role="status" class="status">Loading guides…</p>
 <div id="identify-page">
 <section id="category-stage" class="identify-stage" tabindex="-1">
-<div class="intro"><h1>What’s the problem?</h1></div>
+<div class="intro"><h1>What’s the problem?</h1><p id="selection-summary" class="selection-summary" aria-live="polite"></p></div>
 <form id="category-form" class="identify-form">
 <label for="model">Mower model<select id="model" required disabled><option value="">Select your model</option></select></label>
 <label for="observable-area">Where do you notice the problem?<select id="observable-area" required disabled><option value="">Choose a problem</option></select></label>
-<button class="primary" id="category-next" type="submit" disabled>Next →</button>
 </form></section>
 <section id="symptom-stage" class="identify-stage" tabindex="-1" hidden>
 <div class="intro"><h1>What exactly happens?</h1><p id="context-summary"></p></div>
@@ -17,7 +16,7 @@
 <div id="other-field" hidden><label for="other-description">Anything else to add? <span class="optional">Optional</span><textarea id="other-description" maxlength="500" placeholder="Describe what you see for PIE" rows="3"></textarea></label></div>
 <label for="search">Error code or message <span class="optional">Optional</span><input id="search" name="search" type="search" maxlength="500" placeholder="If shown, enter the code or message" autocomplete="off" spellcheck="false" disabled></label>
 <details id="more-details"><summary>Firmware version <span class="optional">Optional</span></summary><label for="firmware">Current firmware<input id="firmware" type="text" maxlength="80" placeholder="Enter exact version" autocomplete="off" spellcheck="false" disabled></label></details>
-<div class="step-buttons" id="detail-buttons"><button id="category-back" class="text-button" type="button">Back</button><button class="primary" id="search-button" type="submit" disabled>Continue →</button></div>
+<div class="step-buttons" id="detail-buttons"><button id="category-back" class="text-button legacy-flow-control" type="button" aria-hidden="true" tabindex="-1">Back</button><button class="primary" id="search-button" type="submit" disabled>Continue →</button></div>
 </form></section>
 <section id="confirm-stage" class="identify-stage" tabindex="-1" hidden>
 <div class="intro"><h1>Confirm the details</h1><p id="confirmation-summary"></p></div>

@@ -7,6 +7,7 @@ Result: TROUBLESHOOTER_CONTROLLED_SELECTION_GREEN retained after fresh regressio
 ## Delivered
 
 - Restrained visual refinement using the applicable principles from the user-requested taste-skill; the skill's explicit exclusion of product wizards is documented in the architecture note.
+- Continuous single-panel identification: model and area reveal the next controlled symptom in place, while the compact summary preserves earlier selections. The redundant category step control is no longer visible.
 - Numbered, unchanged approved actions with adjacent desktop verification, consistent form contrast/spacing and a clear failure fallback.
 - Tested presentation adapter and exact step-resource contract for future parts, tools, reasoning, disassembly and expected observations. No real resource source is connected; empty resources produce no UI.
 - Parts require confirmed fitment and replacement target, disassembly requires access-safety and procedure-scope facts. Resources cannot select or authorize repairs.
@@ -22,6 +23,7 @@ All commands ran against the final runtime changes in this follow-up:
 - `node test/stable-browser.mjs`: 21/21 stable guidance cases, ten scoped guidance cards at both desktop sizes.
 - `node test/refinement-browser.mjs`: 3/3 viewport/picker cases.
 - `node test/service-browser.mjs`: 3/3 viewport cases; exact approved action/verification parity, no resource placeholders, verification gate, preserved Back selections, Other-to-PIE and no horizontal overflow. Primary button contrast measured 7.87:1.
+- `node test/single-panel-browser.mjs`: 1/1; same-panel progressive reveal, retained model/area/symptom summary and no premature solution.
 - `node test/browser-zoom.mjs`: actual Edge browser zoom 1.25 at 1366×768 and 1920×1080, including native picker and ten guidance cards. Desktop, 125% and basic mobile screenshots visually inspected.
 - Import check: 19 candidates plus separately frozen 1202, nine promoted portions, ten retained PIE_ONLY candidates; source parity passed.
 - Lifecycle: two owned start/exit/relaunch cycles on specialist port 8806.
@@ -33,9 +35,9 @@ Independent reviewer `service_architecture_review` inspected the local diff read
 
 ## Standalone package
 
-`artifacts/error-code-pilot-20260908-194153.zip`
+`artifacts/error-code-pilot-20260911-103644.zip`
 
-SHA256: `74f7ef0596ec87a32c4decd9ad1351bf2f8914dfdbd77cb9693945677eb56ef6`
+SHA256: `c0f2f58fbf1f753822ce08428dd0d0230512a56c74bd1b8abcc636c83cc3968d`
 
 Ten allowlisted entries, including the bundled Windows Node runtime and new presentation module. Extracted copy starts with its own runtime on 8797; HTTP operation, knowledge parity, every extracted entry hash, content privacy checks and owned process exit passed. Recipients extract the ZIP, double-click `run-pilot.cmd`, then open `http://127.0.0.1:8796`. The ZIP includes `LOCAL_README.txt` with operation and rollback instructions. No Node installation is required.
 
