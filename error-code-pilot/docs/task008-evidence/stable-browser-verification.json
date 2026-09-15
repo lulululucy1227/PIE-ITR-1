@@ -1,0 +1,28 @@
+{
+  "passed": 21,
+  "checks": [
+    "1366 guide-wheel-movement controlled scope/identify/action/message/parity/failure",
+    "1366 guide-cutting-operation controlled scope/identify/action/message/parity/failure",
+    "1366 guide-no-charge controlled scope/identify/action/message/parity/failure",
+    "1366 guide-station-recognition controlled scope/identify/action/message/parity/failure",
+    "1366 guide-docking controlled scope/identify/action/message/parity/failure",
+    "1366 guide-power controlled scope/identify/action/message/parity/failure",
+    "1366 guide-rtk-connection controlled scope/identify/action/message/parity/failure",
+    "1366 guide-bumper controlled scope/identify/action/message/parity/failure",
+    "1366 guide-visible-cable-damage controlled scope/identify/action/message/parity/failure",
+    "1366 guide-update-failure controlled scope/identify/action/message/parity/failure",
+    "1920 guide-wheel-movement controlled scope/identify/action/message/parity/failure",
+    "1920 guide-cutting-operation controlled scope/identify/action/message/parity/failure",
+    "1920 guide-no-charge controlled scope/identify/action/message/parity/failure",
+    "1920 guide-station-recognition controlled scope/identify/action/message/parity/failure",
+    "1920 guide-docking controlled scope/identify/action/message/parity/failure",
+    "1920 guide-power controlled scope/identify/action/message/parity/failure",
+    "1920 guide-rtk-connection controlled scope/identify/action/message/parity/failure",
+    "1920 guide-bumper controlled scope/identify/action/message/parity/failure",
+    "1920 guide-visible-cable-damage controlled scope/identify/action/message/parity/failure",
+    "1920 guide-update-failure controlled scope/identify/action/message/parity/failure",
+    "non1202 operation qualifier rejection remains PIE"
+  ],
+  "pageErrors": [],
+  "externalRequests": 0
+}

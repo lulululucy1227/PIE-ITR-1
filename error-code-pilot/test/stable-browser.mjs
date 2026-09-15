@@ -13,7 +13,7 @@ try{
   const context=await browser.newContext({viewport:{width,height:width===1366?768:1080}}),page=await context.newPage();page.setDefaultTimeout(5000);page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>{if(!r.url().startsWith(base)&&!r.url().startsWith('data:'))external.push(r.url());});
   for(const card of cards){
    await page.goto(base);await page.locator('#model:enabled').waitFor();const s=catalog.symptoms.find(s=>s.repair_refs.some(r=>r.card_id===card.id));
-   await enterSymptom(page,s.symptom_id,card.scope.models[0]);await identify(page);assert.doesNotMatch(await page.locator('#identify-page').innerText(),/Most likely faulty part|What to do|After repair|STABLE_OPERATIONAL_GUIDANCE|REP-[A-Z]+/);
+   await enterSymptom(page,s.symptom_id,card.scope.models[0]);await identify(page);assert.doesNotMatch(await page.locator('#identify-page').innerText(),/Most likely faulty part|What to do|What should I do now\?|After repair|STABLE_OPERATIONAL_GUIDANCE|REP-[A-Z]+/);
    for(const action of card.paths[0].action)assert.ok(!(await page.locator('#identify-page').textContent()).includes(action));await confirm(page);await solve(page);
    assert.equal(await page.locator('#result article').getAttribute('data-card'),card.id);for(const action of card.paths[0].action)assert.ok((await page.locator('#result').innerText()).includes(action));
    assert.equal(await page.locator('#result .part-box').count(),card.paths[0].part?1:0);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);

@@ -269,7 +269,7 @@ export function controlledSymptoms(catalog,{model,area}) {
     !s.repair_refs.length||s.repair_refs.some(r=>selectionRefFits(catalog,r,model))));
 }
 export function validControlledSelection(catalog,selection) {
-  return controlledModels(catalog).includes(selection.model)&&OBSERVABLE_AREAS.includes(selection.area)&&(
+  return controlledModels(catalog).includes(selection.model)&&(
     selection.symptomId==='__other__'||controlledSymptoms(catalog,selection).some(s=>s.symptom_id===selection.symptomId));
 }
 export function controlledReferences(catalog,selection) {

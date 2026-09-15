@@ -8,7 +8,7 @@ $stage = Join-Path $pilotRoot "artifacts\package-$stamp"
 $zip = Join-Path $pilotRoot "artifacts\error-code-pilot-$stamp.zip"
 $runtimeNode = 'C:\Users\Reggie\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe'
 if (-not (Test-Path -LiteralPath $runtimeNode)) { throw 'Bundled runtime is unavailable; do not produce a partial colleague package.' }
-$allow = @('dist/index.html','dist/styles.css','dist/app.mjs','dist/engine.mjs','dist/service-plan.mjs','dist/knowledge.json','scripts/serve.mjs','run-pilot.cmd','LOCAL_README.txt','runtime/node.exe')
+$allow = @('dist/index.html','dist/styles.css','dist/app.mjs','dist/engine.mjs','dist/service-plan.mjs','dist/knowledge.json','scripts/serve.mjs','scripts/launch-local.mjs','run-pilot.cmd','LOCAL_README.txt','runtime/node.exe')
 New-Item -ItemType Directory -Path (Join-Path $stage 'dist'),(Join-Path $stage 'scripts'),(Join-Path $stage 'runtime') -Force | Out-Null
 foreach ($relative in $allow) {
   if ($relative -eq 'LOCAL_README.txt' -or $relative -eq 'runtime/node.exe') { continue }
@@ -19,12 +19,13 @@ Copy-Item -LiteralPath $runtimeNode -Destination (Join-Path $stage 'runtime\node
 PIE Troubleshooter — desktop local review
 No Node.js installation is required. The package includes its local runtime.
 Double-click run-pilot.cmd.
-Open http://127.0.0.1:8796 and use Ctrl+C to stop this preview.
-If 8796 is occupied, run runtime\node.exe scripts/serve.mjs 8797. Never use 8787.
+The launcher opens your browser after checking the background service.
+You can close the launcher window. Double-click again to reopen or recover the service.
+It prefers http://127.0.0.1:8796 and safely tries 8797-8805 if occupied. Never use 8787.
 
 This package is for local service-agent/supervisor review only. No external deployment is authorized.
-Page 1: choose the supported mower model and problem area, then a filtered controlled symptom.
-Model, area and symptom are controlled selections. Error Code / Message is optional auxiliary text.
+Page 1: choose the supported mower model and one controlled symptom from the grouped list.
+Model and symptom are required selections. Error Code / Message is optional auxiliary text.
 Only necessary conditions/firmware scope add a confirmation. Other text is for PIE contact only.
 Open the local HTTP address above, not src/index.html or dist/index.html directly.
 Click Continue for Page 2: the approved next action and verification, or safe PIE guidance.
@@ -90,5 +91,8 @@ $report = @{
   navigationSymptomCount = $projected.symptoms.Count
   extractedAllEntryHashesMatched = $true
 }
+$launcherReadback = & (Join-Path $extracted 'runtime/node.exe') (Join-Path $PSScriptRoot 'verify-package-launch.mjs') $extracted
+if ($LASTEXITCODE -ne 0) { throw 'Extracted launcher start/reopen verification failed' }
+$report.launcher = ($launcherReadback | ConvertFrom-Json)
 $report | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $pilotRoot 'artifacts\package-verification.json') -Encoding utf8
 $report | ConvertTo-Json -Depth 4

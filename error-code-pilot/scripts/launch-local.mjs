@@ -3,6 +3,7 @@ import net from 'node:net';
 import path from 'node:path';
 import {spawn} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
+import {previewIdentity} from './serve.mjs';
 
 const defaultRoot=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const healthyMarker='PIE Troubleshooter';
@@ -14,13 +15,13 @@ function validPort(value){
  return Number.isInteger(port)&&port>=1024&&port<=65526&&port!==8787?port:8796;
 }
 
-function probe(port){
+function probe(port,identity){
  return new Promise(resolve=>{
   const request=http.get({host:'127.0.0.1',port,path:'/',timeout:350},response=>{
    let body='';
    response.setEncoding('utf8');
    response.on('data',chunk=>body+=chunk);
-   response.on('end',()=>resolve(response.statusCode===200&&body.includes(healthyMarker)));
+   response.on('end',()=>resolve(response.statusCode===200&&response.headers['x-pie-instance']===identity&&body.includes(healthyMarker)));
   });
   request.once('error',()=>resolve(false));
   request.once('timeout',()=>{request.destroy();resolve(false);});
@@ -35,9 +36,9 @@ function canBind(port){
  });
 }
 
-async function waitForHealthy(port,child){
+async function waitForHealthy(port,child,identity){
  for(let attempt=0;attempt<40;attempt++){
-  if(await probe(port))return true;
+  if(await probe(port,identity))return true;
   if(child.exitCode!==null)return false;
   await delay(100);
  }
@@ -59,10 +60,11 @@ function stopOwned(child){
 }
 
 export async function launch({root=defaultRoot,preferredPort=8796,openBrowser=true}={}){
+ const identity=previewIdentity(path.join(root,'dist'));
  const startPort=validPort(preferredPort);
  const candidates=Array.from({length:10},(_value,index)=>startPort+index).filter(port=>port<=65535&&port!==8787);
  for(const port of candidates){
-  if(await probe(port)){
+  if(await probe(port,identity)){
    const url=`http://127.0.0.1:${port}`;
    if(openBrowser)open(url);
    return {state:'reused',port,url};
@@ -75,7 +77,7 @@ export async function launch({root=defaultRoot,preferredPort=8796,openBrowser=tr
    windowsHide:true
   });
   child.unref();
-  if(await waitForHealthy(port,child)){
+  if(await waitForHealthy(port,child,identity)){
    const url=`http://127.0.0.1:${port}`;
    if(openBrowser)open(url);
    return {state:'started',port,url,pid:child.pid};

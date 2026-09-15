@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "width": 1366,
+      "keyboardCancellation": "passed",
+      "tabToOptionalCode": true,
+      "controlledIdsPreserved": true,
+      "backPreserved": true,
+      "noOverflow": true
+    },
+    {
+      "width": 1920,
+      "keyboardCancellation": "passed",
+      "tabToOptionalCode": true,
+      "controlledIdsPreserved": true,
+      "backPreserved": true,
+      "noOverflow": true
+    },
+    {
+      "width": 390,
+      "keyboardCancellation": "native mobile behavior",
+      "tabToOptionalCode": true,
+      "controlledIdsPreserved": true,
+      "backPreserved": true,
+      "noOverflow": true
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,67 @@
+{
+  "knowledgeVersion": "2026-09-15-simple-knowledge-reuse.1",
+  "cards": 31,
+  "privateReuseAudit": {
+    "reviewed": 18,
+    "published": 5,
+    "classes": {
+      "PUBLIC_REPAIR_FACT": 3,
+      "PUBLIC_TOOL_STEP": 1,
+      "PUBLIC_PART_FACT": 1,
+      "PRIVATE_INTERNAL": 3,
+      "NEEDS_SCOPE_REVIEW": 6,
+      "CONFLICT": 2,
+      "DUPLICATE": 2
+    },
+    "snapshotSha256": "34d9e89f782e5dffbbe146cab2977a57fbb3c90d9d2b516ffde2610aa3ad65b6"
+  },
+  "privateCandidateAudit": {
+    "imported": 19,
+    "frozen": 1,
+    "promoted": 9,
+    "visibility": {
+      "AGENT_GUIDED": 9,
+      "PIE_ONLY": 10
+    },
+    "evidence": {
+      "STABLE_OPERATIONAL_GUIDANCE": 14,
+      "SOURCE_RECOMMENDATION": 5
+    },
+    "frozenVisibility": {
+      "WITHHELD": 1
+    },
+    "sourceSha256": "edc38d9ec9e9d0c4f9be47cbefb087f9f5975ea7378cf045aa4142dc1cb441f1"
+  },
+  "files": [
+    {
+      "name": "index.html",
+      "bytes": 3117,
+      "sha256": "1c706f7409f46c1ab04c9211c77307f8ad32a7ef1da8f04264f6b2b6f5325588"
+    },
+    {
+      "name": "styles.css",
+      "bytes": 17929,
+      "sha256": "09272c8764c4fca2d77809c83458400771361b70cafff2fbd2479206d51b5133"
+    },
+    {
+      "name": "app.mjs",
+      "bytes": 23538,
+      "sha256": "20242033b0091edab2093a1a23f76803b9a384798fd187097406ecdc28ddf18b"
+    },
+    {
+      "name": "engine.mjs",
+      "bytes": 20180,
+      "sha256": "50f02cfb5f357f6f3e3e6ecda765a02305bfda7fd3075577ba8648c34714fdbb"
+    },
+    {
+      "name": "service-plan.mjs",
+      "bytes": 3927,
+      "sha256": "bd25a17b2229b775022cd70695a05e885f6b55d1dd0b991a7b34125f9ab1ba4d"
+    },
+    {
+      "name": "knowledge.json",
+      "bytes": 59996,
+      "sha256": "75328aef7bf707175f98d48ae5be34f99a388b22ae6dda9ab1020b054aca1633"
+    }
+  ]
+}

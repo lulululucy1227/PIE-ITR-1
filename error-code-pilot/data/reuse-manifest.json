@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 1,
+  "task": "EC-MT-20260915-SIMPLE-KNOWLEDGE-REUSE-008",
+  "reviewedAt": "2026-09-15",
+  "snapshotSha256": "34d9e89f782e5dffbbe146cab2977a57fbb3c90d9d2b516ffde2610aa3ad65b6",
+  "roots": [
+    {
+      "id": "active-vault",
+      "relativeTo": "Desktop",
+      "path": "ITR工单助手/工单助手交接包/维修与售后知识库/07-标准知识",
+      "role": "Active Reply Assistant knowledge; confirmed via settings.py VAULT sibling lookup, no configured or process-environment override.",
+      "sourceStatus": "Internal diagnostic/draft references; file modification time 2026-09-14 is packaging time, not evidence of new technical approval."
+    },
+    {
+      "id": "reply-reference",
+      "relativeTo": "Desktop",
+      "path": "ITR工单助手/工单助手交接包/ticket_assist/external/pie-itr-workbench/docs/knowledge",
+      "role": "Five required reference families in latest located Reply Assistant handoff. external/README explicitly says archive does not participate in runtime.",
+      "sourceStatus": "2026-09-08 Workbench package copied September 14; not active knowledge updates."
+    },
+    {
+      "id": "governance-reference",
+      "relativeTo": "Desktop",
+      "path": "ITR工单助手/工单助手交接包/ticket_assist-governance/external/pie-itr-workbench/docs/knowledge",
+      "role": "Governance copy of five reference families; all five SHA-256 values equal reply-reference despite later copy timestamps."
+    },
+    {
+      "id": "legacy-fallback",
+      "relativeTo": "Desktop",
+      "path": "PIE-ITR-1/docs/knowledge",
+      "role": "Older local fallback checked; normalized text identical to five reference families. Byte differences are only CRLF/LF."
+    }
+  ],
+  "sources": [
+    {
+      "id": "diagnostic",
+      "root": "reply-reference",
+      "file": "DIAGNOSTIC_KNOWLEDGE.md",
+      "sha256": "54627f51550252c73855cb0ca4ccac3f2b8007aa07e18a26f948471e4ab2fcc9",
+      "bytes": 19080
+    },
+    {
+      "id": "tool",
+      "root": "reply-reference",
+      "file": "TOOL_KNOWLEDGE.md",
+      "sha256": "2e459d323ed845c2633e749fbebced8736239294232b668293d1b523a5a7ad2c",
+      "bytes": 5023
+    },
+    {
+      "id": "parts",
+      "root": "reply-reference",
+      "file": "PARTS_KNOWLEDGE.md",
+      "sha256": "045c977cb9c7f31854f499b86e9d2409c322828f894487a8bb48b2e511a89e49",
+      "bytes": 4813
+    },
+    {
+      "id": "codes",
+      "root": "reply-reference",
+      "file": "ERROR_CODES.md",
+      "sha256": "e799568db5f77897189b2dd3d409e582dad304ea222dbce728d82ac5bc3a840d",
+      "bytes": 3233
+    },
+    {
+      "id": "fixes",
+      "root": "reply-reference",
+      "file": "KNOWN_FIXES.md",
+      "sha256": "88a7c41edce260facb4827fca0e754d3221c7dd1eb35dce55637455bfcdd79fd",
+      "bytes": 1173
+    },
+    {
+      "id": "active-power",
+      "root": "active-vault",
+      "file": "09-IF规则库/02-供电充电.md",
+      "sha256": "db2a9a2b6e823b6236a685e178b18f04ad1490c014624a692fb18b2a7dffb2c9",
+      "bytes": 3382
+    },
+    {
+      "id": "active-tool",
+      "root": "active-vault",
+      "file": "03-标准SOP/维修工具与刷写标准SOP.md",
+      "sha256": "5bf8256de1b8cd23d774a9122d8f7071c67a05d9dbf5c0e278f5e418a83c3358",
+      "bytes": 7849
+    },
+    {
+      "id": "active-version",
+      "root": "active-vault",
+      "file": "06-版本治理/02-版本适用与失效规则.md",
+      "sha256": "1fce44352bb00271669b24ff36ad5603c5f724dc9e2dfbcc2bc60d7858470fa3",
+      "bytes": 1266
+    },
+    {
+      "id": "active-guided",
+      "root": "active-vault",
+      "file": "08-诊断图谱/05-引导式维修路径.md",
+      "sha256": "55523ba5cf18cc56f4a7317446dfaf338e3923f2f52f5fc88c5d2935de60b978",
+      "bytes": 10854
+    },
+    {
+      "id": "active-parts",
+      "root": "active-vault",
+      "file": "04-料号依据/00-料号依据总索引.md",
+      "sha256": "ffc5074dc9becbdf8817fd4bc16e828fd908e32cfbd27dbb374638b9f329f859",
+      "bytes": 756
+    },
+    {
+      "id": "active-codes",
+      "root": "active-vault",
+      "file": "01-错误码/00-错误码总表.md",
+      "sha256": "d0b7c8b47417caa0a8c4ef60cc5debd9e1018b7b46986e85b480d5dc1ce8311f",
+      "bytes": 53317
+    }
+  ],
+  "assessment": {
+    "sourceFilesReviewed": 11,
+    "archivedFamilyCount": 5,
+    "activeEquivalentFiles": 6,
+    "newRepairPaths": 0,
+    "newSkuRecommendations": 0,
+    "existingMatureCardsEnriched": 5,
+    "mandatoryInputAdded": false,
+    "excludedMaterial": "No raw ticket/cache body, customer identifier, access value, proprietary source document or full knowledge directory copied. Snapshot contains only selected rewritten technical facts and disposition metadata.",
+    "maturity": "Existing supervisor-approved scoped portions retained. Archived copies and circular pilot imports are not counted as independent repeated-use evidence.",
+    "sourceIsolation": "All Reply Assistant and legacy sources read-only; build only reads local sanitized snapshot."
+  }
+}

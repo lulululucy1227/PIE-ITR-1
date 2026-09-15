@@ -1,0 +1,372 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-09-15",
+  "task": "EC-MT-20260915-SIMPLE-KNOWLEDGE-REUSE-008",
+  "entries": [
+    {
+      "id": "reuse-charge-comparison",
+      "classification": "PUBLIC_REPAIR_FACT",
+      "text": "Compare the original station and adapter with confirmed-good compatible hardware, changing one component at a time. Record the charging result for each comparison using the model service procedure.",
+      "sources": [
+        {
+          "sourceId": "diagnostic",
+          "sha256": "54627f51550252c73855cb0ca4ccac3f2b8007aa07e18a26f948471e4ab2fcc9",
+          "section": "Cross-validation"
+        },
+        {
+          "sourceId": "diagnostic",
+          "sha256": "54627f51550252c73855cb0ca4ccac3f2b8007aa07e18a26f948471e4ab2fcc9",
+          "section": "Battery Test / controlled battery cross-validation"
+        }
+      ],
+      "review": {
+        "approved": true,
+        "scopeConfirmed": true,
+        "noContradiction": true,
+        "authority": "Task EC-MT-20260915-SIMPLE-KNOWLEDGE-REUSE-008 scoped self-review; existing operational-maturity approval retained",
+        "evidenceState": "STABLE_OPERATIONAL_GUIDANCE"
+      },
+      "publication": {
+        "cardId": "guide-no-charge",
+        "pathId": "guided",
+        "field": "action",
+        "index": 0,
+        "models": [
+          "LUBA 1",
+          "LUBA 2",
+          "LUBA 2X",
+          "LUBA 3"
+        ]
+      }
+    },
+    {
+      "id": "reuse-bumper-crosscheck",
+      "classification": "PUBLIC_REPAIR_FACT",
+      "text": "With the mechanism clear, use a model-supported test or confirmed-good compatible reference to isolate the bumper/sensor. If the suspect bumper works on the reference mower, contact PIE for the mower-side sensing path. Replace only a confirmed faulty, model-serviceable bumper/sensor.",
+      "sources": [
+        {
+          "sourceId": "diagnostic",
+          "sha256": "54627f51550252c73855cb0ca4ccac3f2b8007aa07e18a26f948471e4ab2fcc9",
+          "section": "Side-bumper fault isolation"
+        },
+        {
+          "sourceId": "diagnostic",
+          "sha256": "54627f51550252c73855cb0ca4ccac3f2b8007aa07e18a26f948471e4ab2fcc9",
+          "section": "Cross-validation"
+        }
+      ],
+      "review": {
+        "approved": true,
+        "scopeConfirmed": true,
+        "noContradiction": true,
+        "authority": "Task EC-MT-20260915-SIMPLE-KNOWLEDGE-REUSE-008 scoped self-review; existing operational-maturity approval retained",
+        "evidenceState": "STABLE_OPERATIONAL_GUIDANCE"
+      },
+      "publication": {
+        "cardId": "guide-bumper",
+        "pathId": "guided",
+        "field": "action",
+        "index": 1,
+        "models": [
+          "LUBA 2",
+          "LUBA 2X",
+          "LUBA 3"
+        ]
+      }
+    },
+    {
+      "id": "reuse-cable-part-check",
+      "classification": "PUBLIC_PART_FACT",
+      "text": "Identify the visibly damaged cable/harness, then confirm its serviceable replacement against the exact model in SBOM and the service diagram. If the references disagree or the part is not separately serviceable, contact PIE before fitting a replacement.",
+      "sources": [
+        {
+          "sourceId": "parts",
+          "sha256": "045c977cb9c7f31854f499b86e9d2409c322828f894487a8bb48b2e511a89e49",
+          "section": "SBOM vs exploded-view consistency rule"
+        },
+        {
+          "sourceId": "parts",
+          "sha256": "045c977cb9c7f31854f499b86e9d2409c322828f894487a8bb48b2e511a89e49",
+          "section": "Repair-strategy rule"
+        }
+      ],
+      "review": {
+        "approved": true,
+        "scopeConfirmed": true,
+        "noContradiction": true,
+        "authority": "Task EC-MT-20260915-SIMPLE-KNOWLEDGE-REUSE-008 scoped self-review; existing operational-maturity approval retained",
+        "evidenceState": "STABLE_OPERATIONAL_GUIDANCE"
+      },
+      "publication": {
+        "cardId": "guide-visible-cable-damage",
+        "pathId": "guided",
+        "field": "action",
+        "index": 0,
+        "models": [
+          "LUBA 2",
+          "LUBA 2X",
+          "LUBA 3"
+        ]
+      }
+    },
+    {
+      "id": "reuse-power-observation",
+      "classification": "PUBLIC_REPAIR_FACT",
+      "text": "Use the model-supported battery/power check and note the indicators during the power-on attempt. With power disconnected, inspect the power-button and power connections using the safe service procedure.",
+      "sources": [
+        {
+          "sourceId": "diagnostic",
+          "sha256": "54627f51550252c73855cb0ca4ccac3f2b8007aa07e18a26f948471e4ab2fcc9",
+          "section": "No power / no boot"
+        },
+        {
+          "sourceId": "diagnostic",
+          "sha256": "54627f51550252c73855cb0ca4ccac3f2b8007aa07e18a26f948471e4ab2fcc9",
+          "section": "Evidence principles"
+        }
+      ],
+      "review": {
+        "approved": true,
+        "scopeConfirmed": true,
+        "noContradiction": true,
+        "authority": "Task EC-MT-20260915-SIMPLE-KNOWLEDGE-REUSE-008 scoped self-review; existing operational-maturity approval retained",
+        "evidenceState": "STABLE_OPERATIONAL_GUIDANCE"
+      },
+      "publication": {
+        "cardId": "guide-power",
+        "pathId": "guided",
+        "field": "action",
+        "index": 0,
+        "models": [
+          "LUBA 2",
+          "LUBA 2X",
+          "LUBA 3"
+        ]
+      }
+    },
+    {
+      "id": "reuse-update-evidence",
+      "classification": "PUBLIC_TOOL_STEP",
+      "text": "Confirm the current model-supported service tool, mower firmware and module versions. Record the exact failing step, displayed error and module communication result before repeating the update.",
+      "sources": [
+        {
+          "sourceId": "diagnostic",
+          "sha256": "54627f51550252c73855cb0ca4ccac3f2b8007aa07e18a26f948471e4ab2fcc9",
+          "section": "Upgrade failure"
+        },
+        {
+          "sourceId": "tool",
+          "sha256": "2e459d323ed845c2633e749fbebced8736239294232b668293d1b523a5a7ad2c",
+          "section": "Capability rule"
+        },
+        {
+          "sourceId": "fixes",
+          "sha256": "88a7c41edce260facb4827fca0e754d3221c7dd1eb35dce55637455bfcdd79fd",
+          "section": "5501 / LiDAR-related upgrade failure"
+        }
+      ],
+      "review": {
+        "approved": true,
+        "scopeConfirmed": true,
+        "noContradiction": true,
+        "authority": "Task EC-MT-20260915-SIMPLE-KNOWLEDGE-REUSE-008 scoped self-review; existing operational-maturity approval retained",
+        "evidenceState": "STABLE_OPERATIONAL_GUIDANCE"
+      },
+      "publication": {
+        "cardId": "guide-update-failure",
+        "pathId": "guided",
+        "field": "action",
+        "index": 0,
+        "models": [
+          "LUBA 2",
+          "LUBA 2X",
+          "LUBA 3"
+        ]
+      }
+    },
+    {
+      "id": "reuse-source-access-details",
+      "classification": "PRIVATE_INTERNAL",
+      "text": "Access and installation information excluded; no value copied.",
+      "sources": [
+        {
+          "sourceId": "tool",
+          "sha256": "2e459d323ed845c2633e749fbebced8736239294232b668293d1b523a5a7ad2c",
+          "section": "MammoSuite"
+        }
+      ],
+      "reason": "Operational access information is not repair-card content."
+    },
+    {
+      "id": "reuse-historical-light-version",
+      "classification": "NEEDS_SCOPE_REVIEW",
+      "text": "A historical light-related firmware fix is retained only as a review pointer.",
+      "sources": [
+        {
+          "sourceId": "fixes",
+          "sha256": "88a7c41edce260facb4827fca0e754d3221c7dd1eb35dce55637455bfcdd79fd",
+          "section": "1000022 — LUBA mini 2 1000 Vision"
+        },
+        {
+          "sourceId": "codes",
+          "sha256": "e799568db5f77897189b2dd3d409e582dad304ea222dbce728d82ac5bc3a840d",
+          "section": "1000022"
+        }
+      ],
+      "reason": "Historical target version is not a current cross-model recommendation."
+    },
+    {
+      "id": "reuse-unsupported-yuka-part",
+      "classification": "NEEDS_SCOPE_REVIEW",
+      "text": "A model-specific cutting-noise part example is outside the supported pilot model scope.",
+      "sources": [
+        {
+          "sourceId": "parts",
+          "sha256": "045c977cb9c7f31854f499b86e9d2409c322828f894487a8bb48b2e511a89e49",
+          "section": "Confirmed examples"
+        },
+        {
+          "sourceId": "diagnostic",
+          "sha256": "54627f51550252c73855cb0ca4ccac3f2b8007aa07e18a26f948471e4ab2fcc9",
+          "section": "Abnormal cutting-disc noise"
+        }
+      ],
+      "reason": "No supported model mapping or current SKU fitment publication; no part number copied."
+    },
+    {
+      "id": "reuse-gnss-branch",
+      "classification": "NEEDS_SCOPE_REVIEW",
+      "text": "GNSS tool and antenna checks remain a separate scoped investigation.",
+      "sources": [
+        {
+          "sourceId": "tool",
+          "sha256": "2e459d323ed845c2633e749fbebced8736239294232b668293d1b523a5a7ad2c",
+          "section": "MammoSuite"
+        },
+        {
+          "sourceId": "diagnostic",
+          "sha256": "54627f51550252c73855cb0ca4ccac3f2b8007aa07e18a26f948471e4ab2fcc9",
+          "section": "GNSS / positioning"
+        }
+      ],
+      "reason": "Does not authorize merging mower-side GNSS into approved RTK station-side repair."
+    },
+    {
+      "id": "reuse-software-target-conflict",
+      "classification": "CONFLICT",
+      "text": "Archived tool advice presents the earlier software target; current pilot retains a later narrowly reviewed correction.",
+      "sources": [
+        {
+          "sourceId": "tool",
+          "sha256": "2e459d323ed845c2633e749fbebced8736239294232b668293d1b523a5a7ad2c",
+          "section": "MammoSuite"
+        }
+      ],
+      "reason": "Keep current sym-cutting-functional-test and its exact model/firmware qualifier unchanged; archived copy timestamp is not a newer technical review."
+    },
+    {
+      "id": "reuse-dt041-conflict",
+      "classification": "CONFLICT",
+      "text": "Archived diagnostic identifier conflicts with the Reply Assistant reference note about the official numeric-only error table.",
+      "sources": [
+        {
+          "sourceId": "codes",
+          "sha256": "e799568db5f77897189b2dd3d409e582dad304ea222dbce728d82ac5bc3a840d",
+          "section": "DT-041"
+        }
+      ],
+      "reason": "No new mapping or repair promoted. Existing entry is already unknown-scope PIE_ONLY; description is not an exact device UI claim. Requires authoritative definition review."
+    },
+    {
+      "id": "reuse-standard-verification",
+      "classification": "DUPLICATE",
+      "text": "Model-applicable post-repair function, communication and map verification already exists in published paths.",
+      "sources": [
+        {
+          "sourceId": "diagnostic",
+          "sha256": "54627f51550252c73855cb0ca4ccac3f2b8007aa07e18a26f948471e4ab2fcc9",
+          "section": "Post-repair verification"
+        }
+      ],
+      "reason": "Do not duplicate the existing verification list or count this as independent outcome evidence."
+    },
+    {
+      "id": "reuse-active-power",
+      "classification": "PRIVATE_INTERNAL",
+      "text": "Active internal power rules inspected for consistency; broader internal isolation chains not copied.",
+      "sources": [
+        {
+          "sourceId": "active-power",
+          "sha256": "db2a9a2b6e823b6236a685e178b18f04ad1490c014624a692fb18b2a7dffb2c9",
+          "section": "P001–P009"
+        }
+      ],
+      "reason": "Internal diagnostic-reference, as-of 2026-08-31; broader hardware chains do not acquire public approval from inspection."
+    },
+    {
+      "id": "reuse-active-tools",
+      "classification": "NEEDS_SCOPE_REVIEW",
+      "text": "Active tool SOP contains version-sensitive service procedures.",
+      "sources": [
+        {
+          "sourceId": "active-tool",
+          "sha256": "5bf8256de1b8cd23d774a9122d8f7071c67a05d9dbf5c0e278f5e418a83c3358",
+          "section": "2026-08-21 刷写流程基线"
+        }
+      ],
+      "reason": "Internal evidence-based draft; do not publish fixed tool versions or write procedures without current model-specific approval."
+    },
+    {
+      "id": "reuse-active-versions",
+      "classification": "PRIVATE_INTERNAL",
+      "text": "Active version-governance policy inspected; historical and superseded advice remains non-current.",
+      "sources": [
+        {
+          "sourceId": "active-version",
+          "sha256": "1fce44352bb00271669b24ff36ad5603c5f724dc9e2dfbcc2bc60d7858470fa3",
+          "section": "默认检索 / 失效触发"
+        }
+      ],
+      "reason": "Internal policy used for review only; no document dump in public content."
+    },
+    {
+      "id": "reuse-active-guided-copy",
+      "classification": "DUPLICATE",
+      "text": "Active guided-path document explicitly imports the September 8 Troubleshooter pilot.",
+      "sources": [
+        {
+          "sourceId": "active-guided",
+          "sha256": "55523ba5cf18cc56f4a7317446dfaf338e3923f2f52f5fc88c5d2935de60b978",
+          "section": "引导式维修路径（试点）"
+        }
+      ],
+      "reason": "Circular evidence, not an independent case, new approval or stability signal."
+    },
+    {
+      "id": "reuse-active-parts",
+      "classification": "NEEDS_SCOPE_REVIEW",
+      "text": "Active parts index points to SBOM-supported selection; unlisted combinations have insufficient evidence.",
+      "sources": [
+        {
+          "sourceId": "active-parts",
+          "sha256": "ffc5074dc9becbdf8817fd4bc16e828fd908e32cfbd27dbb374638b9f329f859",
+          "section": "料号依据总索引"
+        }
+      ],
+      "reason": "Internal, time-sensitive draft index is not an approved part-number fitment record."
+    },
+    {
+      "id": "reuse-active-codes",
+      "classification": "NEEDS_SCOPE_REVIEW",
+      "text": "Active compact error master identifies its entries as historical observed codes rather than official cross-model definitions.",
+      "sources": [
+        {
+          "sourceId": "active-codes",
+          "sha256": "d0b7c8b47417caa0a8c4ef60cc5debd9e1018b7b46986e85b480d5dc1ce8311f",
+          "section": "错误码精炼总表"
+        }
+      ],
+      "reason": "Do not bulk-import code mappings from title-derived historical aggregation."
+    }
+  ]
+}

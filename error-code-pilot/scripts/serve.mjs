@@ -1,9 +1,15 @@
 import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
+import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../dist');
 const mime={'index.html':'text/html; charset=utf-8','styles.css':'text/css; charset=utf-8','app.mjs':'text/javascript; charset=utf-8','engine.mjs':'text/javascript; charset=utf-8','service-plan.mjs':'text/javascript; charset=utf-8','knowledge.json':'application/json; charset=utf-8'};
+export function previewIdentity(distRoot=root){
+  const hash=createHash('sha256').update(path.resolve(distRoot));
+  for(const file of Object.keys(mime))hash.update(file).update(fs.readFileSync(path.join(distRoot,file)));
+  return hash.digest('hex');
+}
 export async function createPreview({port=8796}={}) {
   if(!Number.isInteger(port)||port<0||port>65535||port===8787)throw new Error('Invalid pilot port; 8787 belongs to MAIN.');
   if(!fs.existsSync(path.join(root,'index.html')))throw new Error('Build first: node scripts/build.mjs');
@@ -18,7 +24,7 @@ export async function createPreview({port=8796}={}) {
     const file=pathname==='/'?'index.html':pathname.slice(1);
     if(!Object.hasOwn(mime,file)) {res.writeHead(404);res.end('Not found');return;}
     const headers={'Content-Type':mime[file],'Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer','Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'none'"};
-    try {const content=fs.readFileSync(path.join(root,file));res.writeHead(200,headers);res.end(req.method==='HEAD'?undefined:content);}
+    try {const content=fs.readFileSync(path.join(root,file));headers['X-PIE-Instance']=previewIdentity();res.writeHead(200,headers);res.end(req.method==='HEAD'?undefined:content);}
     catch{res.writeHead(503);res.end('Local build unavailable');}
   });
   await new Promise((resolve,reject)=>{server.once('error',reject);server.listen(port,'127.0.0.1',resolve);});

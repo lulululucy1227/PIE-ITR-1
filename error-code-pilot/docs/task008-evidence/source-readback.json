@@ -1,0 +1,57 @@
+[
+  {
+    "sourceId": "diagnostic",
+    "sha256": "54627f51550252c73855cb0ca4ccac3f2b8007aa07e18a26f948471e4ab2fcc9",
+    "unchanged": true
+  },
+  {
+    "sourceId": "tool",
+    "sha256": "2e459d323ed845c2633e749fbebced8736239294232b668293d1b523a5a7ad2c",
+    "unchanged": true
+  },
+  {
+    "sourceId": "parts",
+    "sha256": "045c977cb9c7f31854f499b86e9d2409c322828f894487a8bb48b2e511a89e49",
+    "unchanged": true
+  },
+  {
+    "sourceId": "codes",
+    "sha256": "e799568db5f77897189b2dd3d409e582dad304ea222dbce728d82ac5bc3a840d",
+    "unchanged": true
+  },
+  {
+    "sourceId": "fixes",
+    "sha256": "88a7c41edce260facb4827fca0e754d3221c7dd1eb35dce55637455bfcdd79fd",
+    "unchanged": true
+  },
+  {
+    "sourceId": "active-power",
+    "sha256": "db2a9a2b6e823b6236a685e178b18f04ad1490c014624a692fb18b2a7dffb2c9",
+    "unchanged": true
+  },
+  {
+    "sourceId": "active-tool",
+    "sha256": "5bf8256de1b8cd23d774a9122d8f7071c67a05d9dbf5c0e278f5e418a83c3358",
+    "unchanged": true
+  },
+  {
+    "sourceId": "active-version",
+    "sha256": "1fce44352bb00271669b24ff36ad5603c5f724dc9e2dfbcc2bc60d7858470fa3",
+    "unchanged": true
+  },
+  {
+    "sourceId": "active-guided",
+    "sha256": "55523ba5cf18cc56f4a7317446dfaf338e3923f2f52f5fc88c5d2935de60b978",
+    "unchanged": true
+  },
+  {
+    "sourceId": "active-parts",
+    "sha256": "ffc5074dc9becbdf8817fd4bc16e828fd908e32cfbd27dbb374638b9f329f859",
+    "unchanged": true
+  },
+  {
+    "sourceId": "active-codes",
+    "sha256": "d0b7c8b47417caa0a8c4ef60cc5debd9e1018b7b46986e85b480d5dc1ce8311f",
+    "unchanged": true
+  }
+]

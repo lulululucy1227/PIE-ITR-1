@@ -23,6 +23,8 @@ test('only current allowed symptom IDs or explicit Other validate, never injecte
  assert.equal(engine.validControlledSelection(catalog,good),true);
  for(const change of [{model:''},{model:'unlisted'},{area:'Charging'},{symptomId:'SYM-999'},{symptomId:'SYM-026'},{symptomId:'One wheel does not move'}])assert.equal(engine.validControlledSelection(catalog,{...good,...change}),false);
  assert.equal(engine.validControlledSelection(catalog,{...good,symptomId:'__other__'}),true);
+ assert.equal(engine.validControlledSelection(catalog,{model:'LUBA 2',symptomId:'__other__',area:''}),true);
+ assert.deepEqual(engine.controlledReferences(catalog,{model:'LUBA 2',symptomId:'__other__',area:''}),[]);
  assert.equal(engine.validControlledSelection(catalog,{...good,model:'unlisted',symptomId:'__other__'}),false);
 });
 test('condition choices retain only existing references applicable to the exact selected model',()=>{

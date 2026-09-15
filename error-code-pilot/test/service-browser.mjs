@@ -22,7 +22,8 @@ try{
   assert.equal(await page.locator('.step-support,.support-disclosure').count(),0);
   assert.doesNotMatch(await page.locator('#result').innerText(),/Parts for this step|Tools and how to use them|Why this check matters|How to access and remove|Coming soon|FIXTURE-PART/);
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
-  if(width>1000){const actions=await page.locator('.service-actions').boundingBox(),verification=await page.locator('.service-verification').boundingBox();assert.ok(verification.x>actions.x+actions.width);}
+  assert.equal(await page.locator('.service-actions').evaluate(e=>Boolean(e.compareDocumentPosition(document.querySelector('.part-box'))&Node.DOCUMENT_POSITION_FOLLOWING)),true);
+  assert.equal(await page.locator('.part-box').evaluate(e=>Boolean(e.compareDocumentPosition(document.querySelector('.service-verification'))&Node.DOCUMENT_POSITION_FOLLOWING)),true);
   await page.screenshot({path:`artifacts/service-${width}-guide.png`,fullPage:true});
   const contrast=await page.locator('button.primary').filter({hasText:'Fixed'}).evaluate(e=>{
    const luminance=color=>{const rgb=color.match(/[\d.]+/g).slice(0,3).map(Number).map(c=>{c/=255;return c<=.04045?c/12.92:((c+.055)/1.055)**2.4;});return .2126*rgb[0]+.7152*rgb[1]+.0722*rgb[2];};

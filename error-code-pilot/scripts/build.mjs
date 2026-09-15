@@ -4,10 +4,13 @@ import crypto from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {projectAgentCatalog} from '../src/engine.mjs';
 import {validateCandidates,candidateCounts,PAYLOAD_PATH} from '../lib/candidates.mjs';
+import {enrichKnowledge,reuseCounts} from '../lib/reuse.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 export async function build({catalog,candidates}={}) {
   const input=catalog||JSON.parse(fs.readFileSync(path.join(root,'data/canonical.json'),'utf8'));
-  const agent=projectAgentCatalog(input); // Validate before any output mutation.
+  const reuseManifest=JSON.parse(fs.readFileSync(path.join(root,'data/reuse-manifest.json'),'utf8'));
+  const reuseSnapshot=JSON.parse(fs.readFileSync(path.join(root,'data/reuse-snapshot.json'),'utf8'));
+  const agent=projectAgentCatalog(enrichKnowledge(input,reuseManifest,reuseSnapshot)); // Validate before any output mutation.
   const privateCandidates=candidates||JSON.parse(fs.readFileSync(path.join(root,'data/feishu-candidates.json'),'utf8'));
   const payloadText=fs.readFileSync(path.join(root,'..',PAYLOAD_PATH),'utf8');
   const candidateErrors=validateCandidates(privateCandidates,input,{payloadText});
@@ -22,7 +25,7 @@ export async function build({catalog,candidates}={}) {
   }
   fs.mkdirSync(outDir,{recursive:true});
   for(const [name,content] of files)fs.writeFileSync(path.join(outDir,name),content);
-  const manifest={knowledgeVersion:agent.knowledgeVersion,cards:agent.cards.length,privateCandidateAudit:{...candidateCounts(privateCandidates),sourceSha256:privateCandidates.source.sha256},files:[...files].map(([name,content])=>({name,bytes:content.length,sha256:crypto.createHash('sha256').update(content).digest('hex')}))};
+  const manifest={knowledgeVersion:agent.knowledgeVersion,cards:agent.cards.length,privateReuseAudit:{...reuseCounts(reuseSnapshot),snapshotSha256:reuseManifest.snapshotSha256},privateCandidateAudit:{...candidateCounts(privateCandidates),sourceSha256:privateCandidates.source.sha256},files:[...files].map(([name,content])=>({name,bytes:content.length,sha256:crypto.createHash('sha256').update(content).digest('hex')}))};
   fs.mkdirSync(path.join(root,'artifacts'),{recursive:true});
   fs.writeFileSync(path.join(root,'artifacts/build-manifest.json'),JSON.stringify(manifest,null,2)+'\n');
   return {outDir,...manifest};

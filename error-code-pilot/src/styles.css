@@ -11,7 +11,7 @@
 /* The identification form stays centered; repair procedures retain readable text alignment. */
 #identify-page{text-align:center}#identify-page input{text-align:center}#identify-page summary{margin-inline:auto}#more-details label{margin-inline:auto}.status{text-align:center}#selection .choice{text-align:center}#selection .alert ul{padding-left:0;list-style:none}
 /* Progressive identification: only the current question is visible. */
-.identify-stage:focus{outline:none}.identify-form>label+label{margin-top:22px}.identify-form>label{font-size:13px}#category-next{margin-top:28px}#identify-page select{width:100%;text-align:center}#context-summary,#confirmation-summary{font-size:13px;color:var(--muted);margin-top:12px}#symptom-stage #search-button{display:inline-block!important;margin:0}.step-buttons{display:flex;justify-content:space-between;align-items:center;margin-top:24px}#other-field{margin-top:20px}textarea{font:inherit;color:inherit;width:100%;margin-top:8px;padding:12px;border:1px solid #bdcbbf;border-radius:6px;resize:vertical}#other-field+label{margin-top:22px}#confirmation-firmware{margin:20px auto;max-width:310px}#confirmation-firmware input{text-align:center}#confirm-stage>.text-button{margin-top:16px}
+.identify-stage:focus{outline:none}.identify-form>label+label{margin-top:22px}.identify-form>label{font-size:13px}#category-next{margin-top:28px}#identify-page select{width:100%;text-align:center}#context-summary,#confirmation-summary{font-size:13px;color:var(--muted);margin-top:12px}#symptom-stage #search-button{margin:0}.step-buttons{display:flex;justify-content:space-between;align-items:center;margin-top:24px}#other-field{margin-top:20px}textarea{font:inherit;color:inherit;width:100%;margin-top:8px;padding:12px;border:1px solid #bdcbbf;border-radius:6px;resize:vertical}#other-field+label{margin-top:22px}#confirmation-firmware{margin:20px auto;max-width:310px}#confirmation-firmware input{text-align:center}#confirm-stage>.text-button{margin-top:16px}
 
 /* Refined desktop controls: the browser still owns selection and keyboard semantics. */
 :root{--green:#245b49;--ink:#233e35;--muted:#63756c;--line:#dfe7e1;background:#f6f8f5;color:var(--ink)}
@@ -64,6 +64,9 @@ input,select,textarea{border-color:#82958a;border-radius:var(--radius-control)}
 #solution-page .card-top:has(.code-label):not(:has(.code-label:empty)){margin-bottom:8px}
 #solution-page .card h2{font-size:21px;line-height:1.4;margin:0 0 22px;letter-spacing:-.3px}
 .service-plan{grid-template-columns:minmax(0,1.65fr) minmax(260px,1fr);gap:24px 32px}
+.service-plan .service-actions{grid-column:1;grid-row:1/3}
+.service-plan .part-box{grid-column:2;grid-row:1}
+.service-plan .service-verification{grid-column:2;grid-row:2}
 .service-plan .part-box{padding:0 0 20px;border:0;border-bottom:1px solid var(--line);border-radius:0;background:none}
 .service-plan .part-box h3{font-size:12px;font-weight:500;color:var(--muted);margin-bottom:7px}
 .service-plan .part-box strong{font-size:19px;font-weight:600;line-height:1.5;color:var(--green)}
@@ -99,6 +102,7 @@ input,select,textarea{border-color:#82958a;border-radius:var(--radius-control)}
 #confirm-stage .intro{margin-bottom:12px}
 @media(max-width:850px){
  .service-plan{grid-template-columns:1fr;gap:24px}
+ .service-plan .service-actions,.service-plan .part-box,.service-plan .service-verification{grid-column:auto;grid-row:auto}
  .service-plan .service-verification{padding:22px 0 0;border-left:0;border-top:1px solid var(--line)}
 }
 @media(max-width:600px){

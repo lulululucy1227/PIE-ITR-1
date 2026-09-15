@@ -70,7 +70,7 @@ test('one-click launcher avoids an unrelated occupied port and starts on the nex
  assert.ok(fs.existsSync(launcherPath),'the one-click launcher must be included');
  const {launch}=await import('../scripts/launch-local.mjs');
  const occupied=await unusedPort();
- const blocker=http.createServer((_req,res)=>{res.writeHead(404);res.end('unrelated');});
+ const blocker=http.createServer((_req,res)=>{res.writeHead(200);res.end('PIE Troubleshooter — older package');});
  await new Promise((resolve,reject)=>blocker.listen(occupied,'127.0.0.1',error=>error?reject(error):resolve()));
  t.after(()=>new Promise(resolve=>blocker.close(resolve)));
  const result=await launch({root,preferredPort:occupied,openBrowser:false});
@@ -78,5 +78,21 @@ test('one-click launcher avoids an unrelated occupied port and starts on the nex
  assert.equal(result.state,'started');
  assert.equal(result.port,occupied+1);
  assert.equal((await request(result.port)).status,200);
- assert.equal((await request(occupied)).status,404);
+ assert.match((await request(occupied)).body,/older package/);
+});
+
+test('a different extracted package starts its own service even with identical public files',async t=>{
+ const {launch}=await import('../scripts/launch-local.mjs');
+ const copy=fs.mkdtempSync(path.join(root,'artifacts','launcher-copy-'));
+ fs.cpSync(path.join(root,'dist'),path.join(copy,'dist'),{recursive:true});
+ fs.mkdirSync(path.join(copy,'scripts'));
+ for(const name of ['serve.mjs','launch-local.mjs'])fs.copyFileSync(path.join(root,'scripts',name),path.join(copy,'scripts',name));
+ const first=await launch({root,preferredPort:await unusedPort(),openBrowser:false});
+ let second;
+ try{
+  second=await launch({root:copy,preferredPort:first.port,openBrowser:false});
+  assert.equal(second.state,'started');
+  assert.notEqual(second.port,first.port);
+  assert.equal((await launch({root:copy,preferredPort:first.port,openBrowser:false})).port,second.port);
+ }finally{await stopOwned(second?.pid);await stopOwned(first.pid);}
 });
