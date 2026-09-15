@@ -1753,13 +1753,14 @@
           "docs/knowledge/KNOWN_FIXES.md#luba-2-5000x",
           "docs/knowledge/TOOL_KNOWLEDGE.md#functional-test",
           "git:6370b88..7f4b29f",
-          "git:2bd5772..3b13d9c"
+          "git:2bd5772..3b13d9c",
+          "hardware-verification-review.json#final-verification"
         ],
         "outcome": "recommended",
         "cohortCount": null,
         "notes": "Active correction and repeated similar-case use support narrow maintained operational guidance; no invented cohort or claim of complete case closure."
       },
-      "lastReviewed": "2026-09-08",
+      "lastReviewed": "2026-09-16",
       "supersededBy": null,
       "paths": [
         {
@@ -1775,7 +1776,8 @@
           "verification": {
             "steps": [
               "Run Functional Test, Communication Check and Auto Map Run.",
-              "Keep all three reports and a Connect Checking screenshot. If a test cannot run or a relevant fault remains, contact PIE."
+              "Keep all three reports and a Connect Checking screenshot. If a test cannot run or a relevant fault remains, contact PIE.",
+              "After any repair, upload fresh logs captured after the final tests and retain the upload confirmation and time (Log ID if available). Missing evidence, an unexplained failure of an applicable test, or a required test that cannot run means the repair needs PIE review."
             ],
             "canonical": [
               "Functional Test",
@@ -1783,8 +1785,9 @@
               "Auto Map Run",
               "Retain all three reports",
               "Connect Checking screenshot",
-              "Relevant non-ultrasonic FAIL requires PIE review; ultrasonic failure alone is not a blocker",
-              "Burn-in does not replace standard validation"
+              "All applicable checks must pass without unexplained failure; no blanket ultrasonic-test exemption.",
+              "Burn-in does not replace standard validation",
+              "Fresh logs after final tests with upload confirmation. Required evidence unavailable or failed: PIE review, not repair completion."
             ]
           },
           "ifNotFixed": {
@@ -1916,13 +1919,14 @@
           "docs/troubleshooter/FEISHU_CANDIDATE_PAYLOAD_2026-09-08.md",
           "docs/knowledge/DIAGNOSTIC_KNOWLEDGE.md",
           "docs/knowledge/TOOL_KNOWLEDGE.md",
-          "docs/knowledge/PARTS_KNOWLEDGE.md"
+          "docs/knowledge/PARTS_KNOWLEDGE.md",
+          "hardware-verification-review.json#final-verification"
         ],
         "outcome": "recommended",
         "cohortCount": null,
         "notes": "Model-supported wheel-motor/driver-board isolation only; simultaneous motor failures require shared-power review. Original automatic mainboard fallback excluded. No production read or independent success count inferred."
       },
-      "lastReviewed": "2026-09-08",
+      "lastReviewed": "2026-09-16",
       "supersededBy": null,
       "paths": [
         {
@@ -1938,7 +1942,9 @@
           "verification": {
             "steps": [
               "Confirm normal movement of the affected wheel(s) and repeat the applicable Motor Test.",
-              "Complete the model-applicable Functional Test, Communication Check and Auto Map Run. Keep all three reports and a Connect Checking screenshot; contact PIE if a required check cannot run or a relevant fault remains."
+              "Complete the model-applicable Functional Test, Communication Check and Auto Map Run. Keep all three reports and a Connect Checking screenshot; contact PIE if a required check cannot run or a relevant fault remains.",
+              "After any repair, upload fresh logs captured after the final tests and retain the upload confirmation and time (Log ID if available). Missing evidence, an unexplained failure of an applicable test, or a required test that cannot run means the repair needs PIE review.",
+              "After motor or driver-board repair, complete the model-supported Burn-in test and retain a passing record. If unavailable or failed, contact PIE before marking the repair complete."
             ],
             "canonical": [
               "Functional Test",
@@ -1947,7 +1953,8 @@
               "Retain all three reports",
               "Connect Checking screenshot",
               "Apply the model-supported tests; any unavailable required test or unresolved relevant fault requires PIE review.",
-              "Burn-in is additional and does not replace standard validation."
+              "Fresh logs after final tests with upload confirmation. Required evidence unavailable or failed: PIE review, not repair completion.",
+              "After motor or driver-board repair, complete the model-supported Burn-in test and retain a passing record. If unavailable or failed, contact PIE before marking the repair complete."
             ]
           },
           "ifNotFixed": {
@@ -1998,13 +2005,14 @@
           "docs/troubleshooter/FEISHU_CANDIDATE_PAYLOAD_2026-09-08.md",
           "docs/knowledge/DIAGNOSTIC_KNOWLEDGE.md",
           "docs/knowledge/TOOL_KNOWLEDGE.md",
-          "docs/knowledge/PARTS_KNOWLEDGE.md"
+          "docs/knowledge/PARTS_KNOWLEDGE.md",
+          "hardware-verification-review.json#final-verification"
         ],
         "outcome": "recommended",
         "cohortCount": null,
         "notes": "Explicit non1202 actual-operation branch. Test-only software mismatch remains a separate existing path; driver-board/cable fallback excluded. No production read or independent success count inferred."
       },
-      "lastReviewed": "2026-09-08",
+      "lastReviewed": "2026-09-16",
       "supersededBy": null,
       "paths": [
         {
@@ -2013,14 +2021,16 @@
           "kind": "repair",
           "part": "Cutting-disc blockage or confirmed failed cutting-motor assembly",
           "action": [
-            "Power off the mower before inspecting the cutting area. Remove actual debris or physical blockage safely, then recheck cutting operation.",
+            "Power off the mower and wear protective gloves before inspecting the cutting area. Remove actual debris or physical blockage safely, then recheck cutting operation.",
             "If the problem remains, evaluate the cutting motor with the model-supported test and actual operation. MammoSuite does not independently isolate left and right cutting motors; a Functional Test failure alone is not proof of motor failure.",
             "Replace the cutting-motor assembly only when failure is confirmed and the correct model-serviceable assembly is identified. If Error 1202 is present, use its separate guide and contact PIE; this procedure does not authorize its frozen hardware path."
           ],
           "verification": {
             "steps": [
               "Confirm normal disc movement/noise in the actual operating mode and repeat the applicable motor/cutting checks.",
-              "Complete the model-applicable Functional Test, Communication Check and Auto Map Run. Keep all three reports and a Connect Checking screenshot; contact PIE if a required check cannot run or a relevant fault remains."
+              "Complete the model-applicable Functional Test, Communication Check and Auto Map Run. Keep all three reports and a Connect Checking screenshot; contact PIE if a required check cannot run or a relevant fault remains.",
+              "After any repair, upload fresh logs captured after the final tests and retain the upload confirmation and time (Log ID if available). Missing evidence, an unexplained failure of an applicable test, or a required test that cannot run means the repair needs PIE review.",
+              "After motor or driver-board repair, complete the model-supported Burn-in test and retain a passing record. If unavailable or failed, contact PIE before marking the repair complete."
             ],
             "canonical": [
               "Functional Test",
@@ -2029,7 +2039,8 @@
               "Retain all three reports",
               "Connect Checking screenshot",
               "Apply the model-supported tests; any unavailable required test or unresolved relevant fault requires PIE review.",
-              "Burn-in is additional and does not replace standard validation."
+              "Fresh logs after final tests with upload confirmation. Required evidence unavailable or failed: PIE review, not repair completion.",
+              "After motor or driver-board repair, complete the model-supported Burn-in test and retain a passing record. If unavailable or failed, contact PIE before marking the repair complete."
             ]
           },
           "ifNotFixed": {
@@ -2081,13 +2092,14 @@
           "docs/troubleshooter/FEISHU_CANDIDATE_PAYLOAD_2026-09-08.md",
           "docs/knowledge/DIAGNOSTIC_KNOWLEDGE.md",
           "docs/knowledge/TOOL_KNOWLEDGE.md",
-          "docs/knowledge/PARTS_KNOWLEDGE.md"
+          "docs/knowledge/PARTS_KNOWLEDGE.md",
+          "hardware-verification-review.json#final-verification"
         ],
         "outcome": "recommended",
         "cohortCount": null,
         "notes": "No-charge scope includes LUBA1; distinct station-recognition branch excludes it. Controlled compatible source comparison, no automatic board chain. No production read or independent success count inferred."
       },
-      "lastReviewed": "2026-09-08",
+      "lastReviewed": "2026-09-16",
       "supersededBy": null,
       "paths": [
         {
@@ -2103,7 +2115,9 @@
           "verification": {
             "steps": [
               "Confirm normal charging indication and model-applicable charging current/behavior with the repaired charging source.",
-              "Complete the model-applicable Functional Test, Communication Check and Auto Map Run. Keep all three reports and a Connect Checking screenshot; contact PIE if a required check cannot run or a relevant fault remains."
+              "Complete the model-applicable Functional Test, Communication Check and Auto Map Run. Keep all three reports and a Connect Checking screenshot; contact PIE if a required check cannot run or a relevant fault remains.",
+              "After any repair, upload fresh logs captured after the final tests and retain the upload confirmation and time (Log ID if available). Missing evidence, an unexplained failure of an applicable test, or a required test that cannot run means the repair needs PIE review.",
+              "After power-adapter repair, complete the model-supported Burn-in test with a passing record. Charging-station or charging-contact replacement alone does not require Burn-in. If a required test is unavailable or fails, contact PIE."
             ],
             "canonical": [
               "Functional Test",
@@ -2112,7 +2126,8 @@
               "Retain all three reports",
               "Connect Checking screenshot",
               "Apply the model-supported tests; any unavailable required test or unresolved relevant fault requires PIE review.",
-              "Burn-in is additional and does not replace standard validation."
+              "Fresh logs after final tests with upload confirmation. Required evidence unavailable or failed: PIE review, not repair completion.",
+              "After power-adapter repair, complete the model-supported Burn-in test with a passing record. Charging-station or charging-contact replacement alone does not require Burn-in. If a required test is unavailable or fails, contact PIE."
             ]
           },
           "ifNotFixed": {
@@ -2162,13 +2177,14 @@
           "docs/troubleshooter/FEISHU_CANDIDATE_PAYLOAD_2026-09-08.md",
           "docs/knowledge/DIAGNOSTIC_KNOWLEDGE.md",
           "docs/knowledge/TOOL_KNOWLEDGE.md",
-          "docs/knowledge/PARTS_KNOWLEDGE.md"
+          "docs/knowledge/PARTS_KNOWLEDGE.md",
+          "hardware-verification-review.json#final-verification"
         ],
         "outcome": "recommended",
         "cohortCount": null,
         "notes": "Station-not-recognized only, LUBA2/2X/3; no expansion of LUBA1 no-charge evidence to this observation. No production read or independent success count inferred."
       },
-      "lastReviewed": "2026-09-08",
+      "lastReviewed": "2026-09-16",
       "supersededBy": null,
       "paths": [
         {
@@ -2184,7 +2200,9 @@
           "verification": {
             "steps": [
               "Repeat station recognition and confirm the relevant charging indication/behavior for this model.",
-              "Complete the model-applicable Functional Test, Communication Check and Auto Map Run. Keep all three reports and a Connect Checking screenshot; contact PIE if a required check cannot run or a relevant fault remains."
+              "Complete the model-applicable Functional Test, Communication Check and Auto Map Run. Keep all three reports and a Connect Checking screenshot; contact PIE if a required check cannot run or a relevant fault remains.",
+              "After any repair, upload fresh logs captured after the final tests and retain the upload confirmation and time (Log ID if available). Missing evidence, an unexplained failure of an applicable test, or a required test that cannot run means the repair needs PIE review.",
+              "After power-adapter repair, complete the model-supported Burn-in test with a passing record. Charging-station or charging-contact replacement alone does not require Burn-in. If a required test is unavailable or fails, contact PIE."
             ],
             "canonical": [
               "Functional Test",
@@ -2193,7 +2211,8 @@
               "Retain all three reports",
               "Connect Checking screenshot",
               "Apply the model-supported tests; any unavailable required test or unresolved relevant fault requires PIE review.",
-              "Burn-in is additional and does not replace standard validation."
+              "Fresh logs after final tests with upload confirmation. Required evidence unavailable or failed: PIE review, not repair completion.",
+              "After power-adapter repair, complete the model-supported Burn-in test with a passing record. Charging-station or charging-contact replacement alone does not require Burn-in. If a required test is unavailable or fails, contact PIE."
             ]
           },
           "ifNotFixed": {
@@ -2243,13 +2262,14 @@
           "docs/troubleshooter/FEISHU_CANDIDATE_PAYLOAD_2026-09-08.md",
           "docs/knowledge/DIAGNOSTIC_KNOWLEDGE.md",
           "docs/knowledge/TOOL_KNOWLEDGE.md",
-          "docs/knowledge/PARTS_KNOWLEDGE.md"
+          "docs/knowledge/PARTS_KNOWLEDGE.md",
+          "hardware-verification-review.json#final-verification"
         ],
         "outcome": "recommended",
         "cohortCount": null,
         "notes": "Approved first-line docking/IR process only; no universal station or robot-side component replacement. No production read or independent success count inferred."
       },
-      "lastReviewed": "2026-09-08",
+      "lastReviewed": "2026-09-16",
       "supersededBy": null,
       "paths": [
         {
@@ -2258,14 +2278,15 @@
           "kind": "check",
           "part": null,
           "action": [
-            "Clean the docking contacts and IR window, remove any actual obstruction, then repeat docking.",
+            "Power off the mower before cleaning the docking contacts and IR window. Remove any actual obstruction, then repeat docking.",
             "If docking still fails, evaluate the station/IR path using the model-supported service checks. Retain the docking behavior and station-side results.",
             "If supported station-side checks do not resolve the issue, contact PIE. Do not replace a robot-side IR module, harness or board without a confirmed model-specific fault."
           ],
           "verification": {
             "steps": [
               "Repeat docking and confirm reliable station approach, recognition and charging contact for the model.",
-              "Complete the model-applicable Functional Test, Communication Check and Auto Map Run. Keep all three reports and a Connect Checking screenshot; contact PIE if a required check cannot run or a relevant fault remains."
+              "Complete the model-applicable Functional Test, Communication Check and Auto Map Run. Keep all three reports and a Connect Checking screenshot; contact PIE if a required check cannot run or a relevant fault remains.",
+              "After any repair, upload fresh logs captured after the final tests and retain the upload confirmation and time (Log ID if available). Missing evidence, an unexplained failure of an applicable test, or a required test that cannot run means the repair needs PIE review."
             ],
             "canonical": [
               "Functional Test",
@@ -2274,7 +2295,7 @@
               "Retain all three reports",
               "Connect Checking screenshot",
               "Apply the model-supported tests; any unavailable required test or unresolved relevant fault requires PIE review.",
-              "Burn-in is additional and does not replace standard validation."
+              "Fresh logs after final tests with upload confirmation. Required evidence unavailable or failed: PIE review, not repair completion."
             ]
           },
           "ifNotFixed": {
@@ -2324,13 +2345,14 @@
           "docs/troubleshooter/FEISHU_CANDIDATE_PAYLOAD_2026-09-08.md",
           "docs/knowledge/DIAGNOSTIC_KNOWLEDGE.md",
           "docs/knowledge/TOOL_KNOWLEDGE.md",
-          "docs/knowledge/PARTS_KNOWLEDGE.md"
+          "docs/knowledge/PARTS_KNOWLEDGE.md",
+          "hardware-verification-review.json#final-verification"
         ],
         "outcome": "recommended",
         "cohortCount": null,
         "notes": "Model-applicable battery/power checks; no invented voltage/SOH threshold or generic battery/mainboard mapping. No production read or independent success count inferred."
       },
-      "lastReviewed": "2026-09-08",
+      "lastReviewed": "2026-09-16",
       "supersededBy": null,
       "paths": [
         {
@@ -2346,7 +2368,9 @@
           "verification": {
             "steps": [
               "Confirm stable power-on and operation, including the condition that previously caused the shutdown.",
-              "Complete the model-applicable Functional Test, Communication Check and Auto Map Run. Keep all three reports and a Connect Checking screenshot; contact PIE if a required check cannot run or a relevant fault remains."
+              "Complete the model-applicable Functional Test, Communication Check and Auto Map Run. Keep all three reports and a Connect Checking screenshot; contact PIE if a required check cannot run or a relevant fault remains.",
+              "After any repair, upload fresh logs captured after the final tests and retain the upload confirmation and time (Log ID if available). Missing evidence, an unexplained failure of an applicable test, or a required test that cannot run means the repair needs PIE review.",
+              "After battery or power-system repair, complete the model-supported Burn-in test and retain a passing record. If unavailable or failed, contact PIE before marking the repair complete."
             ],
             "canonical": [
               "Functional Test",
@@ -2355,7 +2379,8 @@
               "Retain all three reports",
               "Connect Checking screenshot",
               "Apply the model-supported tests; any unavailable required test or unresolved relevant fault requires PIE review.",
-              "Burn-in is additional and does not replace standard validation."
+              "Fresh logs after final tests with upload confirmation. Required evidence unavailable or failed: PIE review, not repair completion.",
+              "After battery or power-system repair, complete the model-supported Burn-in test and retain a passing record. If unavailable or failed, contact PIE before marking the repair complete."
             ]
           },
           "ifNotFixed": {
@@ -2405,13 +2430,14 @@
           "docs/troubleshooter/FEISHU_CANDIDATE_PAYLOAD_2026-09-08.md",
           "docs/knowledge/DIAGNOSTIC_KNOWLEDGE.md",
           "docs/knowledge/TOOL_KNOWLEDGE.md",
-          "docs/knowledge/PARTS_KNOWLEDGE.md"
+          "docs/knowledge/PARTS_KNOWLEDGE.md",
+          "hardware-verification-review.json#final-verification"
         ],
         "outcome": "recommended",
         "cohortCount": null,
         "notes": "Station-side power/adapter fault isolation only; mower-side GNSS/LoRa remains PIE. No production read or independent success count inferred."
       },
-      "lastReviewed": "2026-09-08",
+      "lastReviewed": "2026-09-16",
       "supersededBy": null,
       "paths": [
         {
@@ -2427,7 +2453,9 @@
           "verification": {
             "steps": [
               "Confirm stable connection to the applicable RTK station and repeat the relevant positioning/map operation.",
-              "Complete the model-applicable Functional Test, Communication Check and Auto Map Run. Keep all three reports and a Connect Checking screenshot; contact PIE if a required check cannot run or a relevant fault remains."
+              "Complete the model-applicable Functional Test, Communication Check and Auto Map Run. Keep all three reports and a Connect Checking screenshot; contact PIE if a required check cannot run or a relevant fault remains.",
+              "After any repair, upload fresh logs captured after the final tests and retain the upload confirmation and time (Log ID if available). Missing evidence, an unexplained failure of an applicable test, or a required test that cannot run means the repair needs PIE review.",
+              "If the repair involved a power supply, complete the model-supported Burn-in test with a passing record. If the required test is unavailable or fails, contact PIE."
             ],
             "canonical": [
               "Functional Test",
@@ -2436,7 +2464,8 @@
               "Retain all three reports",
               "Connect Checking screenshot",
               "Apply the model-supported tests; any unavailable required test or unresolved relevant fault requires PIE review.",
-              "Burn-in is additional and does not replace standard validation."
+              "Fresh logs after final tests with upload confirmation. Required evidence unavailable or failed: PIE review, not repair completion.",
+              "If the repair involved a power supply, complete the model-supported Burn-in test with a passing record. If the required test is unavailable or fails, contact PIE."
             ]
           },
           "ifNotFixed": {
@@ -2486,13 +2515,14 @@
           "docs/troubleshooter/FEISHU_CANDIDATE_PAYLOAD_2026-09-08.md",
           "docs/knowledge/DIAGNOSTIC_KNOWLEDGE.md",
           "docs/knowledge/TOOL_KNOWLEDGE.md",
-          "docs/knowledge/PARTS_KNOWLEDGE.md"
+          "docs/knowledge/PARTS_KNOWLEDGE.md",
+          "hardware-verification-review.json#final-verification"
         ],
         "outcome": "recommended",
         "cohortCount": null,
         "notes": "Clear mechanism plus persistent confirmed bumper/sensor fault; Hall/chassis sensing and serviceability remain distinct. No production read or independent success count inferred."
       },
-      "lastReviewed": "2026-09-08",
+      "lastReviewed": "2026-09-16",
       "supersededBy": null,
       "paths": [
         {
@@ -2508,7 +2538,8 @@
           "verification": {
             "steps": [
               "Confirm correct bumper response and no false trigger during the relevant model-supported operating test.",
-              "Complete the model-applicable Functional Test, Communication Check and Auto Map Run. Keep all three reports and a Connect Checking screenshot; contact PIE if a required check cannot run or a relevant fault remains."
+              "Complete the model-applicable Functional Test, Communication Check and Auto Map Run. Keep all three reports and a Connect Checking screenshot; contact PIE if a required check cannot run or a relevant fault remains.",
+              "After any repair, upload fresh logs captured after the final tests and retain the upload confirmation and time (Log ID if available). Missing evidence, an unexplained failure of an applicable test, or a required test that cannot run means the repair needs PIE review."
             ],
             "canonical": [
               "Functional Test",
@@ -2517,7 +2548,7 @@
               "Retain all three reports",
               "Connect Checking screenshot",
               "Apply the model-supported tests; any unavailable required test or unresolved relevant fault requires PIE review.",
-              "Burn-in is additional and does not replace standard validation."
+              "Fresh logs after final tests with upload confirmation. Required evidence unavailable or failed: PIE review, not repair completion."
             ]
           },
           "ifNotFixed": {
@@ -2567,13 +2598,14 @@
           "docs/troubleshooter/FEISHU_CANDIDATE_PAYLOAD_2026-09-08.md",
           "docs/knowledge/DIAGNOSTIC_KNOWLEDGE.md",
           "docs/knowledge/TOOL_KNOWLEDGE.md",
-          "docs/knowledge/PARTS_KNOWLEDGE.md"
+          "docs/knowledge/PARTS_KNOWLEDGE.md",
+          "hardware-verification-review.json#final-verification"
         ],
         "outcome": "recommended",
         "cohortCount": null,
         "notes": "Visible damage plus correct model/serviceable part; not universal harness replacement or downstream component repair. No production read or independent success count inferred."
       },
-      "lastReviewed": "2026-09-08",
+      "lastReviewed": "2026-09-16",
       "supersededBy": null,
       "paths": [
         {
@@ -2589,7 +2621,9 @@
           "verification": {
             "steps": [
               "Verify the repaired cable path and relevant function/communication with the correctly installed part.",
-              "Complete the model-applicable Functional Test, Communication Check and Auto Map Run. Keep all three reports and a Connect Checking screenshot; contact PIE if a required check cannot run or a relevant fault remains."
+              "Complete the model-applicable Functional Test, Communication Check and Auto Map Run. Keep all three reports and a Connect Checking screenshot; contact PIE if a required check cannot run or a relevant fault remains.",
+              "After any repair, upload fresh logs captured after the final tests and retain the upload confirmation and time (Log ID if available). Missing evidence, an unexplained failure of an applicable test, or a required test that cannot run means the repair needs PIE review.",
+              "If the repair involved a motor, driver board, battery or power circuit, complete the model-supported Burn-in test with a passing record. If the required test is unavailable or fails, contact PIE."
             ],
             "canonical": [
               "Functional Test",
@@ -2598,7 +2632,8 @@
               "Retain all three reports",
               "Connect Checking screenshot",
               "Apply the model-supported tests; any unavailable required test or unresolved relevant fault requires PIE review.",
-              "Burn-in is additional and does not replace standard validation."
+              "Fresh logs after final tests with upload confirmation. Required evidence unavailable or failed: PIE review, not repair completion.",
+              "If the repair involved a motor, driver board, battery or power circuit, complete the model-supported Burn-in test with a passing record. If the required test is unavailable or fails, contact PIE."
             ]
           },
           "ifNotFixed": {
@@ -2648,13 +2683,14 @@
           "docs/troubleshooter/FEISHU_CANDIDATE_PAYLOAD_2026-09-08.md",
           "docs/knowledge/DIAGNOSTIC_KNOWLEDGE.md",
           "docs/knowledge/TOOL_KNOWLEDGE.md",
-          "docs/knowledge/PARTS_KNOWLEDGE.md"
+          "docs/knowledge/PARTS_KNOWLEDGE.md",
+          "hardware-verification-review.json#final-verification"
         ],
         "outcome": "recommended",
         "cohortCount": null,
         "notes": "Current model/tool remediation process only; no universal firmware target or blind repeated board replacement. No production read or independent success count inferred."
       },
-      "lastReviewed": "2026-09-08",
+      "lastReviewed": "2026-09-16",
       "supersededBy": null,
       "paths": [
         {
@@ -2670,7 +2706,8 @@
           "verification": {
             "steps": [
               "Repeat the originally failing update/connection step and confirm the expected model-applicable module/version state.",
-              "Complete the model-applicable Functional Test, Communication Check and Auto Map Run. Keep all three reports and a Connect Checking screenshot; contact PIE if a required check cannot run or a relevant fault remains."
+              "Complete the model-applicable Functional Test, Communication Check and Auto Map Run. Keep all three reports and a Connect Checking screenshot; contact PIE if a required check cannot run or a relevant fault remains.",
+              "After any repair, upload fresh logs captured after the final tests and retain the upload confirmation and time (Log ID if available). Missing evidence, an unexplained failure of an applicable test, or a required test that cannot run means the repair needs PIE review."
             ],
             "canonical": [
               "Functional Test",
@@ -2679,7 +2716,7 @@
               "Retain all three reports",
               "Connect Checking screenshot",
               "Apply the model-supported tests; any unavailable required test or unresolved relevant fault requires PIE review.",
-              "Burn-in is additional and does not replace standard validation."
+              "Fresh logs after final tests with upload confirmation. Required evidence unavailable or failed: PIE review, not repair completion."
             ]
           },
           "ifNotFixed": {

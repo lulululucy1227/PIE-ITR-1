@@ -27,6 +27,14 @@ test('invalid private candidate source or promotion fails before changing valid 
   await assert.rejects(()=>build({candidates}),/source content drift/);
   assert.equal(fs.readFileSync(path.join(root,'dist/knowledge.json'),'utf8'),original);
 });
+
+test('an invalid hardware resource cannot replace the last verified public build',async()=>{
+ const original=fs.readFileSync(path.join(root,'dist/knowledge.json'),'utf8');
+ const hardwareSupport=JSON.parse(fs.readFileSync(path.join(root,'data/hardware-step-support.json'),'utf8'));
+ hardwareSupport.records[0].binding.instruction='Unreviewed replacement instruction';
+ await assert.rejects(()=>build({hardwareSupport}),/stale scope/);
+ assert.equal(fs.readFileSync(path.join(root,'dist/knowledge.json'),'utf8'),original);
+});
 test('local preview rejects write methods, raw paths, traversal and foreign origins',async()=>{
   const server=await createPreview({port:0});
   try {

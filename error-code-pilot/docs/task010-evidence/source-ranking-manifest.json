@@ -1,0 +1,957 @@
+{
+  "generatedAt": "2026-09-15T22:41:34.205Z",
+  "vault": "C:\\Users\\Reggie\\Desktop\\ITR工单助手\\工单助手交接包\\维修与售后知识库",
+  "technicalSources": [
+    {
+      "id": "cases",
+      "root": "active-vault",
+      "file": "07-标准知识/08-诊断图谱/07-近期工单蒸馏-2026-08-18至21.md",
+      "sha256Before": "311b3d349db441a3f4185e0cc92e3f69c97ebcdc25bb7753f807571b18b52156",
+      "bytes": 8404,
+      "sourceRole": "dated-case-distillation-not-census",
+      "dates": {
+        "generated": "2026-08-21",
+        "updated": "2026-08-21",
+        "version_scope": "source-window-2026-08-18-to-2026-08-21"
+      },
+      "section": {
+        "heading": "## 可复用根因链路",
+        "startLine": 44,
+        "endLine": 79,
+        "sha256": "a130375c8e810ea959b80152e804faf0c14f9123387782f1926f3a7930bded4a",
+        "normalization": "UTF-8 LF, heading through before next level-1/2 heading"
+      },
+      "sha256After": "311b3d349db441a3f4185e0cc92e3f69c97ebcdc25bb7753f807571b18b52156",
+      "unchanged": true
+    },
+    {
+      "id": "charge",
+      "root": "active-vault",
+      "file": "07-标准知识/03-标准SOP/充电与回充标准SOP.md",
+      "sha256Before": "c94ea763acab2149e422d525c3043667819140a86962086b287645529e513077",
+      "bytes": 6526,
+      "sourceRole": "active-technical-reference",
+      "dates": {
+        "generated": "2026-08-06",
+        "updated": "2026-08-21",
+        "version_scope": "as-of-2026-08-21"
+      },
+      "section": {
+        "heading": "## 不充电",
+        "startLine": 24,
+        "endLine": 30,
+        "sha256": "d526f3ead8f2e6a5a0a6974691463d1bc7e28a88811c8ba5d64959637b28a2fc",
+        "normalization": "UTF-8 LF, heading through before next level-1/2 heading"
+      },
+      "sha256After": "c94ea763acab2149e422d525c3043667819140a86962086b287645529e513077",
+      "unchanged": true
+    },
+    {
+      "id": "power",
+      "root": "active-vault",
+      "file": "07-标准知识/03-标准SOP/电池与开关机标准SOP.md",
+      "sha256Before": "70ad9870ae5a48cdd419f903754ba90e50cbd33eff5a119083b079f0123c7c1c",
+      "bytes": 4611,
+      "sourceRole": "active-technical-reference",
+      "dates": {
+        "generated": "2026-08-06",
+        "updated": "2026-08-21",
+        "version_scope": "as-of-2026-08-21"
+      },
+      "section": {
+        "heading": "# 电池与开关机标准 SOP",
+        "startLine": 17,
+        "endLine": 24,
+        "sha256": "973fd781c1c37e108d2132982861f09f913edfcc42fbc7fd03db80629eaa0b42",
+        "normalization": "UTF-8 LF, heading through before next level-1/2 heading"
+      },
+      "sha256After": "70ad9870ae5a48cdd419f903754ba90e50cbd33eff5a119083b079f0123c7c1c",
+      "unchanged": true
+    },
+    {
+      "id": "wheel",
+      "root": "active-vault",
+      "file": "07-标准知识/03-标准SOP/轮毂与行走标准SOP.md",
+      "sha256Before": "65463388454eaa739730ee82a66a274b922961687220d70d3f93899622c5041b",
+      "bytes": 6576,
+      "sourceRole": "active-technical-reference",
+      "dates": {
+        "generated": "2026-08-06",
+        "updated": "2026-08-21",
+        "version_scope": "as-of-2026-08-21"
+      },
+      "section": {
+        "heading": "# 轮毂与行走标准 SOP",
+        "startLine": 17,
+        "endLine": 25,
+        "sha256": "b4cb153dccc3081f820a75163a5ada2a717f0174c74dae0243ce3e133b106570",
+        "normalization": "UTF-8 LF, heading through before next level-1/2 heading"
+      },
+      "sha256After": "65463388454eaa739730ee82a66a274b922961687220d70d3f93899622c5041b",
+      "unchanged": true
+    },
+    {
+      "id": "can",
+      "root": "active-vault",
+      "file": "07-标准知识/03-标准SOP/轮毂与行走标准SOP.md",
+      "sha256Before": "65463388454eaa739730ee82a66a274b922961687220d70d3f93899622c5041b",
+      "bytes": 6576,
+      "sourceRole": "active-technical-reference",
+      "dates": {
+        "generated": "2026-08-06",
+        "updated": "2026-08-21",
+        "version_scope": "as-of-2026-08-21"
+      },
+      "section": {
+        "heading": "## 复合症状判定：定位丢失 + CAN 失败 + 感知/回充异常",
+        "startLine": 26,
+        "endLine": 41,
+        "sha256": "2cf1a3b794a290a4d557398daa302b0d71255c1af8501b408cf50db2916ab35e",
+        "normalization": "UTF-8 LF, heading through before next level-1/2 heading"
+      },
+      "sha256After": "65463388454eaa739730ee82a66a274b922961687220d70d3f93899622c5041b",
+      "unchanged": true
+    },
+    {
+      "id": "cut",
+      "root": "active-vault",
+      "file": "07-标准知识/03-标准SOP/刀盘与割草标准SOP.md",
+      "sha256Before": "5e3a12b9fb2a183ee54f831be58c2cced3d68d483738ce003c807dd3605c0791",
+      "bytes": 3696,
+      "sourceRole": "active-technical-reference",
+      "dates": {
+        "generated": "2026-08-06",
+        "updated": "2026-08-14",
+        "version_scope": "as-of-2026-08-06"
+      },
+      "section": {
+        "heading": "# 刀盘与割草标准 SOP",
+        "startLine": 17,
+        "endLine": 25,
+        "sha256": "8dd1e3b9fe9405ae981385f9397ff0060a1620446e28641234db033bd65bc065",
+        "normalization": "UTF-8 LF, heading through before next level-1/2 heading"
+      },
+      "sha256After": "5e3a12b9fb2a183ee54f831be58c2cced3d68d483738ce003c807dd3605c0791",
+      "unchanged": true
+    },
+    {
+      "id": "bumper",
+      "root": "active-vault",
+      "file": "07-标准知识/03-标准SOP/传感器与防撞标准SOP.md",
+      "sha256Before": "23eba425422459b97224ca99276e51b94a8719c0e7305e8268e3114d1ff85a8f",
+      "bytes": 3989,
+      "sourceRole": "active-technical-reference",
+      "dates": {
+        "generated": "2026-08-06",
+        "updated": "2026-08-14",
+        "version_scope": "as-of-2026-08-06"
+      },
+      "section": {
+        "heading": "# 传感器与防撞标准 SOP",
+        "startLine": 17,
+        "endLine": 23,
+        "sha256": "8de59751636cf93f1735168318535617063e307ffae90b974854923173d1e54c",
+        "normalization": "UTF-8 LF, heading through before next level-1/2 heading"
+      },
+      "sha256After": "23eba425422459b97224ca99276e51b94a8719c0e7305e8268e3114d1ff85a8f",
+      "unchanged": true
+    },
+    {
+      "id": "rtk",
+      "root": "active-vault",
+      "file": "07-标准知识/03-标准SOP/定位与RTK标准SOP.md",
+      "sha256Before": "87c3c901fa3fd8f5e378f6bc6de91e57a597982a918f54f964e24c47309c06ed",
+      "bytes": 4468,
+      "sourceRole": "active-technical-reference",
+      "dates": {
+        "generated": "2026-08-06",
+        "updated": "2026-08-14",
+        "version_scope": "as-of-2026-08-06"
+      },
+      "section": {
+        "heading": "## 判断流程",
+        "startLine": 21,
+        "endLine": 29,
+        "sha256": "e53fb44f930c0c6fc3ac370c89d7a017c95b47802e3044168508c18615e088fa",
+        "normalization": "UTF-8 LF, heading through before next level-1/2 heading"
+      },
+      "sha256After": "87c3c901fa3fd8f5e378f6bc6de91e57a597982a918f54f964e24c47309c06ed",
+      "unchanged": true
+    },
+    {
+      "id": "vision",
+      "root": "active-vault",
+      "file": "07-标准知识/03-标准SOP/视觉-雷达与X5标准SOP.md",
+      "sha256Before": "4897e755ae887275c3b19b104c8233441a0c794dcc16699e1111b1bc0b8e20c0",
+      "bytes": 4937,
+      "sourceRole": "active-technical-reference",
+      "dates": {
+        "generated": "2026-08-06",
+        "updated": "2026-08-21",
+        "version_scope": "as-of-2026-08-21"
+      },
+      "section": {
+        "heading": "## 排查",
+        "startLine": 23,
+        "endLine": 30,
+        "sha256": "a6bbdf96b245b5270069645ff5a60699a22d7aceb24e7f20608c91d2cc5ac191",
+        "normalization": "UTF-8 LF, heading through before next level-1/2 heading"
+      },
+      "sha256After": "4897e755ae887275c3b19b104c8233441a0c794dcc16699e1111b1bc0b8e20c0",
+      "unchanged": true
+    },
+    {
+      "id": "mechanical",
+      "root": "active-vault",
+      "file": "07-标准知识/07-机型结构/01-机械优先故障树.md",
+      "sha256Before": "f543501d042cc62d2c139ec8e7d07675051f4d157e3f19f173813dc17cd89826",
+      "bytes": 2071,
+      "sourceRole": "active-technical-reference",
+      "dates": {
+        "generated": "2026-08-06",
+        "version_scope": "as-of-2026-08-06"
+      },
+      "section": {
+        "heading": "## 症状到机械检查点",
+        "startLine": 30,
+        "endLine": 42,
+        "sha256": "44e4738a3332bf393ffa78d553287e2ab4b11cef06027e44a1476efa2ad41889",
+        "normalization": "UTF-8 LF, heading through before next level-1/2 heading"
+      },
+      "sha256After": "f543501d042cc62d2c139ec8e7d07675051f4d157e3f19f173813dc17cd89826",
+      "unchanged": true
+    },
+    {
+      "id": "nff",
+      "root": "active-vault",
+      "file": "07-标准知识/03-标准SOP/NFF与二返标准SOP.md",
+      "sha256Before": "ebc704baa76a6002d71a612bc1a0070adbd7cb0a4d2dfc676ec774256658c097",
+      "bytes": 7526,
+      "sourceRole": "active-technical-reference",
+      "dates": {
+        "generated": "2026-08-14",
+        "updated": "2026-09-14",
+        "version_scope": "as-of-2026-09-14"
+      },
+      "section": {
+        "heading": "## 7. 未发现问题 / 维修完成验收门（唯一口径）",
+        "startLine": 68,
+        "endLine": 98,
+        "sha256": "266df8eeaf5148ceebbfdb82f1aa2b5494ef7c99f3bda7f24c04e34ea414adfd",
+        "normalization": "UTF-8 LF, heading through before next level-1/2 heading"
+      },
+      "sha256After": "ebc704baa76a6002d71a612bc1a0070adbd7cb0a4d2dfc676ec774256658c097",
+      "unchanged": true
+    },
+    {
+      "id": "burnin",
+      "root": "active-vault",
+      "file": "90-来源/业务口径/2026-09-11-维修后BurnIn验收口径.md",
+      "sha256Before": "1bb22e3f68fe626be11c69e59d44b925cb7a58a97fdd4fd757cdfdbccbfc39ff",
+      "bytes": 1535,
+      "sourceRole": "active-technical-reference",
+      "dates": {
+        "generated": "2026-09-11",
+        "updated": "2026-09-14",
+        "version_scope": "as-of-2026-09-14"
+      },
+      "section": {
+        "heading": "## 已确认",
+        "startLine": 31,
+        "endLine": 35,
+        "sha256": "6c9f096de12803430eceafddafd2fa12719e7c80c639b5a061f2fe2fcd7fcbfe",
+        "normalization": "UTF-8 LF, heading through before next level-1/2 heading"
+      },
+      "sha256After": "1bb22e3f68fe626be11c69e59d44b925cb7a58a97fdd4fd757cdfdbccbfc39ff",
+      "unchanged": true
+    },
+    {
+      "id": "pilotImport",
+      "root": "active-vault",
+      "file": "07-标准知识/09-IF规则库/08-已审核引导路径.md",
+      "sha256Before": "b2a6a1bfff8c862add87c2846f177888406baaad1bd797f515d01ea058bd01fa",
+      "bytes": 11194,
+      "sourceRole": "circular-pilot-import-not-independent-evidence",
+      "dates": {
+        "version_scope": "as-of-2026-09-09",
+        "updated": "2026-09-09"
+      },
+      "section": {
+        "heading": "## 取向（压过下面所有具体规则）",
+        "startLine": 17,
+        "endLine": 22,
+        "sha256": "fae42f23879b72ceecf17847d87ce13b455441d6787fcc32640e0ee739c925ed",
+        "normalization": "UTF-8 LF, heading through before next level-1/2 heading"
+      },
+      "sha256After": "b2a6a1bfff8c862add87c2846f177888406baaad1bd797f515d01ea058bd01fa",
+      "unchanged": true
+    },
+    {
+      "id": "guided",
+      "root": "active-vault",
+      "file": "07-标准知识/08-诊断图谱/05-引导式维修路径.md",
+      "sha256Before": "55523ba5cf18cc56f4a7317446dfaf338e3923f2f52f5fc88c5d2935de60b978",
+      "bytes": 10854,
+      "sourceRole": "active-technical-reference",
+      "dates": {},
+      "section": {
+        "heading": "# 引导式维修路径（试点）",
+        "startLine": 14,
+        "endLine": 23,
+        "sha256": "3cff8b119d5f62892fe156b30ba9b01bbb84fc33bcf66987547a11ac44f65c19",
+        "normalization": "UTF-8 LF, heading through before next level-1/2 heading"
+      },
+      "sha256After": "55523ba5cf18cc56f4a7317446dfaf338e3923f2f52f5fc88c5d2935de60b978",
+      "unchanged": true
+    },
+    {
+      "id": "tools",
+      "root": "active-vault",
+      "file": "07-标准知识/03-标准SOP/维修工具与刷写标准SOP.md",
+      "sha256Before": "5bf8256de1b8cd23d774a9122d8f7071c67a05d9dbf5c0e278f5e418a83c3358",
+      "bytes": 7849,
+      "sourceRole": "active-technical-reference",
+      "dates": {
+        "generated": "2026-08-06",
+        "updated": "2026-08-21",
+        "version_scope": "as-of-2026-08-21"
+      },
+      "section": {
+        "heading": "# 维修工具与刷写标准 SOP",
+        "startLine": 17,
+        "endLine": 24,
+        "sha256": "8eac62e155019ed6880cb4a70e9c8d84f119c24be2b4ebac23d6677c842a905c",
+        "normalization": "UTF-8 LF, heading through before next level-1/2 heading"
+      },
+      "sha256After": "5bf8256de1b8cd23d774a9122d8f7071c67a05d9dbf5c0e278f5e418a83c3358",
+      "unchanged": true
+    },
+    {
+      "id": "mini",
+      "root": "active-vault",
+      "file": "07-标准知识/03-标准SOP/核心维修手册/机型-LUBA-mini-HM430-HM431核心维修流程.md",
+      "sha256Before": "ca8c8b5bf79b40fd493603f79b555ebdc97fb0a9902d12ed94e8809acf7d7524",
+      "bytes": 4010,
+      "sourceRole": "active-technical-reference",
+      "dates": {
+        "generated": "2026-08-14",
+        "updated": "2026-08-14",
+        "version_scope": "as-provided-2026-08-14",
+        "source_version": "unknown"
+      },
+      "section": {
+        "heading": "## 分系统隔离",
+        "startLine": 36,
+        "endLine": 49,
+        "sha256": "46d4ce111cf35dfdda38d70cf80a77ca075bd746cd873a840fdcae175fd3ab89",
+        "normalization": "UTF-8 LF, heading through before next level-1/2 heading"
+      },
+      "sha256After": "ca8c8b5bf79b40fd493603f79b555ebdc97fb0a9902d12ed94e8809acf7d7524",
+      "unchanged": true
+    },
+    {
+      "id": "scope",
+      "root": "active-vault",
+      "file": "07-标准知识/06-版本治理/02-版本适用与失效规则.md",
+      "sha256Before": "1fce44352bb00271669b24ff36ad5603c5f724dc9e2dfbcc2bc60d7858470fa3",
+      "bytes": 1266,
+      "sourceRole": "active-technical-reference",
+      "dates": {
+        "generated": "2026-08-06",
+        "version_scope": "as-of-2026-08-06"
+      },
+      "section": {
+        "heading": "# 版本适用与失效规则",
+        "startLine": 13,
+        "endLine": 14,
+        "sha256": "e933f1f19bdf768700e66340edcbdd609ef2e6c9cb48c2ce03e3cc512bcaea4d",
+        "normalization": "UTF-8 LF, heading through before next level-1/2 heading"
+      },
+      "sha256After": "1fce44352bb00271669b24ff36ad5603c5f724dc9e2dfbcc2bc60d7858470fa3",
+      "unchanged": true
+    }
+  ],
+  "aggregateTaxonomySources": [
+    {
+      "file": "02-故障与案例/知识条目/Boundary Map - Map Visualization Request-08e484.md",
+      "sha256Before": "d439b89622b08aede6c7cfbcf5fdcf801fe5118eb5ee40ac98522b116897df55",
+      "sha256After": "d439b89622b08aede6c7cfbcf5fdcf801fe5118eb5ee40ac98522b116897df55"
+    },
+    {
+      "file": "02-故障与案例/知识条目/Cable - Ribbon Cable - Connector-1358f5.md",
+      "sha256Before": "8bf97d2ea774614be54906e0b4e8d73f434e168bfb283e0834681f1282b91418",
+      "sha256After": "8bf97d2ea774614be54906e0b4e8d73f434e168bfb283e0834681f1282b91418"
+    },
+    {
+      "file": "02-故障与案例/知识条目/Failed to Read Device Information-71a35f.md",
+      "sha256Before": "d57e10162e10128ec0023a225a7e20aa87ffbc1d1cacfdefb8ef9176821453a5",
+      "sha256After": "d57e10162e10128ec0023a225a7e20aa87ffbc1d1cacfdefb8ef9176821453a5"
+    },
+    {
+      "file": "02-故障与案例/知识条目/Functional Test Issue-458114.md",
+      "sha256Before": "3d543756958793cad2cce4b72901d0fd7adb202e61d3fa36a667c3b884d8a9ed",
+      "sha256After": "3d543756958793cad2cce4b72901d0fd7adb202e61d3fa36a667c3b884d8a9ed"
+    },
+    {
+      "file": "02-故障与案例/知识条目/Hub Motor - Wheel - Drive Board-fcc800.md",
+      "sha256Before": "e315012976cd422d6142a065f14f1e44f6fbc83ec1d74164b28f2eacda2911d7",
+      "sha256After": "e315012976cd422d6142a065f14f1e44f6fbc83ec1d74164b28f2eacda2911d7"
+    },
+    {
+      "file": "02-故障与案例/知识条目/Issue Escalation-47cc8c.md",
+      "sha256Before": "6b6f0c4a45a69753c743063ef733e304a7745a0a36df41b7e878e993badb433e",
+      "sha256After": "6b6f0c4a45a69753c743063ef733e304a7745a0a36df41b7e878e993badb433e"
+    },
+    {
+      "file": "02-故障与案例/知识条目/Kit Version Update Issue-b664e9.md",
+      "sha256Before": "64331c7a2ce3fa8e6484afe12f828458fd3cdaf50bb24c3f29de260e2689845a",
+      "sha256After": "64331c7a2ce3fa8e6484afe12f828458fd3cdaf50bb24c3f29de260e2689845a"
+    },
+    {
+      "file": "02-故障与案例/知识条目/Mainboard - Control Board-1d25de.md",
+      "sha256Before": "4f2c983f27a15cdbdac8e965a267417c69b0d60c434a7d092240065db6e0fc99",
+      "sha256After": "4f2c983f27a15cdbdac8e965a267417c69b0d60c434a7d092240065db6e0fc99"
+    },
+    {
+      "file": "02-故障与案例/知识条目/MammoSuite问题 - Suite版本兼容问题 - Suite版本不兼容；版本不匹配；Version Compatibility-4361d4.md",
+      "sha256Before": "6bc43a6fe225cab4de515a5d02df7a9e2826cebfe404d506a9beececd3e08acd",
+      "sha256After": "6bc43a6fe225cab4de515a5d02df7a9e2826cebfe404d506a9beececd3e08acd"
+    },
+    {
+      "file": "02-故障与案例/知识条目/MammoSuite问题 - Suite界面Bug - Suite UI Bug；界面异常；Suite显示错误-1e5ed8.md",
+      "sha256Before": "074afd05a3de01aeb2658b91152f1478c4ee665b616f32ef45f26708c7fd2876",
+      "sha256After": "074afd05a3de01aeb2658b91152f1478c4ee665b616f32ef45f26708c7fd2876"
+    },
+    {
+      "file": "02-故障与案例/知识条目/MammoSuite问题 - Suite登录问题 - Suite登录失败；登不上Suite；Suite Login-b37e0a.md",
+      "sha256Before": "ffee0efe073daa47cc0eade0bfff1818e48462e18c151d0e6740fcc7d098a6ba",
+      "sha256After": "ffee0efe073daa47cc0eade0bfff1818e48462e18c151d0e6740fcc7d098a6ba"
+    },
+    {
+      "file": "02-故障与案例/知识条目/MammoSuite问题 - Suite设备连接问题 - Suite连不上设备；Suite Device Connection-4cbfbe.md",
+      "sha256Before": "0f18617301aa3336f7be429394c1b0639d6133ec4a6aa97bd8c97fd8baed6b83",
+      "sha256After": "0f18617301aa3336f7be429394c1b0639d6133ec4a6aa97bd8c97fd8baed6b83"
+    },
+    {
+      "file": "02-故障与案例/知识条目/MammoSuite问题 - 功能测试问题 - 功能测试失败；测试异常；Functional Test-832c19.md",
+      "sha256Before": "73bcb5b47b7170e62ecc4a2090972f95c838124d566262f4877c1d102c136f6c",
+      "sha256After": "73bcb5b47b7170e62ecc4a2090972f95c838124d566262f4877c1d102c136f6c"
+    },
+    {
+      "file": "02-故障与案例/知识条目/MammoSuite问题 - 电池测试SOH - 电池测试；SOH；电池健康度；Battery Test-2dcf43.md",
+      "sha256Before": "262da8b59bfb490f7a941f8a15d18b7564144a8524b232e0c691fcab7e00f68d",
+      "sha256After": "262da8b59bfb490f7a941f8a15d18b7564144a8524b232e0c691fcab7e00f68d"
+    },
+    {
+      "file": "02-故障与案例/知识条目/MammoSuite问题 - 自动地图运行问题 - 自动跑图失败；Auto Map Run-e2ab08.md",
+      "sha256Before": "ba5ef9f5395aca7ecb39bc458013c643c7249bd6e6da0fc268defdba8a14ece8",
+      "sha256After": "ba5ef9f5395aca7ecb39bc458013c643c7249bd6e6da0fc268defdba8a14ece8"
+    },
+    {
+      "file": "02-故障与案例/知识条目/MammoSuite问题 - 边界地图可视化请求 - 边界地图；地图可视化；Boundary Map-4b3cfa.md",
+      "sha256Before": "12d725729a76325c0a73b9b4157f638e8fd028f0b334a9363c3a511d343639f1",
+      "sha256After": "12d725729a76325c0a73b9b4157f638e8fd028f0b334a9363c3a511d343639f1"
+    },
+    {
+      "file": "02-故障与案例/知识条目/Mammotion APP问题 - 固件升级失败 - 升级失败；固件更新失败；OTA失败-15b059.md",
+      "sha256Before": "a95906991c158565af59159c3af234fbb6d4e56f5f513b3339df634a5f728620",
+      "sha256After": "a95906991c158565af59159c3af234fbb6d4e56f5f513b3339df634a5f728620"
+    },
+    {
+      "file": "02-故障与案例/知识条目/Mammotion Kit问题 - Kit版本更新问题 - Kit更新失败；Kit Version Update-575786.md",
+      "sha256Before": "9da9aa9ecd9c774f2840e7d8e5e4a7cd2dad56524fc25acd4990932b91968480",
+      "sha256After": "9da9aa9ecd9c774f2840e7d8e5e4a7cd2dad56524fc25acd4990932b91968480"
+    },
+    {
+      "file": "02-故障与案例/知识条目/Mammotion Kit问题 - Kit界面Bug - Kit UI Bug；界面异常；Kit显示错误;Kit按键分辨率低看不见-378854.md",
+      "sha256Before": "9c1edd5f3185666c12b6e3acc49e2a5640671e5a18f1daec2015205eac979ace",
+      "sha256After": "9c1edd5f3185666c12b6e3acc49e2a5640671e5a18f1daec2015205eac979ace"
+    },
+    {
+      "file": "02-故障与案例/知识条目/Mammotion Kit问题 - Kit登录权限问题 - Kit登录失败；Kit权限；Kit Login；Permission-8130d7.md",
+      "sha256Before": "8998d77c3e108a703cd5b733a3bf791d4dc885dabfb44018ea1cf07411481410",
+      "sha256After": "8998d77c3e108a703cd5b733a3bf791d4dc885dabfb44018ea1cf07411481410"
+    },
+    {
+      "file": "02-故障与案例/知识条目/Mammotion Kit问题 - Kit设备连接问题 - Kit连不上设备；Kit Device Connection-935fe6.md",
+      "sha256Before": "fca1da49dfaf3faccf39f093bb79ef9f9203e8007f3149c88f7d1a766cfb7d0c",
+      "sha256After": "fca1da49dfaf3faccf39f093bb79ef9f9203e8007f3149c88f7d1a766cfb7d0c"
+    },
+    {
+      "file": "02-故障与案例/知识条目/Mammotion Kit问题 - RTK固件更新问题 - RTK固件更新；RTK Firmware Update-13c6e9.md",
+      "sha256Before": "d1e5038d7720552af9bc38f5973518323bf2a02f94bfb9dd02ba5c07797c4f6a",
+      "sha256After": "d1e5038d7720552af9bc38f5973518323bf2a02f94bfb9dd02ba5c07797c4f6a"
+    },
+    {
+      "file": "02-故障与案例/知识条目/Mammotion Kit问题 - 主板刷写问题 - 主板刷机；刷写失败；Mainboard Flashing-807e8e.md",
+      "sha256Before": "b0296a36f9e92111294d18177645e46c57293382e45c1ddd2d6ac880a846bfec",
+      "sha256After": "b0296a36f9e92111294d18177645e46c57293382e45c1ddd2d6ac880a846bfec"
+    },
+    {
+      "file": "02-故障与案例/知识条目/Mammotion Kit问题 - 机器固件更新问题 - 机器固件更新；Robot Firmware Update-3d47c6.md",
+      "sha256Before": "9e607bcaba7f36b763b074233e97317955abba950ee8b41c3509198876d716ad",
+      "sha256After": "9e607bcaba7f36b763b074233e97317955abba950ee8b41c3509198876d716ad"
+    },
+    {
+      "file": "02-故障与案例/知识条目/Mammotion Kit问题 - 电机标志位刷写 - 电机标志位；Motor Flag Flashing-b40c6e.md",
+      "sha256Before": "5eeda776417c6fc7ca10617d208c30243cf1d29aeb6ff79d8d0eed3eedfcc8a7",
+      "sha256After": "5eeda776417c6fc7ca10617d208c30243cf1d29aeb6ff79d8d0eed3eedfcc8a7"
+    },
+    {
+      "file": "02-故障与案例/知识条目/Mammotion Kit问题 - 设备名刷写问题 - 设备名刷写；Device Name Flashing-5ad12f.md",
+      "sha256Before": "869a7317d5c922edb28d10d730ce56365832229bb3642c5bb79b39db2f411722",
+      "sha256After": "869a7317d5c922edb28d10d730ce56365832229bb3642c5bb79b39db2f411722"
+    },
+    {
+      "file": "02-故障与案例/知识条目/Part Number Inquiry-2ee66f.md",
+      "sha256Before": "1057d23f55e2b96c35be9ab1924325bfb692a6d131d0cd6cd769e15b9b78ebc4",
+      "sha256After": "1057d23f55e2b96c35be9ab1924325bfb692a6d131d0cd6cd769e15b9b78ebc4"
+    },
+    {
+      "file": "02-故障与案例/知识条目/R&D Escalation-9302a4.md",
+      "sha256Before": "390753232213c4cbbeb798f4e7a9d345486edba3b58f905915310cdbe1b702c3",
+      "sha256After": "390753232213c4cbbeb798f4e7a9d345486edba3b58f905915310cdbe1b702c3"
+    },
+    {
+      "file": "02-故障与案例/知识条目/Replacement - Refund Process-f099c6.md",
+      "sha256Before": "1bde79bfd8fde912e183d8f735538b2777619bcfdcf3a84beac04a744f7061e3",
+      "sha256After": "1bde79bfd8fde912e183d8f735538b2777619bcfdcf3a84beac04a744f7061e3"
+    },
+    {
+      "file": "02-故障与案例/知识条目/Robot Firmware Update Issue-2d141c.md",
+      "sha256Before": "c1b4b352ca70d468ea645685259dacb22cd83698aa26da27c30ccf3133064efd",
+      "sha256After": "c1b4b352ca70d468ea645685259dacb22cd83698aa26da27c30ccf3133064efd"
+    },
+    {
+      "file": "02-故障与案例/知识条目/RTK问题 - RTK通讯失败 - RTK连不上；LoRa通讯失败；RTK故障-4f971c.md",
+      "sha256Before": "c5a48b0b35e913158d08d2ef7fdd2e979e55bcc14b52c4cdd74d532ec83458ff",
+      "sha256After": "c5a48b0b35e913158d08d2ef7fdd2e979e55bcc14b52c4cdd74d532ec83458ff"
+    },
+    {
+      "file": "02-故障与案例/知识条目/Service Handling Due to Spare Parts Shortage-81db6c.md",
+      "sha256Before": "e5fc4f34b4f2ab4aa98be13c08adda0d7a595a2134dfc9d19e7921f3dce42d0b",
+      "sha256After": "e5fc4f34b4f2ab4aa98be13c08adda0d7a595a2134dfc9d19e7921f3dce42d0b"
+    },
+    {
+      "file": "02-故障与案例/知识条目/Vision - Camera - LiDAR - iNavi - Positioning Module - X3 Board - X5 Board-6aa995.md",
+      "sha256Before": "b34060918c815d4a5f29a61fdd267ce7b263429645440efd0c92a3435fafa07b",
+      "sha256After": "b34060918c815d4a5f29a61fdd267ce7b263429645440efd0c92a3435fafa07b"
+    },
+    {
+      "file": "02-故障与案例/知识条目/传感器问题 - 前防撞故障 - 前防撞杆插头线断裂；前防撞破损；持续触发；未安装提示；1207-c5587a.md",
+      "sha256Before": "248c0022905c095b04b9549d228c2f831cca5d55bd298baafec8d045b0332e38",
+      "sha256After": "248c0022905c095b04b9549d228c2f831cca5d55bd298baafec8d045b0332e38"
+    },
+    {
+      "file": "02-故障与案例/知识条目/传感器问题 - 安全键故障 - 急停键脱落；安全键问题；Safety Key-6ba4bc.md",
+      "sha256Before": "29a1a5acd220d7fa969f91609787754e2895452a2ce922025d40013085412bd0",
+      "sha256After": "29a1a5acd220d7fa969f91609787754e2895452a2ce922025d40013085412bd0"
+    },
+    {
+      "file": "02-故障与案例/知识条目/保修报废定损问题 - 保修范围确认 - 保修范围；是否保修；Warranty Coverage-2e91cd.md",
+      "sha256Before": "83773614002af0b74d6dce5016c8b355f45fc7714f073937d2f80f18d40817df",
+      "sha256After": "83773614002af0b74d6dce5016c8b355f45fc7714f073937d2f80f18d40817df"
+    },
+    {
+      "file": "02-故障与案例/知识条目/保修报废定损问题 - 报废确认 - 报废；Scrap Confirmation-c4d979.md",
+      "sha256Before": "33b243d20e885a73b185fd6dad02768f02be3d17d57be3bac430bf8e8c3dfb53",
+      "sha256After": "33b243d20e885a73b185fd6dad02768f02be3d17d57be3bac430bf8e8c3dfb53"
+    },
+    {
+      "file": "02-故障与案例/知识条目/保修报废定损问题 - 损坏评估定损 - 定损；损坏评估；Damage Assessment-fa9884.md",
+      "sha256Before": "1485ad4a64c3012485846b6c9900be5671313b2a753a7cc4348c566ef1cdd174",
+      "sha256After": "1485ad4a64c3012485846b6c9900be5671313b2a753a7cc4348c566ef1cdd174"
+    },
+    {
+      "file": "02-故障与案例/知识条目/保修报废定损问题 - 换货退款流程 - 换货；退款；Replacement；Refund-c178a0.md",
+      "sha256Before": "74bca99a277144e00c9a847df91bc44441964512ae3de3e2a49d7fdccdf6645d",
+      "sha256After": "74bca99a277144e00c9a847df91bc44441964512ae3de3e2a49d7fdccdf6645d"
+    },
+    {
+      "file": "02-故障与案例/知识条目/充电问题 - 充不满电 - 充不满；充到一半；电量上不去；电量计异常；电池固件问题-bfdc3a.md",
+      "sha256Before": "b1ad93f6bbcacbe478e654eeeed89237bb0fe7ca8ae4ac3262827e3edc8bbdeb",
+      "sha256After": "b1ad93f6bbcacbe478e654eeeed89237bb0fe7ca8ae4ac3262827e3edc8bbdeb"
+    },
+    {
+      "file": "02-故障与案例/知识条目/充电问题 - 充电中断 - 充着停了；充电中关机；反复播报开始充电；来回进桩；2833-66cdeb.md",
+      "sha256Before": "f7b386cf827818cd6d8b08081cb52eae9a5ac7d6a934cb7151750bdfa55e735d",
+      "sha256After": "f7b386cf827818cd6d8b08081cb52eae9a5ac7d6a934cb7151750bdfa55e735d"
+    },
+    {
+      "file": "02-故障与案例/知识条目/充电问题 - 充电桩故障 - 桩不亮灯；指示灯不亮；桩没反应；桩掉电；桩安装不水平-95782f.md",
+      "sha256Before": "965bc7cd093d560fd60de8c726017182903c15bfefc032ba462a3998d1199830",
+      "sha256After": "965bc7cd093d560fd60de8c726017182903c15bfefc032ba462a3998d1199830"
+    },
+    {
+      "file": "02-故障与案例/知识条目/充电问题 - 探针-极片故障 - 探针接触不良；极片腐蚀；极片焊接不良；接触不良-d10d54.md",
+      "sha256Before": "28ffb54248b7bc02eaf6662fd6e6512508d3fa605eb518f08e82b743ce5937e7",
+      "sha256After": "28ffb54248b7bc02eaf6662fd6e6512508d3fa605eb518f08e82b743ce5937e7"
+    },
+    {
+      "file": "02-故障与案例/知识条目/充电问题 - 无法充电 - 不能充电；充不进；充不进去；放桩没反应；充电没反应；电充不进；1105；1200-06cce8.md",
+      "sha256Before": "4ab0d4b7cab4551227e2a6ebcda373e4bf3cc78e043a2c918141c600381e0e8e",
+      "sha256After": "4ab0d4b7cab4551227e2a6ebcda373e4bf3cc78e043a2c918141c600381e0e8e"
+    },
+    {
+      "file": "02-故障与案例/知识条目/充电问题 - 适配器故障 - 适配器坏；充电器坏；起包漏液；炸裂；接口烧坏；2729-c600d9.md",
+      "sha256Before": "48a3e3392573a91064d5aeffa092c385bcff7366b5ba843e18dfcf70371de95b",
+      "sha256After": "48a3e3392573a91064d5aeffa092c385bcff7366b5ba843e18dfcf70371de95b"
+    },
+    {
+      "file": "02-故障与案例/知识条目/充电问题 - 驱动板-主板充电故障 - 驱动板异常；主板故障；360；392-9d76ab.md",
+      "sha256Before": "0b18baa8b20ff7bc714bbe71d255afed3d0c1835d3a387a0240169f8e59b8b22",
+      "sha256After": "0b18baa8b20ff7bc714bbe71d255afed3d0c1835d3a387a0240169f8e59b8b22"
+    },
+    {
+      "file": "02-故障与案例/知识条目/刀盘问题 - 刀盘功能异常 - 刀盘不转；刀盘熔断-3d9746.md",
+      "sha256Before": "4fda0d127fb2ff834b638db49a063aa582351cb55130dc35e7857c831317351d",
+      "sha256After": "4fda0d127fb2ff834b638db49a063aa582351cb55130dc35e7857c831317351d"
+    },
+    {
+      "file": "02-故障与案例/知识条目/刀盘问题 - 刀盘电机堵转卡阻 - 刀盘卡住；转不动；被卡；314；324；1202；1216-98228b.md",
+      "sha256Before": "e978c42d86870be5a53e29be1fb4ed0097784bdf5fe8b1275c1ffd625189dc0c",
+      "sha256After": "e978c42d86870be5a53e29be1fb4ed0097784bdf5fe8b1275c1ffd625189dc0c"
+    },
+    {
+      "file": "02-故障与案例/知识条目/刀盘问题 - 刀盘电机温度异常 - 刀盘过热；316；317；326；327；436；468；660-97059a.md",
+      "sha256Before": "43a9d1075ac6259cccc9faebb32a920981cdb58cb3542b725261a08825bf0913",
+      "sha256After": "43a9d1075ac6259cccc9faebb32a920981cdb58cb3542b725261a08825bf0913"
+    },
+    {
+      "file": "02-故障与案例/知识条目/刀盘问题 - 刀盘电机通讯异常 - 刀盘通讯故障；422；454-e2662e.md",
+      "sha256Before": "5b030ff07ade3640f3429c172bde7c18f0bf54cfafa0e30e6667cfe04877cef5",
+      "sha256After": "5b030ff07ade3640f3429c172bde7c18f0bf54cfafa0e30e6667cfe04877cef5"
+    },
+    {
+      "file": "02-故障与案例/知识条目/刀盘问题 - 刀盘结构件破损 - 挡板开裂；护刀支架破损；保护罩破损；旋钮掉落-72ef02.md",
+      "sha256Before": "e27317fdc92a74c4c932c0f56c031dfef61533d5c9f7e9487ebee9d59748c361",
+      "sha256After": "e27317fdc92a74c4c932c0f56c031dfef61533d5c9f7e9487ebee9d59748c361"
+    },
+    {
+      "file": "02-故障与案例/知识条目/升降问题 - 升降电机传感器异常 - 磁编出错；角位置传感器断连；632；2748-293758.md",
+      "sha256Before": "016752f08c718688b441c952c63aed6d4200db280558d9996fc8c803f8da6aac",
+      "sha256After": "016752f08c718688b441c952c63aed6d4200db280558d9996fc8c803f8da6aac"
+    },
+    {
+      "file": "02-故障与案例/知识条目/升降问题 - 升降电机控制异常 - 控制异常；升降异常；613；2711；2746-5861be.md",
+      "sha256Before": "14ce5de774915d14e23aa40311613264855a7f1c170958110d334384674ef09e",
+      "sha256After": "14ce5de774915d14e23aa40311613264855a7f1c170958110d334384674ef09e"
+    },
+    {
+      "file": "02-故障与案例/知识条目/升降问题 - 升降电机过流 - 升降过流；618；619；2743；2744-35dd7a.md",
+      "sha256Before": "a90562b0b6b50b0ed473c4c0fa35af951a7ab9ba9dcb16c44a99e1dd108a402f",
+      "sha256After": "a90562b0b6b50b0ed473c4c0fa35af951a7ab9ba9dcb16c44a99e1dd108a402f"
+    },
+    {
+      "file": "02-故障与案例/知识条目/受困问题 - 设备受困 - 卡住了；出不来；1201-7f2464.md",
+      "sha256Before": "51b14da7d1236aa1c63dddb87555c0df8e8e2032ee73b5aec260567bafdb65bd",
+      "sha256After": "51b14da7d1236aa1c63dddb87555c0df8e8e2032ee73b5aec260567bafdb65bd"
+    },
+    {
+      "file": "02-故障与案例/知识条目/受困问题 - 设备锁定 - 设备被锁；1008-db4007.md",
+      "sha256Before": "9530477c487514402467d01461fa8bb94fef97fd4b738bf5eb0562e214b95b7e",
+      "sha256After": "9530477c487514402467d01461fa8bb94fef97fd4b738bf5eb0562e214b95b7e"
+    },
+    {
+      "file": "02-故障与案例/知识条目/合规与参数问题 - 电池规格参数 - 安全认证；安全技术说明书；-793999.md",
+      "sha256Before": "e3c77c30dbf731c3e3a1b907ffca314af51c88239ddf49404ee65831e6264a7e",
+      "sha256After": "e3c77c30dbf731c3e3a1b907ffca314af51c88239ddf49404ee65831e6264a7e"
+    },
+    {
+      "file": "02-故障与案例/知识条目/回充问题 - 回充失败 - 回充不成功；障碍物阻塞；环境遮挡；1200；1203-1f6d35.md",
+      "sha256Before": "4ddfee079b592273d7a5c91e79c3582b461d2a8c9de5fa399d1c0bdf7e843b38",
+      "sha256After": "4ddfee079b592273d7a5c91e79c3582b461d2a8c9de5fa399d1c0bdf7e843b38"
+    },
+    {
+      "file": "02-故障与案例/知识条目/回充问题 - 无法回桩 - 回不了桩；找不到桩；不回充；回桩失败-4bbb49.md",
+      "sha256Before": "da1a3a51ccfacafdf742d6925e014f2e41593dece26a3a4984a933b861ac39ed",
+      "sha256After": "da1a3a51ccfacafdf742d6925e014f2e41593dece26a3a4984a933b861ac39ed"
+    },
+    {
+      "file": "02-故障与案例/知识条目/回充问题 - 红外异常 - 桩红外异常；车红外异常-e0f1bc.md",
+      "sha256Before": "77e3847ed4e36b3431e467e21846391a9b1f914c1d239213ffa3871e3aefc1c0",
+      "sha256After": "77e3847ed4e36b3431e467e21846391a9b1f914c1d239213ffa3871e3aefc1c0"
+    },
+    {
+      "file": "02-故障与案例/知识条目/培训文档升级问题 - 工具使用指导 - 工具使用；Tool Usage-bfbe75.md",
+      "sha256Before": "7628a9cda285cc4e183937140c4fc6e7cfb7e5f7b0b9b5ab730081a44c950d0f",
+      "sha256After": "7628a9cda285cc4e183937140c4fc6e7cfb7e5f7b0b9b5ab730081a44c950d0f"
+    },
+    {
+      "file": "02-故障与案例/知识条目/培训文档升级问题 - 研发升级 - 研发升级；R&D Escalation-770e04.md",
+      "sha256Before": "fd0e25d487f1b50f9f7998d3859ef2ce41e7a4f470252c60939a01b90c24a741",
+      "sha256After": "fd0e25d487f1b50f9f7998d3859ef2ce41e7a4f470252c60939a01b90c24a741"
+    },
+    {
+      "file": "02-故障与案例/知识条目/培训文档升级问题 - 结构反馈 - 结构反馈；Structural Feedback-42af67.md",
+      "sha256Before": "f832fdc9759af1cf162fd81d954075775f87b90f5bd2fff228d31098c69fe580",
+      "sha256After": "f832fdc9759af1cf162fd81d954075775f87b90f5bd2fff228d31098c69fe580"
+    },
+    {
+      "file": "02-故障与案例/知识条目/培训文档升级问题 - 维修培训 - 维修培训；Repair Training-9bf730.md",
+      "sha256Before": "e2cacb1328e4f0b2d6e1cc241c89db1e1832e5a26456264b31bd260ea07cdada",
+      "sha256After": "e2cacb1328e4f0b2d6e1cc241c89db1e1832e5a26456264b31bd260ea07cdada"
+    },
+    {
+      "file": "02-故障与案例/知识条目/备件与料号问题 - SBOM查询 - SBOM；物料清单；SBOM Inquiry-ba473a.md",
+      "sha256Before": "d04d86482c8ae44215e4250b8b84fe3f7907e0d4d9cb3171da70ea8a812c7d08",
+      "sha256After": "d04d86482c8ae44215e4250b8b84fe3f7907e0d4d9cb3171da70ea8a812c7d08"
+    },
+    {
+      "file": "02-故障与案例/知识条目/备件与料号问题 - 兼容性确认 - 兼容性；能不能通用；Compatibility-90de3e.md",
+      "sha256Before": "f3ff1a9dc3dba25d73a7f4df28da5367831eb5dc916cc151870cd66654e5775a",
+      "sha256After": "f3ff1a9dc3dba25d73a7f4df28da5367831eb5dc916cc151870cd66654e5775a"
+    },
+    {
+      "file": "02-故障与案例/知识条目/备件与料号问题 - 常用备件清单 - 常用备件；备件清单；Common Spare Parts-43f106.md",
+      "sha256Before": "a991830c8c7c4b3f809cd22ee8186b6a05b711da5316ad5440cc00f1eb842c4a",
+      "sha256After": "a991830c8c7c4b3f809cd22ee8186b6a05b711da5316ad5440cc00f1eb842c4a"
+    },
+    {
+      "file": "02-故障与案例/知识条目/备件与料号问题 - 料号查询 - 料号；Part Number；查料号-bb034a.md",
+      "sha256Before": "caf4f1669d839510afc9397ac5511042c0991f5fb8d6b49393a304a94efac5fc",
+      "sha256After": "caf4f1669d839510afc9397ac5511042c0991f5fb8d6b49393a304a94efac5fc"
+    },
+    {
+      "file": "02-故障与案例/知识条目/备件与料号问题 - 料号缺失 - 缺料号；Missing Part Number-15219f.md",
+      "sha256Before": "5e647143364b4a37016597065dcc246be60aacf31042a5f98dd9c893fd27d2a3",
+      "sha256After": "5e647143364b4a37016597065dcc246be60aacf31042a5f98dd9c893fd27d2a3"
+    },
+    {
+      "file": "02-故障与案例/知识条目/备件与料号问题 - 替代件新旧件差异 - 替代件；新旧件；Alternative Parts-777691.md",
+      "sha256Before": "aab68ae550ad675f40b38578988c54620edd7d2b9d99ff5a51c946b95adabbe8",
+      "sha256After": "aab68ae550ad675f40b38578988c54620edd7d2b9d99ff5a51c946b95adabbe8"
+    },
+    {
+      "file": "02-故障与案例/知识条目/备件与料号问题 - 测试板适配工具 - 测试板；适配工具；Test Board；Adapter Tool-94a593.md",
+      "sha256Before": "b734fd54a2cf814488c80ffc9b8a63bef3afff06caaddb3ffd30a911af12529c",
+      "sha256After": "b734fd54a2cf814488c80ffc9b8a63bef3afff06caaddb3ffd30a911af12529c"
+    },
+    {
+      "file": "02-故障与案例/知识条目/备件与料号问题 - 资料索取 - 索取资料爆炸图，外箱标签对照表，料号清单，产品规格-97bd15.md",
+      "sha256Before": "ca9d910ccf569d598f9adf7617d0a2442e4e286a836a5d377eafeb0a6271f3b0",
+      "sha256After": "ca9d910ccf569d598f9adf7617d0a2442e4e286a836a5d377eafeb0a6271f3b0"
+    },
+    {
+      "file": "02-故障与案例/知识条目/定位问题 - iNavi定位问题 - iNavi故障；信号基站问题；后台服务问题-0dfe10.md",
+      "sha256Before": "e8b5dafb0765a76c9cbb95b9e9869c52645615bceb4ed50818ff13645c3d0e80",
+      "sha256After": "e8b5dafb0765a76c9cbb95b9e9869c52645615bceb4ed50818ff13645c3d0e80"
+    },
+    {
+      "file": "02-故障与案例/知识条目/定位问题 - 基站信号问题 - 基站断连；基站位置不佳；1300；1551-366c7b.md",
+      "sha256Before": "5d9bd7e60def5e7ccb6c372e3177c04ecc7b12fa8afd804565f88ad3be282bc4",
+      "sha256After": "5d9bd7e60def5e7ccb6c372e3177c04ecc7b12fa8afd804565f88ad3be282bc4"
+    },
+    {
+      "file": "02-故障与案例/知识条目/定位问题 - 定位失败 - 定位不了；无法定位；1000019；1000020；1100-ae75fc.md",
+      "sha256Before": "1603f39ab306c8d907b4e47979b7060ad8f8029a97f615ec52b0949608562ca0",
+      "sha256After": "1603f39ab306c8d907b4e47979b7060ad8f8029a97f615ec52b0949608562ca0"
+    },
+    {
+      "file": "02-故障与案例/知识条目/建图问题 - 地图存储异常 - 地图元素存储异常；设置无法保存；1199；1139-0a0278.md",
+      "sha256Before": "d0502460a308bc1f89682dae932b64f13122230d96b1a4861b33ba92e0fd9b8e",
+      "sha256After": "d0502460a308bc1f89682dae932b64f13122230d96b1a4861b33ba92e0fd9b8e"
+    },
+    {
+      "file": "02-故障与案例/知识条目/建图问题 - 建图失败 - 建图不成功；1188；1223-9a8568.md",
+      "sha256Before": "aff0666da1daaec24c555d095a1b2de416d82bc72ced2840c7e7ce52cea1c059",
+      "sha256After": "aff0666da1daaec24c555d095a1b2de416d82bc72ced2840c7e7ce52cea1c059"
+    },
+    {
+      "file": "02-故障与案例/知识条目/开关机问题 - SOC重启 - 系统重启；死机-abb3c2.md",
+      "sha256Before": "9d5e36c37081dc4d327b0ace2aaeb563859876de3a862af77b74859180e158f7",
+      "sha256After": "9d5e36c37081dc4d327b0ace2aaeb563859876de3a862af77b74859180e158f7"
+    },
+    {
+      "file": "02-故障与案例/知识条目/开关机问题 - 反复开关机 - 一直重启；自动关机-f9b376.md",
+      "sha256Before": "b1e6699d31e08fe7a49ba670f96bfed8b91f6af522dca32656fbc664239dd9d4",
+      "sha256After": "b1e6699d31e08fe7a49ba670f96bfed8b91f6af522dca32656fbc664239dd9d4"
+    },
+    {
+      "file": "02-故障与案例/知识条目/开关机问题 - 无法开机 - 开不了机；按了没反应-4e76fa.md",
+      "sha256Before": "63d8cb4dcf935fd854755c186d9bb6e84c2f46657c6192442adceaa6641e5b0d",
+      "sha256After": "63d8cb4dcf935fd854755c186d9bb6e84c2f46657c6192442adceaa6641e5b0d"
+    },
+    {
+      "file": "02-故障与案例/知识条目/电池问题 - 电池健康度SOH - SOH；电池测试；电池衰减-0649a0.md",
+      "sha256Before": "d7c10f0f4bdcf3e9f9de3555fbb4d6af7466153884a41deec96ca8cef92249a5",
+      "sha256After": "d7c10f0f4bdcf3e9f9de3555fbb4d6af7466153884a41deec96ca8cef92249a5"
+    },
+    {
+      "file": "02-故障与案例/知识条目/电池问题 - 电池过放 - 电池亏电；过度放电-7466a8.md",
+      "sha256Before": "0958f0b60288539316858fc02c34848aa4d624934f0d4ee8dc1008526ce3c5ec",
+      "sha256After": "0958f0b60288539316858fc02c34848aa4d624934f0d4ee8dc1008526ce3c5ec"
+    },
+    {
+      "file": "02-故障与案例/知识条目/电池问题 - 电量显示异常 - 电量显示不对；电量计异常-b4f999.md",
+      "sha256Before": "5be28d64c616ddbd59c6db89df80bc319feb94ff3a73f38bbf7bd4954237b278",
+      "sha256After": "5be28d64c616ddbd59c6db89df80bc319feb94ff3a73f38bbf7bd4954237b278"
+    },
+    {
+      "file": "02-故障与案例/知识条目/电池问题 - 续航差 - 续航短；不耐用；用一会没电-8f2eba.md",
+      "sha256Before": "28bf1839e6e81ebca9c3a2bb38da8d67b61ac956f77f008a9143e767e0312cf2",
+      "sha256After": "28bf1839e6e81ebca9c3a2bb38da8d67b61ac956f77f008a9143e767e0312cf2"
+    },
+    {
+      "file": "02-故障与案例/知识条目/视觉-雷达问题 - FPV图像异常 - FPV无图像；图像不正常；画面异常-2c578a.md",
+      "sha256Before": "becb80e0253a740256eca8a55703d73f0daca1843de16fc44e3b8c70619aee76",
+      "sha256After": "becb80e0253a740256eca8a55703d73f0daca1843de16fc44e3b8c70619aee76"
+    },
+    {
+      "file": "02-故障与案例/知识条目/视觉-雷达问题 - 视觉模组故障 - 视觉模组不良；遮光盖脱落；油墨起皮；1418；1420；1425-138ed0.md",
+      "sha256Before": "fd0f2a823012ef0142d0c8c4b6ed29b9fdd09fe75487081c7c258ca19ae3a188",
+      "sha256After": "fd0f2a823012ef0142d0c8c4b6ed29b9fdd09fe75487081c7c258ca19ae3a188"
+    },
+    {
+      "file": "02-故障与案例/知识条目/视觉-雷达问题 - 雷达传感器异常 - 雷达传感器故障；2401-49931e.md",
+      "sha256Before": "0a5300ceda33e6fc853389d8033161d494aa78ef0c6de8bef7c2cf0289949e84",
+      "sha256After": "0a5300ceda33e6fc853389d8033161d494aa78ef0c6de8bef7c2cf0289949e84"
+    },
+    {
+      "file": "02-故障与案例/知识条目/视觉-雷达问题 - 雷达模组故障 - 雷达不良；雷达破损；雷达未准备好-48781e.md",
+      "sha256Before": "f5fa05919f4c5682a795298dea15fbcaeb2c3af866544078b2e264af0265af15",
+      "sha256After": "f5fa05919f4c5682a795298dea15fbcaeb2c3af866544078b2e264af0265af15"
+    },
+    {
+      "file": "02-故障与案例/知识条目/账户与权限问题 - ID错误 - 账号错误；ID不对；ID Error-04738c.md",
+      "sha256Before": "ad7ac4a6529b1c0d2157fa72807f8f1ce729927f5bbdd82ae008c7922cf25f7e",
+      "sha256After": "ad7ac4a6529b1c0d2157fa72807f8f1ce729927f5bbdd82ae008c7922cf25f7e"
+    },
+    {
+      "file": "02-故障与案例/知识条目/账户与权限问题 - 密码重置 - 忘记密码；改密码；Password Reset-2076b2.md",
+      "sha256Before": "397f3e490b0f13932d72823332d2ebe784c08503d92045fae0714a3ae8d25431",
+      "sha256After": "397f3e490b0f13932d72823332d2ebe784c08503d92045fae0714a3ae8d25431"
+    },
+    {
+      "file": "02-故障与案例/知识条目/账户与权限问题 - 权限不足 - 没权限；权限不够；无法操作；Insufficient Permission-8abfbf.md",
+      "sha256Before": "a3dfe9d5c7724b6d12471d2a7b452d2d2cfa24f1d51f09921dd0654abdb5a809",
+      "sha256After": "a3dfe9d5c7724b6d12471d2a7b452d2d2cfa24f1d51f09921dd0654abdb5a809"
+    },
+    {
+      "file": "02-故障与案例/知识条目/账户与权限问题 - 用户不存在 - 查无此人；账号不存在；User Not Exist-9ecd4d.md",
+      "sha256Before": "0be79e6e2c9dc0e0c8815a476df9b1c6f8ecfa961c44887c755d5afd5fcf94d5",
+      "sha256After": "0be79e6e2c9dc0e0c8815a476df9b1c6f8ecfa961c44887c755d5afd5fcf94d5"
+    },
+    {
+      "file": "02-故障与案例/知识条目/账户与权限问题 - 登录失败 - 登不上；登录不了；进不去；Login Failure-35a10b.md",
+      "sha256Before": "e7bd54e32c66930b01642a9fb05c7afd898b59ed910d1aab0381f6588cc28bf6",
+      "sha256After": "e7bd54e32c66930b01642a9fb05c7afd898b59ed910d1aab0381f6588cc28bf6"
+    },
+    {
+      "file": "02-故障与案例/知识条目/账户与权限问题 - 绑定-解绑问题 - 绑不上；解绑；换绑；Binding；Unbinding-3d2880.md",
+      "sha256Before": "a842c4bb5149b3d380a75f5807069ae66503f4fa8a1cf2fa25e07c74d4e7b45a",
+      "sha256After": "a842c4bb5149b3d380a75f5807069ae66503f4fa8a1cf2fa25e07c74d4e7b45a"
+    },
+    {
+      "file": "02-故障与案例/知识条目/账户与权限问题 - 账号创建 - 注册；建账号；开账号；Account Creation-e0b0ae.md",
+      "sha256Before": "b2a1abb8f9b405b1216e82c267af0d1040c933c404a5c0794aa83e55f8c38e31",
+      "sha256After": "b2a1abb8f9b405b1216e82c267af0d1040c933c404a5c0794aa83e55f8c38e31"
+    },
+    {
+      "file": "02-故障与案例/知识条目/轮毂问题 - 轮毂电机传感器失效 - 传感器失效；116；126；136；146；367；399-c4cef2.md",
+      "sha256Before": "6009f7310d50f1f22301129a83aca656bca82228f34677e1e6b9db310b203d48",
+      "sha256After": "6009f7310d50f1f22301129a83aca656bca82228f34677e1e6b9db310b203d48"
+    },
+    {
+      "file": "02-故障与案例/知识条目/轮毂问题 - 轮毂电机堵转 - 轮子卡住；轮毂堵转；114；124；134；144；350；382-559618.md",
+      "sha256Before": "44faedf08a088811c6901279cdeff2c06c694e8481f96c5b99593e8986e10003",
+      "sha256After": "44faedf08a088811c6901279cdeff2c06c694e8481f96c5b99593e8986e10003"
+    },
+    {
+      "file": "02-故障与案例/知识条目/轮毂问题 - 轮毂电机温度异常 - 轮毂过热；111；112；121；122；131；132；141；142；366；398；368；369；400；401-ce76fc.md",
+      "sha256Before": "919932f7372e05f2a17db63e54f783c8f1986540f5738a1b2bae9da1754f6dbb",
+      "sha256After": "919932f7372e05f2a17db63e54f783c8f1986540f5738a1b2bae9da1754f6dbb"
+    },
+    {
+      "file": "02-故障与案例/知识条目/轮毂问题 - 轮毂电机电压电流异常 - 电压过高低；过流；缺相；359；360；391；392；133；123；143；352；384；356；388；363；395-619666.md",
+      "sha256Before": "a3b7777ff45fbeb8b9f9d9bb7dce724b0c6c88ff6bd6977c01a7bff76fc377b7",
+      "sha256After": "a3b7777ff45fbeb8b9f9d9bb7dce724b0c6c88ff6bd6977c01a7bff76fc377b7"
+    },
+    {
+      "file": "02-故障与案例/知识条目/轮毂问题 - 轮毂电机通讯异常 - 轮毂通讯故障；358；390-cf1e25.md",
+      "sha256Before": "79d0e0b324752a1d63d856de0eb73cb5a9a73a308410ef1281d813b2d933cbfa",
+      "sha256After": "79d0e0b324752a1d63d856de0eb73cb5a9a73a308410ef1281d813b2d933cbfa"
+    },
+    {
+      "file": "02-故障与案例/知识条目/轮毂问题 - 轮毂电机霍尔异常 - 霍尔错误；霍尔零漂；115；125；135；145；354；386；355；387-c74577.md",
+      "sha256Before": "173d0cde591961e17b392a0b185c15bf30658da0edc3f3fbbdfe996ff8189732",
+      "sha256After": "173d0cde591961e17b392a0b185c15bf30658da0edc3f3fbbdfe996ff8189732"
+    },
+    {
+      "file": "02-故障与案例/知识条目/轮毂问题 - 轮毂结构件破损 - 轮毂外观损坏；面盖破损；前轮卡涩；前轮坏；全向轮破损-2386a1.md",
+      "sha256Before": "21a933a105e50bc9116fe1fab6f889a004bdfc2c85fa9a3ebdec08f8c3237293",
+      "sha256After": "21a933a105e50bc9116fe1fab6f889a004bdfc2c85fa9a3ebdec08f8c3237293"
+    },
+    {
+      "file": "02-故障与案例/知识条目/连接与通讯问题 - 4G-SIM卡问题 - 4G信号差；4G感叹号；流量耗尽；SIM卡；运营商-bc8160.md",
+      "sha256Before": "ebb604dedf48b5035a4c3496dc284a90057edc362aa4b0e4d79d09bec634dc41",
+      "sha256After": "ebb604dedf48b5035a4c3496dc284a90057edc362aa4b0e4d79d09bec634dc41"
+    },
+    {
+      "file": "02-故障与案例/知识条目/连接与通讯问题 - 4G连接失败 - 连不上4G；无法注册4G；获取不到IP；4G模块损坏-7c3d24.md",
+      "sha256Before": "b1ac7441ee5c3306540b3568b9d9f3bb9182afb061d24f749cb1d7c0926737c7",
+      "sha256After": "b1ac7441ee5c3306540b3568b9d9f3bb9182afb061d24f749cb1d7c0926737c7"
+    },
+    {
+      "file": "02-故障与案例/知识条目/连接与通讯问题 - USB-TypeC有线连接 - USB连不上；TypeC；有线连接失败-853c51.md",
+      "sha256Before": "bd70a71b58391ff872605b48f68cf1360100648fcde3b2f9a210e6ca145df6bd",
+      "sha256After": "bd70a71b58391ff872605b48f68cf1360100648fcde3b2f9a210e6ca145df6bd"
+    },
+    {
+      "file": "02-故障与案例/知识条目/连接与通讯问题 - WiFi信号弱 - WiFi信号差；WiFi感叹号-196018.md",
+      "sha256Before": "018a228573b2023b2c14cea63af940842f3b086bea513a738795ae0167213cc3",
+      "sha256After": "018a228573b2023b2c14cea63af940842f3b086bea513a738795ae0167213cc3"
+    },
+    {
+      "file": "02-故障与案例/知识条目/连接与通讯问题 - WiFi连接失败 - 连不上WiFi；视觉模组；主控板；天线松动-8faa78.md",
+      "sha256Before": "6b71c2b04c538eaf85c5c6f785e7ce29ea8e8e5c5185d2049cb37513273340b1",
+      "sha256After": "6b71c2b04c538eaf85c5c6f785e7ce29ea8e8e5c5185d2049cb37513273340b1"
+    },
+    {
+      "file": "02-故障与案例/知识条目/连接与通讯问题 - 蓝牙信号差 - 蓝牙信号弱；蓝牙断连-7c9329.md",
+      "sha256Before": "2be758263062f6fab68a92aad2cf488dd1c70f2f1be17f49f137fbed8e78f05b",
+      "sha256After": "2be758263062f6fab68a92aad2cf488dd1c70f2f1be17f49f137fbed8e78f05b"
+    },
+    {
+      "file": "02-故障与案例/知识条目/连接与通讯问题 - 蓝牙连接失败 - 连不上蓝牙；蓝牙搜不到；App搜不到车-d4076d.md",
+      "sha256Before": "a32c627081c15cddc1f3f1963b2edfcfd46358046a6c364db0e60dcf69a40da0",
+      "sha256After": "a32c627081c15cddc1f3f1963b2edfcfd46358046a6c364db0e60dcf69a40da0"
+    },
+    {
+      "file": "02-故障与案例/知识条目/连接与通讯问题 - 设备离线 - 设备不在线；离线；IOT问题；阿里云问题-68b4f0.md",
+      "sha256Before": "572452b36d02a0890a046fe91eb48f30e3c7bc153aa0d1879606cf01b17ecaee",
+      "sha256After": "572452b36d02a0890a046fe91eb48f30e3c7bc153aa0d1879606cf01b17ecaee"
+    },
+    {
+      "file": "02-故障与案例/知识条目/连接与通讯问题 - 读取设备信息失败 - 读不到设备信息；Failed to Read Device Info-1c4709.md",
+      "sha256Before": "a64ab3ac7eed27dbcaad6065f73e8adbd56b50dbef6ff25c8bdf319a222e5761",
+      "sha256After": "a64ab3ac7eed27dbcaad6065f73e8adbd56b50dbef6ff25c8bdf319a222e5761"
+    },
+    {
+      "file": "02-故障与案例/知识条目/避障问题 - 避障失败 - 不避障；撞上障碍；误触发避障；误识别障碍；1217-20a42d.md",
+      "sha256Before": "5950c5bbcbfcc6649f8cf898649aa4f2cc68bccb99f9d03ef946f3164483cbe8",
+      "sha256After": "5950c5bbcbfcc6649f8cf898649aa4f2cc68bccb99f9d03ef946f3164483cbe8"
+    },
+    {
+      "file": "02-故障与案例/知识条目/配套常规工具问题 - 工具规格 - 内六角螺丝刀 - 扳手规格；卡簧钳；撬棒 ；维修支架-b0df77.md",
+      "sha256Before": "c857d631e2e4e28597c98580ba6bc6410f3fccaa10059b136574cbf5a89dee00",
+      "sha256After": "c857d631e2e4e28597c98580ba6bc6410f3fccaa10059b136574cbf5a89dee00"
+    },
+    {
+      "file": "02-故障与案例/知识条目/集草模块问题 - 滚刷故障 - 滚刷不转；滚刷掉毛；无法安装；草梳破损-eb5790.md",
+      "sha256Before": "9cb9da804243d41e5589ee8f38464c37462835a588935a6a2a08e19e121c2366",
+      "sha256After": "9cb9da804243d41e5589ee8f38464c37462835a588935a6a2a08e19e121c2366"
+    },
+    {
+      "file": "02-故障与案例/知识条目/集草模块问题 - 集草框破损 - 集草框坏；支架磨损；挡板抓钩坏-a9c3e2.md",
+      "sha256Before": "83ca32358a691a53b21f39ac1218d1e8f719406835526ad95508d23188ac7e78",
+      "sha256After": "83ca32358a691a53b21f39ac1218d1e8f719406835526ad95508d23188ac7e78"
+    },
+    {
+      "file": "02-故障与案例/知识条目/集草模块问题 - 集草框通讯异常 - 集草框故障；卡草；1210；1211-27b01e.md",
+      "sha256Before": "1726a3f9f07bd7b961d68237765443b734754890ca873698a70925ec265ba072",
+      "sha256After": "1726a3f9f07bd7b961d68237765443b734754890ca873698a70925ec265ba072"
+    }
+  ],
+  "allUnchanged": true
+}

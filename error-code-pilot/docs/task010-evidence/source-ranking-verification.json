@@ -1,0 +1,29 @@
+{
+  "gate": "TOP10_SOURCE_AUDIT_PASS",
+  "verifiedAt": "2026-09-15T22:42:05.189Z",
+  "candidateCount": 28,
+  "selected": 10,
+  "fieldsAudited": 90,
+  "priorityBased": true,
+  "technicalSourceReadbacks": 17,
+  "piOnly": 2,
+  "sourceWindow": {
+    "start": "2026-08-18",
+    "end": "2026-08-21",
+    "daysInclusive": 4,
+    "kind": "newest explicit continuous case-distillation window safely available",
+    "caseCount": 13,
+    "populationComplete": false,
+    "technicalReferencesAsOf": "2026-09-14",
+    "technicalDatesAreCaseDates": false,
+    "requested90DayWindowSupported": false,
+    "limitations": [
+      "13 distilled cases are a convenience sample, not complete intake or occurrence counts.",
+      "543 historical ITR files and 91 auto-archives have no uniform validated incident-date denominator; archived_at through September 14 is not a case-date window.",
+      "116 historical aggregate nodes carry overlapping case_count without a common dated denominator; counts are neither summed nor used as recurrence rank.",
+      "Newer isolated September business instructions update acceptance, not the continuous case sample.",
+      "No copied/modified timestamp is used as case date or technical approval."
+    ]
+  },
+  "applicationAndPackageGateClaimed": false
+}

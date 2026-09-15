@@ -53,6 +53,11 @@ try{
     if(card.paths[0].qualifier)await page.getByRole('button',{name:'Yes, this matches',exact:true}).click();
     assert.equal(await page.locator('#result').innerText(),'');await page.locator('#continue').click();await page.getByRole('heading',{name:'What should I do now?',exact:true}).waitFor();
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,card.id);
+    assert.equal(await page.locator('.support-disclosure[open]').count(),0);
+    if(await page.locator('.support-disclosure').count()){
+     await page.locator('.support-disclosure summary').first().click();
+     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,card.id+' expanded detail');
+    }
     await page.evaluate(()=>scrollTo(0,0));await capture(`zoom125-${size.width}-${card.id}.png`);
     await page.locator('#edit-issue').click();await page.locator('#identify-page:visible').waitFor();
    }

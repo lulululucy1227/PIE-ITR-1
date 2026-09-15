@@ -1,0 +1,32 @@
+{
+  "checks": [
+    {
+      "width": 1366,
+      "allApprovedActionsPreserved": true,
+      "noEmptyResources": true,
+      "verificationGate": true,
+      "backPreserved": true,
+      "otherSafe": true,
+      "contrast": 7.8720805376030984
+    },
+    {
+      "width": 1920,
+      "allApprovedActionsPreserved": true,
+      "noEmptyResources": true,
+      "verificationGate": true,
+      "backPreserved": true,
+      "otherSafe": true,
+      "contrast": 7.8720805376030984
+    },
+    {
+      "width": 390,
+      "allApprovedActionsPreserved": true,
+      "noEmptyResources": true,
+      "verificationGate": true,
+      "backPreserved": true,
+      "otherSafe": true,
+      "contrast": 7.8720805376030984
+    }
+  ],
+  "errors": []
+}

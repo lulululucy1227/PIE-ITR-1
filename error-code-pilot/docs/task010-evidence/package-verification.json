@@ -1,0 +1,31 @@
+{
+  "publicDeployment": false,
+  "sourceAndCaseContentExcluded": true,
+  "extractedAllEntryHashesMatched": true,
+  "zip": "error-code-pilot-20260916-005145.zip",
+  "sha256": "cf3260b7662bb7df28945741ae1269d0b4b5af10e6a3771d1bc6dbfbb8fad1dd",
+  "cardCount": 31,
+  "entryCount": 11,
+  "extractedOwnedProcessExited": true,
+  "navigationSymptomCount": 25,
+  "entries": [
+    "dist/index.html",
+    "dist/styles.css",
+    "dist/app.mjs",
+    "dist/engine.mjs",
+    "dist/service-plan.mjs",
+    "dist/knowledge.json",
+    "scripts/serve.mjs",
+    "scripts/launch-local.mjs",
+    "run-pilot.cmd",
+    "LOCAL_README.txt",
+    "runtime/node.exe"
+  ],
+  "launcher": {
+    "extractedLauncherStarted": true,
+    "extractedLauncherReused": true,
+    "allSixHttpFilesMatched": true,
+    "port": 8840
+  },
+  "extractedStandaloneHttpPassed": true
+}

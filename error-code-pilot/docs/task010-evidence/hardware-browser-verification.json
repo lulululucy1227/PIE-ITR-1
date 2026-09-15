@@ -1,0 +1,194 @@
+{
+  "checks": [
+    {
+      "width": 1366,
+      "card": "guide-wheel-movement",
+      "collapsedByDefault": true,
+      "exactDetail": true,
+      "staleResourceCleared": true
+    },
+    {
+      "width": 1366,
+      "card": "guide-cutting-operation",
+      "collapsedByDefault": true,
+      "exactDetail": true,
+      "staleResourceCleared": true
+    },
+    {
+      "width": 1366,
+      "card": "guide-no-charge",
+      "collapsedByDefault": true,
+      "exactDetail": true,
+      "staleResourceCleared": true
+    },
+    {
+      "width": 1366,
+      "card": "guide-station-recognition",
+      "collapsedByDefault": true,
+      "exactDetail": true,
+      "staleResourceCleared": true
+    },
+    {
+      "width": 1366,
+      "card": "guide-docking",
+      "collapsedByDefault": true,
+      "exactDetail": true,
+      "staleResourceCleared": true
+    },
+    {
+      "width": 1366,
+      "card": "guide-power",
+      "collapsedByDefault": true,
+      "exactDetail": true,
+      "staleResourceCleared": true
+    },
+    {
+      "width": 1366,
+      "card": "guide-rtk-connection",
+      "collapsedByDefault": true,
+      "exactDetail": true,
+      "staleResourceCleared": true
+    },
+    {
+      "width": 1366,
+      "card": "guide-bumper",
+      "collapsedByDefault": true,
+      "exactDetail": true,
+      "staleResourceCleared": true
+    },
+    {
+      "width": 1366,
+      "card": "guide-visible-cable-damage",
+      "collapsedByDefault": true,
+      "exactDetail": true,
+      "staleResourceCleared": true
+    },
+    {
+      "width": 1920,
+      "card": "guide-wheel-movement",
+      "collapsedByDefault": true,
+      "exactDetail": true,
+      "staleResourceCleared": true
+    },
+    {
+      "width": 1920,
+      "card": "guide-cutting-operation",
+      "collapsedByDefault": true,
+      "exactDetail": true,
+      "staleResourceCleared": true
+    },
+    {
+      "width": 1920,
+      "card": "guide-no-charge",
+      "collapsedByDefault": true,
+      "exactDetail": true,
+      "staleResourceCleared": true
+    },
+    {
+      "width": 1920,
+      "card": "guide-station-recognition",
+      "collapsedByDefault": true,
+      "exactDetail": true,
+      "staleResourceCleared": true
+    },
+    {
+      "width": 1920,
+      "card": "guide-docking",
+      "collapsedByDefault": true,
+      "exactDetail": true,
+      "staleResourceCleared": true
+    },
+    {
+      "width": 1920,
+      "card": "guide-power",
+      "collapsedByDefault": true,
+      "exactDetail": true,
+      "staleResourceCleared": true
+    },
+    {
+      "width": 1920,
+      "card": "guide-rtk-connection",
+      "collapsedByDefault": true,
+      "exactDetail": true,
+      "staleResourceCleared": true
+    },
+    {
+      "width": 1920,
+      "card": "guide-bumper",
+      "collapsedByDefault": true,
+      "exactDetail": true,
+      "staleResourceCleared": true
+    },
+    {
+      "width": 1920,
+      "card": "guide-visible-cable-damage",
+      "collapsedByDefault": true,
+      "exactDetail": true,
+      "staleResourceCleared": true
+    },
+    {
+      "width": 390,
+      "card": "guide-wheel-movement",
+      "collapsedByDefault": true,
+      "exactDetail": true,
+      "staleResourceCleared": true
+    },
+    {
+      "width": 390,
+      "card": "guide-cutting-operation",
+      "collapsedByDefault": true,
+      "exactDetail": true,
+      "staleResourceCleared": true
+    },
+    {
+      "width": 390,
+      "card": "guide-no-charge",
+      "collapsedByDefault": true,
+      "exactDetail": true,
+      "staleResourceCleared": true
+    },
+    {
+      "width": 390,
+      "card": "guide-station-recognition",
+      "collapsedByDefault": true,
+      "exactDetail": true,
+      "staleResourceCleared": true
+    },
+    {
+      "width": 390,
+      "card": "guide-docking",
+      "collapsedByDefault": true,
+      "exactDetail": true,
+      "staleResourceCleared": true
+    },
+    {
+      "width": 390,
+      "card": "guide-power",
+      "collapsedByDefault": true,
+      "exactDetail": true,
+      "staleResourceCleared": true
+    },
+    {
+      "width": 390,
+      "card": "guide-rtk-connection",
+      "collapsedByDefault": true,
+      "exactDetail": true,
+      "staleResourceCleared": true
+    },
+    {
+      "width": 390,
+      "card": "guide-bumper",
+      "collapsedByDefault": true,
+      "exactDetail": true,
+      "staleResourceCleared": true
+    },
+    {
+      "width": 390,
+      "card": "guide-visible-cable-damage",
+      "collapsedByDefault": true,
+      "exactDetail": true,
+      "staleResourceCleared": true
+    }
+  ],
+  "errors": []
+}

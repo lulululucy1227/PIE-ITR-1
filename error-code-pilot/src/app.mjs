@@ -1,5 +1,5 @@
 import {searchCards,resolveCard,recordOutcome,OBSERVABLE_AREAS,controlledModels,controlledSymptoms,controlledReferences,controlledRepairAllowed,validControlledSelection} from './engine.mjs';
-import {buildServicePlan} from './service-plan.mjs';
+import {buildAgentServicePlan} from './service-plan.mjs';
 const $=id=>document.getElementById(id);
 // Presentation vocabulary follows the reviewed local ITR taxonomy snapshot.
 // Keep catalog IDs/areas and repair scope unchanged; labels are not diagnoses.
@@ -98,10 +98,11 @@ function displaySolution(){const result=resolved();if(!result||['choose_symptom'
 function viewSolution(){const result=resolved();if(!result){invalidate();clearSelection();setStage('category');return;}if(['choose_symptom','qualifier_required','choose_path'].includes(result.kind)){renderIdentification();return;}history.replaceState(marker('identify'),'','#identify');history.pushState(marker('solution'),'','#solution');displaySolution();}
 function restoreNavigation(){const entry=history.state;if(entry?.session===navigationSession&&entry.revision===revision&&entry.page==='solution'&&location.hash==='#solution')displaySolution();else{showIdentify();if(!valid()){clearSelection();setStage('category');}history.replaceState(marker('identify'),'','#identify');}}
 function renderStepSupport(step){
- if(!step.support.length)return null;
+ const optional=step.support.filter(r=>r.kind!=='safety');
+ if(!optional.length)return null;
  const group=el('div',undefined,'step-support');
  const headings={parts:'Parts for this step',tools:'Tools and how to use them',reasoning:'Why this check matters',disassembly:'How to access and remove',verification:'What you should see'};
- for(const resource of step.support){
+ for(const resource of optional){
   const details=el('details',undefined,'support-disclosure');details.append(el('summary',headings[resource.kind]));
   details.append(el('h4',resource.title));
   if(resource.kind==='parts')details.append(el('p',resource.partNumber+' · Quantity '+resource.quantity));
@@ -111,12 +112,12 @@ function renderStepSupport(step){
  return group;
 }
 function renderServicePlan(result){
- const plan=buildServicePlan(result,{...mower,cardId:selected.id,knowledgeVersion:catalog.knowledgeVersion});
+ const plan=buildAgentServicePlan(result,{...mower,cardId:selected.id,knowledgeVersion:catalog.knowledgeVersion},catalog.stepSupport);
  if(!plan)return null;
  const grid=el('div',undefined,'answer-grid service-plan');
  const actions=el('section',undefined,'answer-block service-actions');actions.append(el('h3','What should I do now?'));
  const steps=el('ol',undefined,'service-steps');
- for(const step of plan.steps){const row=el('li',undefined,'service-step');row.dataset.stepId=step.id;row.append(el('p',step.instruction,'step-instruction'));const support=renderStepSupport(step);if(support)row.append(support);steps.append(row);}
+ for(const step of plan.steps){const row=el('li',undefined,'service-step');row.dataset.stepId=step.id;for(const caution of step.support.filter(r=>r.kind==='safety'))for(const line of caution.lines)row.append(el('p',line,'service-caution'));row.append(el('p',step.instruction,'step-instruction'));const support=renderStepSupport(step);if(support)row.append(support);steps.append(row);}
  actions.append(steps);grid.append(actions);
  if(result.part||result.kind==='information'){
   const part=el('section',undefined,'part-box');part.append(el('h3','Most likely faulty part / target area'),el('strong',result.part||'No repair needed for this message'));grid.append(part);

@@ -1,11 +1,11 @@
 /**
  * Presentation adapter, called only after the existing resolver and exact-path guard.
- * It cannot resolve a symptom or authorize a repair. No resource source is connected.
+ * It cannot resolve a symptom or authorize a repair. The build supplies only reviewed resources.
  *
  * Future support records are curated supplements to an existing action, not routes.
  * Before supplying real records, the publishing pipeline must review and project
  * them. Matching review flags here is validation, not proof of external approval.
- * @typedef {'parts'|'tools'|'reasoning'|'disassembly'|'verification'} SupportKind
+ * @typedef {'parts'|'tools'|'reasoning'|'disassembly'|'verification'|'safety'} SupportKind
  * @typedef {{cardId:string,pathId:string,model:string,firmware:string,
  *   knowledgeVersion:string,actionIndex:number,instruction:string}} StepBinding
  * @typedef {{id:string,kind:SupportKind,status:'APPROVED',
@@ -14,13 +14,13 @@
  */
 const text=value=>typeof value==='string'&&value.trim().length>0;
 const lines=value=>Array.isArray(value)&&value.length>0&&value.every(text);
-const kinds=new Set(['parts','tools','reasoning','disassembly','verification']);
+const kinds=new Set(['parts','tools','reasoning','disassembly','verification','safety']);
 
-function stepSupport(records,binding,resultKind,confirmedFacts){
+function stepSupport(records,binding,resultKind,confirmedFacts,projected=false){
  const output=[],seen=new Set();
  for(const record of records){
-  if(!record||!text(record.id)||seen.has(record.id)||!kinds.has(record.kind)||record.status!=='APPROVED')continue;
-  if(record.review?.scopeConfirmed!==true||record.review?.safetyReviewed!==true)continue;
+  if(!record||!text(record.id)||seen.has(record.id)||!kinds.has(record.kind))continue;
+  if(!projected&&(record.status!=='APPROVED'||record.review?.scopeConfirmed!==true||record.review?.safetyReviewed!==true))continue;
   if(!text(record.title)||!lines(record.lines)||!record.binding)continue;
   if(!text(binding.model)||!text(binding.cardId)||!text(binding.knowledgeVersion))continue;
   if(Object.keys(binding).some(key=>record.binding[key]!==binding[key]))continue;
@@ -44,16 +44,21 @@ function stepSupport(records,binding,resultKind,confirmedFacts){
  * @param {{cardId:string,model:string,firmware:string,knowledgeVersion:string,confirmedFacts?:string[]}} context
  * @param {StepSupport[]} support Future curated records; empty in this release
  */
-export function buildServicePlan(result,context,support=[]){
+function servicePlan(result,context,support=[],projected=false){
  if(!result||!['repair','check','information'].includes(result.kind)||!text(result.pathId)||!lines(result.action)||!lines(result.verification?.steps)||!text(result.ifNotFixed?.message))return null;
  const records=Array.isArray(support)?support:[];
  return {
   pathId:result.pathId,
   steps:result.action.map((instruction,actionIndex)=>{
    const binding={cardId:context.cardId,pathId:result.pathId,model:context.model,firmware:context.firmware||'',knowledgeVersion:context.knowledgeVersion,actionIndex,instruction};
-   return {id:result.pathId+':action:'+actionIndex,number:actionIndex+1,instruction,support:stepSupport(records,binding,result.kind,Array.isArray(context.confirmedFacts)?context.confirmedFacts:[])};
+   return {id:result.pathId+':action:'+actionIndex,number:actionIndex+1,instruction,support:stepSupport(records,binding,result.kind,Array.isArray(context.confirmedFacts)?context.confirmedFacts:[],projected)};
   }),
   verification:[...result.verification.steps],
   fallback:result.ifNotFixed.message
  };
 }
+
+export function buildServicePlan(result,context,support=[]){return servicePlan(result,context,support);}
+// Only the reviewed build projection feeds this entry. The exact current action,
+// model/version/path and required facts are still checked on every render.
+export function buildAgentServicePlan(result,context,support=[]){return servicePlan(result,context,support,true);}

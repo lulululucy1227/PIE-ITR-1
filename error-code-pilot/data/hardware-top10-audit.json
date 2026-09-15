@@ -1,0 +1,2812 @@
+{
+  "schemaVersion": 1,
+  "task": "EC-MT-20260916-HARDWARE-TOP10-010",
+  "reviewDate": "2026-09-16",
+  "visibility": "PRIVATE_SUPERVISOR_AUDIT_NOT_PUBLIC_PACKAGE",
+  "sourceResolution": {
+    "workspace": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/ticket_assist",
+    "vault": "C:\\Users\\Reggie\\Desktop\\ITR工单助手\\工单助手交接包\\维修与售后知识库",
+    "method": "settings.py _path/_sibling statically re-evaluated without import/runtime mutation",
+    "environmentOverride": false,
+    "localVaultOverride": false,
+    "settingsSha256Before": "54a1f6cf61d65d29e64f5581fcd809b7145912bcfee2a5bb62ff84ab24e2c553",
+    "settingsSha256After": "54a1f6cf61d65d29e64f5581fcd809b7145912bcfee2a5bb62ff84ab24e2c553"
+  },
+  "evidenceWindow": {
+    "start": "2026-08-18",
+    "end": "2026-08-21",
+    "daysInclusive": 4,
+    "kind": "newest explicit continuous case-distillation window safely available",
+    "caseCount": 13,
+    "populationComplete": false,
+    "technicalReferencesAsOf": "2026-09-14",
+    "technicalDatesAreCaseDates": false,
+    "requested90DayWindowSupported": false,
+    "limitations": [
+      "13 distilled cases are a convenience sample, not complete intake or occurrence counts.",
+      "543 historical ITR files and 91 auto-archives have no uniform validated incident-date denominator; archived_at through September 14 is not a case-date window.",
+      "116 historical aggregate nodes carry overlapping case_count without a common dated denominator; counts are neither summed nor used as recurrence rank.",
+      "Newer isolated September business instructions update acceptance, not the continuous case sample.",
+      "No copied/modified timestamp is used as case date or technical approval."
+    ]
+  },
+  "ranking": {
+    "method": "priority-based",
+    "countBased": false,
+    "frequencyCountsAvailable": false,
+    "criteria": [
+      "recent safely observed operational signal when present",
+      "hardware repair and technician relevance",
+      "observable symptom and stable scoped repair route",
+      "verification and executable safe fallback",
+      "avoid duplicate domain slots",
+      "cross-model usefulness without broadening scope"
+    ],
+    "candidateCount": 28,
+    "selectedCount": 10,
+    "excludedCount": 18,
+    "hardwareSelectedCount": 10,
+    "pureSoftwareSelectedCount": 0,
+    "top10Gap": 0,
+    "selfServiceGap": 2,
+    "explanation": "10 management priorities comprise 8 guided symptom groups reusing 9 mature hardware cards and 2 PIE-guided investigation entries. A ranking position is judgment, never an occurrence count or success percentage."
+  },
+  "corpus": {
+    "markdownCountsByCategory": {
+      "00-导航中心": 117,
+      "01-SOP与流程": 32,
+      "02-故障与案例": 140,
+      "03-产品与料号": 1271,
+      "04-工具与版本": 45,
+      "05-工单与支持": 665,
+      "06-运营与决策": 28,
+      "07-标准知识": 86,
+      "80-待审核": 12,
+      "90-来源": 54,
+      "_tools": 5
+    },
+    "historicalItrFiles": 543,
+    "autoArchiveFiles": 91,
+    "aggregateKnowledgeNodes": 116,
+    "aggregateNodesWithCaseCount": 116,
+    "rawCaseBodiesCopied": 0,
+    "aggregateCountsUsedForRanking": false,
+    "scope": "All relevant active-vault families inventoried; technical SOPs/case distillation read, aggregate taxonomy and metadata scanned; raw case bodies not used in output."
+  },
+  "sourceManifest": [
+    {
+      "id": "cases",
+      "root": "active-vault",
+      "file": "07-标准知识/08-诊断图谱/07-近期工单蒸馏-2026-08-18至21.md",
+      "sha256Before": "311b3d349db441a3f4185e0cc92e3f69c97ebcdc25bb7753f807571b18b52156",
+      "bytes": 8404,
+      "sourceRole": "dated-case-distillation-not-census",
+      "dates": {
+        "generated": "2026-08-21",
+        "updated": "2026-08-21",
+        "version_scope": "source-window-2026-08-18-to-2026-08-21"
+      },
+      "section": {
+        "heading": "## 可复用根因链路",
+        "startLine": 44,
+        "endLine": 79,
+        "sha256": "a130375c8e810ea959b80152e804faf0c14f9123387782f1926f3a7930bded4a",
+        "normalization": "UTF-8 LF, heading through before next level-1/2 heading"
+      },
+      "sha256After": "311b3d349db441a3f4185e0cc92e3f69c97ebcdc25bb7753f807571b18b52156",
+      "unchanged": true
+    },
+    {
+      "id": "charge",
+      "root": "active-vault",
+      "file": "07-标准知识/03-标准SOP/充电与回充标准SOP.md",
+      "sha256Before": "c94ea763acab2149e422d525c3043667819140a86962086b287645529e513077",
+      "bytes": 6526,
+      "sourceRole": "active-technical-reference",
+      "dates": {
+        "generated": "2026-08-06",
+        "updated": "2026-08-21",
+        "version_scope": "as-of-2026-08-21"
+      },
+      "section": {
+        "heading": "## 不充电",
+        "startLine": 24,
+        "endLine": 30,
+        "sha256": "d526f3ead8f2e6a5a0a6974691463d1bc7e28a88811c8ba5d64959637b28a2fc",
+        "normalization": "UTF-8 LF, heading through before next level-1/2 heading"
+      },
+      "sha256After": "c94ea763acab2149e422d525c3043667819140a86962086b287645529e513077",
+      "unchanged": true
+    },
+    {
+      "id": "power",
+      "root": "active-vault",
+      "file": "07-标准知识/03-标准SOP/电池与开关机标准SOP.md",
+      "sha256Before": "70ad9870ae5a48cdd419f903754ba90e50cbd33eff5a119083b079f0123c7c1c",
+      "bytes": 4611,
+      "sourceRole": "active-technical-reference",
+      "dates": {
+        "generated": "2026-08-06",
+        "updated": "2026-08-21",
+        "version_scope": "as-of-2026-08-21"
+      },
+      "section": {
+        "heading": "# 电池与开关机标准 SOP",
+        "startLine": 17,
+        "endLine": 24,
+        "sha256": "973fd781c1c37e108d2132982861f09f913edfcc42fbc7fd03db80629eaa0b42",
+        "normalization": "UTF-8 LF, heading through before next level-1/2 heading"
+      },
+      "sha256After": "70ad9870ae5a48cdd419f903754ba90e50cbd33eff5a119083b079f0123c7c1c",
+      "unchanged": true
+    },
+    {
+      "id": "wheel",
+      "root": "active-vault",
+      "file": "07-标准知识/03-标准SOP/轮毂与行走标准SOP.md",
+      "sha256Before": "65463388454eaa739730ee82a66a274b922961687220d70d3f93899622c5041b",
+      "bytes": 6576,
+      "sourceRole": "active-technical-reference",
+      "dates": {
+        "generated": "2026-08-06",
+        "updated": "2026-08-21",
+        "version_scope": "as-of-2026-08-21"
+      },
+      "section": {
+        "heading": "# 轮毂与行走标准 SOP",
+        "startLine": 17,
+        "endLine": 25,
+        "sha256": "b4cb153dccc3081f820a75163a5ada2a717f0174c74dae0243ce3e133b106570",
+        "normalization": "UTF-8 LF, heading through before next level-1/2 heading"
+      },
+      "sha256After": "65463388454eaa739730ee82a66a274b922961687220d70d3f93899622c5041b",
+      "unchanged": true
+    },
+    {
+      "id": "can",
+      "root": "active-vault",
+      "file": "07-标准知识/03-标准SOP/轮毂与行走标准SOP.md",
+      "sha256Before": "65463388454eaa739730ee82a66a274b922961687220d70d3f93899622c5041b",
+      "bytes": 6576,
+      "sourceRole": "active-technical-reference",
+      "dates": {
+        "generated": "2026-08-06",
+        "updated": "2026-08-21",
+        "version_scope": "as-of-2026-08-21"
+      },
+      "section": {
+        "heading": "## 复合症状判定：定位丢失 + CAN 失败 + 感知/回充异常",
+        "startLine": 26,
+        "endLine": 41,
+        "sha256": "2cf1a3b794a290a4d557398daa302b0d71255c1af8501b408cf50db2916ab35e",
+        "normalization": "UTF-8 LF, heading through before next level-1/2 heading"
+      },
+      "sha256After": "65463388454eaa739730ee82a66a274b922961687220d70d3f93899622c5041b",
+      "unchanged": true
+    },
+    {
+      "id": "cut",
+      "root": "active-vault",
+      "file": "07-标准知识/03-标准SOP/刀盘与割草标准SOP.md",
+      "sha256Before": "5e3a12b9fb2a183ee54f831be58c2cced3d68d483738ce003c807dd3605c0791",
+      "bytes": 3696,
+      "sourceRole": "active-technical-reference",
+      "dates": {
+        "generated": "2026-08-06",
+        "updated": "2026-08-14",
+        "version_scope": "as-of-2026-08-06"
+      },
+      "section": {
+        "heading": "# 刀盘与割草标准 SOP",
+        "startLine": 17,
+        "endLine": 25,
+        "sha256": "8dd1e3b9fe9405ae981385f9397ff0060a1620446e28641234db033bd65bc065",
+        "normalization": "UTF-8 LF, heading through before next level-1/2 heading"
+      },
+      "sha256After": "5e3a12b9fb2a183ee54f831be58c2cced3d68d483738ce003c807dd3605c0791",
+      "unchanged": true
+    },
+    {
+      "id": "bumper",
+      "root": "active-vault",
+      "file": "07-标准知识/03-标准SOP/传感器与防撞标准SOP.md",
+      "sha256Before": "23eba425422459b97224ca99276e51b94a8719c0e7305e8268e3114d1ff85a8f",
+      "bytes": 3989,
+      "sourceRole": "active-technical-reference",
+      "dates": {
+        "generated": "2026-08-06",
+        "updated": "2026-08-14",
+        "version_scope": "as-of-2026-08-06"
+      },
+      "section": {
+        "heading": "# 传感器与防撞标准 SOP",
+        "startLine": 17,
+        "endLine": 23,
+        "sha256": "8de59751636cf93f1735168318535617063e307ffae90b974854923173d1e54c",
+        "normalization": "UTF-8 LF, heading through before next level-1/2 heading"
+      },
+      "sha256After": "23eba425422459b97224ca99276e51b94a8719c0e7305e8268e3114d1ff85a8f",
+      "unchanged": true
+    },
+    {
+      "id": "rtk",
+      "root": "active-vault",
+      "file": "07-标准知识/03-标准SOP/定位与RTK标准SOP.md",
+      "sha256Before": "87c3c901fa3fd8f5e378f6bc6de91e57a597982a918f54f964e24c47309c06ed",
+      "bytes": 4468,
+      "sourceRole": "active-technical-reference",
+      "dates": {
+        "generated": "2026-08-06",
+        "updated": "2026-08-14",
+        "version_scope": "as-of-2026-08-06"
+      },
+      "section": {
+        "heading": "## 判断流程",
+        "startLine": 21,
+        "endLine": 29,
+        "sha256": "e53fb44f930c0c6fc3ac370c89d7a017c95b47802e3044168508c18615e088fa",
+        "normalization": "UTF-8 LF, heading through before next level-1/2 heading"
+      },
+      "sha256After": "87c3c901fa3fd8f5e378f6bc6de91e57a597982a918f54f964e24c47309c06ed",
+      "unchanged": true
+    },
+    {
+      "id": "vision",
+      "root": "active-vault",
+      "file": "07-标准知识/03-标准SOP/视觉-雷达与X5标准SOP.md",
+      "sha256Before": "4897e755ae887275c3b19b104c8233441a0c794dcc16699e1111b1bc0b8e20c0",
+      "bytes": 4937,
+      "sourceRole": "active-technical-reference",
+      "dates": {
+        "generated": "2026-08-06",
+        "updated": "2026-08-21",
+        "version_scope": "as-of-2026-08-21"
+      },
+      "section": {
+        "heading": "## 排查",
+        "startLine": 23,
+        "endLine": 30,
+        "sha256": "a6bbdf96b245b5270069645ff5a60699a22d7aceb24e7f20608c91d2cc5ac191",
+        "normalization": "UTF-8 LF, heading through before next level-1/2 heading"
+      },
+      "sha256After": "4897e755ae887275c3b19b104c8233441a0c794dcc16699e1111b1bc0b8e20c0",
+      "unchanged": true
+    },
+    {
+      "id": "mechanical",
+      "root": "active-vault",
+      "file": "07-标准知识/07-机型结构/01-机械优先故障树.md",
+      "sha256Before": "f543501d042cc62d2c139ec8e7d07675051f4d157e3f19f173813dc17cd89826",
+      "bytes": 2071,
+      "sourceRole": "active-technical-reference",
+      "dates": {
+        "generated": "2026-08-06",
+        "version_scope": "as-of-2026-08-06"
+      },
+      "section": {
+        "heading": "## 症状到机械检查点",
+        "startLine": 30,
+        "endLine": 42,
+        "sha256": "44e4738a3332bf393ffa78d553287e2ab4b11cef06027e44a1476efa2ad41889",
+        "normalization": "UTF-8 LF, heading through before next level-1/2 heading"
+      },
+      "sha256After": "f543501d042cc62d2c139ec8e7d07675051f4d157e3f19f173813dc17cd89826",
+      "unchanged": true
+    },
+    {
+      "id": "nff",
+      "root": "active-vault",
+      "file": "07-标准知识/03-标准SOP/NFF与二返标准SOP.md",
+      "sha256Before": "ebc704baa76a6002d71a612bc1a0070adbd7cb0a4d2dfc676ec774256658c097",
+      "bytes": 7526,
+      "sourceRole": "active-technical-reference",
+      "dates": {
+        "generated": "2026-08-14",
+        "updated": "2026-09-14",
+        "version_scope": "as-of-2026-09-14"
+      },
+      "section": {
+        "heading": "## 7. 未发现问题 / 维修完成验收门（唯一口径）",
+        "startLine": 68,
+        "endLine": 98,
+        "sha256": "266df8eeaf5148ceebbfdb82f1aa2b5494ef7c99f3bda7f24c04e34ea414adfd",
+        "normalization": "UTF-8 LF, heading through before next level-1/2 heading"
+      },
+      "sha256After": "ebc704baa76a6002d71a612bc1a0070adbd7cb0a4d2dfc676ec774256658c097",
+      "unchanged": true
+    },
+    {
+      "id": "burnin",
+      "root": "active-vault",
+      "file": "90-来源/业务口径/2026-09-11-维修后BurnIn验收口径.md",
+      "sha256Before": "1bb22e3f68fe626be11c69e59d44b925cb7a58a97fdd4fd757cdfdbccbfc39ff",
+      "bytes": 1535,
+      "sourceRole": "active-technical-reference",
+      "dates": {
+        "generated": "2026-09-11",
+        "updated": "2026-09-14",
+        "version_scope": "as-of-2026-09-14"
+      },
+      "section": {
+        "heading": "## 已确认",
+        "startLine": 31,
+        "endLine": 35,
+        "sha256": "6c9f096de12803430eceafddafd2fa12719e7c80c639b5a061f2fe2fcd7fcbfe",
+        "normalization": "UTF-8 LF, heading through before next level-1/2 heading"
+      },
+      "sha256After": "1bb22e3f68fe626be11c69e59d44b925cb7a58a97fdd4fd757cdfdbccbfc39ff",
+      "unchanged": true
+    },
+    {
+      "id": "pilotImport",
+      "root": "active-vault",
+      "file": "07-标准知识/09-IF规则库/08-已审核引导路径.md",
+      "sha256Before": "b2a6a1bfff8c862add87c2846f177888406baaad1bd797f515d01ea058bd01fa",
+      "bytes": 11194,
+      "sourceRole": "circular-pilot-import-not-independent-evidence",
+      "dates": {
+        "version_scope": "as-of-2026-09-09",
+        "updated": "2026-09-09"
+      },
+      "section": {
+        "heading": "## 取向（压过下面所有具体规则）",
+        "startLine": 17,
+        "endLine": 22,
+        "sha256": "fae42f23879b72ceecf17847d87ce13b455441d6787fcc32640e0ee739c925ed",
+        "normalization": "UTF-8 LF, heading through before next level-1/2 heading"
+      },
+      "sha256After": "b2a6a1bfff8c862add87c2846f177888406baaad1bd797f515d01ea058bd01fa",
+      "unchanged": true
+    },
+    {
+      "id": "guided",
+      "root": "active-vault",
+      "file": "07-标准知识/08-诊断图谱/05-引导式维修路径.md",
+      "sha256Before": "55523ba5cf18cc56f4a7317446dfaf338e3923f2f52f5fc88c5d2935de60b978",
+      "bytes": 10854,
+      "sourceRole": "active-technical-reference",
+      "dates": {},
+      "section": {
+        "heading": "# 引导式维修路径（试点）",
+        "startLine": 14,
+        "endLine": 23,
+        "sha256": "3cff8b119d5f62892fe156b30ba9b01bbb84fc33bcf66987547a11ac44f65c19",
+        "normalization": "UTF-8 LF, heading through before next level-1/2 heading"
+      },
+      "sha256After": "55523ba5cf18cc56f4a7317446dfaf338e3923f2f52f5fc88c5d2935de60b978",
+      "unchanged": true
+    },
+    {
+      "id": "tools",
+      "root": "active-vault",
+      "file": "07-标准知识/03-标准SOP/维修工具与刷写标准SOP.md",
+      "sha256Before": "5bf8256de1b8cd23d774a9122d8f7071c67a05d9dbf5c0e278f5e418a83c3358",
+      "bytes": 7849,
+      "sourceRole": "active-technical-reference",
+      "dates": {
+        "generated": "2026-08-06",
+        "updated": "2026-08-21",
+        "version_scope": "as-of-2026-08-21"
+      },
+      "section": {
+        "heading": "# 维修工具与刷写标准 SOP",
+        "startLine": 17,
+        "endLine": 24,
+        "sha256": "8eac62e155019ed6880cb4a70e9c8d84f119c24be2b4ebac23d6677c842a905c",
+        "normalization": "UTF-8 LF, heading through before next level-1/2 heading"
+      },
+      "sha256After": "5bf8256de1b8cd23d774a9122d8f7071c67a05d9dbf5c0e278f5e418a83c3358",
+      "unchanged": true
+    },
+    {
+      "id": "mini",
+      "root": "active-vault",
+      "file": "07-标准知识/03-标准SOP/核心维修手册/机型-LUBA-mini-HM430-HM431核心维修流程.md",
+      "sha256Before": "ca8c8b5bf79b40fd493603f79b555ebdc97fb0a9902d12ed94e8809acf7d7524",
+      "bytes": 4010,
+      "sourceRole": "active-technical-reference",
+      "dates": {
+        "generated": "2026-08-14",
+        "updated": "2026-08-14",
+        "version_scope": "as-provided-2026-08-14",
+        "source_version": "unknown"
+      },
+      "section": {
+        "heading": "## 分系统隔离",
+        "startLine": 36,
+        "endLine": 49,
+        "sha256": "46d4ce111cf35dfdda38d70cf80a77ca075bd746cd873a840fdcae175fd3ab89",
+        "normalization": "UTF-8 LF, heading through before next level-1/2 heading"
+      },
+      "sha256After": "ca8c8b5bf79b40fd493603f79b555ebdc97fb0a9902d12ed94e8809acf7d7524",
+      "unchanged": true
+    },
+    {
+      "id": "scope",
+      "root": "active-vault",
+      "file": "07-标准知识/06-版本治理/02-版本适用与失效规则.md",
+      "sha256Before": "1fce44352bb00271669b24ff36ad5603c5f724dc9e2dfbcc2bc60d7858470fa3",
+      "bytes": 1266,
+      "sourceRole": "active-technical-reference",
+      "dates": {
+        "generated": "2026-08-06",
+        "version_scope": "as-of-2026-08-06"
+      },
+      "section": {
+        "heading": "# 版本适用与失效规则",
+        "startLine": 13,
+        "endLine": 14,
+        "sha256": "e933f1f19bdf768700e66340edcbdd609ef2e6c9cb48c2ce03e3cc512bcaea4d",
+        "normalization": "UTF-8 LF, heading through before next level-1/2 heading"
+      },
+      "sha256After": "1fce44352bb00271669b24ff36ad5603c5f724dc9e2dfbcc2bc60d7858470fa3",
+      "unchanged": true
+    }
+  ],
+  "selected": [
+    {
+      "rank": 1,
+      "id": "no-charge",
+      "symptom": "机器人正确入桩仍不充电",
+      "modelScope": "LUBA 1 / 2 / 2X / 3",
+      "hardwareDomain": "充电电源/触点",
+      "solution": "确认触点与桩供电；使用兼容良品分别交叉适配器和充电桩，仅更换被定位的故障件。",
+      "verification": "恢复稳定充电指示及该型号正常充电行为。 原症状在原使用条件下消失；完成适用 Functional Test、Communication Check、AutoMap Run 三报告、Connect Checking 截图、修后最终测试的新日志；驱动板/电机/电池/电源维修另需 Burn-in 通过，换充电桩或充电极片除外。",
+      "fallback": "仍失败、复发、无法执行适用测试或证据不足时转 PIE；保留现象、交叉测试和修后结果，不自动追加换件。",
+      "publicationStatus": "GUIDED",
+      "evidenceState": "STABLE_OPERATIONAL_GUIDANCE",
+      "existingCards": [
+        "guide-no-charge"
+      ],
+      "newPublicRepairPath": false,
+      "frequency": null,
+      "rationale": "近期低SOC压降观察提高排查价值，空载正常不能排除电源，未闭环不直接认定电池。",
+      "sourceRefs": [
+        {
+          "sourceId": "charge",
+          "file": "07-标准知识/03-标准SOP/充电与回充标准SOP.md",
+          "section": "## 不充电",
+          "sectionSha256": "d526f3ead8f2e6a5a0a6974691463d1bc7e28a88811c8ba5d64959637b28a2fc"
+        },
+        {
+          "sourceId": "nff",
+          "file": "07-标准知识/03-标准SOP/NFF与二返标准SOP.md",
+          "section": "## 7. 未发现问题 / 维修完成验收门（唯一口径）",
+          "sectionSha256": "266df8eeaf5148ceebbfdb82f1aa2b5494ef7c99f3bda7f24c04e34ea414adfd"
+        }
+      ],
+      "gap": "需精确项目/目标/区域/侧别及当前SBOM才能发布SKU；无通用数量或拆装序列。",
+      "fieldAudit": {
+        "part": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "充电电源/触点",
+          "sourceRefs": [
+            {
+              "sourceId": "charge",
+              "file": "07-标准知识/03-标准SOP/充电与回充标准SOP.md",
+              "section": "## 不充电",
+              "sectionSha256": "d526f3ead8f2e6a5a0a6974691463d1bc7e28a88811c8ba5d64959637b28a2fc"
+            }
+          ],
+          "reason": "只在路径确诊及可维修性门通过后使用组件名称。"
+        },
+        "sku": {
+          "classification": "CONFLICT",
+          "value": null,
+          "sourceRefs": [
+            {
+              "sourceId": "charge",
+              "file": "07-标准知识/03-标准SOP/充电与回充标准SOP.md",
+              "section": "## 不充电",
+              "sectionSha256": "d526f3ead8f2e6a5a0a6974691463d1bc7e28a88811c8ba5d64959637b28a2fc"
+            }
+          ],
+          "reason": "Do not silently publish cleaner SKU. QTY14 in product name is not supported as a one-repair quantity. Region/capacity unconfirmed in broad public path.",
+          "resourceReviewId": "hm441-eu-adapter-conflict",
+          "resourceSourceRefs": [
+            {
+              "sourceId": "hm441-manual",
+              "file": "07-标准知识/03-标准SOP/核心维修手册/机型-LUBA-2X-HM441核心维修流程.md",
+              "section": "分系统隔离; 当前SBOM; 手册内部冲突; 完工门",
+              "sourceSha256": "06de4f5d2e8103c0ccf8fa0d93b56ac4a0250dca86c7edd2f1227c4fb684f06f",
+              "hashScope": "whole-source-file; section selector supplied by resource review"
+            },
+            {
+              "sourceId": "parts-compat",
+              "file": "03-产品与料号/01-工件兼容表.md",
+              "section": "LUBA 2X cutter rows; regional adapter rows; model compatibility",
+              "sourceSha256": "1704dc3b7e510eafd3328528bf9b788e07eb2f421e99040fdbd9befd4b1b33d0",
+              "hashScope": "whole-source-file; section selector supplied by resource review"
+            },
+            {
+              "sourceId": "eu-adapter",
+              "file": "03-产品与料号/物料卡片/C.P.XS.000121001.md",
+              "section": "适用范围与供应信息, SBOM row 266",
+              "sourceSha256": "018cf58483a532e01da9a75b83ae9dda49852032d74e12cee8780ab1ba077c14",
+              "hashScope": "whole-source-file; section selector supplied by resource review"
+            },
+            {
+              "sourceId": "ca-adapter",
+              "file": "03-产品与料号/物料卡片/C.P.XS.000121005.md",
+              "section": "适用范围与供应信息, SBOM row 270",
+              "sourceSha256": "7b6bdc4580cd3c7e9c38fabebdc72a73c940c264b6ff91e2f8d90c83af895330",
+              "hashScope": "whole-source-file; section selector supplied by resource review"
+            }
+          ]
+        },
+        "qty": {
+          "classification": "NEEDS_SCOPE_REVIEW",
+          "value": null,
+          "sourceRefs": [
+            {
+              "sourceId": "charge",
+              "file": "07-标准知识/03-标准SOP/充电与回充标准SOP.md",
+              "section": "## 不充电",
+              "sectionSha256": "d526f3ead8f2e6a5a0a6974691463d1bc7e28a88811c8ba5d64959637b28a2fc"
+            }
+          ],
+          "reason": "无绑定本修理目标的明确用量；不得由“一件部件”推断下单数量。"
+        },
+        "tool": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "该模型/功能支持的维修测试工具",
+          "sourceRefs": [
+            {
+              "sourceId": "charge",
+              "file": "07-标准知识/03-标准SOP/充电与回充标准SOP.md",
+              "section": "## 不充电",
+              "sectionSha256": "d526f3ead8f2e6a5a0a6974691463d1bc7e28a88811c8ba5d64959637b28a2fc"
+            },
+            {
+              "sourceId": "tools",
+              "file": "07-标准知识/03-标准SOP/维修工具与刷写标准SOP.md",
+              "section": "# 维修工具与刷写标准 SOP",
+              "sectionSha256": "8eac62e155019ed6880cb4a70e9c8d84f119c24be2b4ebac23d6677c842a905c"
+            }
+          ],
+          "reason": "MammoSuite与Mammotion Kit不互换；不是跨型号工具功能授权。"
+        },
+        "toolUsage": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "在确认工具支持后执行本分支检查与适用验收。",
+          "sourceRefs": [
+            {
+              "sourceId": "charge",
+              "file": "07-标准知识/03-标准SOP/充电与回充标准SOP.md",
+              "section": "## 不充电",
+              "sectionSha256": "d526f3ead8f2e6a5a0a6974691463d1bc7e28a88811c8ba5d64959637b28a2fc"
+            },
+            {
+              "sourceId": "tools",
+              "file": "07-标准知识/03-标准SOP/维修工具与刷写标准SOP.md",
+              "section": "# 维修工具与刷写标准 SOP",
+              "sectionSha256": "8eac62e155019ed6880cb4a70e9c8d84f119c24be2b4ebac23d6677c842a905c"
+            }
+          ],
+          "reason": "如工具不支持，转PIE，不以功能名假定支持。"
+        },
+        "disassembly": {
+          "classification": "NEEDS_SCOPE_REVIEW",
+          "value": null,
+          "sourceRefs": [
+            {
+              "sourceId": "charge",
+              "file": "07-标准知识/03-标准SOP/充电与回充标准SOP.md",
+              "section": "## 不充电",
+              "sectionSha256": "d526f3ead8f2e6a5a0a6974691463d1bc7e28a88811c8ba5d64959637b28a2fc"
+            }
+          ],
+          "reason": "断电/清障/外观检查可作范围说明，但没有可跨型号发布的开盖拆装、扭矩或连接器序列。"
+        },
+        "expectedResult": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "恢复稳定充电指示及该型号正常充电行为。",
+          "sourceRefs": [
+            {
+              "sourceId": "charge",
+              "file": "07-标准知识/03-标准SOP/充电与回充标准SOP.md",
+              "section": "## 不充电",
+              "sectionSha256": "d526f3ead8f2e6a5a0a6974691463d1bc7e28a88811c8ba5d64959637b28a2fc"
+            }
+          ],
+          "reason": "原症状和对应功能可观测，无发明电压/电流/时长阈值。"
+        },
+        "verification": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "原症状在原使用条件下消失；完成适用 Functional Test、Communication Check、AutoMap Run 三报告、Connect Checking 截图、修后最终测试的新日志；驱动板/电机/电池/电源维修另需 Burn-in 通过，换充电桩或充电极片除外。",
+          "sourceRefs": [
+            {
+              "sourceId": "nff",
+              "file": "07-标准知识/03-标准SOP/NFF与二返标准SOP.md",
+              "section": "## 7. 未发现问题 / 维修完成验收门（唯一口径）",
+              "sectionSha256": "266df8eeaf5148ceebbfdb82f1aa2b5494ef7c99f3bda7f24c04e34ea414adfd"
+            },
+            {
+              "sourceId": "burnin",
+              "file": "90-来源/业务口径/2026-09-11-维修后BurnIn验收口径.md",
+              "section": "## 已确认",
+              "sectionSha256": "6c9f096de12803430eceafddafd2fa12719e7c80c639b5a061f2fe2fcd7fcbfe"
+            }
+          ],
+          "reason": "09-14唯一验收口径；适用项不能缺失或以截图代报告。"
+        },
+        "fallback": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "仍失败、复发、无法执行适用测试或证据不足时转 PIE；保留现象、交叉测试和修后结果，不自动追加换件。",
+          "sourceRefs": [
+            {
+              "sourceId": "charge",
+              "file": "07-标准知识/03-标准SOP/充电与回充标准SOP.md",
+              "section": "## 不充电",
+              "sectionSha256": "d526f3ead8f2e6a5a0a6974691463d1bc7e28a88811c8ba5d64959637b28a2fc"
+            },
+            {
+              "sourceId": "nff",
+              "file": "07-标准知识/03-标准SOP/NFF与二返标准SOP.md",
+              "section": "## 7. 未发现问题 / 维修完成验收门（唯一口径）",
+              "sectionSha256": "266df8eeaf5148ceebbfdb82f1aa2b5494ef7c99f3bda7f24c04e34ea414adfd"
+            }
+          ],
+          "reason": "返修和未复现保留证据，不把换过当已排除。"
+        }
+      },
+      "controlledSymptomIds": [
+        "SYM-007"
+      ],
+      "existingPieRouting": null,
+      "resourceReviewRefs": [
+        "hm441-eu-adapter-conflict",
+        "full-disassembly-withheld",
+        "pcn-and-installation-coverage"
+      ],
+      "resourceSupportCandidates": [
+        "hw-charge-load-observation"
+      ],
+      "resourcePublicationStatus": "PUBLISHED_SCOPED_DETAILS",
+      "actualPublishedSupport": [
+        "hw-charge-load-observation-luba-1",
+        "hw-charge-load-observation-luba-2",
+        "hw-charge-load-observation-luba-2x",
+        "hw-charge-load-observation-luba-3"
+      ]
+    },
+    {
+      "rank": 2,
+      "id": "no-power",
+      "symptom": "机器人不开机",
+      "modelScope": "LUBA 2 / 2X / 3；LUBA 1打火观察仅PIE",
+      "hardwareDomain": "电池/BMS/主电源",
+      "solution": "按机型检查安全钥匙/开关/座充和供电；先识别故障节点，打火、短路、进水、发热即停止并交PIE。",
+      "verification": "开关机和原故障条件下负载运行稳定。 原症状在原使用条件下消失；完成适用 Functional Test、Communication Check、AutoMap Run 三报告、Connect Checking 截图、修后最终测试的新日志；驱动板/电机/电池/电源维修另需 Burn-in 通过，换充电桩或充电极片除外。",
+      "fallback": "仍失败、复发、无法执行适用测试或证据不足时转 PIE；保留现象、交叉测试和修后结果，不自动追加换件。",
+      "publicationStatus": "GUIDED",
+      "evidenceState": "STABLE_OPERATIONAL_GUIDANCE",
+      "existingCards": [
+        "guide-power"
+      ],
+      "newPublicRepairPath": false,
+      "frequency": null,
+      "rationale": "近期不开机伴打火仅强假设，安全与服务价值高；不从症状直接开电池或驱动板料号。",
+      "sourceRefs": [
+        {
+          "sourceId": "power",
+          "file": "07-标准知识/03-标准SOP/电池与开关机标准SOP.md",
+          "section": "# 电池与开关机标准 SOP",
+          "sectionSha256": "973fd781c1c37e108d2132982861f09f913edfcc42fbc7fd03db80629eaa0b42"
+        },
+        {
+          "sourceId": "nff",
+          "file": "07-标准知识/03-标准SOP/NFF与二返标准SOP.md",
+          "section": "## 7. 未发现问题 / 维修完成验收门（唯一口径）",
+          "sectionSha256": "266df8eeaf5148ceebbfdb82f1aa2b5494ef7c99f3bda7f24c04e34ea414adfd"
+        }
+      ],
+      "gap": "需精确项目/目标/区域/侧别及当前SBOM才能发布SKU；无通用数量或拆装序列。",
+      "fieldAudit": {
+        "part": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "电池/BMS/主电源",
+          "sourceRefs": [
+            {
+              "sourceId": "power",
+              "file": "07-标准知识/03-标准SOP/电池与开关机标准SOP.md",
+              "section": "# 电池与开关机标准 SOP",
+              "sectionSha256": "973fd781c1c37e108d2132982861f09f913edfcc42fbc7fd03db80629eaa0b42"
+            }
+          ],
+          "reason": "只在路径确诊及可维修性门通过后使用组件名称。"
+        },
+        "sku": {
+          "classification": "NEEDS_SCOPE_REVIEW",
+          "value": null,
+          "sourceRefs": [
+            {
+              "sourceId": "power",
+              "file": "07-标准知识/03-标准SOP/电池与开关机标准SOP.md",
+              "section": "# 电池与开关机标准 SOP",
+              "sectionSha256": "973fd781c1c37e108d2132982861f09f913edfcc42fbc7fd03db80629eaa0b42"
+            }
+          ],
+          "reason": "本rank跨型号；未形成 exact model + exact target + exact compatible SKU。零件详细冲突见task010资源审计。"
+        },
+        "qty": {
+          "classification": "NEEDS_SCOPE_REVIEW",
+          "value": null,
+          "sourceRefs": [
+            {
+              "sourceId": "power",
+              "file": "07-标准知识/03-标准SOP/电池与开关机标准SOP.md",
+              "section": "# 电池与开关机标准 SOP",
+              "sectionSha256": "973fd781c1c37e108d2132982861f09f913edfcc42fbc7fd03db80629eaa0b42"
+            }
+          ],
+          "reason": "无绑定本修理目标的明确用量；不得由“一件部件”推断下单数量。"
+        },
+        "tool": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "该模型/功能支持的维修测试工具",
+          "sourceRefs": [
+            {
+              "sourceId": "power",
+              "file": "07-标准知识/03-标准SOP/电池与开关机标准SOP.md",
+              "section": "# 电池与开关机标准 SOP",
+              "sectionSha256": "973fd781c1c37e108d2132982861f09f913edfcc42fbc7fd03db80629eaa0b42"
+            },
+            {
+              "sourceId": "tools",
+              "file": "07-标准知识/03-标准SOP/维修工具与刷写标准SOP.md",
+              "section": "# 维修工具与刷写标准 SOP",
+              "sectionSha256": "8eac62e155019ed6880cb4a70e9c8d84f119c24be2b4ebac23d6677c842a905c"
+            }
+          ],
+          "reason": "MammoSuite与Mammotion Kit不互换；不是跨型号工具功能授权。"
+        },
+        "toolUsage": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "在确认工具支持后执行本分支检查与适用验收。",
+          "sourceRefs": [
+            {
+              "sourceId": "power",
+              "file": "07-标准知识/03-标准SOP/电池与开关机标准SOP.md",
+              "section": "# 电池与开关机标准 SOP",
+              "sectionSha256": "973fd781c1c37e108d2132982861f09f913edfcc42fbc7fd03db80629eaa0b42"
+            },
+            {
+              "sourceId": "tools",
+              "file": "07-标准知识/03-标准SOP/维修工具与刷写标准SOP.md",
+              "section": "# 维修工具与刷写标准 SOP",
+              "sectionSha256": "8eac62e155019ed6880cb4a70e9c8d84f119c24be2b4ebac23d6677c842a905c"
+            }
+          ],
+          "reason": "如工具不支持，转PIE，不以功能名假定支持。"
+        },
+        "disassembly": {
+          "classification": "NEEDS_SCOPE_REVIEW",
+          "value": null,
+          "sourceRefs": [
+            {
+              "sourceId": "power",
+              "file": "07-标准知识/03-标准SOP/电池与开关机标准SOP.md",
+              "section": "# 电池与开关机标准 SOP",
+              "sectionSha256": "973fd781c1c37e108d2132982861f09f913edfcc42fbc7fd03db80629eaa0b42"
+            }
+          ],
+          "reason": "断电/清障/外观检查可作范围说明，但没有可跨型号发布的开盖拆装、扭矩或连接器序列。"
+        },
+        "expectedResult": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "开关机和原故障条件下负载运行稳定。",
+          "sourceRefs": [
+            {
+              "sourceId": "power",
+              "file": "07-标准知识/03-标准SOP/电池与开关机标准SOP.md",
+              "section": "# 电池与开关机标准 SOP",
+              "sectionSha256": "973fd781c1c37e108d2132982861f09f913edfcc42fbc7fd03db80629eaa0b42"
+            }
+          ],
+          "reason": "原症状和对应功能可观测，无发明电压/电流/时长阈值。"
+        },
+        "verification": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "原症状在原使用条件下消失；完成适用 Functional Test、Communication Check、AutoMap Run 三报告、Connect Checking 截图、修后最终测试的新日志；驱动板/电机/电池/电源维修另需 Burn-in 通过，换充电桩或充电极片除外。",
+          "sourceRefs": [
+            {
+              "sourceId": "nff",
+              "file": "07-标准知识/03-标准SOP/NFF与二返标准SOP.md",
+              "section": "## 7. 未发现问题 / 维修完成验收门（唯一口径）",
+              "sectionSha256": "266df8eeaf5148ceebbfdb82f1aa2b5494ef7c99f3bda7f24c04e34ea414adfd"
+            },
+            {
+              "sourceId": "burnin",
+              "file": "90-来源/业务口径/2026-09-11-维修后BurnIn验收口径.md",
+              "section": "## 已确认",
+              "sectionSha256": "6c9f096de12803430eceafddafd2fa12719e7c80c639b5a061f2fe2fcd7fcbfe"
+            }
+          ],
+          "reason": "09-14唯一验收口径；适用项不能缺失或以截图代报告。"
+        },
+        "fallback": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "仍失败、复发、无法执行适用测试或证据不足时转 PIE；保留现象、交叉测试和修后结果，不自动追加换件。",
+          "sourceRefs": [
+            {
+              "sourceId": "power",
+              "file": "07-标准知识/03-标准SOP/电池与开关机标准SOP.md",
+              "section": "# 电池与开关机标准 SOP",
+              "sectionSha256": "973fd781c1c37e108d2132982861f09f913edfcc42fbc7fd03db80629eaa0b42"
+            },
+            {
+              "sourceId": "nff",
+              "file": "07-标准知识/03-标准SOP/NFF与二返标准SOP.md",
+              "section": "## 7. 未发现问题 / 维修完成验收门（唯一口径）",
+              "sectionSha256": "266df8eeaf5148ceebbfdb82f1aa2b5494ef7c99f3bda7f24c04e34ea414adfd"
+            }
+          ],
+          "reason": "返修和未复现保留证据，不把换过当已排除。"
+        }
+      },
+      "controlledSymptomIds": [
+        "SYM-011"
+      ],
+      "existingPieRouting": null,
+      "resourceReviewRefs": [
+        "tool-capability-boundary",
+        "full-disassembly-withheld",
+        "pcn-and-installation-coverage"
+      ],
+      "resourceSupportCandidates": [
+        "hw-power-observation"
+      ],
+      "resourcePublicationStatus": "PUBLISHED_SCOPED_DETAILS",
+      "actualPublishedSupport": [
+        "hw-power-observation-luba-2",
+        "hw-power-observation-luba-2x",
+        "hw-power-observation-luba-3",
+        "hw-power-stop-luba-2",
+        "hw-power-stop-luba-2x",
+        "hw-power-stop-luba-3"
+      ]
+    },
+    {
+      "rank": 3,
+      "id": "wheel",
+      "symptom": "一个或多个轮子不转/运动异常",
+      "modelScope": "LUBA 2 / 2X / 3",
+      "hardwareDomain": "轮毂/电机线束/驱动通道",
+      "solution": "先排机械卡阻与断电线束检查；用机型支持的电机测试定位，多个执行器同时失败转共享链路PIE检查。",
+      "verification": "受影响轮正常运动，适用Motor Test和原负载工况通过。 原症状在原使用条件下消失；完成适用 Functional Test、Communication Check、AutoMap Run 三报告、Connect Checking 截图、修后最终测试的新日志；驱动板/电机/电池/电源维修另需 Burn-in 通过，换充电桩或充电极片除外。",
+      "fallback": "仍失败、复发、无法执行适用测试或证据不足时转 PIE；保留现象、交叉测试和修后结果，不自动追加换件。",
+      "publicationStatus": "GUIDED",
+      "evidenceState": "STABLE_OPERATIONAL_GUIDANCE",
+      "existingCards": [
+        "guide-wheel-movement"
+      ],
+      "newPublicRepairPath": false,
+      "frequency": null,
+      "rationale": "维护中的轮毂SOP和聚合知识覆盖完整；电机/驱动板不能凭单次工具失败互相替代。",
+      "sourceRefs": [
+        {
+          "sourceId": "wheel",
+          "file": "07-标准知识/03-标准SOP/轮毂与行走标准SOP.md",
+          "section": "# 轮毂与行走标准 SOP",
+          "sectionSha256": "b4cb153dccc3081f820a75163a5ada2a717f0174c74dae0243ce3e133b106570"
+        },
+        {
+          "sourceId": "nff",
+          "file": "07-标准知识/03-标准SOP/NFF与二返标准SOP.md",
+          "section": "## 7. 未发现问题 / 维修完成验收门（唯一口径）",
+          "sectionSha256": "266df8eeaf5148ceebbfdb82f1aa2b5494ef7c99f3bda7f24c04e34ea414adfd"
+        }
+      ],
+      "gap": "需精确项目/目标/区域/侧别及当前SBOM才能发布SKU；无通用数量或拆装序列。",
+      "fieldAudit": {
+        "part": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "轮毂/电机线束/驱动通道",
+          "sourceRefs": [
+            {
+              "sourceId": "wheel",
+              "file": "07-标准知识/03-标准SOP/轮毂与行走标准SOP.md",
+              "section": "# 轮毂与行走标准 SOP",
+              "sectionSha256": "b4cb153dccc3081f820a75163a5ada2a717f0174c74dae0243ce3e133b106570"
+            }
+          ],
+          "reason": "只在路径确诊及可维修性门通过后使用组件名称。"
+        },
+        "sku": {
+          "classification": "CONFLICT",
+          "value": null,
+          "sourceRefs": [
+            {
+              "sourceId": "wheel",
+              "file": "07-标准知识/03-标准SOP/轮毂与行走标准SOP.md",
+              "section": "# 轮毂与行走标准 SOP",
+              "sectionSha256": "b4cb153dccc3081f820a75163a5ada2a717f0174c74dae0243ce3e133b106570"
+            }
+          ],
+          "reason": "Preserve conflicting identifiers privately; no wheel SKU or automatic driver-board fallback.",
+          "resourceReviewId": "hm441-wheel-conflict",
+          "resourceSourceRefs": [
+            {
+              "sourceId": "hm441-manual",
+              "file": "07-标准知识/03-标准SOP/核心维修手册/机型-LUBA-2X-HM441核心维修流程.md",
+              "section": "分系统隔离; 当前SBOM; 手册内部冲突; 完工门",
+              "sourceSha256": "06de4f5d2e8103c0ccf8fa0d93b56ac4a0250dca86c7edd2f1227c4fb684f06f",
+              "hashScope": "whole-source-file; section selector supplied by resource review"
+            },
+            {
+              "sourceId": "hm441-structure",
+              "file": "07-标准知识/07-机型结构/项目/HM441-结构主档.md",
+              "section": "系统/关键物料组件",
+              "sourceSha256": "bde78074e3dc8bca9849e581d7958e3374c9c3f717c4c0b1db38a74c65c854ea",
+              "hashScope": "whole-source-file; section selector supplied by resource review"
+            },
+            {
+              "sourceId": "parts-compat",
+              "file": "03-产品与料号/01-工件兼容表.md",
+              "section": "LUBA 2X cutter rows; regional adapter rows; model compatibility",
+              "sourceSha256": "1704dc3b7e510eafd3328528bf9b788e07eb2f421e99040fdbd9befd4b1b33d0",
+              "hashScope": "whole-source-file; section selector supplied by resource review"
+            },
+            {
+              "sourceId": "parts-alternatives",
+              "file": "03-产品与料号/02-替代料表.md",
+              "section": "V2 header; LUBA 2X cutter and wheel alternatives",
+              "sourceSha256": "485e6c677ec26d47a693bdab6e7fb2197f6159ed6a97438a25922a1406e9221a",
+              "hashScope": "whole-source-file; section selector supplied by resource review"
+            }
+          ]
+        },
+        "qty": {
+          "classification": "NEEDS_SCOPE_REVIEW",
+          "value": null,
+          "sourceRefs": [
+            {
+              "sourceId": "wheel",
+              "file": "07-标准知识/03-标准SOP/轮毂与行走标准SOP.md",
+              "section": "# 轮毂与行走标准 SOP",
+              "sectionSha256": "b4cb153dccc3081f820a75163a5ada2a717f0174c74dae0243ce3e133b106570"
+            }
+          ],
+          "reason": "无绑定本修理目标的明确用量；不得由“一件部件”推断下单数量。"
+        },
+        "tool": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "该模型/功能支持的维修测试工具",
+          "sourceRefs": [
+            {
+              "sourceId": "wheel",
+              "file": "07-标准知识/03-标准SOP/轮毂与行走标准SOP.md",
+              "section": "# 轮毂与行走标准 SOP",
+              "sectionSha256": "b4cb153dccc3081f820a75163a5ada2a717f0174c74dae0243ce3e133b106570"
+            },
+            {
+              "sourceId": "tools",
+              "file": "07-标准知识/03-标准SOP/维修工具与刷写标准SOP.md",
+              "section": "# 维修工具与刷写标准 SOP",
+              "sectionSha256": "8eac62e155019ed6880cb4a70e9c8d84f119c24be2b4ebac23d6677c842a905c"
+            }
+          ],
+          "reason": "MammoSuite与Mammotion Kit不互换；不是跨型号工具功能授权。"
+        },
+        "toolUsage": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "仅用机型支持的Motor Test区分电机与驱动通道；多电机同错转PIE。",
+          "sourceRefs": [
+            {
+              "sourceId": "wheel",
+              "file": "07-标准知识/03-标准SOP/轮毂与行走标准SOP.md",
+              "section": "# 轮毂与行走标准 SOP",
+              "sectionSha256": "b4cb153dccc3081f820a75163a5ada2a717f0174c74dae0243ce3e133b106570"
+            },
+            {
+              "sourceId": "tools",
+              "file": "07-标准知识/03-标准SOP/维修工具与刷写标准SOP.md",
+              "section": "# 维修工具与刷写标准 SOP",
+              "sectionSha256": "8eac62e155019ed6880cb4a70e9c8d84f119c24be2b4ebac23d6677c842a905c"
+            }
+          ],
+          "reason": "如工具不支持，转PIE，不以功能名假定支持。"
+        },
+        "disassembly": {
+          "classification": "NEEDS_SCOPE_REVIEW",
+          "value": null,
+          "sourceRefs": [
+            {
+              "sourceId": "wheel",
+              "file": "07-标准知识/03-标准SOP/轮毂与行走标准SOP.md",
+              "section": "# 轮毂与行走标准 SOP",
+              "sectionSha256": "b4cb153dccc3081f820a75163a5ada2a717f0174c74dae0243ce3e133b106570"
+            }
+          ],
+          "reason": "断电/清障/外观检查可作范围说明，但没有可跨型号发布的开盖拆装、扭矩或连接器序列。"
+        },
+        "expectedResult": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "受影响轮正常运动，适用Motor Test和原负载工况通过。",
+          "sourceRefs": [
+            {
+              "sourceId": "wheel",
+              "file": "07-标准知识/03-标准SOP/轮毂与行走标准SOP.md",
+              "section": "# 轮毂与行走标准 SOP",
+              "sectionSha256": "b4cb153dccc3081f820a75163a5ada2a717f0174c74dae0243ce3e133b106570"
+            }
+          ],
+          "reason": "原症状和对应功能可观测，无发明电压/电流/时长阈值。"
+        },
+        "verification": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "原症状在原使用条件下消失；完成适用 Functional Test、Communication Check、AutoMap Run 三报告、Connect Checking 截图、修后最终测试的新日志；驱动板/电机/电池/电源维修另需 Burn-in 通过，换充电桩或充电极片除外。",
+          "sourceRefs": [
+            {
+              "sourceId": "nff",
+              "file": "07-标准知识/03-标准SOP/NFF与二返标准SOP.md",
+              "section": "## 7. 未发现问题 / 维修完成验收门（唯一口径）",
+              "sectionSha256": "266df8eeaf5148ceebbfdb82f1aa2b5494ef7c99f3bda7f24c04e34ea414adfd"
+            },
+            {
+              "sourceId": "burnin",
+              "file": "90-来源/业务口径/2026-09-11-维修后BurnIn验收口径.md",
+              "section": "## 已确认",
+              "sectionSha256": "6c9f096de12803430eceafddafd2fa12719e7c80c639b5a061f2fe2fcd7fcbfe"
+            }
+          ],
+          "reason": "09-14唯一验收口径；适用项不能缺失或以截图代报告。"
+        },
+        "fallback": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "仍失败、复发、无法执行适用测试或证据不足时转 PIE；保留现象、交叉测试和修后结果，不自动追加换件。",
+          "sourceRefs": [
+            {
+              "sourceId": "wheel",
+              "file": "07-标准知识/03-标准SOP/轮毂与行走标准SOP.md",
+              "section": "# 轮毂与行走标准 SOP",
+              "sectionSha256": "b4cb153dccc3081f820a75163a5ada2a717f0174c74dae0243ce3e133b106570"
+            },
+            {
+              "sourceId": "nff",
+              "file": "07-标准知识/03-标准SOP/NFF与二返标准SOP.md",
+              "section": "## 7. 未发现问题 / 维修完成验收门（唯一口径）",
+              "sectionSha256": "266df8eeaf5148ceebbfdb82f1aa2b5494ef7c99f3bda7f24c04e34ea414adfd"
+            }
+          ],
+          "reason": "返修和未复现保留证据，不把换过当已排除。"
+        }
+      },
+      "controlledSymptomIds": [
+        "SYM-001",
+        "SYM-002"
+      ],
+      "existingPieRouting": null,
+      "resourceReviewRefs": [
+        "hm441-wheel-conflict",
+        "tool-capability-boundary",
+        "full-disassembly-withheld",
+        "pcn-and-installation-coverage"
+      ],
+      "resourceSupportCandidates": [
+        "hw-wheel-cross-result"
+      ],
+      "resourcePublicationStatus": "PUBLISHED_SCOPED_DETAILS",
+      "actualPublishedSupport": [
+        "hw-wheel-cross-result-luba-2",
+        "hw-wheel-cross-result-luba-2x",
+        "hw-wheel-cross-result-luba-3"
+      ]
+    },
+    {
+      "rank": 4,
+      "id": "shared-can",
+      "symptom": "多个驱动/执行器一起停转且重复通信失败",
+      "modelScope": "仅PIE确认主板—CAN—驱动板拓扑的精确变体；不是所有LUBA/YUKA",
+      "hardwareDomain": "共享CAN/线束/驱动板",
+      "solution": "PIE先确认拓扑；断电检查连接器/线束，再以兼容已知良好CAN线交叉；只有仍失败且故障随驱动板移动才定位板件。",
+      "verification": "原负载下通信及执行器稳定；相关感知/回充分别复测，不能只凭维修台短时Pass放行。 原症状在原使用条件下消失；完成适用 Functional Test、Communication Check、AutoMap Run 三报告、Connect Checking 截图、修后最终测试的新日志；驱动板/电机/电池/电源维修另需 Burn-in 通过，换充电桩或充电极片除外。",
+      "fallback": "仍失败、复发、无法执行适用测试或证据不足时转 PIE；保留现象、交叉测试和修后结果，不自动追加换件。",
+      "publicationStatus": "PIE_ONLY",
+      "evidenceState": "TOP10_PIE_GUIDED",
+      "existingCards": [],
+      "newPublicRepairPath": false,
+      "frequency": null,
+      "rationale": "08-21业务判据和近期复合症状提供独立管理价值；无完整机型闭环，保留TOP10_PIE_GUIDED。",
+      "sourceRefs": [
+        {
+          "sourceId": "can",
+          "file": "07-标准知识/03-标准SOP/轮毂与行走标准SOP.md",
+          "section": "## 复合症状判定：定位丢失 + CAN 失败 + 感知/回充异常",
+          "sectionSha256": "2cf1a3b794a290a4d557398daa302b0d71255c1af8501b408cf50db2916ab35e"
+        },
+        {
+          "sourceId": "nff",
+          "file": "07-标准知识/03-标准SOP/NFF与二返标准SOP.md",
+          "section": "## 7. 未发现问题 / 维修完成验收门（唯一口径）",
+          "sectionSha256": "266df8eeaf5148ceebbfdb82f1aa2b5494ef7c99f3bda7f24c04e34ea414adfd"
+        }
+      ],
+      "gap": "精确机型/变体、稳定修后闭环与公开可执行范围不足，保持PIE_ONLY。",
+      "fieldAudit": {
+        "part": {
+          "classification": "PRIVATE_ONLY",
+          "value": "共享CAN/线束/驱动板",
+          "sourceRefs": [
+            {
+              "sourceId": "can",
+              "file": "07-标准知识/03-标准SOP/轮毂与行走标准SOP.md",
+              "section": "## 复合症状判定：定位丢失 + CAN 失败 + 感知/回充异常",
+              "sectionSha256": "2cf1a3b794a290a4d557398daa302b0d71255c1af8501b408cf50db2916ab35e"
+            }
+          ],
+          "reason": "调查链路不是确诊换件清单。"
+        },
+        "sku": {
+          "classification": "NEEDS_SCOPE_REVIEW",
+          "value": null,
+          "sourceRefs": [
+            {
+              "sourceId": "can",
+              "file": "07-标准知识/03-标准SOP/轮毂与行走标准SOP.md",
+              "section": "## 复合症状判定：定位丢失 + CAN 失败 + 感知/回充异常",
+              "sectionSha256": "2cf1a3b794a290a4d557398daa302b0d71255c1af8501b408cf50db2916ab35e"
+            }
+          ],
+          "reason": "本rank跨型号；未形成 exact model + exact target + exact compatible SKU。零件详细冲突见task010资源审计。"
+        },
+        "qty": {
+          "classification": "NEEDS_SCOPE_REVIEW",
+          "value": null,
+          "sourceRefs": [
+            {
+              "sourceId": "can",
+              "file": "07-标准知识/03-标准SOP/轮毂与行走标准SOP.md",
+              "section": "## 复合症状判定：定位丢失 + CAN 失败 + 感知/回充异常",
+              "sectionSha256": "2cf1a3b794a290a4d557398daa302b0d71255c1af8501b408cf50db2916ab35e"
+            }
+          ],
+          "reason": "无绑定本修理目标的明确用量；不得由“一件部件”推断下单数量。"
+        },
+        "tool": {
+          "classification": "PRIVATE_ONLY",
+          "value": "PIE确认的机型适用测试工具",
+          "sourceRefs": [
+            {
+              "sourceId": "can",
+              "file": "07-标准知识/03-标准SOP/轮毂与行走标准SOP.md",
+              "section": "## 复合症状判定：定位丢失 + CAN 失败 + 感知/回充异常",
+              "sectionSha256": "2cf1a3b794a290a4d557398daa302b0d71255c1af8501b408cf50db2916ab35e"
+            },
+            {
+              "sourceId": "tools",
+              "file": "07-标准知识/03-标准SOP/维修工具与刷写标准SOP.md",
+              "section": "# 维修工具与刷写标准 SOP",
+              "sectionSha256": "8eac62e155019ed6880cb4a70e9c8d84f119c24be2b4ebac23d6677c842a905c"
+            }
+          ],
+          "reason": "MammoSuite与Mammotion Kit不互换；不是跨型号工具功能授权。"
+        },
+        "toolUsage": {
+          "classification": "PRIVATE_ONLY",
+          "value": "在确认工具支持后执行本分支检查与适用验收。",
+          "sourceRefs": [
+            {
+              "sourceId": "can",
+              "file": "07-标准知识/03-标准SOP/轮毂与行走标准SOP.md",
+              "section": "## 复合症状判定：定位丢失 + CAN 失败 + 感知/回充异常",
+              "sectionSha256": "2cf1a3b794a290a4d557398daa302b0d71255c1af8501b408cf50db2916ab35e"
+            },
+            {
+              "sourceId": "tools",
+              "file": "07-标准知识/03-标准SOP/维修工具与刷写标准SOP.md",
+              "section": "# 维修工具与刷写标准 SOP",
+              "sectionSha256": "8eac62e155019ed6880cb4a70e9c8d84f119c24be2b4ebac23d6677c842a905c"
+            }
+          ],
+          "reason": "如工具不支持，转PIE，不以功能名假定支持。"
+        },
+        "disassembly": {
+          "classification": "NEEDS_SCOPE_REVIEW",
+          "value": null,
+          "sourceRefs": [
+            {
+              "sourceId": "can",
+              "file": "07-标准知识/03-标准SOP/轮毂与行走标准SOP.md",
+              "section": "## 复合症状判定：定位丢失 + CAN 失败 + 感知/回充异常",
+              "sectionSha256": "2cf1a3b794a290a4d557398daa302b0d71255c1af8501b408cf50db2916ab35e"
+            }
+          ],
+          "reason": "断电/清障/外观检查可作范围说明，但没有可跨型号发布的开盖拆装、扭矩或连接器序列。"
+        },
+        "expectedResult": {
+          "classification": "PRIVATE_ONLY",
+          "value": "原负载下通信及执行器稳定；相关感知/回充分别复测，不能只凭维修台短时Pass放行。",
+          "sourceRefs": [
+            {
+              "sourceId": "can",
+              "file": "07-标准知识/03-标准SOP/轮毂与行走标准SOP.md",
+              "section": "## 复合症状判定：定位丢失 + CAN 失败 + 感知/回充异常",
+              "sectionSha256": "2cf1a3b794a290a4d557398daa302b0d71255c1af8501b408cf50db2916ab35e"
+            }
+          ],
+          "reason": "原症状和对应功能可观测，无发明电压/电流/时长阈值。"
+        },
+        "verification": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "原症状在原使用条件下消失；完成适用 Functional Test、Communication Check、AutoMap Run 三报告、Connect Checking 截图、修后最终测试的新日志；驱动板/电机/电池/电源维修另需 Burn-in 通过，换充电桩或充电极片除外。",
+          "sourceRefs": [
+            {
+              "sourceId": "nff",
+              "file": "07-标准知识/03-标准SOP/NFF与二返标准SOP.md",
+              "section": "## 7. 未发现问题 / 维修完成验收门（唯一口径）",
+              "sectionSha256": "266df8eeaf5148ceebbfdb82f1aa2b5494ef7c99f3bda7f24c04e34ea414adfd"
+            },
+            {
+              "sourceId": "burnin",
+              "file": "90-来源/业务口径/2026-09-11-维修后BurnIn验收口径.md",
+              "section": "## 已确认",
+              "sectionSha256": "6c9f096de12803430eceafddafd2fa12719e7c80c639b5a061f2fe2fcd7fcbfe"
+            }
+          ],
+          "reason": "09-14唯一验收口径；适用项不能缺失或以截图代报告。"
+        },
+        "fallback": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "仍失败、复发、无法执行适用测试或证据不足时转 PIE；保留现象、交叉测试和修后结果，不自动追加换件。",
+          "sourceRefs": [
+            {
+              "sourceId": "can",
+              "file": "07-标准知识/03-标准SOP/轮毂与行走标准SOP.md",
+              "section": "## 复合症状判定：定位丢失 + CAN 失败 + 感知/回充异常",
+              "sectionSha256": "2cf1a3b794a290a4d557398daa302b0d71255c1af8501b408cf50db2916ab35e"
+            },
+            {
+              "sourceId": "nff",
+              "file": "07-标准知识/03-标准SOP/NFF与二返标准SOP.md",
+              "section": "## 7. 未发现问题 / 维修完成验收门（唯一口径）",
+              "sectionSha256": "266df8eeaf5148ceebbfdb82f1aa2b5494ef7c99f3bda7f24c04e34ea414adfd"
+            }
+          ],
+          "reason": "返修和未复现保留证据，不把换过当已排除。"
+        }
+      },
+      "controlledSymptomIds": [
+        "SYM-002"
+      ],
+      "existingPieRouting": "SYM-002 -> guide-wheel-movement/shared-power stop-and-PIE guardrail; no new public diagnosis",
+      "resourceReviewRefs": [
+        "new-can-hardware-path",
+        "full-disassembly-withheld",
+        "pcn-and-installation-coverage"
+      ],
+      "resourceSupportCandidates": [],
+      "resourcePublicationStatus": "PIE_ONLY_NO_NEW_PUBLIC_REPAIR",
+      "actualPublishedSupport": []
+    },
+    {
+      "rank": 5,
+      "id": "cutting",
+      "symptom": "实际割草时刀盘不转或卡阻",
+      "modelScope": "LUBA 1 / 2 / 2X / 3；1202冻结路径除外",
+      "hardwareDomain": "机械卡阻/割草电机",
+      "solution": "停机断电戴手套清除实物卡阻；复测实际割草；仅在电机故障及可维修总成确认后更换。",
+      "verification": "实际割草刀盘运动及声音正常，适用功能测试通过。 原症状在原使用条件下消失；完成适用 Functional Test、Communication Check、AutoMap Run 三报告、Connect Checking 截图、修后最终测试的新日志；驱动板/电机/电池/电源维修另需 Burn-in 通过，换充电桩或充电极片除外。",
+      "fallback": "仍失败、复发、无法执行适用测试或证据不足时转 PIE；保留现象、交叉测试和修后结果，不自动追加换件。",
+      "publicationStatus": "GUIDED",
+      "evidenceState": "STABLE_OPERATIONAL_GUIDANCE",
+      "existingCards": [
+        "guide-cutting-operation"
+      ],
+      "newPublicRepairPath": false,
+      "frequency": null,
+      "rationale": "明确机械优先、实际操作验证；1202与仅Functional Test异常不借本项放开。",
+      "sourceRefs": [
+        {
+          "sourceId": "cut",
+          "file": "07-标准知识/03-标准SOP/刀盘与割草标准SOP.md",
+          "section": "# 刀盘与割草标准 SOP",
+          "sectionSha256": "8dd1e3b9fe9405ae981385f9397ff0060a1620446e28641234db033bd65bc065"
+        },
+        {
+          "sourceId": "nff",
+          "file": "07-标准知识/03-标准SOP/NFF与二返标准SOP.md",
+          "section": "## 7. 未发现问题 / 维修完成验收门（唯一口径）",
+          "sectionSha256": "266df8eeaf5148ceebbfdb82f1aa2b5494ef7c99f3bda7f24c04e34ea414adfd"
+        }
+      ],
+      "gap": "需精确项目/目标/区域/侧别及当前SBOM才能发布SKU；无通用数量或拆装序列。",
+      "fieldAudit": {
+        "part": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "机械卡阻/割草电机",
+          "sourceRefs": [
+            {
+              "sourceId": "cut",
+              "file": "07-标准知识/03-标准SOP/刀盘与割草标准SOP.md",
+              "section": "# 刀盘与割草标准 SOP",
+              "sectionSha256": "8dd1e3b9fe9405ae981385f9397ff0060a1620446e28641234db033bd65bc065"
+            }
+          ],
+          "reason": "只在路径确诊及可维修性门通过后使用组件名称。"
+        },
+        "sku": {
+          "classification": "NEEDS_SCOPE_REVIEW",
+          "value": null,
+          "sourceRefs": [
+            {
+              "sourceId": "cut",
+              "file": "07-标准知识/03-标准SOP/刀盘与割草标准SOP.md",
+              "section": "# 刀盘与割草标准 SOP",
+              "sectionSha256": "8dd1e3b9fe9405ae981385f9397ff0060a1620446e28641234db033bd65bc065"
+            }
+          ],
+          "reason": "本rank跨型号；未形成 exact model + exact target + exact compatible SKU。零件详细冲突见task010资源审计。"
+        },
+        "qty": {
+          "classification": "NEEDS_SCOPE_REVIEW",
+          "value": null,
+          "sourceRefs": [
+            {
+              "sourceId": "cut",
+              "file": "07-标准知识/03-标准SOP/刀盘与割草标准SOP.md",
+              "section": "# 刀盘与割草标准 SOP",
+              "sectionSha256": "8dd1e3b9fe9405ae981385f9397ff0060a1620446e28641234db033bd65bc065"
+            }
+          ],
+          "reason": "无绑定本修理目标的明确用量；不得由“一件部件”推断下单数量。"
+        },
+        "tool": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "该模型/功能支持的维修测试工具",
+          "sourceRefs": [
+            {
+              "sourceId": "cut",
+              "file": "07-标准知识/03-标准SOP/刀盘与割草标准SOP.md",
+              "section": "# 刀盘与割草标准 SOP",
+              "sectionSha256": "8dd1e3b9fe9405ae981385f9397ff0060a1620446e28641234db033bd65bc065"
+            },
+            {
+              "sourceId": "tools",
+              "file": "07-标准知识/03-标准SOP/维修工具与刷写标准SOP.md",
+              "section": "# 维修工具与刷写标准 SOP",
+              "sectionSha256": "8eac62e155019ed6880cb4a70e9c8d84f119c24be2b4ebac23d6677c842a905c"
+            }
+          ],
+          "reason": "MammoSuite与Mammotion Kit不互换；不是跨型号工具功能授权。"
+        },
+        "toolUsage": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "实际割草与适用测试结合；不声称MammoSuite可独立隔离左右刀盘。",
+          "sourceRefs": [
+            {
+              "sourceId": "cut",
+              "file": "07-标准知识/03-标准SOP/刀盘与割草标准SOP.md",
+              "section": "# 刀盘与割草标准 SOP",
+              "sectionSha256": "8dd1e3b9fe9405ae981385f9397ff0060a1620446e28641234db033bd65bc065"
+            },
+            {
+              "sourceId": "tools",
+              "file": "07-标准知识/03-标准SOP/维修工具与刷写标准SOP.md",
+              "section": "# 维修工具与刷写标准 SOP",
+              "sectionSha256": "8eac62e155019ed6880cb4a70e9c8d84f119c24be2b4ebac23d6677c842a905c"
+            }
+          ],
+          "reason": "如工具不支持，转PIE，不以功能名假定支持。"
+        },
+        "disassembly": {
+          "classification": "NEEDS_SCOPE_REVIEW",
+          "value": null,
+          "sourceRefs": [
+            {
+              "sourceId": "cut",
+              "file": "07-标准知识/03-标准SOP/刀盘与割草标准SOP.md",
+              "section": "# 刀盘与割草标准 SOP",
+              "sectionSha256": "8dd1e3b9fe9405ae981385f9397ff0060a1620446e28641234db033bd65bc065"
+            }
+          ],
+          "reason": "断电/清障/外观检查可作范围说明，但没有可跨型号发布的开盖拆装、扭矩或连接器序列。"
+        },
+        "expectedResult": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "实际割草刀盘运动及声音正常，适用功能测试通过。",
+          "sourceRefs": [
+            {
+              "sourceId": "cut",
+              "file": "07-标准知识/03-标准SOP/刀盘与割草标准SOP.md",
+              "section": "# 刀盘与割草标准 SOP",
+              "sectionSha256": "8dd1e3b9fe9405ae981385f9397ff0060a1620446e28641234db033bd65bc065"
+            }
+          ],
+          "reason": "原症状和对应功能可观测，无发明电压/电流/时长阈值。"
+        },
+        "verification": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "原症状在原使用条件下消失；完成适用 Functional Test、Communication Check、AutoMap Run 三报告、Connect Checking 截图、修后最终测试的新日志；驱动板/电机/电池/电源维修另需 Burn-in 通过，换充电桩或充电极片除外。",
+          "sourceRefs": [
+            {
+              "sourceId": "nff",
+              "file": "07-标准知识/03-标准SOP/NFF与二返标准SOP.md",
+              "section": "## 7. 未发现问题 / 维修完成验收门（唯一口径）",
+              "sectionSha256": "266df8eeaf5148ceebbfdb82f1aa2b5494ef7c99f3bda7f24c04e34ea414adfd"
+            },
+            {
+              "sourceId": "burnin",
+              "file": "90-来源/业务口径/2026-09-11-维修后BurnIn验收口径.md",
+              "section": "## 已确认",
+              "sectionSha256": "6c9f096de12803430eceafddafd2fa12719e7c80c639b5a061f2fe2fcd7fcbfe"
+            }
+          ],
+          "reason": "09-14唯一验收口径；适用项不能缺失或以截图代报告。"
+        },
+        "fallback": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "仍失败、复发、无法执行适用测试或证据不足时转 PIE；保留现象、交叉测试和修后结果，不自动追加换件。",
+          "sourceRefs": [
+            {
+              "sourceId": "cut",
+              "file": "07-标准知识/03-标准SOP/刀盘与割草标准SOP.md",
+              "section": "# 刀盘与割草标准 SOP",
+              "sectionSha256": "8dd1e3b9fe9405ae981385f9397ff0060a1620446e28641234db033bd65bc065"
+            },
+            {
+              "sourceId": "nff",
+              "file": "07-标准知识/03-标准SOP/NFF与二返标准SOP.md",
+              "section": "## 7. 未发现问题 / 维修完成验收门（唯一口径）",
+              "sectionSha256": "266df8eeaf5148ceebbfdb82f1aa2b5494ef7c99f3bda7f24c04e34ea414adfd"
+            }
+          ],
+          "reason": "返修和未复现保留证据，不把换过当已排除。"
+        }
+      },
+      "controlledSymptomIds": [
+        "SYM-004",
+        "SYM-006"
+      ],
+      "existingPieRouting": null,
+      "resourceReviewRefs": [
+        "hm441-cutting-sku",
+        "tool-capability-boundary",
+        "full-disassembly-withheld",
+        "pcn-and-installation-coverage"
+      ],
+      "resourceSupportCandidates": [
+        "hw-cutting-safe-clean"
+      ],
+      "resourcePublicationStatus": "PUBLISHED_SCOPED_DETAILS",
+      "actualPublishedSupport": [
+        "hw-cutting-safe-clean-luba-1",
+        "hw-cutting-safe-clean-luba-2",
+        "hw-cutting-safe-clean-luba-2x",
+        "hw-cutting-safe-clean-luba-3"
+      ]
+    },
+    {
+      "rank": 6,
+      "id": "docking",
+      "symptom": "回桩对位失败或到桩后无法识别",
+      "modelScope": "LUBA 2 / 2X / 3；两个症状保留各自卡",
+      "hardwareDomain": "桩/红外窗口/接触对位",
+      "solution": "先区分进桩失败与已到桩不识别；清洁触点/IR窗口并排障，识别分支仅用兼容良品隔离桩/适配器。",
+      "verification": "对应分支的进桩、识别、接触与充电表现恢复稳定。 原症状在原使用条件下消失；完成适用 Functional Test、Communication Check、AutoMap Run 三报告、Connect Checking 截图、修后最终测试的新日志；驱动板/电机/电池/电源维修另需 Burn-in 通过，换充电桩或充电极片除外。",
+      "fallback": "仍失败、复发、无法执行适用测试或证据不足时转 PIE；保留现象、交叉测试和修后结果，不自动追加换件。",
+      "publicationStatus": "GUIDED",
+      "evidenceState": "STABLE_OPERATIONAL_GUIDANCE",
+      "existingCards": [
+        "guide-docking",
+        "guide-station-recognition"
+      ],
+      "newPublicRepairPath": false,
+      "frequency": null,
+      "rationale": "管理分组共用rank避免充电域重复占位；不合并两个公开症状或扩大换件权限。",
+      "sourceRefs": [
+        {
+          "sourceId": "charge",
+          "file": "07-标准知识/03-标准SOP/充电与回充标准SOP.md",
+          "section": "## 不充电",
+          "sectionSha256": "d526f3ead8f2e6a5a0a6974691463d1bc7e28a88811c8ba5d64959637b28a2fc"
+        },
+        {
+          "sourceId": "nff",
+          "file": "07-标准知识/03-标准SOP/NFF与二返标准SOP.md",
+          "section": "## 7. 未发现问题 / 维修完成验收门（唯一口径）",
+          "sectionSha256": "266df8eeaf5148ceebbfdb82f1aa2b5494ef7c99f3bda7f24c04e34ea414adfd"
+        }
+      ],
+      "gap": "需精确项目/目标/区域/侧别及当前SBOM才能发布SKU；无通用数量或拆装序列。",
+      "fieldAudit": {
+        "part": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "桩/红外窗口/接触对位",
+          "sourceRefs": [
+            {
+              "sourceId": "charge",
+              "file": "07-标准知识/03-标准SOP/充电与回充标准SOP.md",
+              "section": "## 不充电",
+              "sectionSha256": "d526f3ead8f2e6a5a0a6974691463d1bc7e28a88811c8ba5d64959637b28a2fc"
+            }
+          ],
+          "reason": "只在路径确诊及可维修性门通过后使用组件名称。"
+        },
+        "sku": {
+          "classification": "CONFLICT",
+          "value": null,
+          "sourceRefs": [
+            {
+              "sourceId": "charge",
+              "file": "07-标准知识/03-标准SOP/充电与回充标准SOP.md",
+              "section": "## 不充电",
+              "sectionSha256": "d526f3ead8f2e6a5a0a6974691463d1bc7e28a88811c8ba5d64959637b28a2fc"
+            }
+          ],
+          "reason": "Do not silently publish cleaner SKU. QTY14 in product name is not supported as a one-repair quantity. Region/capacity unconfirmed in broad public path.",
+          "resourceReviewId": "hm441-eu-adapter-conflict",
+          "resourceSourceRefs": [
+            {
+              "sourceId": "hm441-manual",
+              "file": "07-标准知识/03-标准SOP/核心维修手册/机型-LUBA-2X-HM441核心维修流程.md",
+              "section": "分系统隔离; 当前SBOM; 手册内部冲突; 完工门",
+              "sourceSha256": "06de4f5d2e8103c0ccf8fa0d93b56ac4a0250dca86c7edd2f1227c4fb684f06f",
+              "hashScope": "whole-source-file; section selector supplied by resource review"
+            },
+            {
+              "sourceId": "parts-compat",
+              "file": "03-产品与料号/01-工件兼容表.md",
+              "section": "LUBA 2X cutter rows; regional adapter rows; model compatibility",
+              "sourceSha256": "1704dc3b7e510eafd3328528bf9b788e07eb2f421e99040fdbd9befd4b1b33d0",
+              "hashScope": "whole-source-file; section selector supplied by resource review"
+            },
+            {
+              "sourceId": "eu-adapter",
+              "file": "03-产品与料号/物料卡片/C.P.XS.000121001.md",
+              "section": "适用范围与供应信息, SBOM row 266",
+              "sourceSha256": "018cf58483a532e01da9a75b83ae9dda49852032d74e12cee8780ab1ba077c14",
+              "hashScope": "whole-source-file; section selector supplied by resource review"
+            },
+            {
+              "sourceId": "ca-adapter",
+              "file": "03-产品与料号/物料卡片/C.P.XS.000121005.md",
+              "section": "适用范围与供应信息, SBOM row 270",
+              "sourceSha256": "7b6bdc4580cd3c7e9c38fabebdc72a73c940c264b6ff91e2f8d90c83af895330",
+              "hashScope": "whole-source-file; section selector supplied by resource review"
+            }
+          ]
+        },
+        "qty": {
+          "classification": "NEEDS_SCOPE_REVIEW",
+          "value": null,
+          "sourceRefs": [
+            {
+              "sourceId": "charge",
+              "file": "07-标准知识/03-标准SOP/充电与回充标准SOP.md",
+              "section": "## 不充电",
+              "sectionSha256": "d526f3ead8f2e6a5a0a6974691463d1bc7e28a88811c8ba5d64959637b28a2fc"
+            }
+          ],
+          "reason": "无绑定本修理目标的明确用量；不得由“一件部件”推断下单数量。"
+        },
+        "tool": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "该模型/功能支持的维修测试工具",
+          "sourceRefs": [
+            {
+              "sourceId": "charge",
+              "file": "07-标准知识/03-标准SOP/充电与回充标准SOP.md",
+              "section": "## 不充电",
+              "sectionSha256": "d526f3ead8f2e6a5a0a6974691463d1bc7e28a88811c8ba5d64959637b28a2fc"
+            },
+            {
+              "sourceId": "tools",
+              "file": "07-标准知识/03-标准SOP/维修工具与刷写标准SOP.md",
+              "section": "# 维修工具与刷写标准 SOP",
+              "sectionSha256": "8eac62e155019ed6880cb4a70e9c8d84f119c24be2b4ebac23d6677c842a905c"
+            }
+          ],
+          "reason": "MammoSuite与Mammotion Kit不互换；不是跨型号工具功能授权。"
+        },
+        "toolUsage": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "在确认工具支持后执行本分支检查与适用验收。",
+          "sourceRefs": [
+            {
+              "sourceId": "charge",
+              "file": "07-标准知识/03-标准SOP/充电与回充标准SOP.md",
+              "section": "## 不充电",
+              "sectionSha256": "d526f3ead8f2e6a5a0a6974691463d1bc7e28a88811c8ba5d64959637b28a2fc"
+            },
+            {
+              "sourceId": "tools",
+              "file": "07-标准知识/03-标准SOP/维修工具与刷写标准SOP.md",
+              "section": "# 维修工具与刷写标准 SOP",
+              "sectionSha256": "8eac62e155019ed6880cb4a70e9c8d84f119c24be2b4ebac23d6677c842a905c"
+            }
+          ],
+          "reason": "如工具不支持，转PIE，不以功能名假定支持。"
+        },
+        "disassembly": {
+          "classification": "NEEDS_SCOPE_REVIEW",
+          "value": null,
+          "sourceRefs": [
+            {
+              "sourceId": "charge",
+              "file": "07-标准知识/03-标准SOP/充电与回充标准SOP.md",
+              "section": "## 不充电",
+              "sectionSha256": "d526f3ead8f2e6a5a0a6974691463d1bc7e28a88811c8ba5d64959637b28a2fc"
+            }
+          ],
+          "reason": "断电/清障/外观检查可作范围说明，但没有可跨型号发布的开盖拆装、扭矩或连接器序列。"
+        },
+        "expectedResult": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "对应分支的进桩、识别、接触与充电表现恢复稳定。",
+          "sourceRefs": [
+            {
+              "sourceId": "charge",
+              "file": "07-标准知识/03-标准SOP/充电与回充标准SOP.md",
+              "section": "## 不充电",
+              "sectionSha256": "d526f3ead8f2e6a5a0a6974691463d1bc7e28a88811c8ba5d64959637b28a2fc"
+            }
+          ],
+          "reason": "原症状和对应功能可观测，无发明电压/电流/时长阈值。"
+        },
+        "verification": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "原症状在原使用条件下消失；完成适用 Functional Test、Communication Check、AutoMap Run 三报告、Connect Checking 截图、修后最终测试的新日志；驱动板/电机/电池/电源维修另需 Burn-in 通过，换充电桩或充电极片除外。",
+          "sourceRefs": [
+            {
+              "sourceId": "nff",
+              "file": "07-标准知识/03-标准SOP/NFF与二返标准SOP.md",
+              "section": "## 7. 未发现问题 / 维修完成验收门（唯一口径）",
+              "sectionSha256": "266df8eeaf5148ceebbfdb82f1aa2b5494ef7c99f3bda7f24c04e34ea414adfd"
+            },
+            {
+              "sourceId": "burnin",
+              "file": "90-来源/业务口径/2026-09-11-维修后BurnIn验收口径.md",
+              "section": "## 已确认",
+              "sectionSha256": "6c9f096de12803430eceafddafd2fa12719e7c80c639b5a061f2fe2fcd7fcbfe"
+            }
+          ],
+          "reason": "09-14唯一验收口径；适用项不能缺失或以截图代报告。"
+        },
+        "fallback": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "仍失败、复发、无法执行适用测试或证据不足时转 PIE；保留现象、交叉测试和修后结果，不自动追加换件。",
+          "sourceRefs": [
+            {
+              "sourceId": "charge",
+              "file": "07-标准知识/03-标准SOP/充电与回充标准SOP.md",
+              "section": "## 不充电",
+              "sectionSha256": "d526f3ead8f2e6a5a0a6974691463d1bc7e28a88811c8ba5d64959637b28a2fc"
+            },
+            {
+              "sourceId": "nff",
+              "file": "07-标准知识/03-标准SOP/NFF与二返标准SOP.md",
+              "section": "## 7. 未发现问题 / 维修完成验收门（唯一口径）",
+              "sectionSha256": "266df8eeaf5148ceebbfdb82f1aa2b5494ef7c99f3bda7f24c04e34ea414adfd"
+            }
+          ],
+          "reason": "返修和未复现保留证据，不把换过当已排除。"
+        }
+      },
+      "controlledSymptomIds": [
+        "SYM-009",
+        "SYM-010"
+      ],
+      "existingPieRouting": null,
+      "resourceReviewRefs": [
+        "hm441-eu-adapter-conflict",
+        "full-disassembly-withheld",
+        "pcn-and-installation-coverage"
+      ],
+      "resourceSupportCandidates": [
+        "hw-station-record-comparison",
+        "hw-docking-cleaning"
+      ],
+      "resourcePublicationStatus": "PUBLISHED_SCOPED_DETAILS",
+      "actualPublishedSupport": [
+        "hw-station-record-comparison-luba-2",
+        "hw-station-record-comparison-luba-2x",
+        "hw-station-record-comparison-luba-3",
+        "hw-docking-cleaning-luba-2",
+        "hw-docking-cleaning-luba-2x",
+        "hw-docking-cleaning-luba-3"
+      ]
+    },
+    {
+      "rank": 7,
+      "id": "bumper",
+      "symptom": "没有障碍物时防撞持续误触发",
+      "modelScope": "LUBA 2 / 2X / 3",
+      "hardwareDomain": "防撞机械回弹/可维修传感器",
+      "solution": "先清除异物并确认回弹；仍误触发用机型支持的检查确认组件，仅换确认为故障且可单独维修的部件。",
+      "verification": "防撞响应正常且无误触发，安全传感器及STOP测试通过。 原症状在原使用条件下消失；完成适用 Functional Test、Communication Check、AutoMap Run 三报告、Connect Checking 截图、修后最终测试的新日志；驱动板/电机/电池/电源维修另需 Burn-in 通过，换充电桩或充电极片除外。",
+      "fallback": "仍失败、复发、无法执行适用测试或证据不足时转 PIE；保留现象、交叉测试和修后结果，不自动追加换件。",
+      "publicationStatus": "GUIDED",
+      "evidenceState": "STABLE_OPERATIONAL_GUIDANCE",
+      "existingCards": [
+        "guide-bumper"
+      ],
+      "newPublicRepairPath": false,
+      "frequency": null,
+      "rationale": "可见现象、机械检查与安全验证明确；底盘Hall或不可单独维修组件留PIE。",
+      "sourceRefs": [
+        {
+          "sourceId": "bumper",
+          "file": "07-标准知识/03-标准SOP/传感器与防撞标准SOP.md",
+          "section": "# 传感器与防撞标准 SOP",
+          "sectionSha256": "8de59751636cf93f1735168318535617063e307ffae90b974854923173d1e54c"
+        },
+        {
+          "sourceId": "nff",
+          "file": "07-标准知识/03-标准SOP/NFF与二返标准SOP.md",
+          "section": "## 7. 未发现问题 / 维修完成验收门（唯一口径）",
+          "sectionSha256": "266df8eeaf5148ceebbfdb82f1aa2b5494ef7c99f3bda7f24c04e34ea414adfd"
+        }
+      ],
+      "gap": "需精确项目/目标/区域/侧别及当前SBOM才能发布SKU；无通用数量或拆装序列。",
+      "fieldAudit": {
+        "part": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "防撞机械回弹/可维修传感器",
+          "sourceRefs": [
+            {
+              "sourceId": "bumper",
+              "file": "07-标准知识/03-标准SOP/传感器与防撞标准SOP.md",
+              "section": "# 传感器与防撞标准 SOP",
+              "sectionSha256": "8de59751636cf93f1735168318535617063e307ffae90b974854923173d1e54c"
+            }
+          ],
+          "reason": "只在路径确诊及可维修性门通过后使用组件名称。"
+        },
+        "sku": {
+          "classification": "NEEDS_SCOPE_REVIEW",
+          "value": null,
+          "sourceRefs": [
+            {
+              "sourceId": "bumper",
+              "file": "07-标准知识/03-标准SOP/传感器与防撞标准SOP.md",
+              "section": "# 传感器与防撞标准 SOP",
+              "sectionSha256": "8de59751636cf93f1735168318535617063e307ffae90b974854923173d1e54c"
+            }
+          ],
+          "reason": "本rank跨型号；未形成 exact model + exact target + exact compatible SKU。零件详细冲突见task010资源审计。"
+        },
+        "qty": {
+          "classification": "NEEDS_SCOPE_REVIEW",
+          "value": null,
+          "sourceRefs": [
+            {
+              "sourceId": "bumper",
+              "file": "07-标准知识/03-标准SOP/传感器与防撞标准SOP.md",
+              "section": "# 传感器与防撞标准 SOP",
+              "sectionSha256": "8de59751636cf93f1735168318535617063e307ffae90b974854923173d1e54c"
+            }
+          ],
+          "reason": "无绑定本修理目标的明确用量；不得由“一件部件”推断下单数量。"
+        },
+        "tool": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "该模型/功能支持的维修测试工具",
+          "sourceRefs": [
+            {
+              "sourceId": "bumper",
+              "file": "07-标准知识/03-标准SOP/传感器与防撞标准SOP.md",
+              "section": "# 传感器与防撞标准 SOP",
+              "sectionSha256": "8de59751636cf93f1735168318535617063e307ffae90b974854923173d1e54c"
+            },
+            {
+              "sourceId": "tools",
+              "file": "07-标准知识/03-标准SOP/维修工具与刷写标准SOP.md",
+              "section": "# 维修工具与刷写标准 SOP",
+              "sectionSha256": "8eac62e155019ed6880cb4a70e9c8d84f119c24be2b4ebac23d6677c842a905c"
+            }
+          ],
+          "reason": "MammoSuite与Mammotion Kit不互换；不是跨型号工具功能授权。"
+        },
+        "toolUsage": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "在确认工具支持后执行本分支检查与适用验收。",
+          "sourceRefs": [
+            {
+              "sourceId": "bumper",
+              "file": "07-标准知识/03-标准SOP/传感器与防撞标准SOP.md",
+              "section": "# 传感器与防撞标准 SOP",
+              "sectionSha256": "8de59751636cf93f1735168318535617063e307ffae90b974854923173d1e54c"
+            },
+            {
+              "sourceId": "tools",
+              "file": "07-标准知识/03-标准SOP/维修工具与刷写标准SOP.md",
+              "section": "# 维修工具与刷写标准 SOP",
+              "sectionSha256": "8eac62e155019ed6880cb4a70e9c8d84f119c24be2b4ebac23d6677c842a905c"
+            }
+          ],
+          "reason": "如工具不支持，转PIE，不以功能名假定支持。"
+        },
+        "disassembly": {
+          "classification": "NEEDS_SCOPE_REVIEW",
+          "value": null,
+          "sourceRefs": [
+            {
+              "sourceId": "bumper",
+              "file": "07-标准知识/03-标准SOP/传感器与防撞标准SOP.md",
+              "section": "# 传感器与防撞标准 SOP",
+              "sectionSha256": "8de59751636cf93f1735168318535617063e307ffae90b974854923173d1e54c"
+            }
+          ],
+          "reason": "断电/清障/外观检查可作范围说明，但没有可跨型号发布的开盖拆装、扭矩或连接器序列。"
+        },
+        "expectedResult": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "防撞响应正常且无误触发，安全传感器及STOP测试通过。",
+          "sourceRefs": [
+            {
+              "sourceId": "bumper",
+              "file": "07-标准知识/03-标准SOP/传感器与防撞标准SOP.md",
+              "section": "# 传感器与防撞标准 SOP",
+              "sectionSha256": "8de59751636cf93f1735168318535617063e307ffae90b974854923173d1e54c"
+            }
+          ],
+          "reason": "原症状和对应功能可观测，无发明电压/电流/时长阈值。"
+        },
+        "verification": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "原症状在原使用条件下消失；完成适用 Functional Test、Communication Check、AutoMap Run 三报告、Connect Checking 截图、修后最终测试的新日志；驱动板/电机/电池/电源维修另需 Burn-in 通过，换充电桩或充电极片除外。",
+          "sourceRefs": [
+            {
+              "sourceId": "nff",
+              "file": "07-标准知识/03-标准SOP/NFF与二返标准SOP.md",
+              "section": "## 7. 未发现问题 / 维修完成验收门（唯一口径）",
+              "sectionSha256": "266df8eeaf5148ceebbfdb82f1aa2b5494ef7c99f3bda7f24c04e34ea414adfd"
+            },
+            {
+              "sourceId": "burnin",
+              "file": "90-来源/业务口径/2026-09-11-维修后BurnIn验收口径.md",
+              "section": "## 已确认",
+              "sectionSha256": "6c9f096de12803430eceafddafd2fa12719e7c80c639b5a061f2fe2fcd7fcbfe"
+            }
+          ],
+          "reason": "09-14唯一验收口径；适用项不能缺失或以截图代报告。"
+        },
+        "fallback": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "仍失败、复发、无法执行适用测试或证据不足时转 PIE；保留现象、交叉测试和修后结果，不自动追加换件。",
+          "sourceRefs": [
+            {
+              "sourceId": "bumper",
+              "file": "07-标准知识/03-标准SOP/传感器与防撞标准SOP.md",
+              "section": "# 传感器与防撞标准 SOP",
+              "sectionSha256": "8de59751636cf93f1735168318535617063e307ffae90b974854923173d1e54c"
+            },
+            {
+              "sourceId": "nff",
+              "file": "07-标准知识/03-标准SOP/NFF与二返标准SOP.md",
+              "section": "## 7. 未发现问题 / 维修完成验收门（唯一口径）",
+              "sectionSha256": "266df8eeaf5148ceebbfdb82f1aa2b5494ef7c99f3bda7f24c04e34ea414adfd"
+            }
+          ],
+          "reason": "返修和未复现保留证据，不把换过当已排除。"
+        }
+      },
+      "controlledSymptomIds": [
+        "SYM-020"
+      ],
+      "existingPieRouting": null,
+      "resourceReviewRefs": [
+        "luba3-sealed-side-sensor",
+        "full-disassembly-withheld",
+        "pcn-and-installation-coverage"
+      ],
+      "resourceSupportCandidates": [
+        "hw-bumper-test-result"
+      ],
+      "resourcePublicationStatus": "PUBLISHED_SCOPED_DETAILS",
+      "actualPublishedSupport": [
+        "hw-bumper-test-result-luba-2",
+        "hw-bumper-test-result-luba-2x",
+        "hw-bumper-test-result-luba-3"
+      ]
+    },
+    {
+      "rank": 8,
+      "id": "cable",
+      "symptom": "可见电缆或线束破损",
+      "modelScope": "LUBA 2 / 2X / 3",
+      "hardwareDomain": "已确认损坏的可维修线束",
+      "solution": "断电确认受损线束、精确型号及可维修性；按对应服务规程更换确认损坏段。",
+      "verification": "安装无挤压/连接异常，相关功能与通信通过。 原症状在原使用条件下消失；完成适用 Functional Test、Communication Check、AutoMap Run 三报告、Connect Checking 截图、修后最终测试的新日志；驱动板/电机/电池/电源维修另需 Burn-in 通过，换充电桩或充电极片除外。",
+      "fallback": "仍失败、复发、无法执行适用测试或证据不足时转 PIE；保留现象、交叉测试和修后结果，不自动追加换件。",
+      "publicationStatus": "GUIDED",
+      "evidenceState": "STABLE_OPERATIONAL_GUIDANCE",
+      "existingCards": [
+        "guide-visible-cable-damage"
+      ],
+      "newPublicRepairPath": false,
+      "frequency": null,
+      "rationale": "故障证据直观，可避免凭未定位症状猜板；损伤扩展或不可独立维修即PIE。",
+      "sourceRefs": [
+        {
+          "sourceId": "mechanical",
+          "file": "07-标准知识/07-机型结构/01-机械优先故障树.md",
+          "section": "## 症状到机械检查点",
+          "sectionSha256": "44e4738a3332bf393ffa78d553287e2ab4b11cef06027e44a1476efa2ad41889"
+        },
+        {
+          "sourceId": "nff",
+          "file": "07-标准知识/03-标准SOP/NFF与二返标准SOP.md",
+          "section": "## 7. 未发现问题 / 维修完成验收门（唯一口径）",
+          "sectionSha256": "266df8eeaf5148ceebbfdb82f1aa2b5494ef7c99f3bda7f24c04e34ea414adfd"
+        }
+      ],
+      "gap": "需精确项目/目标/区域/侧别及当前SBOM才能发布SKU；无通用数量或拆装序列。",
+      "fieldAudit": {
+        "part": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "已确认损坏的可维修线束",
+          "sourceRefs": [
+            {
+              "sourceId": "mechanical",
+              "file": "07-标准知识/07-机型结构/01-机械优先故障树.md",
+              "section": "## 症状到机械检查点",
+              "sectionSha256": "44e4738a3332bf393ffa78d553287e2ab4b11cef06027e44a1476efa2ad41889"
+            }
+          ],
+          "reason": "只在路径确诊及可维修性门通过后使用组件名称。"
+        },
+        "sku": {
+          "classification": "NEEDS_SCOPE_REVIEW",
+          "value": null,
+          "sourceRefs": [
+            {
+              "sourceId": "mechanical",
+              "file": "07-标准知识/07-机型结构/01-机械优先故障树.md",
+              "section": "## 症状到机械检查点",
+              "sectionSha256": "44e4738a3332bf393ffa78d553287e2ab4b11cef06027e44a1476efa2ad41889"
+            }
+          ],
+          "reason": "本rank跨型号；未形成 exact model + exact target + exact compatible SKU。零件详细冲突见task010资源审计。"
+        },
+        "qty": {
+          "classification": "NEEDS_SCOPE_REVIEW",
+          "value": null,
+          "sourceRefs": [
+            {
+              "sourceId": "mechanical",
+              "file": "07-标准知识/07-机型结构/01-机械优先故障树.md",
+              "section": "## 症状到机械检查点",
+              "sectionSha256": "44e4738a3332bf393ffa78d553287e2ab4b11cef06027e44a1476efa2ad41889"
+            }
+          ],
+          "reason": "无绑定本修理目标的明确用量；不得由“一件部件”推断下单数量。"
+        },
+        "tool": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "该模型/功能支持的维修测试工具",
+          "sourceRefs": [
+            {
+              "sourceId": "mechanical",
+              "file": "07-标准知识/07-机型结构/01-机械优先故障树.md",
+              "section": "## 症状到机械检查点",
+              "sectionSha256": "44e4738a3332bf393ffa78d553287e2ab4b11cef06027e44a1476efa2ad41889"
+            },
+            {
+              "sourceId": "tools",
+              "file": "07-标准知识/03-标准SOP/维修工具与刷写标准SOP.md",
+              "section": "# 维修工具与刷写标准 SOP",
+              "sectionSha256": "8eac62e155019ed6880cb4a70e9c8d84f119c24be2b4ebac23d6677c842a905c"
+            }
+          ],
+          "reason": "MammoSuite与Mammotion Kit不互换；不是跨型号工具功能授权。"
+        },
+        "toolUsage": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "在确认工具支持后执行本分支检查与适用验收。",
+          "sourceRefs": [
+            {
+              "sourceId": "mechanical",
+              "file": "07-标准知识/07-机型结构/01-机械优先故障树.md",
+              "section": "## 症状到机械检查点",
+              "sectionSha256": "44e4738a3332bf393ffa78d553287e2ab4b11cef06027e44a1476efa2ad41889"
+            },
+            {
+              "sourceId": "tools",
+              "file": "07-标准知识/03-标准SOP/维修工具与刷写标准SOP.md",
+              "section": "# 维修工具与刷写标准 SOP",
+              "sectionSha256": "8eac62e155019ed6880cb4a70e9c8d84f119c24be2b4ebac23d6677c842a905c"
+            }
+          ],
+          "reason": "如工具不支持，转PIE，不以功能名假定支持。"
+        },
+        "disassembly": {
+          "classification": "NEEDS_SCOPE_REVIEW",
+          "value": null,
+          "sourceRefs": [
+            {
+              "sourceId": "mechanical",
+              "file": "07-标准知识/07-机型结构/01-机械优先故障树.md",
+              "section": "## 症状到机械检查点",
+              "sectionSha256": "44e4738a3332bf393ffa78d553287e2ab4b11cef06027e44a1476efa2ad41889"
+            }
+          ],
+          "reason": "断电/清障/外观检查可作范围说明，但没有可跨型号发布的开盖拆装、扭矩或连接器序列。"
+        },
+        "expectedResult": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "安装无挤压/连接异常，相关功能与通信通过。",
+          "sourceRefs": [
+            {
+              "sourceId": "mechanical",
+              "file": "07-标准知识/07-机型结构/01-机械优先故障树.md",
+              "section": "## 症状到机械检查点",
+              "sectionSha256": "44e4738a3332bf393ffa78d553287e2ab4b11cef06027e44a1476efa2ad41889"
+            }
+          ],
+          "reason": "原症状和对应功能可观测，无发明电压/电流/时长阈值。"
+        },
+        "verification": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "原症状在原使用条件下消失；完成适用 Functional Test、Communication Check、AutoMap Run 三报告、Connect Checking 截图、修后最终测试的新日志；驱动板/电机/电池/电源维修另需 Burn-in 通过，换充电桩或充电极片除外。",
+          "sourceRefs": [
+            {
+              "sourceId": "nff",
+              "file": "07-标准知识/03-标准SOP/NFF与二返标准SOP.md",
+              "section": "## 7. 未发现问题 / 维修完成验收门（唯一口径）",
+              "sectionSha256": "266df8eeaf5148ceebbfdb82f1aa2b5494ef7c99f3bda7f24c04e34ea414adfd"
+            },
+            {
+              "sourceId": "burnin",
+              "file": "90-来源/业务口径/2026-09-11-维修后BurnIn验收口径.md",
+              "section": "## 已确认",
+              "sectionSha256": "6c9f096de12803430eceafddafd2fa12719e7c80c639b5a061f2fe2fcd7fcbfe"
+            }
+          ],
+          "reason": "09-14唯一验收口径；适用项不能缺失或以截图代报告。"
+        },
+        "fallback": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "仍失败、复发、无法执行适用测试或证据不足时转 PIE；保留现象、交叉测试和修后结果，不自动追加换件。",
+          "sourceRefs": [
+            {
+              "sourceId": "mechanical",
+              "file": "07-标准知识/07-机型结构/01-机械优先故障树.md",
+              "section": "## 症状到机械检查点",
+              "sectionSha256": "44e4738a3332bf393ffa78d553287e2ab4b11cef06027e44a1476efa2ad41889"
+            },
+            {
+              "sourceId": "nff",
+              "file": "07-标准知识/03-标准SOP/NFF与二返标准SOP.md",
+              "section": "## 7. 未发现问题 / 维修完成验收门（唯一口径）",
+              "sectionSha256": "266df8eeaf5148ceebbfdb82f1aa2b5494ef7c99f3bda7f24c04e34ea414adfd"
+            }
+          ],
+          "reason": "返修和未复现保留证据，不把换过当已排除。"
+        }
+      },
+      "controlledSymptomIds": [
+        "SYM-023"
+      ],
+      "existingPieRouting": null,
+      "resourceReviewRefs": [
+        "luba3-sealed-side-sensor",
+        "full-disassembly-withheld",
+        "pcn-and-installation-coverage"
+      ],
+      "resourceSupportCandidates": [
+        "hw-cable-sbom-boundary"
+      ],
+      "resourcePublicationStatus": "PUBLISHED_SCOPED_DETAILS",
+      "actualPublishedSupport": [
+        "hw-cable-sbom-boundary-luba-2",
+        "hw-cable-sbom-boundary-luba-2x",
+        "hw-cable-sbom-boundary-luba-3"
+      ]
+    },
+    {
+      "rank": 9,
+      "id": "rtk",
+      "symptom": "无法连接RTK基站",
+      "modelScope": "LUBA 2 / 2X / 3的适用RTK配置",
+      "hardwareDomain": "基站供电/适配器；机器人GNSS/LoRa留PIE",
+      "solution": "先看基站电源/指示及遮挡，按机型检查兼容电源；仅换定位明确的站端故障件，站端正常转PIE。",
+      "verification": "RTK稳定连接，原定位/地图操作通过。 原症状在原使用条件下消失；完成适用 Functional Test、Communication Check、AutoMap Run 三报告、Connect Checking 截图、修后最终测试的新日志；驱动板/电机/电池/电源维修另需 Burn-in 通过，换充电桩或充电极片除外。",
+      "fallback": "仍失败、复发、无法执行适用测试或证据不足时转 PIE；保留现象、交叉测试和修后结果，不自动追加换件。",
+      "publicationStatus": "GUIDED",
+      "evidenceState": "STABLE_OPERATIONAL_GUIDANCE",
+      "existingCards": [
+        "guide-rtk-connection"
+      ],
+      "newPublicRepairPath": false,
+      "frequency": null,
+      "rationale": "硬件限定在站端供电；纯iNavi服务/地图问题不占本项。",
+      "sourceRefs": [
+        {
+          "sourceId": "rtk",
+          "file": "07-标准知识/03-标准SOP/定位与RTK标准SOP.md",
+          "section": "## 判断流程",
+          "sectionSha256": "e53fb44f930c0c6fc3ac370c89d7a017c95b47802e3044168508c18615e088fa"
+        },
+        {
+          "sourceId": "nff",
+          "file": "07-标准知识/03-标准SOP/NFF与二返标准SOP.md",
+          "section": "## 7. 未发现问题 / 维修完成验收门（唯一口径）",
+          "sectionSha256": "266df8eeaf5148ceebbfdb82f1aa2b5494ef7c99f3bda7f24c04e34ea414adfd"
+        }
+      ],
+      "gap": "需精确项目/目标/区域/侧别及当前SBOM才能发布SKU；无通用数量或拆装序列。",
+      "fieldAudit": {
+        "part": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "基站供电/适配器；机器人GNSS/LoRa留PIE",
+          "sourceRefs": [
+            {
+              "sourceId": "rtk",
+              "file": "07-标准知识/03-标准SOP/定位与RTK标准SOP.md",
+              "section": "## 判断流程",
+              "sectionSha256": "e53fb44f930c0c6fc3ac370c89d7a017c95b47802e3044168508c18615e088fa"
+            }
+          ],
+          "reason": "只在路径确诊及可维修性门通过后使用组件名称。"
+        },
+        "sku": {
+          "classification": "NEEDS_SCOPE_REVIEW",
+          "value": null,
+          "sourceRefs": [
+            {
+              "sourceId": "rtk",
+              "file": "07-标准知识/03-标准SOP/定位与RTK标准SOP.md",
+              "section": "## 判断流程",
+              "sectionSha256": "e53fb44f930c0c6fc3ac370c89d7a017c95b47802e3044168508c18615e088fa"
+            }
+          ],
+          "reason": "本rank跨型号；未形成 exact model + exact target + exact compatible SKU。零件详细冲突见task010资源审计。"
+        },
+        "qty": {
+          "classification": "NEEDS_SCOPE_REVIEW",
+          "value": null,
+          "sourceRefs": [
+            {
+              "sourceId": "rtk",
+              "file": "07-标准知识/03-标准SOP/定位与RTK标准SOP.md",
+              "section": "## 判断流程",
+              "sectionSha256": "e53fb44f930c0c6fc3ac370c89d7a017c95b47802e3044168508c18615e088fa"
+            }
+          ],
+          "reason": "无绑定本修理目标的明确用量；不得由“一件部件”推断下单数量。"
+        },
+        "tool": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "该模型/功能支持的维修测试工具",
+          "sourceRefs": [
+            {
+              "sourceId": "rtk",
+              "file": "07-标准知识/03-标准SOP/定位与RTK标准SOP.md",
+              "section": "## 判断流程",
+              "sectionSha256": "e53fb44f930c0c6fc3ac370c89d7a017c95b47802e3044168508c18615e088fa"
+            },
+            {
+              "sourceId": "tools",
+              "file": "07-标准知识/03-标准SOP/维修工具与刷写标准SOP.md",
+              "section": "# 维修工具与刷写标准 SOP",
+              "sectionSha256": "8eac62e155019ed6880cb4a70e9c8d84f119c24be2b4ebac23d6677c842a905c"
+            }
+          ],
+          "reason": "MammoSuite与Mammotion Kit不互换；不是跨型号工具功能授权。"
+        },
+        "toolUsage": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "在确认工具支持后执行本分支检查与适用验收。",
+          "sourceRefs": [
+            {
+              "sourceId": "rtk",
+              "file": "07-标准知识/03-标准SOP/定位与RTK标准SOP.md",
+              "section": "## 判断流程",
+              "sectionSha256": "e53fb44f930c0c6fc3ac370c89d7a017c95b47802e3044168508c18615e088fa"
+            },
+            {
+              "sourceId": "tools",
+              "file": "07-标准知识/03-标准SOP/维修工具与刷写标准SOP.md",
+              "section": "# 维修工具与刷写标准 SOP",
+              "sectionSha256": "8eac62e155019ed6880cb4a70e9c8d84f119c24be2b4ebac23d6677c842a905c"
+            }
+          ],
+          "reason": "如工具不支持，转PIE，不以功能名假定支持。"
+        },
+        "disassembly": {
+          "classification": "NEEDS_SCOPE_REVIEW",
+          "value": null,
+          "sourceRefs": [
+            {
+              "sourceId": "rtk",
+              "file": "07-标准知识/03-标准SOP/定位与RTK标准SOP.md",
+              "section": "## 判断流程",
+              "sectionSha256": "e53fb44f930c0c6fc3ac370c89d7a017c95b47802e3044168508c18615e088fa"
+            }
+          ],
+          "reason": "断电/清障/外观检查可作范围说明，但没有可跨型号发布的开盖拆装、扭矩或连接器序列。"
+        },
+        "expectedResult": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "RTK稳定连接，原定位/地图操作通过。",
+          "sourceRefs": [
+            {
+              "sourceId": "rtk",
+              "file": "07-标准知识/03-标准SOP/定位与RTK标准SOP.md",
+              "section": "## 判断流程",
+              "sectionSha256": "e53fb44f930c0c6fc3ac370c89d7a017c95b47802e3044168508c18615e088fa"
+            }
+          ],
+          "reason": "原症状和对应功能可观测，无发明电压/电流/时长阈值。"
+        },
+        "verification": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "原症状在原使用条件下消失；完成适用 Functional Test、Communication Check、AutoMap Run 三报告、Connect Checking 截图、修后最终测试的新日志；驱动板/电机/电池/电源维修另需 Burn-in 通过，换充电桩或充电极片除外。",
+          "sourceRefs": [
+            {
+              "sourceId": "nff",
+              "file": "07-标准知识/03-标准SOP/NFF与二返标准SOP.md",
+              "section": "## 7. 未发现问题 / 维修完成验收门（唯一口径）",
+              "sectionSha256": "266df8eeaf5148ceebbfdb82f1aa2b5494ef7c99f3bda7f24c04e34ea414adfd"
+            },
+            {
+              "sourceId": "burnin",
+              "file": "90-来源/业务口径/2026-09-11-维修后BurnIn验收口径.md",
+              "section": "## 已确认",
+              "sectionSha256": "6c9f096de12803430eceafddafd2fa12719e7c80c639b5a061f2fe2fcd7fcbfe"
+            }
+          ],
+          "reason": "09-14唯一验收口径；适用项不能缺失或以截图代报告。"
+        },
+        "fallback": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "仍失败、复发、无法执行适用测试或证据不足时转 PIE；保留现象、交叉测试和修后结果，不自动追加换件。",
+          "sourceRefs": [
+            {
+              "sourceId": "rtk",
+              "file": "07-标准知识/03-标准SOP/定位与RTK标准SOP.md",
+              "section": "## 判断流程",
+              "sectionSha256": "e53fb44f930c0c6fc3ac370c89d7a017c95b47802e3044168508c18615e088fa"
+            },
+            {
+              "sourceId": "nff",
+              "file": "07-标准知识/03-标准SOP/NFF与二返标准SOP.md",
+              "section": "## 7. 未发现问题 / 维修完成验收门（唯一口径）",
+              "sectionSha256": "266df8eeaf5148ceebbfdb82f1aa2b5494ef7c99f3bda7f24c04e34ea414adfd"
+            }
+          ],
+          "reason": "返修和未复现保留证据，不把换过当已排除。"
+        }
+      },
+      "controlledSymptomIds": [
+        "SYM-015"
+      ],
+      "existingPieRouting": null,
+      "resourceReviewRefs": [
+        "tool-capability-boundary",
+        "full-disassembly-withheld",
+        "pcn-and-installation-coverage"
+      ],
+      "resourceSupportCandidates": [
+        "hw-rtk-result-scope"
+      ],
+      "resourcePublicationStatus": "PUBLISHED_SCOPED_DETAILS",
+      "actualPublishedSupport": [
+        "hw-rtk-result-scope-luba-2",
+        "hw-rtk-result-scope-luba-2x",
+        "hw-rtk-result-scope-luba-3"
+      ]
+    },
+    {
+      "rank": 10,
+      "id": "lidar",
+      "symptom": "LiDAR未就绪或无法正常工作",
+      "modelScope": "只有确认配备LiDAR的精确项目与硬件变体；PIE判定",
+      "hardwareDomain": "镜窗/雷达线束/雷达组件",
+      "solution": "PIE核对硬件变体与模块状态；先检查遮挡/污染/安装；有必要时按机型断电检查连接，良品交叉前确认兼容性。",
+      "verification": "对应雷达自检、定位/避障及原故障场景恢复；需完成适用验收。 原症状在原使用条件下消失；完成适用 Functional Test、Communication Check、AutoMap Run 三报告、Connect Checking 截图、修后最终测试的新日志；驱动板/电机/电池/电源维修另需 Burn-in 通过，换充电桩或充电极片除外。",
+      "fallback": "仍失败、复发、无法执行适用测试或证据不足时转 PIE；保留现象、交叉测试和修后结果，不自动追加换件。",
+      "publicationStatus": "PIE_ONLY",
+      "evidenceState": "TOP10_PIE_GUIDED",
+      "existingCards": [],
+      "newPublicRepairPath": false,
+      "frequency": null,
+      "rationale": "跨版本和共享供电关联仍有疑点；无稳定直接换件证据，保留TOP10_PIE_GUIDED。",
+      "sourceRefs": [
+        {
+          "sourceId": "vision",
+          "file": "07-标准知识/03-标准SOP/视觉-雷达与X5标准SOP.md",
+          "section": "## 排查",
+          "sectionSha256": "a6bbdf96b245b5270069645ff5a60699a22d7aceb24e7f20608c91d2cc5ac191"
+        },
+        {
+          "sourceId": "nff",
+          "file": "07-标准知识/03-标准SOP/NFF与二返标准SOP.md",
+          "section": "## 7. 未发现问题 / 维修完成验收门（唯一口径）",
+          "sectionSha256": "266df8eeaf5148ceebbfdb82f1aa2b5494ef7c99f3bda7f24c04e34ea414adfd"
+        }
+      ],
+      "gap": "精确机型/变体、稳定修后闭环与公开可执行范围不足，保持PIE_ONLY。",
+      "fieldAudit": {
+        "part": {
+          "classification": "PRIVATE_ONLY",
+          "value": "镜窗/雷达线束/雷达组件",
+          "sourceRefs": [
+            {
+              "sourceId": "vision",
+              "file": "07-标准知识/03-标准SOP/视觉-雷达与X5标准SOP.md",
+              "section": "## 排查",
+              "sectionSha256": "a6bbdf96b245b5270069645ff5a60699a22d7aceb24e7f20608c91d2cc5ac191"
+            }
+          ],
+          "reason": "调查链路不是确诊换件清单。"
+        },
+        "sku": {
+          "classification": "CONFLICT",
+          "value": null,
+          "sourceRefs": [
+            {
+              "sourceId": "vision",
+              "file": "07-标准知识/03-标准SOP/视觉-雷达与X5标准SOP.md",
+              "section": "## 排查",
+              "sectionSha256": "a6bbdf96b245b5270069645ff5a60699a22d7aceb24e7f20608c91d2cc5ac191"
+            }
+          ],
+          "reason": "No scoped confirmed replacement in existing PIE_ONLY cards; not a reason to publish any vision SKU.",
+          "resourceReviewId": "hm441-vision-conflict",
+          "resourceSourceRefs": [
+            {
+              "sourceId": "hm441-manual",
+              "file": "07-标准知识/03-标准SOP/核心维修手册/机型-LUBA-2X-HM441核心维修流程.md",
+              "section": "分系统隔离; 当前SBOM; 手册内部冲突; 完工门",
+              "sourceSha256": "06de4f5d2e8103c0ccf8fa0d93b56ac4a0250dca86c7edd2f1227c4fb684f06f",
+              "hashScope": "whole-source-file; section selector supplied by resource review"
+            },
+            {
+              "sourceId": "hm441-structure",
+              "file": "07-标准知识/07-机型结构/项目/HM441-结构主档.md",
+              "section": "系统/关键物料组件",
+              "sourceSha256": "bde78074e3dc8bca9849e581d7958e3374c9c3f717c4c0b1db38a74c65c854ea",
+              "hashScope": "whole-source-file; section selector supplied by resource review"
+            },
+            {
+              "sourceId": "parts-compat",
+              "file": "03-产品与料号/01-工件兼容表.md",
+              "section": "LUBA 2X cutter rows; regional adapter rows; model compatibility",
+              "sourceSha256": "1704dc3b7e510eafd3328528bf9b788e07eb2f421e99040fdbd9befd4b1b33d0",
+              "hashScope": "whole-source-file; section selector supplied by resource review"
+            }
+          ]
+        },
+        "qty": {
+          "classification": "NEEDS_SCOPE_REVIEW",
+          "value": null,
+          "sourceRefs": [
+            {
+              "sourceId": "vision",
+              "file": "07-标准知识/03-标准SOP/视觉-雷达与X5标准SOP.md",
+              "section": "## 排查",
+              "sectionSha256": "a6bbdf96b245b5270069645ff5a60699a22d7aceb24e7f20608c91d2cc5ac191"
+            }
+          ],
+          "reason": "无绑定本修理目标的明确用量；不得由“一件部件”推断下单数量。"
+        },
+        "tool": {
+          "classification": "PRIVATE_ONLY",
+          "value": "PIE确认的机型适用测试工具",
+          "sourceRefs": [
+            {
+              "sourceId": "vision",
+              "file": "07-标准知识/03-标准SOP/视觉-雷达与X5标准SOP.md",
+              "section": "## 排查",
+              "sectionSha256": "a6bbdf96b245b5270069645ff5a60699a22d7aceb24e7f20608c91d2cc5ac191"
+            },
+            {
+              "sourceId": "tools",
+              "file": "07-标准知识/03-标准SOP/维修工具与刷写标准SOP.md",
+              "section": "# 维修工具与刷写标准 SOP",
+              "sectionSha256": "8eac62e155019ed6880cb4a70e9c8d84f119c24be2b4ebac23d6677c842a905c"
+            }
+          ],
+          "reason": "MammoSuite与Mammotion Kit不互换；不是跨型号工具功能授权。"
+        },
+        "toolUsage": {
+          "classification": "PRIVATE_ONLY",
+          "value": "在确认工具支持后执行本分支检查与适用验收。",
+          "sourceRefs": [
+            {
+              "sourceId": "vision",
+              "file": "07-标准知识/03-标准SOP/视觉-雷达与X5标准SOP.md",
+              "section": "## 排查",
+              "sectionSha256": "a6bbdf96b245b5270069645ff5a60699a22d7aceb24e7f20608c91d2cc5ac191"
+            },
+            {
+              "sourceId": "tools",
+              "file": "07-标准知识/03-标准SOP/维修工具与刷写标准SOP.md",
+              "section": "# 维修工具与刷写标准 SOP",
+              "sectionSha256": "8eac62e155019ed6880cb4a70e9c8d84f119c24be2b4ebac23d6677c842a905c"
+            }
+          ],
+          "reason": "如工具不支持，转PIE，不以功能名假定支持。"
+        },
+        "disassembly": {
+          "classification": "NEEDS_SCOPE_REVIEW",
+          "value": null,
+          "sourceRefs": [
+            {
+              "sourceId": "vision",
+              "file": "07-标准知识/03-标准SOP/视觉-雷达与X5标准SOP.md",
+              "section": "## 排查",
+              "sectionSha256": "a6bbdf96b245b5270069645ff5a60699a22d7aceb24e7f20608c91d2cc5ac191"
+            }
+          ],
+          "reason": "断电/清障/外观检查可作范围说明，但没有可跨型号发布的开盖拆装、扭矩或连接器序列。"
+        },
+        "expectedResult": {
+          "classification": "PRIVATE_ONLY",
+          "value": "对应雷达自检、定位/避障及原故障场景恢复；需完成适用验收。",
+          "sourceRefs": [
+            {
+              "sourceId": "vision",
+              "file": "07-标准知识/03-标准SOP/视觉-雷达与X5标准SOP.md",
+              "section": "## 排查",
+              "sectionSha256": "a6bbdf96b245b5270069645ff5a60699a22d7aceb24e7f20608c91d2cc5ac191"
+            }
+          ],
+          "reason": "原症状和对应功能可观测，无发明电压/电流/时长阈值。"
+        },
+        "verification": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "原症状在原使用条件下消失；完成适用 Functional Test、Communication Check、AutoMap Run 三报告、Connect Checking 截图、修后最终测试的新日志；驱动板/电机/电池/电源维修另需 Burn-in 通过，换充电桩或充电极片除外。",
+          "sourceRefs": [
+            {
+              "sourceId": "nff",
+              "file": "07-标准知识/03-标准SOP/NFF与二返标准SOP.md",
+              "section": "## 7. 未发现问题 / 维修完成验收门（唯一口径）",
+              "sectionSha256": "266df8eeaf5148ceebbfdb82f1aa2b5494ef7c99f3bda7f24c04e34ea414adfd"
+            },
+            {
+              "sourceId": "burnin",
+              "file": "90-来源/业务口径/2026-09-11-维修后BurnIn验收口径.md",
+              "section": "## 已确认",
+              "sectionSha256": "6c9f096de12803430eceafddafd2fa12719e7c80c639b5a061f2fe2fcd7fcbfe"
+            }
+          ],
+          "reason": "09-14唯一验收口径；适用项不能缺失或以截图代报告。"
+        },
+        "fallback": {
+          "classification": "PUBLISH_SCOPED_NOTE",
+          "value": "仍失败、复发、无法执行适用测试或证据不足时转 PIE；保留现象、交叉测试和修后结果，不自动追加换件。",
+          "sourceRefs": [
+            {
+              "sourceId": "vision",
+              "file": "07-标准知识/03-标准SOP/视觉-雷达与X5标准SOP.md",
+              "section": "## 排查",
+              "sectionSha256": "a6bbdf96b245b5270069645ff5a60699a22d7aceb24e7f20608c91d2cc5ac191"
+            },
+            {
+              "sourceId": "nff",
+              "file": "07-标准知识/03-标准SOP/NFF与二返标准SOP.md",
+              "section": "## 7. 未发现问题 / 维修完成验收门（唯一口径）",
+              "sectionSha256": "266df8eeaf5148ceebbfdb82f1aa2b5494ef7c99f3bda7f24c04e34ea414adfd"
+            }
+          ],
+          "reason": "返修和未复现保留证据，不把换过当已排除。"
+        }
+      },
+      "controlledSymptomIds": [
+        "SYM-021"
+      ],
+      "existingPieRouting": "SYM-021 -> ec-5501/pie",
+      "resourceReviewRefs": [
+        "hm441-vision-conflict",
+        "x5-variant-selection",
+        "new-lidar-hardware-path",
+        "full-disassembly-withheld",
+        "pcn-and-installation-coverage"
+      ],
+      "resourceSupportCandidates": [],
+      "resourcePublicationStatus": "PIE_ONLY_NO_NEW_PUBLIC_REPAIR",
+      "actualPublishedSupport": []
+    }
+  ],
+  "excluded": [
+    {
+      "id": "battery-runtime",
+      "symptom": "续航差/电池健康度下降",
+      "selected": false,
+      "classification": "NEEDS_SCOPE_REVIEW",
+      "reason": "低于Top10优先级：SOH与售后判据缺精确型号、稳定修理和区域策略；不凭续航直接换电池。",
+      "sourceRefs": [
+        {
+          "sourceId": "power",
+          "file": "07-标准知识/03-标准SOP/电池与开关机标准SOP.md",
+          "section": "# 电池与开关机标准 SOP",
+          "sectionSha256": "973fd781c1c37e108d2132982861f09f913edfcc42fbc7fd03db80629eaa0b42"
+        }
+      ]
+    },
+    {
+      "id": "charge-interruption",
+      "symptom": "充电提前停止/充不满",
+      "selected": false,
+      "classification": "DUPLICATE",
+      "reason": "归入不充电的受限调查；无独立确诊硬件修复，不重复占位。",
+      "sourceRefs": [
+        {
+          "sourceId": "charge",
+          "file": "07-标准知识/03-标准SOP/充电与回充标准SOP.md",
+          "section": "## 不充电",
+          "sectionSha256": "d526f3ead8f2e6a5a0a6974691463d1bc7e28a88811c8ba5d64959637b28a2fc"
+        }
+      ]
+    },
+    {
+      "id": "height",
+      "symptom": "割草高度不能调整",
+      "selected": false,
+      "classification": "NEEDS_SCOPE_REVIEW",
+      "reason": "硬件候选保留；当前独立模型/升降修理证据及验证成熟度低于已选卡。",
+      "sourceRefs": [
+        {
+          "sourceId": "bumper",
+          "file": "07-标准知识/03-标准SOP/传感器与防撞标准SOP.md",
+          "section": "# 传感器与防撞标准 SOP",
+          "sectionSha256": "8de59751636cf93f1735168318535617063e307ffae90b974854923173d1e54c"
+        }
+      ]
+    },
+    {
+      "id": "fpv",
+      "symptom": "FPV黑屏/偏色",
+      "selected": false,
+      "classification": "NEEDS_SCOPE_REVIEW",
+      "reason": "硬件候选保留；与LiDAR同属感知但不得共用换件路径；本轮优先新LiDAR诊断缺口。",
+      "sourceRefs": [
+        {
+          "sourceId": "vision",
+          "file": "07-标准知识/03-标准SOP/视觉-雷达与X5标准SOP.md",
+          "section": "## 排查",
+          "sectionSha256": "a6bbdf96b245b5270069645ff5a60699a22d7aceb24e7f20608c91d2cc5ac191"
+        }
+      ]
+    },
+    {
+      "id": "water",
+      "symptom": "可见进水/腐蚀",
+      "selected": false,
+      "classification": "PRIVATE_ONLY",
+      "reason": "安全隔离与PIE定损可执行，但无稳定可复用修理终点，不能作为修复卡填数。",
+      "sourceRefs": [
+        {
+          "sourceId": "mechanical",
+          "file": "07-标准知识/07-机型结构/01-机械优先故障树.md",
+          "section": "## 症状到机械检查点",
+          "sectionSha256": "44e4738a3332bf393ffa78d553287e2ab4b11cef06027e44a1476efa2ad41889"
+        }
+      ]
+    },
+    {
+      "id": "impact",
+      "symptom": "可见壳体/结构撞击损坏",
+      "selected": false,
+      "classification": "NEEDS_SCOPE_REVIEW",
+      "reason": "需精确损伤总成及安全定损；不将所有撞击归于一个修理方法。",
+      "sourceRefs": [
+        {
+          "sourceId": "mechanical",
+          "file": "07-标准知识/07-机型结构/01-机械优先故障树.md",
+          "section": "## 症状到机械检查点",
+          "sectionSha256": "44e4738a3332bf393ffa78d553287e2ab4b11cef06027e44a1476efa2ad41889"
+        }
+      ]
+    },
+    {
+      "id": "4g",
+      "symptom": "4G注册后无数据",
+      "selected": false,
+      "classification": "PRIVATE_ONLY",
+      "reason": "多件更换仍未闭环，运营商/服务/天线和板卡混合；不直接推硬件。",
+      "sourceRefs": [
+        {
+          "sourceId": "cases",
+          "file": "07-标准知识/08-诊断图谱/07-近期工单蒸馏-2026-08-18至21.md",
+          "section": "## 可复用根因链路",
+          "sectionSha256": "a130375c8e810ea959b80152e804faf0c14f9123387782f1926f3a7930bded4a"
+        }
+      ]
+    },
+    {
+      "id": "wifi",
+      "symptom": "无法连接WiFi",
+      "selected": false,
+      "classification": "NOT_RELEVANT",
+      "reason": "连接配置/服务/工具混合；没有比已选硬件路径更强的稳定硬件证据。",
+      "sourceRefs": [
+        {
+          "sourceId": "tools",
+          "file": "07-标准知识/03-标准SOP/维修工具与刷写标准SOP.md",
+          "section": "# 维修工具与刷写标准 SOP",
+          "sectionSha256": "8eac62e155019ed6880cb4a70e9c8d84f119c24be2b4ebac23d6677c842a905c"
+        }
+      ]
+    },
+    {
+      "id": "bluetooth",
+      "symptom": "蓝牙连接失败",
+      "selected": false,
+      "classification": "NEEDS_SCOPE_REVIEW",
+      "reason": "核心手册有型号隔离方向，但跨工具/变体症状混合且无单一稳定修理授权。",
+      "sourceRefs": [
+        {
+          "sourceId": "mini",
+          "file": "07-标准知识/03-标准SOP/核心维修手册/机型-LUBA-mini-HM430-HM431核心维修流程.md",
+          "section": "## 分系统隔离",
+          "sectionSha256": "46d4ce111cf35dfdda38d70cf80a77ca075bd746cd873a840fdcae175fd3ab89"
+        }
+      ]
+    },
+    {
+      "id": "firmware",
+      "symptom": "固件更新失败",
+      "selected": false,
+      "classification": "NOT_RELEVANT",
+      "reason": "纯软件/工具路径不进入硬件Top10；既有guide-update-failure保留。",
+      "sourceRefs": [
+        {
+          "sourceId": "tools",
+          "file": "07-标准知识/03-标准SOP/维修工具与刷写标准SOP.md",
+          "section": "# 维修工具与刷写标准 SOP",
+          "sectionSha256": "8eac62e155019ed6880cb4a70e9c8d84f119c24be2b4ebac23d6677c842a905c"
+        }
+      ]
+    },
+    {
+      "id": "map",
+      "symptom": "地图丢失/不能加载",
+      "selected": false,
+      "classification": "NOT_RELEVANT",
+      "reason": "存储/版本/地图服务混合，未确诊硬件，不能替代硬件候选。",
+      "sourceRefs": [
+        {
+          "sourceId": "rtk",
+          "file": "07-标准知识/03-标准SOP/定位与RTK标准SOP.md",
+          "section": "## 判断流程",
+          "sectionSha256": "e53fb44f930c0c6fc3ac370c89d7a017c95b47802e3044168508c18615e088fa"
+        }
+      ]
+    },
+    {
+      "id": "iot",
+      "symptom": "IoT离线/日志上传失败",
+      "selected": false,
+      "classification": "NOT_RELEVANT",
+      "reason": "网络服务和工具状态不属于稳定硬件修理。",
+      "sourceRefs": [
+        {
+          "sourceId": "tools",
+          "file": "07-标准知识/03-标准SOP/维修工具与刷写标准SOP.md",
+          "section": "# 维修工具与刷写标准 SOP",
+          "sectionSha256": "8eac62e155019ed6880cb4a70e9c8d84f119c24be2b4ebac23d6677c842a905c"
+        }
+      ]
+    },
+    {
+      "id": "flash",
+      "symptom": "换主板后写号失败",
+      "selected": false,
+      "classification": "NOT_RELEVANT",
+      "reason": "维修工具流程，不是独立硬件可观测故障。",
+      "sourceRefs": [
+        {
+          "sourceId": "tools",
+          "file": "07-标准知识/03-标准SOP/维修工具与刷写标准SOP.md",
+          "section": "# 维修工具与刷写标准 SOP",
+          "sectionSha256": "8eac62e155019ed6880cb4a70e9c8d84f119c24be2b4ebac23d6677c842a905c"
+        }
+      ]
+    },
+    {
+      "id": "rtk-update",
+      "symptom": "RTK固件更新失败",
+      "selected": false,
+      "classification": "NOT_RELEVANT",
+      "reason": "固件更新问题不以高频为由入硬件Top10。",
+      "sourceRefs": [
+        {
+          "sourceId": "tools",
+          "file": "07-标准知识/03-标准SOP/维修工具与刷写标准SOP.md",
+          "section": "# 维修工具与刷写标准 SOP",
+          "sectionSha256": "8eac62e155019ed6880cb4a70e9c8d84f119c24be2b4ebac23d6677c842a905c"
+        }
+      ]
+    },
+    {
+      "id": "led",
+      "symptom": "固件变更后侧灯不亮",
+      "selected": false,
+      "classification": "PRIVATE_ONLY",
+      "reason": "只有相关性与换件无效观察，最终处理未回填。",
+      "sourceRefs": [
+        {
+          "sourceId": "cases",
+          "file": "07-标准知识/08-诊断图谱/07-近期工单蒸馏-2026-08-18至21.md",
+          "section": "## 可复用根因链路",
+          "sectionSha256": "a130375c8e810ea959b80152e804faf0c14f9123387782f1926f3a7930bded4a"
+        }
+      ]
+    },
+    {
+      "id": "spino",
+      "symptom": "SPINO样机/充电器异常",
+      "selected": false,
+      "classification": "NEEDS_SCOPE_REVIEW",
+      "reason": "机型不在当前图谱且结果未闭环，不能套用LUBA/YUKA。",
+      "sourceRefs": [
+        {
+          "sourceId": "cases",
+          "file": "07-标准知识/08-诊断图谱/07-近期工单蒸馏-2026-08-18至21.md",
+          "section": "## 可复用根因链路",
+          "sectionSha256": "a130375c8e810ea959b80152e804faf0c14f9123387782f1926f3a7930bded4a"
+        }
+      ]
+    },
+    {
+      "id": "1202",
+      "symptom": "1202刀盘卡阻独立换件",
+      "selected": false,
+      "classification": "PRIVATE_ONLY",
+      "reason": "冻结仍有效；不得借实际割草通用卡放开硬件分支。",
+      "sourceRefs": [
+        {
+          "sourceId": "cut",
+          "file": "07-标准知识/03-标准SOP/刀盘与割草标准SOP.md",
+          "section": "# 刀盘与割草标准 SOP",
+          "sectionSha256": "8dd1e3b9fe9405ae981385f9397ff0060a1620446e28641234db033bd65bc065"
+        }
+      ]
+    },
+    {
+      "id": "random-power",
+      "symptom": "随机掉电/电量跳变",
+      "selected": false,
+      "classification": "DUPLICATE",
+      "reason": "按可观测分支归入供电或共享通信调查；不重复计独立硬件根因。",
+      "sourceRefs": [
+        {
+          "sourceId": "cases",
+          "file": "07-标准知识/08-诊断图谱/07-近期工单蒸馏-2026-08-18至21.md",
+          "section": "## 可复用根因链路",
+          "sectionSha256": "a130375c8e810ea959b80152e804faf0c14f9123387782f1926f3a7930bded4a"
+        }
+      ]
+    }
+  ],
+  "sourceDispositions": [
+    {
+      "sourceId": "pilotImport",
+      "classification": "DUPLICATE",
+      "reason": "Imported pilot paths are circular maintenance references; not independent recurrence or a new supervisor approval."
+    },
+    {
+      "sourceId": "nff",
+      "classification": "PUBLISH_SCOPED_NOTE",
+      "reason": "09-14 section7 overrides older incomplete 3+1 acceptance shorthand."
+    }
+  ],
+  "safeguards": {
+    "readOnlyExternalSources": true,
+    "noRawTicketsOrCustomerIdentifiers": true,
+    "noSKUInRankCards": true,
+    "noQuantityInference": true,
+    "noNewPublicRepairPathsByThisAudit": true,
+    "softwareCardPreserved": true,
+    "error1202Frozen": true
+  },
+  "implementation": {
+    "knowledgeVersion": "2026-09-16-hardware-top10.1",
+    "publicResourceRecords": 32,
+    "resourceCards": 9,
+    "optionalDetails": 9,
+    "visibleSafetyNotes": 1,
+    "newRepairPaths": 0,
+    "newSku": 0,
+    "newQuantity": 0,
+    "newDisassembly": 0,
+    "requiredSelections": 2,
+    "verificationPolicy": "hardware-verification-review.json"
+  }
+}

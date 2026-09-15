@@ -5,12 +5,16 @@ import {fileURLToPath} from 'node:url';
 import {projectAgentCatalog} from '../src/engine.mjs';
 import {validateCandidates,candidateCounts,PAYLOAD_PATH} from '../lib/candidates.mjs';
 import {enrichKnowledge,reuseCounts} from '../lib/reuse.mjs';
+import {projectHardwareSupport} from '../lib/hardware-support.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
-export async function build({catalog,candidates}={}) {
+export async function build({catalog,candidates,hardwareSupport}={}) {
   const input=catalog||JSON.parse(fs.readFileSync(path.join(root,'data/canonical.json'),'utf8'));
   const reuseManifest=JSON.parse(fs.readFileSync(path.join(root,'data/reuse-manifest.json'),'utf8'));
   const reuseSnapshot=JSON.parse(fs.readFileSync(path.join(root,'data/reuse-snapshot.json'),'utf8'));
   const agent=projectAgentCatalog(enrichKnowledge(input,reuseManifest,reuseSnapshot)); // Validate before any output mutation.
+  agent.knowledgeVersion='2026-09-16-hardware-top10.1';
+  const reviewedSupport=hardwareSupport||JSON.parse(fs.readFileSync(path.join(root,'data/hardware-step-support.json'),'utf8'));
+  agent.stepSupport=projectHardwareSupport(reviewedSupport,agent);
   const privateCandidates=candidates||JSON.parse(fs.readFileSync(path.join(root,'data/feishu-candidates.json'),'utf8'));
   const payloadText=fs.readFileSync(path.join(root,'..',PAYLOAD_PATH),'utf8');
   const candidateErrors=validateCandidates(privateCandidates,input,{payloadText});

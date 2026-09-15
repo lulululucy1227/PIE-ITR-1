@@ -1,0 +1,1163 @@
+{
+  "schemaVersion": 1,
+  "task": "EC-MT-20260916-HARDWARE-TOP10-010",
+  "reviewedAt": "2026-09-16",
+  "visibility": "PRIVATE_REVIEW_INPUT_NOT_PUBLIC_PROJECTION",
+  "replyAssistantRoot": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/ticket_assist",
+  "vaultRoot": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/维修与售后知识库",
+  "sourceResolution": "Read settings.py without importing it: VAULT environment > config.local.json vault > nested/sibling vault. Only the vault configuration key was read. This session has no VAULT override, config vault is absent, nested vault does not exist and sibling vault exists. No claim about an unread running process environment.",
+  "currentness": "Operational case window is owned by hardware-top10-audit. Resource baselines are separately dated: SOPs August 6–21; official compatibility/alternative tables captured September 7; direct-business final verification revised September 14. File modification dates and PDF creation date do not establish technical currentness.",
+  "classifications": [
+    "PUBLISH_EXACT",
+    "PUBLISH_SCOPED_NOTE",
+    "PRIVATE_ONLY",
+    "NEEDS_SCOPE_REVIEW",
+    "CONFLICT",
+    "DUPLICATE",
+    "NOT_RELEVANT"
+  ],
+  "sources": [
+    {
+      "id": "wheel-sop",
+      "file": "07-标准知识/03-标准SOP/轮毂与行走标准SOP.md",
+      "section": "Numbered steps 1–6; 复合症状判定",
+      "sourceDate": "2026-08-21",
+      "status": "canonical/evidence-based-draft; rewritten bounded interpretation only",
+      "sha256": "65463388454eaa739730ee82a66a274b922961687220d70d3f93899622c5041b",
+      "bytes": 6576,
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/维修与售后知识库/07-标准知识/03-标准SOP/轮毂与行走标准SOP.md",
+      "documentMetadata": {
+        "generated": "2026-08-06",
+        "updated": "2026-08-21",
+        "version_scope": "as-of-2026-08-21",
+        "review_status": "canonical",
+        "ai_use": "draft-reference"
+      }
+    },
+    {
+      "id": "cutting-sop",
+      "file": "07-标准知识/03-标准SOP/刀盘与割草标准SOP.md",
+      "section": "Numbered steps 1–5",
+      "sourceDate": "2026-08-14",
+      "status": "canonical/evidence-based-draft; version scope remains as-of-2026-08-06",
+      "sha256": "5e3a12b9fb2a183ee54f831be58c2cced3d68d483738ce003c807dd3605c0791",
+      "bytes": 3696,
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/维修与售后知识库/07-标准知识/03-标准SOP/刀盘与割草标准SOP.md",
+      "documentMetadata": {
+        "generated": "2026-08-06",
+        "updated": "2026-08-14",
+        "version_scope": "as-of-2026-08-06",
+        "review_status": "canonical",
+        "ai_use": "draft-reference"
+      }
+    },
+    {
+      "id": "charge-sop",
+      "file": "07-标准知识/03-标准SOP/充电与回充标准SOP.md",
+      "section": "不充电; 回充失败; 负载压降分支",
+      "sourceDate": "2026-08-21",
+      "status": "canonical/evidence-based-draft; case hypothesis not a confirmed component fault",
+      "sha256": "c94ea763acab2149e422d525c3043667819140a86962086b287645529e513077",
+      "bytes": 6526,
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/维修与售后知识库/07-标准知识/03-标准SOP/充电与回充标准SOP.md",
+      "documentMetadata": {
+        "generated": "2026-08-06",
+        "updated": "2026-08-21",
+        "version_scope": "as-of-2026-08-21",
+        "review_status": "canonical",
+        "ai_use": "draft-reference"
+      }
+    },
+    {
+      "id": "power-sop",
+      "file": "07-标准知识/03-标准SOP/电池与开关机标准SOP.md",
+      "section": "Numbered steps 1–5; 接电池打火/疑似短路",
+      "sourceDate": "2026-08-21",
+      "status": "canonical/evidence-based-draft",
+      "sha256": "70ad9870ae5a48cdd419f903754ba90e50cbd33eff5a119083b079f0123c7c1c",
+      "bytes": 4611,
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/维修与售后知识库/07-标准知识/03-标准SOP/电池与开关机标准SOP.md",
+      "documentMetadata": {
+        "generated": "2026-08-06",
+        "updated": "2026-08-21",
+        "version_scope": "as-of-2026-08-21",
+        "review_status": "canonical",
+        "ai_use": "draft-reference"
+      }
+    },
+    {
+      "id": "sensor-sop",
+      "file": "07-标准知识/03-标准SOP/传感器与防撞标准SOP.md",
+      "section": "Numbered steps 1–5; safety stop",
+      "sourceDate": "2026-08-14",
+      "status": "canonical/evidence-based-draft",
+      "sha256": "23eba425422459b97224ca99276e51b94a8719c0e7305e8268e3114d1ff85a8f",
+      "bytes": 3989,
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/维修与售后知识库/07-标准知识/03-标准SOP/传感器与防撞标准SOP.md",
+      "documentMetadata": {
+        "generated": "2026-08-06",
+        "updated": "2026-08-14",
+        "version_scope": "as-of-2026-08-06",
+        "review_status": "canonical",
+        "ai_use": "draft-reference"
+      }
+    },
+    {
+      "id": "position-sop",
+      "file": "07-标准知识/03-标准SOP/定位与RTK标准SOP.md",
+      "section": "判断流程; 升级条件",
+      "sourceDate": "2026-08-14",
+      "status": "canonical/evidence-based-draft; exact positioning architecture required",
+      "sha256": "87c3c901fa3fd8f5e378f6bc6de91e57a597982a918f54f964e24c47309c06ed",
+      "bytes": 4468,
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/维修与售后知识库/07-标准知识/03-标准SOP/定位与RTK标准SOP.md",
+      "documentMetadata": {
+        "generated": "2026-08-06",
+        "updated": "2026-08-14",
+        "version_scope": "as-of-2026-08-06",
+        "review_status": "canonical",
+        "ai_use": "draft-reference"
+      }
+    },
+    {
+      "id": "vision-sop",
+      "file": "07-标准知识/03-标准SOP/视觉-雷达与X5标准SOP.md",
+      "section": "必填识别; 排查; 共享通信异常与轻微镜头告警",
+      "sourceDate": "2026-08-21",
+      "status": "canonical/evidence-based-draft; no unscoped component replacement",
+      "sha256": "4897e755ae887275c3b19b104c8233441a0c794dcc16699e1111b1bc0b8e20c0",
+      "bytes": 4937,
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/维修与售后知识库/07-标准知识/03-标准SOP/视觉-雷达与X5标准SOP.md",
+      "documentMetadata": {
+        "generated": "2026-08-06",
+        "updated": "2026-08-21",
+        "version_scope": "as-of-2026-08-21",
+        "review_status": "canonical",
+        "ai_use": "draft-reference"
+      }
+    },
+    {
+      "id": "tool-sop",
+      "file": "07-标准知识/03-标准SOP/维修工具与刷写标准SOP.md",
+      "section": "Numbered steps 1–5; 2026-08-21 刷写流程基线",
+      "sourceDate": "2026-08-21",
+      "status": "canonical/evidence-based-draft; time-sensitive tool versions not assumed current",
+      "sha256": "5bf8256de1b8cd23d774a9122d8f7071c67a05d9dbf5c0e278f5e418a83c3358",
+      "bytes": 7849,
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/维修与售后知识库/07-标准知识/03-标准SOP/维修工具与刷写标准SOP.md",
+      "documentMetadata": {
+        "generated": "2026-08-06",
+        "updated": "2026-08-21",
+        "version_scope": "as-of-2026-08-21",
+        "review_status": "canonical",
+        "ai_use": "draft-reference"
+      }
+    },
+    {
+      "id": "nff-current",
+      "file": "07-标准知识/03-标准SOP/NFF与二返标准SOP.md",
+      "section": "4 交叉验证规则; 7 未发现问题 / 维修完成验收门",
+      "sourceDate": "2026-09-14",
+      "status": "canonical; section 7 is sole current acceptance authority",
+      "sha256": "ebc704baa76a6002d71a612bc1a0070adbd7cb0a4d2dfc676ec774256658c097",
+      "bytes": 7526,
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/维修与售后知识库/07-标准知识/03-标准SOP/NFF与二返标准SOP.md",
+      "documentMetadata": {
+        "generated": "2026-08-14",
+        "updated": "2026-09-14",
+        "version_scope": "as-of-2026-09-14",
+        "review_status": "canonical",
+        "ai_use": "draft-reference"
+      }
+    },
+    {
+      "id": "burnin-business",
+      "file": "90-来源/业务口径/2026-09-11-维修后BurnIn验收口径.md",
+      "section": "与2026-08-17口径的关系; 已确认",
+      "sourceDate": "2026-09-14",
+      "status": "direct-business-instruction/citation-only; sanitized rule paraphrase only",
+      "sha256": "1bb22e3f68fe626be11c69e59d44b925cb7a58a97fdd4fd757cdfdbccbfc39ff",
+      "bytes": 1535,
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/维修与售后知识库/90-来源/业务口径/2026-09-11-维修后BurnIn验收口径.md",
+      "documentMetadata": {
+        "generated": "2026-09-11",
+        "updated": "2026-09-14",
+        "version_scope": "as-of-2026-09-14",
+        "review_status": "source-record",
+        "ai_use": "citation-only"
+      }
+    },
+    {
+      "id": "maintenance",
+      "file": "01-SOP与流程/官网SOP/清洁-刀片-电池-冬季存储维护.md",
+      "section": "安全和清洁; 刀片和刀盘",
+      "sourceDate": "2026-08-06",
+      "status": "official-support-sop/source-record; captured public maintenance baseline; no new interval or tool setting published",
+      "sha256": "a2478ac41fe2a0b100488c598af1e9a68f79a4743079ce176b262ac3e4cde012",
+      "bytes": 1837,
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/维修与售后知识库/01-SOP与流程/官网SOP/清洁-刀片-电池-冬季存储维护.md",
+      "documentMetadata": {
+        "captured_at": "2026-08-06",
+        "review_status": "source-record",
+        "ai_use": "draft-reference"
+      }
+    },
+    {
+      "id": "manual-policy",
+      "file": "07-标准知识/03-标准SOP/核心维修手册/00-核心维修手册使用规则.md",
+      "section": "依据优先级; 使用前必须锁定; 共同诊断原则; 来源与限制",
+      "sourceDate": "2026-08-14",
+      "status": "source-backed primary diagnostic reference; formal manual version unknown",
+      "sha256": "9cc4a7efa5ea74a9cd75cc8ea8fff84a86ccf7acacce5956da9c5ecf9f25ee4b",
+      "bytes": 2967,
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/维修与售后知识库/07-标准知识/03-标准SOP/核心维修手册/00-核心维修手册使用规则.md",
+      "documentMetadata": {
+        "generated": "2026-08-14",
+        "updated": "2026-08-14",
+        "version_scope": "as-provided-2026-08-14",
+        "source_version": "unknown",
+        "review_status": "canonical",
+        "ai_use": "primary-diagnostic-reference"
+      }
+    },
+    {
+      "id": "hm441-manual",
+      "file": "07-标准知识/03-标准SOP/核心维修手册/机型-LUBA-2X-HM441核心维修流程.md",
+      "section": "分系统隔离; 当前SBOM; 手册内部冲突; 完工门",
+      "sourceDate": "2026-08-14",
+      "status": "source-backed; HM441 only, excludes HM442; source formal version unknown",
+      "sha256": "06de4f5d2e8103c0ccf8fa0d93b56ac4a0250dca86c7edd2f1227c4fb684f06f",
+      "bytes": 3548,
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/维修与售后知识库/07-标准知识/03-标准SOP/核心维修手册/机型-LUBA-2X-HM441核心维修流程.md",
+      "documentMetadata": {
+        "generated": "2026-08-14",
+        "updated": "2026-08-14",
+        "version_scope": "as-provided-2026-08-14",
+        "source_version": "unknown",
+        "review_status": "canonical",
+        "ai_use": "primary-diagnostic-reference"
+      }
+    },
+    {
+      "id": "hm441-structure",
+      "file": "07-标准知识/07-机型结构/项目/HM441-结构主档.md",
+      "section": "系统/关键物料组件",
+      "sourceDate": "2026-08-14",
+      "status": "project-scoped structural lookup; not an order authorization",
+      "sha256": "bde78074e3dc8bca9849e581d7958e3374c9c3f717c4c0b1db38a74c65c854ea",
+      "bytes": 9664,
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/维修与售后知识库/07-标准知识/07-机型结构/项目/HM441-结构主档.md",
+      "documentMetadata": {
+        "generated": "2026-08-06",
+        "updated": "2026-08-14",
+        "version_scope": "as-of-2026-08-06",
+        "review_status": "canonical",
+        "ai_use": "draft-reference"
+      }
+    },
+    {
+      "id": "parts-compat",
+      "file": "03-产品与料号/01-工件兼容表.md",
+      "section": "LUBA 2X cutter rows; regional adapter rows; model compatibility",
+      "sourceDate": "2026-09-07",
+      "status": "official canonical lookup-only; captured date not approval date; absent compatibility is not inferred",
+      "sha256": "1704dc3b7e510eafd3328528bf9b788e07eb2f421e99040fdbd9befd4b1b33d0",
+      "bytes": 129315,
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/维修与售后知识库/03-产品与料号/01-工件兼容表.md",
+      "documentMetadata": {
+        "captured_at": "2026-09-07",
+        "review_status": "canonical",
+        "ai_use": "lookup-only"
+      }
+    },
+    {
+      "id": "parts-alternatives",
+      "file": "03-产品与料号/02-替代料表.md",
+      "section": "V2 header; LUBA 2X cutter and wheel alternatives",
+      "sourceDate": "2026-09-07",
+      "status": "official canonical lookup-only V2; substitute still requires compatibility",
+      "sha256": "485e6c677ec26d47a693bdab6e7fb2197f6159ed6a97438a25922a1406e9221a",
+      "bytes": 61956,
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/维修与售后知识库/03-产品与料号/02-替代料表.md",
+      "documentMetadata": {
+        "captured_at": "2026-09-07",
+        "review_status": "canonical",
+        "ai_use": "lookup-only"
+      }
+    },
+    {
+      "id": "left-cutter",
+      "file": "03-产品与料号/物料卡片/C.P.SH.000184000.md",
+      "section": "适用范围与供应信息, SBOM row 41",
+      "sourceDate": "2026-08-06",
+      "status": "material-card/source-record/lookup-only; PCS is a unit, not repair quantity",
+      "sha256": "4fd6a1e67075f9f9964e35322428dd83c72f34762c02c954925cc9f5c277bd73",
+      "bytes": 1227,
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/维修与售后知识库/03-产品与料号/物料卡片/C.P.SH.000184000.md",
+      "documentMetadata": {
+        "generated": "2026-08-06",
+        "review_status": "source-record",
+        "ai_use": "lookup-only"
+      }
+    },
+    {
+      "id": "right-cutter",
+      "file": "03-产品与料号/物料卡片/C.P.SH.000185000.md",
+      "section": "适用范围与供应信息, SBOM row 42",
+      "sourceDate": "2026-08-06",
+      "status": "material-card/source-record/lookup-only",
+      "sha256": "8b99e5b9cbb03ff90fb1b91fcd6f4af60df9ed3e45ee335e3fcfa50835ca9cf2",
+      "bytes": 1229,
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/维修与售后知识库/03-产品与料号/物料卡片/C.P.SH.000185000.md",
+      "documentMetadata": {
+        "generated": "2026-08-06",
+        "review_status": "source-record",
+        "ai_use": "lookup-only"
+      }
+    },
+    {
+      "id": "eu-adapter",
+      "file": "03-产品与料号/物料卡片/C.P.XS.000121001.md",
+      "section": "适用范围与供应信息, SBOM row 266",
+      "sourceDate": "2026-08-06",
+      "status": "HM441 EU 3000/5000/10000; QTY14 text is not one-repair quantity",
+      "sha256": "018cf58483a532e01da9a75b83ae9dda49852032d74e12cee8780ab1ba077c14",
+      "bytes": 1233,
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/维修与售后知识库/03-产品与料号/物料卡片/C.P.XS.000121001.md",
+      "documentMetadata": {
+        "generated": "2026-08-06",
+        "review_status": "source-record",
+        "ai_use": "lookup-only"
+      }
+    },
+    {
+      "id": "ca-adapter",
+      "file": "03-产品与料号/物料卡片/C.P.XS.000121005.md",
+      "section": "适用范围与供应信息, SBOM row 270",
+      "sourceDate": "2026-08-06",
+      "status": "HM441 CA variants; contradicts manual EU label",
+      "sha256": "7b6bdc4580cd3c7e9c38fabebdc72a73c940c264b6ff91e2f8d90c83af895330",
+      "bytes": 1254,
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/维修与售后知识库/03-产品与料号/物料卡片/C.P.XS.000121005.md",
+      "documentMetadata": {
+        "generated": "2026-08-06",
+        "review_status": "source-record",
+        "ai_use": "lookup-only"
+      }
+    },
+    {
+      "id": "x5-matrix",
+      "file": "07-标准知识/04-料号依据/LUBA 3与YUKA mini 2 X5选型矩阵.md",
+      "section": "LUBA 3 HM442; YUKA mini 2 MN232; 不能自动下单的组合",
+      "sourceDate": "2026-08-06",
+      "status": "canonical evidence-based-draft; exact AK1/Mid360/TP2409 hardware needed",
+      "sha256": "7cd94af95ad388f5fc635142d0ed02cee3b57fa75f511f98576beb58b4fda0ec",
+      "bytes": 1908,
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/维修与售后知识库/07-标准知识/04-料号依据/LUBA 3与YUKA mini 2 X5选型矩阵.md",
+      "documentMetadata": {
+        "generated": "2026-08-06",
+        "version_scope": "as-of-2026-08-06",
+        "review_status": "canonical",
+        "ai_use": "draft-reference"
+      }
+    },
+    {
+      "id": "if-drive",
+      "file": "07-标准知识/09-IF规则库/03-行走CAN.md",
+      "section": "D001 single-channel discriminator",
+      "sourceDate": null,
+      "status": "active internal rule; source date must not be inferred from file timestamp",
+      "sha256": "a98c381b2411f862c01bc51d082496c04a3bdae709c37ef53afa20889a99ec1b",
+      "bytes": 2555,
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/维修与售后知识库/07-标准知识/09-IF规则库/03-行走CAN.md",
+      "documentMetadata": {
+        "updated": "2026-08-31",
+        "version_scope": "as-of-2026-08-31",
+        "review_status": "canonical",
+        "ai_use": "diagnostic-reference"
+      }
+    },
+    {
+      "id": "guided-copy",
+      "file": "07-标准知识/08-诊断图谱/05-引导式维修路径.md",
+      "section": "Pilot-derived repair table; current acceptance reference",
+      "sourceDate": null,
+      "status": "DUPLICATE pilot import; not independent maturity evidence",
+      "sha256": "55523ba5cf18cc56f4a7317446dfaf338e3923f2f52f5fc88c5d2935de60b978",
+      "bytes": 10854,
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/维修与售后知识库/07-标准知识/08-诊断图谱/05-引导式维修路径.md",
+      "documentMetadata": {
+        "captured_at": "2026-09-09",
+        "review_status": "canonical",
+        "ai_use": "diagnostic-reference"
+      }
+    },
+    {
+      "id": "local-canonical",
+      "root": "workspace",
+      "file": "error-code-pilot/data/canonical.json",
+      "section": "Nine hardware guidance cards + guide-update-failure; existing approved action/path scopes",
+      "sourceDate": "2026-09-08",
+      "status": "Existing approved path scope only; hash records read baseline, implementation may change it",
+      "sha256": "550c44a51cd6700a41b89dc1e2792777cb5888ae60429f325708700cf4af05ea",
+      "bytes": 131721,
+      "resolvedPath": "C:/Users/Reggie/Desktop/PIE-ITR-ErrorCode/error-code-pilot/data/canonical.json",
+      "documentMetadata": {}
+    },
+    {
+      "id": "local-reuse",
+      "root": "workspace",
+      "file": "error-code-pilot/data/reuse-snapshot.json",
+      "section": "reuse-charge-comparison; reuse-bumper-crosscheck; reuse-cable-part-check; reuse-power-observation",
+      "sourceDate": "2026-09-15",
+      "status": "Task008 scoped approval retained; no independent new cases",
+      "sha256": "8322c45095d1c4fac87b3b58bfee6ba151248894d9321c6807a1e58a4073e5d2",
+      "bytes": 14350,
+      "resolvedPath": "C:/Users/Reggie/Desktop/PIE-ITR-ErrorCode/error-code-pilot/data/reuse-snapshot.json",
+      "documentMetadata": {}
+    },
+    {
+      "id": "archived-diagnostic",
+      "root": "reply-reference",
+      "file": "DIAGNOSTIC_KNOWLEDGE.md",
+      "section": "Battery Test; Side-bumper fault isolation; Cross-validation; No power/no boot",
+      "sourceDate": null,
+      "status": "Archived corroboration only; sanitized technical facts, no source body copied",
+      "sha256": "54627f51550252c73855cb0ca4ccac3f2b8007aa07e18a26f948471e4ab2fcc9",
+      "bytes": 19080,
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/ticket_assist/external/pie-itr-workbench/docs/knowledge/DIAGNOSTIC_KNOWLEDGE.md",
+      "documentMetadata": {}
+    },
+    {
+      "id": "archived-tool",
+      "root": "reply-reference",
+      "file": "TOOL_KNOWLEDGE.md",
+      "section": "MammoSuite; Mammotion Kit; Capability rule",
+      "sourceDate": null,
+      "status": "Archived corroboration only; installation/access/device-specific text excluded",
+      "sha256": "2e459d323ed845c2633e749fbebced8736239294232b668293d1b523a5a7ad2c",
+      "bytes": 5023,
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/ticket_assist/external/pie-itr-workbench/docs/knowledge/TOOL_KNOWLEDGE.md",
+      "documentMetadata": {}
+    },
+    {
+      "id": "archived-parts",
+      "root": "reply-reference",
+      "file": "PARTS_KNOWLEDGE.md",
+      "section": "SBOM vs exploded-view consistency rule; Repair-strategy rule",
+      "sourceDate": null,
+      "status": "Archived corroboration only; does not authorize an unscoped part",
+      "sha256": "045c977cb9c7f31854f499b86e9d2409c322828f894487a8bb48b2e511a89e49",
+      "bytes": 4813,
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/ticket_assist/external/pie-itr-workbench/docs/knowledge/PARTS_KNOWLEDGE.md",
+      "documentMetadata": {}
+    },
+    {
+      "file": "01-SOP与流程/群知识提炼/维修策略信息群·知识库（2026-01~08） - 3.7 LUBA 3 侧防撞感应线（SKU 缺失）.md",
+      "id": "luba3-sealed-sensor",
+      "section": "2026-08-04 serviceability statement",
+      "sourceDate": "2026-08-04",
+      "status": "pending/human-review-required; sealed chassis side sensing is not a separately serviceable cable",
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/维修与售后知识库/01-SOP与流程/群知识提炼/维修策略信息群·知识库（2026-01~08） - 3.7 LUBA 3 侧防撞感应线（SKU 缺失）.md",
+      "sha256": "1075502886abee085e44e263126293cfbc5dff12cbe0e2398c3324592466d42d",
+      "bytes": 1028
+    },
+    {
+      "file": "04-工具与版本/群知识提炼/维修策略信息群·知识库（2026-01~08） - 6.6 LUBA 2-2X 适配器混用（2026-07-01 - 2026-06-25）.md",
+      "id": "adapter-no-mix",
+      "section": "LUBA 2/2X charging adapter incompatibility",
+      "sourceDate": "2026-07-01",
+      "status": "pending/human-review-required; corroborates exact compatibility guard only",
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/维修与售后知识库/04-工具与版本/群知识提炼/维修策略信息群·知识库（2026-01~08） - 6.6 LUBA 2-2X 适配器混用（2026-07-01 - 2026-06-25）.md",
+      "sha256": "b85693c122b839c12c9bc896dee6bd44931cbf1fc2570d1008e614db8da61c17",
+      "bytes": 1245
+    },
+    {
+      "file": "01-SOP与流程/群知识提炼/维修策略信息群·知识库（2026-01~08） - 3.4 拆装 SOP（迭代版）.md",
+      "id": "disassembly-index",
+      "section": "June–July 2026 revision references",
+      "sourceDate": "2026-07-29",
+      "status": "pending/human-review-required; publication pointers only, not actual disassembly steps",
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/维修与售后知识库/01-SOP与流程/群知识提炼/维修策略信息群·知识库（2026-01~08） - 3.4 拆装 SOP（迭代版）.md",
+      "sha256": "078d357a8bd869f9ac3abc3cbc31b245441bf2d20f8e64f051dfb72f16322871",
+      "bytes": 1120
+    }
+  ],
+  "publicSupportCandidates": [
+    {
+      "id": "hw-wheel-cross-result",
+      "classification": "PUBLISH_SCOPED_NOTE",
+      "cardId": "guide-wheel-movement",
+      "pathId": "guided",
+      "actionIndex": 0,
+      "models": [
+        "LUBA 2",
+        "LUBA 2X",
+        "LUBA 3"
+      ],
+      "kind": "reasoning",
+      "title": "Read the comparison result",
+      "lines": [
+        "In a model-supported comparison, a fault that moves with the motor points to the motor side. A fault that stays on the same channel points to that channel's wiring or drive path.",
+        "Record the motor, channel and result for each comparison. A passing motor test alone does not identify the driver board as faulty."
+      ],
+      "sourceRefs": [
+        "wheel-sop",
+        "if-drive",
+        "nff-current"
+      ],
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true
+      },
+      "scopeReason": "Interprets the already-authorized model-supported isolation; does not add a swap procedure, connector instruction or universal tool capability."
+    },
+    {
+      "id": "hw-cutting-safe-clean",
+      "classification": "PUBLISH_SCOPED_NOTE",
+      "cardId": "guide-cutting-operation",
+      "pathId": "guided",
+      "actionIndex": 0,
+      "models": [
+        "LUBA 1",
+        "LUBA 2",
+        "LUBA 2X",
+        "LUBA 3"
+      ],
+      "kind": "tools",
+      "title": "Clean the cutting area safely",
+      "lines": [
+        "With the mower fully powered off, wear protective gloves and use a soft brush or damp cloth to remove debris.",
+        "Protect the vision module if the mower must be turned over. Do not use sharp objects on the chassis or rinse the mower with water while it is upside down."
+      ],
+      "sourceRefs": [
+        "maintenance",
+        "cutting-sop"
+      ],
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true
+      },
+      "scopeReason": "General non-invasive official maintenance detail applied only to the existing powered-off debris-removal action. Not a disassembly or motor replacement procedure."
+    },
+    {
+      "id": "hw-charge-load-observation",
+      "classification": "PUBLISH_SCOPED_NOTE",
+      "cardId": "guide-no-charge",
+      "pathId": "guided",
+      "actionIndex": 0,
+      "models": [
+        "LUBA 1",
+        "LUBA 2",
+        "LUBA 2X",
+        "LUBA 3"
+      ],
+      "kind": "reasoning",
+      "title": "Compare charging under the same conditions",
+      "lines": [
+        "A normal adapter reading with no mower connected does not prove that the charging source works under load. Retain the station indicator and charging-state observations when the mower docks.",
+        "For each comparison, record which adapter and station were used and the charging result. Change only one component at a time."
+      ],
+      "sourceRefs": [
+        "charge-sop",
+        "nff-current",
+        "local-reuse"
+      ],
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true
+      },
+      "scopeReason": "No voltage threshold, live-probing procedure or battery diagnosis. Extends existing controlled charging comparison."
+    },
+    {
+      "id": "hw-station-record-comparison",
+      "classification": "PUBLISH_SCOPED_NOTE",
+      "cardId": "guide-station-recognition",
+      "pathId": "guided",
+      "actionIndex": 0,
+      "models": [
+        "LUBA 2",
+        "LUBA 2X",
+        "LUBA 3"
+      ],
+      "kind": "reasoning",
+      "title": "Record the station-side result",
+      "lines": [
+        "Record station power/indicator status and whether the mower recognizes each tested station-and-adapter combination.",
+        "Keep the model and firmware unchanged while comparing compatible hardware; a combined swap cannot identify the failed component."
+      ],
+      "sourceRefs": [
+        "charge-sop",
+        "nff-current"
+      ],
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true
+      },
+      "scopeReason": "Result recording for the existing station-side comparison only."
+    },
+    {
+      "id": "hw-docking-cleaning",
+      "classification": "PUBLISH_SCOPED_NOTE",
+      "cardId": "guide-docking",
+      "pathId": "guided",
+      "actionIndex": 0,
+      "models": [
+        "LUBA 2",
+        "LUBA 2X",
+        "LUBA 3"
+      ],
+      "kind": "tools",
+      "title": "Clean contacts and the IR window",
+      "lines": [
+        "Fully power off the mower before cleaning. Use a soft brush or damp cloth on the charging contacts and charging-station IR window.",
+        "Avoid sharp objects and corrosive or volatile solvents. Retain the docking behavior after cleaning for the next check."
+      ],
+      "sourceRefs": [
+        "maintenance",
+        "charge-sop"
+      ],
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true
+      },
+      "scopeReason": "Non-invasive cleaning method for the already-authorized action; no electrical cleaning under power prescribed."
+    },
+    {
+      "id": "hw-power-observation",
+      "classification": "PUBLISH_SCOPED_NOTE",
+      "cardId": "guide-power",
+      "pathId": "guided",
+      "actionIndex": 1,
+      "models": [
+        "LUBA 2",
+        "LUBA 2X",
+        "LUBA 3"
+      ],
+      "kind": "reasoning",
+      "title": "Describe when power is lost",
+      "lines": [
+        "Record whether the mower never powers on, starts then shuts down, or powers off when leaving the station. Include the indicator state and battery readings from the supported test.",
+        "If heat, swelling, an unusual smell, water ingress or sparking is present, stop further powered tests and contact PIE."
+      ],
+      "sourceRefs": [
+        "power-sop",
+        "nff-current"
+      ],
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true
+      },
+      "scopeReason": "Observation and current safety stop; no battery-opening or voltage instructions."
+    },
+    {
+      "id": "hw-rtk-result-scope",
+      "classification": "PUBLISH_SCOPED_NOTE",
+      "cardId": "guide-rtk-connection",
+      "pathId": "guided",
+      "actionIndex": 0,
+      "models": [
+        "LUBA 2",
+        "LUBA 2X",
+        "LUBA 3"
+      ],
+      "kind": "reasoning",
+      "title": "Separate station power from mower positioning",
+      "lines": [
+        "Record the RTK station's power and indicator status separately from the mower's RTK connection/positioning status.",
+        "Retain visible antenna damage, water ingress or installation obstruction for PIE. A mower positioning symptom alone does not confirm that the RTK station is faulty."
+      ],
+      "sourceRefs": [
+        "position-sop",
+        "nff-current"
+      ],
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true
+      },
+      "scopeReason": "Only the existing RTK-station path; does not add GNSS Antenna Check or assume physical RTK is used by another positioning variant."
+    },
+    {
+      "id": "hw-bumper-test-result",
+      "classification": "PUBLISH_SCOPED_NOTE",
+      "cardId": "guide-bumper",
+      "pathId": "guided",
+      "actionIndex": 1,
+      "models": [
+        "LUBA 2",
+        "LUBA 2X",
+        "LUBA 3"
+      ],
+      "kind": "reasoning",
+      "title": "Read the bumper cross-check",
+      "lines": [
+        "If the suspect bumper works on a confirmed-good compatible reference mower, retain that result for PIE to investigate the mower-side sensing path.",
+        "Do not label a replacement bumper as proven good merely because it is new. Confirm STOP and bumper operation during final safety checks."
+      ],
+      "sourceRefs": [
+        "archived-diagnostic",
+        "local-reuse",
+        "sensor-sop"
+      ],
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true
+      },
+      "scopeReason": "Interpretation of an existing authorized compatible cross-check; sealed chassis-side Hall replacement remains PIE-only."
+    },
+    {
+      "id": "hw-cable-sbom-boundary",
+      "classification": "PUBLISH_SCOPED_NOTE",
+      "cardId": "guide-visible-cable-damage",
+      "pathId": "guided",
+      "actionIndex": 0,
+      "models": [
+        "LUBA 2",
+        "LUBA 2X",
+        "LUBA 3"
+      ],
+      "kind": "reasoning",
+      "title": "Confirm the replacement reference",
+      "lines": [
+        "Match the damaged cable's function and connector endpoints to the exact model's SBOM and service diagram before choosing a part.",
+        "An alternative-part listing does not establish model compatibility. If the diagram, SBOM or compatibility table disagree, retain the conflicting references and ask PIE before fitting the part."
+      ],
+      "sourceRefs": [
+        "archived-parts",
+        "local-reuse",
+        "parts-alternatives",
+        "parts-compat",
+        "manual-policy"
+      ],
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true
+      },
+      "scopeReason": "Adds lookup interpretation only; no SKU, routing, pinout or disassembly inferred."
+    }
+  ],
+  "verificationRecommendations": {
+    "classification": "PUBLISH_EXACT",
+    "sourceRefs": [
+      "nff-current",
+      "burnin-business"
+    ],
+    "visibleMandatoryAllRepairs": [
+      "Complete the model-applicable Functional Test, Communication Check and Auto Map Run; retain all three complete passing reports and a Connect Checking screenshot.",
+      "After final testing, upload a fresh log and retain the successful upload record.",
+      "Unsupported, unrun, missing or failed applicable tests are not a pass; contact PIE when final verification cannot be completed."
+    ],
+    "conditionalBurnIn": "After a driver-board, motor, battery or power-component repair, complete the supported Burn-in test and retain a passing result. Replacing only the charging station or charging contacts does not require Burn-in.",
+    "cardRecommendations": [
+      {
+        "cardId": "guide-wheel-movement",
+        "pathId": "guided",
+        "models": [
+          "LUBA 2",
+          "LUBA 2X",
+          "LUBA 3"
+        ],
+        "burnIn": "Required after the authorized confirmed motor or driver-board repair; not presumed completed by standard tests."
+      },
+      {
+        "cardId": "guide-cutting-operation",
+        "pathId": "guided",
+        "models": [
+          "LUBA 1",
+          "LUBA 2",
+          "LUBA 2X",
+          "LUBA 3"
+        ],
+        "burnIn": "Required after cutting-motor repair; do not imply debris cleaning alone requires it."
+      },
+      {
+        "cardId": "guide-no-charge",
+        "pathId": "guided",
+        "models": [
+          "LUBA 1",
+          "LUBA 2",
+          "LUBA 2X",
+          "LUBA 3"
+        ],
+        "burnIn": "Required for power-component repair, conditional on actual repair; station/charging-contact replacement explicitly exempt."
+      },
+      {
+        "cardId": "guide-power",
+        "pathId": "guided",
+        "models": [
+          "LUBA 2",
+          "LUBA 2X",
+          "LUBA 3"
+        ],
+        "burnIn": "Required after battery or power-component repair; no universal Battery Test/Burn-in coverage claim."
+      },
+      {
+        "cardId": "guide-station-recognition",
+        "pathId": "guided",
+        "models": [
+          "LUBA 2",
+          "LUBA 2X",
+          "LUBA 3"
+        ],
+        "burnIn": "Same power-component condition; station/charging-contact replacement explicitly exempt."
+      },
+      {
+        "cardId": "guide-docking",
+        "pathId": "guided",
+        "models": [
+          "LUBA 2",
+          "LUBA 2X",
+          "LUBA 3"
+        ],
+        "burnIn": "Not required for cleaning or station/contact-only replacement."
+      },
+      {
+        "cardId": "guide-rtk-connection",
+        "pathId": "guided",
+        "models": [
+          "LUBA 2",
+          "LUBA 2X",
+          "LUBA 3"
+        ],
+        "burnIn": "Do not infer tool applicability to RTK itself; PIE confirms supported acceptance if a power-component repair was performed."
+      },
+      {
+        "cardId": "guide-bumper",
+        "pathId": "guided",
+        "models": [
+          "LUBA 2",
+          "LUBA 2X",
+          "LUBA 3"
+        ],
+        "burnIn": "No blanket Burn-in addition for bumper repair; standard safety/functional verification applies."
+      },
+      {
+        "cardId": "guide-visible-cable-damage",
+        "pathId": "guided",
+        "models": [
+          "LUBA 2",
+          "LUBA 2X",
+          "LUBA 3"
+        ],
+        "burnIn": "Conditional only if the actual repaired cable belongs to a power/driver/motor repair; the generic visible-damage symptom does not establish that."
+      }
+    ],
+    "conflictPreserved": "Existing pilot ultrasonic-failure exception and previous four-artifact verification differ from current section 7. Root must reconcile using task authority and current source rather than silently calling the source a duplicate. No Burn-in duration, PC menu path or model-support matrix established by the final-acceptance rule."
+  },
+  "withheldFields": [
+    {
+      "id": "hm441-cutting-sku",
+      "classification": "NEEDS_SCOPE_REVIEW",
+      "cards": [
+        "guide-cutting-operation"
+      ],
+      "fields": {
+        "partName": "PUBLISH_EXACT",
+        "sku": "NEEDS_SCOPE_REVIEW",
+        "quantity": "NEEDS_SCOPE_REVIEW",
+        "disassembly": "NEEDS_SCOPE_REVIEW"
+      },
+      "facts": {
+        "project": "HM441",
+        "models": [
+          "LUBA 2X 3000",
+          "LUBA 2X 3000H",
+          "LUBA 2X 5000",
+          "LUBA 2X 5000H",
+          "LUBA 2X 10000",
+          "LUBA 2X 10000H"
+        ],
+        "regions": [
+          "EU",
+          "UK",
+          "AU",
+          "NA",
+          "CA"
+        ],
+        "left": {
+          "partName": "Left Cutting Disc Motor Module",
+          "sku": "C.P.SH.000184000"
+        },
+        "right": {
+          "partName": "Right Cutting Disc Motor Module",
+          "sku": "C.P.SH.000185000"
+        },
+        "quantity": null
+      },
+      "sourceRefs": [
+        "hm441-manual",
+        "hm441-structure",
+        "left-cutter",
+        "right-cutter",
+        "parts-compat",
+        "parts-alternatives"
+      ],
+      "reason": "Exact part facts corroborate within HM441, but broad LUBA 2X path does not confirm capacity, region or failing side. PCS is a unit; no repair quantity was explicit. No new selection fields added to force eligibility."
+    },
+    {
+      "id": "hm441-eu-adapter-conflict",
+      "classification": "CONFLICT",
+      "cards": [
+        "guide-no-charge",
+        "guide-station-recognition"
+      ],
+      "fields": {
+        "partName": "PUBLISH_EXACT",
+        "sku": "CONFLICT",
+        "quantity": "NEEDS_SCOPE_REVIEW"
+      },
+      "claims": [
+        "HM441 core manual labels C.P.XS.000121005 EU.",
+        "Material card and September 7 compatibility table identify C.P.XS.000121005 as CA; EU is C.P.XS.000121001."
+      ],
+      "sourceRefs": [
+        "hm441-manual",
+        "parts-compat",
+        "eu-adapter",
+        "ca-adapter"
+      ],
+      "reason": "Do not silently publish cleaner SKU. QTY14 in product name is not supported as a one-repair quantity. Region/capacity unconfirmed in broad public path."
+    },
+    {
+      "id": "hm441-wheel-conflict",
+      "classification": "CONFLICT",
+      "cards": [
+        "guide-wheel-movement"
+      ],
+      "fields": {
+        "partName": "PUBLISH_EXACT",
+        "sku": "CONFLICT",
+        "quantity": "NEEDS_SCOPE_REVIEW",
+        "disassembly": "NEEDS_SCOPE_REVIEW"
+      },
+      "claims": [
+        "HM441 manual warns that its wheel chapters contain W.D.DJ.000194011, W.D.DJ.000184010, W.D.DJ.000184040 and W.D.DJ.000022020 conflicting identifiers.",
+        "HM441 structure/alternative table contain different front/rear, raised and regional variants. No broad wheel-movement symptom identifies a unique SKU."
+      ],
+      "sourceRefs": [
+        "hm441-manual",
+        "hm441-structure",
+        "parts-compat",
+        "parts-alternatives"
+      ],
+      "reason": "Preserve conflicting identifiers privately; no wheel SKU or automatic driver-board fallback."
+    },
+    {
+      "id": "hm441-vision-conflict",
+      "classification": "CONFLICT",
+      "cards": [
+        "ec-1500",
+        "ec-5501",
+        "ec-6401"
+      ],
+      "fields": {
+        "sku": "CONFLICT",
+        "quantity": "NEEDS_SCOPE_REVIEW",
+        "replacement": "NEEDS_SCOPE_REVIEW"
+      },
+      "claims": [
+        "HM441 manual has C.P.SH.000045000 versus C.P.SH.000055000; the manual's conflict section retains only 000045000 for current HM441 SBOM lookup."
+      ],
+      "sourceRefs": [
+        "hm441-manual",
+        "hm441-structure",
+        "parts-compat"
+      ],
+      "reason": "No scoped confirmed replacement in existing PIE_ONLY cards; not a reason to publish any vision SKU."
+    },
+    {
+      "id": "x5-variant-selection",
+      "classification": "NEEDS_SCOPE_REVIEW",
+      "cards": [
+        "ec-5501",
+        "ec-6401",
+        "ec-1500"
+      ],
+      "fields": {
+        "partName": "NEEDS_SCOPE_REVIEW",
+        "sku": "NEEDS_SCOPE_REVIEW",
+        "quantity": "NEEDS_SCOPE_REVIEW"
+      },
+      "facts": {
+        "LUBA3_1500_AK1": "CPSH00002700",
+        "LUBA3_1500_Mid360": "CPSH00002800",
+        "LUBA3_3000_5000_Mid360": "C.P.SH.000199000",
+        "LUBA3_TP2409_selected_capacities": "CPSH00004400",
+        "YUKAmini2_MN232_800L_1000_1000H": "CPSH00000400"
+      },
+      "sourceRefs": [
+        "x5-matrix",
+        "vision-sop"
+      ],
+      "reason": "Exact hardware variants differ; LUBA 3 3000 AK1 mapping missing. Existing public model selection and error alone cannot authorize X5 replacement. Quantity absent."
+    },
+    {
+      "id": "tool-capability-boundary",
+      "classification": "NEEDS_SCOPE_REVIEW",
+      "cards": [
+        "guide-wheel-movement",
+        "guide-cutting-operation",
+        "guide-power",
+        "guide-rtk-connection",
+        "guide-update-failure"
+      ],
+      "fields": {
+        "existingToolName": "PUBLISH_SCOPED_NOTE",
+        "newToolUsage": "NEEDS_SCOPE_REVIEW",
+        "toolVersion": "PRIVATE_ONLY"
+      },
+      "sourceRefs": [
+        "tool-sop",
+        "hm441-manual",
+        "archived-tool",
+        "local-canonical"
+      ],
+      "reason": "Keep existing model-supported MammoSuite Motor Test wording and cutting left/right limitation. Mammotion Kit is PC; MammoSuite mobile; their functions are not interchangeable. Archived GNSS Antenna Check is mower GNSS scope, not a new station-connection replacement branch. Historical Kit 4.7.1.0/Flash Name baseline is not a current universal tool/version instruction."
+    },
+    {
+      "id": "full-disassembly-withheld",
+      "classification": "NEEDS_SCOPE_REVIEW",
+      "cards": [
+        "guide-wheel-movement",
+        "guide-cutting-operation",
+        "guide-no-charge",
+        "guide-station-recognition",
+        "guide-docking",
+        "guide-power",
+        "guide-rtk-connection",
+        "guide-bumper",
+        "guide-visible-cable-damage"
+      ],
+      "fields": {
+        "disassembly": "NEEDS_SCOPE_REVIEW",
+        "connectorRouting": "NEEDS_SCOPE_REVIEW",
+        "torque": "NEEDS_SCOPE_REVIEW"
+      },
+      "sourceRefs": [
+        "manual-policy",
+        "hm441-manual",
+        "hm441-structure"
+      ],
+      "reason": "Core sources give diagnostic isolation, not a complete variant-bound opening/disconnect/fastener/seal/reassembly procedure. No safe-to-open/service-procedure confirmation UI exists. Published cleaning details are not disassembly. Do not infer pinouts, torque, disconnect timing or cable routing."
+    },
+    {
+      "id": "new-can-hardware-path",
+      "classification": "PRIVATE_ONLY",
+      "cards": [
+        "hardware-top10-intermittent-can"
+      ],
+      "fields": {
+        "solution": "PUBLISH_SCOPED_NOTE",
+        "part": "NEEDS_SCOPE_REVIEW",
+        "sku": "NEEDS_SCOPE_REVIEW",
+        "toolUsage": "NEEDS_SCOPE_REVIEW",
+        "verification": "PUBLISH_SCOPED_NOTE"
+      },
+      "sourceRefs": [
+        "wheel-sop",
+        "if-drive",
+        "nff-current"
+      ],
+      "reason": "Repeated CAN failures with intermittent drive loss support PIE-guided mainboard–CAN–driver path investigation. Source model absent; lower-grade recurrence is not completed repair evidence. Keep investigation and discriminator in management artifact; no automatic cable/board replacement or new public confident repair."
+    },
+    {
+      "id": "new-lidar-hardware-path",
+      "classification": "PRIVATE_ONLY",
+      "cards": [
+        "hardware-top10-lidar"
+      ],
+      "fields": {
+        "solution": "PUBLISH_SCOPED_NOTE",
+        "part": "NEEDS_SCOPE_REVIEW",
+        "sku": "NEEDS_SCOPE_REVIEW",
+        "toolUsage": "NEEDS_SCOPE_REVIEW",
+        "verification": "PUBLISH_SCOPED_NOTE"
+      },
+      "sourceRefs": [
+        "vision-sop",
+        "x5-matrix",
+        "nff-current"
+      ],
+      "reason": "PIE-guided exact-variant optics/connection/known-good isolation is supported; error, update percentage or light dirt does not prove LiDAR failure. No general repair promotion or SKU authorization."
+    },
+    {
+      "id": "guide-update-not-top10",
+      "classification": "NOT_RELEVANT",
+      "cards": [
+        "guide-update-failure"
+      ],
+      "sourceRefs": [
+        "tool-sop",
+        "local-canonical"
+      ],
+      "reason": "Retain existing safe card but pure update failure does not occupy hardware Top 10. Versions and data synchronization may only guard a scoped hardware path."
+    },
+    {
+      "id": "pilot-import-duplicate",
+      "classification": "DUPLICATE",
+      "sourceRefs": [
+        "guided-copy",
+        "local-canonical",
+        "local-reuse"
+      ],
+      "reason": "Active guided-path table imports pilot content; not a second independent source or new evidence of repeated outcomes."
+    },
+    {
+      "id": "access-and-raw-cases",
+      "classification": "PRIVATE_ONLY",
+      "sourceRefs": [
+        "archived-tool",
+        "archived-diagnostic"
+      ],
+      "reason": "No installation access value, customer/partner identity, device identifier, raw ticket body or raw source text is included in this artifact or eligible public records."
+    },
+    {
+      "id": "1202-frozen",
+      "classification": "PRIVATE_ONLY",
+      "cards": [
+        "ec-1202"
+      ],
+      "sourceRefs": [
+        "local-canonical",
+        "cutting-sop"
+      ],
+      "reason": "No enrichment authorizes the frozen hardware branches. Generic cutter maintenance does not promote code1202 replacement scope."
+    },
+    {
+      "classification": "NEEDS_SCOPE_REVIEW",
+      "id": "luba3-sealed-side-sensor",
+      "sourceRefs": [
+        "luba3-sealed-sensor",
+        "local-canonical"
+      ],
+      "cards": [
+        "guide-bumper",
+        "guide-visible-cable-damage"
+      ],
+      "reason": "LUBA3 side sensing is potted and not individually repairable per dated strategy note. Preserve stop condition; no new chassis replacement authorization or invented side-wire SKU.",
+      "fields": {
+        "serviceability": "PUBLISH_SCOPED_NOTE",
+        "sku": "NEEDS_SCOPE_REVIEW",
+        "disassembly": "NEEDS_SCOPE_REVIEW"
+      }
+    },
+    {
+      "classification": "NEEDS_SCOPE_REVIEW",
+      "sourceRefs": [
+        "manual-policy",
+        "parts-alternatives",
+        "disassembly-index",
+        "adapter-no-mix"
+      ],
+      "id": "pcn-and-installation-coverage",
+      "reason": "Relevant canonical/official SOP, structure and parts-reference search found revision/compatibility notices and dismantling index. No dated variant-specific PCN with complete installation sequence was established. This is a searched-coverage gap, not a claim no PCN exists anywhere."
+    }
+  ],
+  "publicProjectionRules": [
+    "Only publicSupportCandidates eligible after root binds exact card/path/model/action instruction/knowledge version and validates source hash.",
+    "Sources, private facts, conflicts, source paths, source hashes and withheldFields never enter public projection or standalone package.",
+    "These scoped notes supplement current approved actions; they do not create repair authorization, a new mandatory input, or runtime access to the vault.",
+    "No exact SKU/quantity or disassembly record is currently eligible. Do not infer quantity=1 or treat packaging QTY as repair quantity.",
+    "Mandatory current verification belongs in visible verification, not collapsed details."
+  ]
+}

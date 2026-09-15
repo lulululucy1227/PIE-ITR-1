@@ -1,0 +1,1484 @@
+{
+  "schemaVersion": 1,
+  "task": "EC-MT-20260916-HARDWARE-TOP10-010",
+  "reviewedAt": "2026-09-16",
+  "sources": [
+    {
+      "id": "wheel-sop",
+      "file": "07-标准知识/03-标准SOP/轮毂与行走标准SOP.md",
+      "section": "Numbered steps 1–6; 复合症状判定",
+      "sourceDate": "2026-08-21",
+      "status": "canonical/evidence-based-draft; rewritten bounded interpretation only",
+      "sha256": "65463388454eaa739730ee82a66a274b922961687220d70d3f93899622c5041b",
+      "bytes": 6576,
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/维修与售后知识库/07-标准知识/03-标准SOP/轮毂与行走标准SOP.md",
+      "documentMetadata": {
+        "generated": "2026-08-06",
+        "updated": "2026-08-21",
+        "version_scope": "as-of-2026-08-21",
+        "review_status": "canonical",
+        "ai_use": "draft-reference"
+      }
+    },
+    {
+      "id": "cutting-sop",
+      "file": "07-标准知识/03-标准SOP/刀盘与割草标准SOP.md",
+      "section": "Numbered steps 1–5",
+      "sourceDate": "2026-08-14",
+      "status": "canonical/evidence-based-draft; version scope remains as-of-2026-08-06",
+      "sha256": "5e3a12b9fb2a183ee54f831be58c2cced3d68d483738ce003c807dd3605c0791",
+      "bytes": 3696,
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/维修与售后知识库/07-标准知识/03-标准SOP/刀盘与割草标准SOP.md",
+      "documentMetadata": {
+        "generated": "2026-08-06",
+        "updated": "2026-08-14",
+        "version_scope": "as-of-2026-08-06",
+        "review_status": "canonical",
+        "ai_use": "draft-reference"
+      }
+    },
+    {
+      "id": "charge-sop",
+      "file": "07-标准知识/03-标准SOP/充电与回充标准SOP.md",
+      "section": "不充电; 回充失败; 负载压降分支",
+      "sourceDate": "2026-08-21",
+      "status": "canonical/evidence-based-draft; case hypothesis not a confirmed component fault",
+      "sha256": "c94ea763acab2149e422d525c3043667819140a86962086b287645529e513077",
+      "bytes": 6526,
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/维修与售后知识库/07-标准知识/03-标准SOP/充电与回充标准SOP.md",
+      "documentMetadata": {
+        "generated": "2026-08-06",
+        "updated": "2026-08-21",
+        "version_scope": "as-of-2026-08-21",
+        "review_status": "canonical",
+        "ai_use": "draft-reference"
+      }
+    },
+    {
+      "id": "power-sop",
+      "file": "07-标准知识/03-标准SOP/电池与开关机标准SOP.md",
+      "section": "Numbered steps 1–5; 接电池打火/疑似短路",
+      "sourceDate": "2026-08-21",
+      "status": "canonical/evidence-based-draft",
+      "sha256": "70ad9870ae5a48cdd419f903754ba90e50cbd33eff5a119083b079f0123c7c1c",
+      "bytes": 4611,
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/维修与售后知识库/07-标准知识/03-标准SOP/电池与开关机标准SOP.md",
+      "documentMetadata": {
+        "generated": "2026-08-06",
+        "updated": "2026-08-21",
+        "version_scope": "as-of-2026-08-21",
+        "review_status": "canonical",
+        "ai_use": "draft-reference"
+      }
+    },
+    {
+      "id": "sensor-sop",
+      "file": "07-标准知识/03-标准SOP/传感器与防撞标准SOP.md",
+      "section": "Numbered steps 1–5; safety stop",
+      "sourceDate": "2026-08-14",
+      "status": "canonical/evidence-based-draft",
+      "sha256": "23eba425422459b97224ca99276e51b94a8719c0e7305e8268e3114d1ff85a8f",
+      "bytes": 3989,
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/维修与售后知识库/07-标准知识/03-标准SOP/传感器与防撞标准SOP.md",
+      "documentMetadata": {
+        "generated": "2026-08-06",
+        "updated": "2026-08-14",
+        "version_scope": "as-of-2026-08-06",
+        "review_status": "canonical",
+        "ai_use": "draft-reference"
+      }
+    },
+    {
+      "id": "position-sop",
+      "file": "07-标准知识/03-标准SOP/定位与RTK标准SOP.md",
+      "section": "判断流程; 升级条件",
+      "sourceDate": "2026-08-14",
+      "status": "canonical/evidence-based-draft; exact positioning architecture required",
+      "sha256": "87c3c901fa3fd8f5e378f6bc6de91e57a597982a918f54f964e24c47309c06ed",
+      "bytes": 4468,
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/维修与售后知识库/07-标准知识/03-标准SOP/定位与RTK标准SOP.md",
+      "documentMetadata": {
+        "generated": "2026-08-06",
+        "updated": "2026-08-14",
+        "version_scope": "as-of-2026-08-06",
+        "review_status": "canonical",
+        "ai_use": "draft-reference"
+      }
+    },
+    {
+      "id": "nff-current",
+      "file": "07-标准知识/03-标准SOP/NFF与二返标准SOP.md",
+      "section": "4 交叉验证规则; 7 未发现问题 / 维修完成验收门",
+      "sourceDate": "2026-09-14",
+      "status": "canonical; section 7 is sole current acceptance authority",
+      "sha256": "ebc704baa76a6002d71a612bc1a0070adbd7cb0a4d2dfc676ec774256658c097",
+      "bytes": 7526,
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/维修与售后知识库/07-标准知识/03-标准SOP/NFF与二返标准SOP.md",
+      "documentMetadata": {
+        "generated": "2026-08-14",
+        "updated": "2026-09-14",
+        "version_scope": "as-of-2026-09-14",
+        "review_status": "canonical",
+        "ai_use": "draft-reference"
+      }
+    },
+    {
+      "id": "maintenance",
+      "file": "01-SOP与流程/官网SOP/清洁-刀片-电池-冬季存储维护.md",
+      "section": "安全和清洁; 刀片和刀盘",
+      "sourceDate": "2026-08-06",
+      "status": "official-support-sop/source-record; captured public maintenance baseline; no new interval or tool setting published",
+      "sha256": "a2478ac41fe2a0b100488c598af1e9a68f79a4743079ce176b262ac3e4cde012",
+      "bytes": 1837,
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/维修与售后知识库/01-SOP与流程/官网SOP/清洁-刀片-电池-冬季存储维护.md",
+      "documentMetadata": {
+        "captured_at": "2026-08-06",
+        "review_status": "source-record",
+        "ai_use": "draft-reference"
+      }
+    },
+    {
+      "id": "manual-policy",
+      "file": "07-标准知识/03-标准SOP/核心维修手册/00-核心维修手册使用规则.md",
+      "section": "依据优先级; 使用前必须锁定; 共同诊断原则; 来源与限制",
+      "sourceDate": "2026-08-14",
+      "status": "source-backed primary diagnostic reference; formal manual version unknown",
+      "sha256": "9cc4a7efa5ea74a9cd75cc8ea8fff84a86ccf7acacce5956da9c5ecf9f25ee4b",
+      "bytes": 2967,
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/维修与售后知识库/07-标准知识/03-标准SOP/核心维修手册/00-核心维修手册使用规则.md",
+      "documentMetadata": {
+        "generated": "2026-08-14",
+        "updated": "2026-08-14",
+        "version_scope": "as-provided-2026-08-14",
+        "source_version": "unknown",
+        "review_status": "canonical",
+        "ai_use": "primary-diagnostic-reference"
+      }
+    },
+    {
+      "id": "parts-compat",
+      "file": "03-产品与料号/01-工件兼容表.md",
+      "section": "LUBA 2X cutter rows; regional adapter rows; model compatibility",
+      "sourceDate": "2026-09-07",
+      "status": "official canonical lookup-only; captured date not approval date; absent compatibility is not inferred",
+      "sha256": "1704dc3b7e510eafd3328528bf9b788e07eb2f421e99040fdbd9befd4b1b33d0",
+      "bytes": 129315,
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/维修与售后知识库/03-产品与料号/01-工件兼容表.md",
+      "documentMetadata": {
+        "captured_at": "2026-09-07",
+        "review_status": "canonical",
+        "ai_use": "lookup-only"
+      }
+    },
+    {
+      "id": "parts-alternatives",
+      "file": "03-产品与料号/02-替代料表.md",
+      "section": "V2 header; LUBA 2X cutter and wheel alternatives",
+      "sourceDate": "2026-09-07",
+      "status": "official canonical lookup-only V2; substitute still requires compatibility",
+      "sha256": "485e6c677ec26d47a693bdab6e7fb2197f6159ed6a97438a25922a1406e9221a",
+      "bytes": 61956,
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/维修与售后知识库/03-产品与料号/02-替代料表.md",
+      "documentMetadata": {
+        "captured_at": "2026-09-07",
+        "review_status": "canonical",
+        "ai_use": "lookup-only"
+      }
+    },
+    {
+      "id": "if-drive",
+      "file": "07-标准知识/09-IF规则库/03-行走CAN.md",
+      "section": "D001 single-channel discriminator",
+      "sourceDate": null,
+      "status": "active internal rule; source date must not be inferred from file timestamp",
+      "sha256": "a98c381b2411f862c01bc51d082496c04a3bdae709c37ef53afa20889a99ec1b",
+      "bytes": 2555,
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/维修与售后知识库/07-标准知识/09-IF规则库/03-行走CAN.md",
+      "documentMetadata": {
+        "updated": "2026-08-31",
+        "version_scope": "as-of-2026-08-31",
+        "review_status": "canonical",
+        "ai_use": "diagnostic-reference"
+      }
+    },
+    {
+      "id": "local-reuse",
+      "root": "workspace",
+      "file": "error-code-pilot/data/reuse-snapshot.json",
+      "section": "reuse-charge-comparison; reuse-bumper-crosscheck; reuse-cable-part-check; reuse-power-observation",
+      "sourceDate": "2026-09-15",
+      "status": "Task008 scoped approval retained; no independent new cases",
+      "sha256": "8322c45095d1c4fac87b3b58bfee6ba151248894d9321c6807a1e58a4073e5d2",
+      "bytes": 14350,
+      "resolvedPath": "C:/Users/Reggie/Desktop/PIE-ITR-ErrorCode/error-code-pilot/data/reuse-snapshot.json",
+      "documentMetadata": {}
+    },
+    {
+      "id": "archived-diagnostic",
+      "root": "reply-reference",
+      "file": "DIAGNOSTIC_KNOWLEDGE.md",
+      "section": "Battery Test; Side-bumper fault isolation; Cross-validation; No power/no boot",
+      "sourceDate": null,
+      "status": "Archived corroboration only; sanitized technical facts, no source body copied",
+      "sha256": "54627f51550252c73855cb0ca4ccac3f2b8007aa07e18a26f948471e4ab2fcc9",
+      "bytes": 19080,
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/ticket_assist/external/pie-itr-workbench/docs/knowledge/DIAGNOSTIC_KNOWLEDGE.md",
+      "documentMetadata": {}
+    },
+    {
+      "id": "archived-parts",
+      "root": "reply-reference",
+      "file": "PARTS_KNOWLEDGE.md",
+      "section": "SBOM vs exploded-view consistency rule; Repair-strategy rule",
+      "sourceDate": null,
+      "status": "Archived corroboration only; does not authorize an unscoped part",
+      "sha256": "045c977cb9c7f31854f499b86e9d2409c322828f894487a8bb48b2e511a89e49",
+      "bytes": 4813,
+      "resolvedPath": "C:/Users/Reggie/Desktop/ITR工单助手/工单助手交接包/ticket_assist/external/pie-itr-workbench/docs/knowledge/PARTS_KNOWLEDGE.md",
+      "documentMetadata": {}
+    }
+  ],
+  "records": [
+    {
+      "id": "hw-wheel-cross-result-luba-2",
+      "kind": "reasoning",
+      "status": "APPROVED",
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true,
+        "current": true
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "wheel-sop",
+          "sha256": "65463388454eaa739730ee82a66a274b922961687220d70d3f93899622c5041b",
+          "section": "Numbered steps 1–6; 复合症状判定"
+        },
+        {
+          "sourceId": "if-drive",
+          "sha256": "a98c381b2411f862c01bc51d082496c04a3bdae709c37ef53afa20889a99ec1b",
+          "section": "D001 single-channel discriminator"
+        },
+        {
+          "sourceId": "nff-current",
+          "sha256": "ebc704baa76a6002d71a612bc1a0070adbd7cb0a4d2dfc676ec774256658c097",
+          "section": "4 交叉验证规则; 7 未发现问题 / 维修完成验收门"
+        }
+      ],
+      "binding": {
+        "cardId": "guide-wheel-movement",
+        "pathId": "guided",
+        "model": "LUBA 2",
+        "firmware": "",
+        "knowledgeVersion": "2026-09-16-hardware-top10.1",
+        "actionIndex": 0,
+        "instruction": "Use the model-supported Motor Test in MammoSuite to distinguish the wheel motor from its driver-board path. If several wheels or other motors fail together, stop individual-part replacement and contact PIE for shared-power checks."
+      },
+      "title": "Read the comparison result",
+      "lines": [
+        "In a model-supported comparison, a fault that moves with the motor points to the motor side. A fault that stays on the same channel points to that channel's wiring or drive path.",
+        "Record the motor, channel and result for each comparison. A passing motor test alone does not identify the driver board as faulty."
+      ]
+    },
+    {
+      "id": "hw-wheel-cross-result-luba-2x",
+      "kind": "reasoning",
+      "status": "APPROVED",
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true,
+        "current": true
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "wheel-sop",
+          "sha256": "65463388454eaa739730ee82a66a274b922961687220d70d3f93899622c5041b",
+          "section": "Numbered steps 1–6; 复合症状判定"
+        },
+        {
+          "sourceId": "if-drive",
+          "sha256": "a98c381b2411f862c01bc51d082496c04a3bdae709c37ef53afa20889a99ec1b",
+          "section": "D001 single-channel discriminator"
+        },
+        {
+          "sourceId": "nff-current",
+          "sha256": "ebc704baa76a6002d71a612bc1a0070adbd7cb0a4d2dfc676ec774256658c097",
+          "section": "4 交叉验证规则; 7 未发现问题 / 维修完成验收门"
+        }
+      ],
+      "binding": {
+        "cardId": "guide-wheel-movement",
+        "pathId": "guided",
+        "model": "LUBA 2X",
+        "firmware": "",
+        "knowledgeVersion": "2026-09-16-hardware-top10.1",
+        "actionIndex": 0,
+        "instruction": "Use the model-supported Motor Test in MammoSuite to distinguish the wheel motor from its driver-board path. If several wheels or other motors fail together, stop individual-part replacement and contact PIE for shared-power checks."
+      },
+      "title": "Read the comparison result",
+      "lines": [
+        "In a model-supported comparison, a fault that moves with the motor points to the motor side. A fault that stays on the same channel points to that channel's wiring or drive path.",
+        "Record the motor, channel and result for each comparison. A passing motor test alone does not identify the driver board as faulty."
+      ]
+    },
+    {
+      "id": "hw-wheel-cross-result-luba-3",
+      "kind": "reasoning",
+      "status": "APPROVED",
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true,
+        "current": true
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "wheel-sop",
+          "sha256": "65463388454eaa739730ee82a66a274b922961687220d70d3f93899622c5041b",
+          "section": "Numbered steps 1–6; 复合症状判定"
+        },
+        {
+          "sourceId": "if-drive",
+          "sha256": "a98c381b2411f862c01bc51d082496c04a3bdae709c37ef53afa20889a99ec1b",
+          "section": "D001 single-channel discriminator"
+        },
+        {
+          "sourceId": "nff-current",
+          "sha256": "ebc704baa76a6002d71a612bc1a0070adbd7cb0a4d2dfc676ec774256658c097",
+          "section": "4 交叉验证规则; 7 未发现问题 / 维修完成验收门"
+        }
+      ],
+      "binding": {
+        "cardId": "guide-wheel-movement",
+        "pathId": "guided",
+        "model": "LUBA 3",
+        "firmware": "",
+        "knowledgeVersion": "2026-09-16-hardware-top10.1",
+        "actionIndex": 0,
+        "instruction": "Use the model-supported Motor Test in MammoSuite to distinguish the wheel motor from its driver-board path. If several wheels or other motors fail together, stop individual-part replacement and contact PIE for shared-power checks."
+      },
+      "title": "Read the comparison result",
+      "lines": [
+        "In a model-supported comparison, a fault that moves with the motor points to the motor side. A fault that stays on the same channel points to that channel's wiring or drive path.",
+        "Record the motor, channel and result for each comparison. A passing motor test alone does not identify the driver board as faulty."
+      ]
+    },
+    {
+      "id": "hw-cutting-safe-clean-luba-1",
+      "kind": "tools",
+      "status": "APPROVED",
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true,
+        "current": true
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "maintenance",
+          "sha256": "a2478ac41fe2a0b100488c598af1e9a68f79a4743079ce176b262ac3e4cde012",
+          "section": "安全和清洁; 刀片和刀盘"
+        },
+        {
+          "sourceId": "cutting-sop",
+          "sha256": "5e3a12b9fb2a183ee54f831be58c2cced3d68d483738ce003c807dd3605c0791",
+          "section": "Numbered steps 1–5"
+        }
+      ],
+      "binding": {
+        "cardId": "guide-cutting-operation",
+        "pathId": "guided",
+        "model": "LUBA 1",
+        "firmware": "",
+        "knowledgeVersion": "2026-09-16-hardware-top10.1",
+        "actionIndex": 0,
+        "instruction": "Power off the mower and wear protective gloves before inspecting the cutting area. Remove actual debris or physical blockage safely, then recheck cutting operation."
+      },
+      "title": "Clean the cutting area safely",
+      "lines": [
+        "With the mower fully powered off, wear protective gloves and use a soft brush or damp cloth to remove debris.",
+        "Protect the vision module if the mower must be turned over. Do not use sharp objects on the chassis or rinse the mower with water while it is upside down."
+      ]
+    },
+    {
+      "id": "hw-cutting-safe-clean-luba-2",
+      "kind": "tools",
+      "status": "APPROVED",
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true,
+        "current": true
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "maintenance",
+          "sha256": "a2478ac41fe2a0b100488c598af1e9a68f79a4743079ce176b262ac3e4cde012",
+          "section": "安全和清洁; 刀片和刀盘"
+        },
+        {
+          "sourceId": "cutting-sop",
+          "sha256": "5e3a12b9fb2a183ee54f831be58c2cced3d68d483738ce003c807dd3605c0791",
+          "section": "Numbered steps 1–5"
+        }
+      ],
+      "binding": {
+        "cardId": "guide-cutting-operation",
+        "pathId": "guided",
+        "model": "LUBA 2",
+        "firmware": "",
+        "knowledgeVersion": "2026-09-16-hardware-top10.1",
+        "actionIndex": 0,
+        "instruction": "Power off the mower and wear protective gloves before inspecting the cutting area. Remove actual debris or physical blockage safely, then recheck cutting operation."
+      },
+      "title": "Clean the cutting area safely",
+      "lines": [
+        "With the mower fully powered off, wear protective gloves and use a soft brush or damp cloth to remove debris.",
+        "Protect the vision module if the mower must be turned over. Do not use sharp objects on the chassis or rinse the mower with water while it is upside down."
+      ]
+    },
+    {
+      "id": "hw-cutting-safe-clean-luba-2x",
+      "kind": "tools",
+      "status": "APPROVED",
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true,
+        "current": true
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "maintenance",
+          "sha256": "a2478ac41fe2a0b100488c598af1e9a68f79a4743079ce176b262ac3e4cde012",
+          "section": "安全和清洁; 刀片和刀盘"
+        },
+        {
+          "sourceId": "cutting-sop",
+          "sha256": "5e3a12b9fb2a183ee54f831be58c2cced3d68d483738ce003c807dd3605c0791",
+          "section": "Numbered steps 1–5"
+        }
+      ],
+      "binding": {
+        "cardId": "guide-cutting-operation",
+        "pathId": "guided",
+        "model": "LUBA 2X",
+        "firmware": "",
+        "knowledgeVersion": "2026-09-16-hardware-top10.1",
+        "actionIndex": 0,
+        "instruction": "Power off the mower and wear protective gloves before inspecting the cutting area. Remove actual debris or physical blockage safely, then recheck cutting operation."
+      },
+      "title": "Clean the cutting area safely",
+      "lines": [
+        "With the mower fully powered off, wear protective gloves and use a soft brush or damp cloth to remove debris.",
+        "Protect the vision module if the mower must be turned over. Do not use sharp objects on the chassis or rinse the mower with water while it is upside down."
+      ]
+    },
+    {
+      "id": "hw-cutting-safe-clean-luba-3",
+      "kind": "tools",
+      "status": "APPROVED",
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true,
+        "current": true
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "maintenance",
+          "sha256": "a2478ac41fe2a0b100488c598af1e9a68f79a4743079ce176b262ac3e4cde012",
+          "section": "安全和清洁; 刀片和刀盘"
+        },
+        {
+          "sourceId": "cutting-sop",
+          "sha256": "5e3a12b9fb2a183ee54f831be58c2cced3d68d483738ce003c807dd3605c0791",
+          "section": "Numbered steps 1–5"
+        }
+      ],
+      "binding": {
+        "cardId": "guide-cutting-operation",
+        "pathId": "guided",
+        "model": "LUBA 3",
+        "firmware": "",
+        "knowledgeVersion": "2026-09-16-hardware-top10.1",
+        "actionIndex": 0,
+        "instruction": "Power off the mower and wear protective gloves before inspecting the cutting area. Remove actual debris or physical blockage safely, then recheck cutting operation."
+      },
+      "title": "Clean the cutting area safely",
+      "lines": [
+        "With the mower fully powered off, wear protective gloves and use a soft brush or damp cloth to remove debris.",
+        "Protect the vision module if the mower must be turned over. Do not use sharp objects on the chassis or rinse the mower with water while it is upside down."
+      ]
+    },
+    {
+      "id": "hw-charge-load-observation-luba-1",
+      "kind": "reasoning",
+      "status": "APPROVED",
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true,
+        "current": true
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "charge-sop",
+          "sha256": "c94ea763acab2149e422d525c3043667819140a86962086b287645529e513077",
+          "section": "不充电; 回充失败; 负载压降分支"
+        },
+        {
+          "sourceId": "nff-current",
+          "sha256": "ebc704baa76a6002d71a612bc1a0070adbd7cb0a4d2dfc676ec774256658c097",
+          "section": "4 交叉验证规则; 7 未发现问题 / 维修完成验收门"
+        },
+        {
+          "sourceId": "local-reuse",
+          "sha256": "8322c45095d1c4fac87b3b58bfee6ba151248894d9321c6807a1e58a4073e5d2",
+          "section": "reuse-charge-comparison; reuse-bumper-crosscheck; reuse-cable-part-check; reuse-power-observation"
+        }
+      ],
+      "binding": {
+        "cardId": "guide-no-charge",
+        "pathId": "guided",
+        "model": "LUBA 1",
+        "firmware": "",
+        "knowledgeVersion": "2026-09-16-hardware-top10.1",
+        "actionIndex": 0,
+        "instruction": "Compare the original station and adapter with confirmed-good compatible hardware, changing one component at a time. Record the charging result for each comparison using the model service procedure."
+      },
+      "title": "Compare charging under the same conditions",
+      "lines": [
+        "A normal adapter reading with no mower connected does not prove that the charging source works under load. Retain the station indicator and charging-state observations when the mower docks.",
+        "For each comparison, record which adapter and station were used and the charging result. Change only one component at a time."
+      ]
+    },
+    {
+      "id": "hw-charge-load-observation-luba-2",
+      "kind": "reasoning",
+      "status": "APPROVED",
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true,
+        "current": true
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "charge-sop",
+          "sha256": "c94ea763acab2149e422d525c3043667819140a86962086b287645529e513077",
+          "section": "不充电; 回充失败; 负载压降分支"
+        },
+        {
+          "sourceId": "nff-current",
+          "sha256": "ebc704baa76a6002d71a612bc1a0070adbd7cb0a4d2dfc676ec774256658c097",
+          "section": "4 交叉验证规则; 7 未发现问题 / 维修完成验收门"
+        },
+        {
+          "sourceId": "local-reuse",
+          "sha256": "8322c45095d1c4fac87b3b58bfee6ba151248894d9321c6807a1e58a4073e5d2",
+          "section": "reuse-charge-comparison; reuse-bumper-crosscheck; reuse-cable-part-check; reuse-power-observation"
+        }
+      ],
+      "binding": {
+        "cardId": "guide-no-charge",
+        "pathId": "guided",
+        "model": "LUBA 2",
+        "firmware": "",
+        "knowledgeVersion": "2026-09-16-hardware-top10.1",
+        "actionIndex": 0,
+        "instruction": "Compare the original station and adapter with confirmed-good compatible hardware, changing one component at a time. Record the charging result for each comparison using the model service procedure."
+      },
+      "title": "Compare charging under the same conditions",
+      "lines": [
+        "A normal adapter reading with no mower connected does not prove that the charging source works under load. Retain the station indicator and charging-state observations when the mower docks.",
+        "For each comparison, record which adapter and station were used and the charging result. Change only one component at a time."
+      ]
+    },
+    {
+      "id": "hw-charge-load-observation-luba-2x",
+      "kind": "reasoning",
+      "status": "APPROVED",
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true,
+        "current": true
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "charge-sop",
+          "sha256": "c94ea763acab2149e422d525c3043667819140a86962086b287645529e513077",
+          "section": "不充电; 回充失败; 负载压降分支"
+        },
+        {
+          "sourceId": "nff-current",
+          "sha256": "ebc704baa76a6002d71a612bc1a0070adbd7cb0a4d2dfc676ec774256658c097",
+          "section": "4 交叉验证规则; 7 未发现问题 / 维修完成验收门"
+        },
+        {
+          "sourceId": "local-reuse",
+          "sha256": "8322c45095d1c4fac87b3b58bfee6ba151248894d9321c6807a1e58a4073e5d2",
+          "section": "reuse-charge-comparison; reuse-bumper-crosscheck; reuse-cable-part-check; reuse-power-observation"
+        }
+      ],
+      "binding": {
+        "cardId": "guide-no-charge",
+        "pathId": "guided",
+        "model": "LUBA 2X",
+        "firmware": "",
+        "knowledgeVersion": "2026-09-16-hardware-top10.1",
+        "actionIndex": 0,
+        "instruction": "Compare the original station and adapter with confirmed-good compatible hardware, changing one component at a time. Record the charging result for each comparison using the model service procedure."
+      },
+      "title": "Compare charging under the same conditions",
+      "lines": [
+        "A normal adapter reading with no mower connected does not prove that the charging source works under load. Retain the station indicator and charging-state observations when the mower docks.",
+        "For each comparison, record which adapter and station were used and the charging result. Change only one component at a time."
+      ]
+    },
+    {
+      "id": "hw-charge-load-observation-luba-3",
+      "kind": "reasoning",
+      "status": "APPROVED",
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true,
+        "current": true
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "charge-sop",
+          "sha256": "c94ea763acab2149e422d525c3043667819140a86962086b287645529e513077",
+          "section": "不充电; 回充失败; 负载压降分支"
+        },
+        {
+          "sourceId": "nff-current",
+          "sha256": "ebc704baa76a6002d71a612bc1a0070adbd7cb0a4d2dfc676ec774256658c097",
+          "section": "4 交叉验证规则; 7 未发现问题 / 维修完成验收门"
+        },
+        {
+          "sourceId": "local-reuse",
+          "sha256": "8322c45095d1c4fac87b3b58bfee6ba151248894d9321c6807a1e58a4073e5d2",
+          "section": "reuse-charge-comparison; reuse-bumper-crosscheck; reuse-cable-part-check; reuse-power-observation"
+        }
+      ],
+      "binding": {
+        "cardId": "guide-no-charge",
+        "pathId": "guided",
+        "model": "LUBA 3",
+        "firmware": "",
+        "knowledgeVersion": "2026-09-16-hardware-top10.1",
+        "actionIndex": 0,
+        "instruction": "Compare the original station and adapter with confirmed-good compatible hardware, changing one component at a time. Record the charging result for each comparison using the model service procedure."
+      },
+      "title": "Compare charging under the same conditions",
+      "lines": [
+        "A normal adapter reading with no mower connected does not prove that the charging source works under load. Retain the station indicator and charging-state observations when the mower docks.",
+        "For each comparison, record which adapter and station were used and the charging result. Change only one component at a time."
+      ]
+    },
+    {
+      "id": "hw-station-record-comparison-luba-2",
+      "kind": "reasoning",
+      "status": "APPROVED",
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true,
+        "current": true
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "charge-sop",
+          "sha256": "c94ea763acab2149e422d525c3043667819140a86962086b287645529e513077",
+          "section": "不充电; 回充失败; 负载压降分支"
+        },
+        {
+          "sourceId": "nff-current",
+          "sha256": "ebc704baa76a6002d71a612bc1a0070adbd7cb0a4d2dfc676ec774256658c097",
+          "section": "4 交叉验证规则; 7 未发现问题 / 维修完成验收门"
+        }
+      ],
+      "binding": {
+        "cardId": "guide-station-recognition",
+        "pathId": "guided",
+        "model": "LUBA 2",
+        "firmware": "",
+        "knowledgeVersion": "2026-09-16-hardware-top10.1",
+        "actionIndex": 0,
+        "instruction": "Check station power/indication and compare recognition using confirmed-good, model-compatible station/adapter hardware."
+      },
+      "title": "Record the station-side result",
+      "lines": [
+        "Record station power/indicator status and whether the mower recognizes each tested station-and-adapter combination.",
+        "Keep the model and firmware unchanged while comparing compatible hardware; a combined swap cannot identify the failed component."
+      ]
+    },
+    {
+      "id": "hw-station-record-comparison-luba-2x",
+      "kind": "reasoning",
+      "status": "APPROVED",
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true,
+        "current": true
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "charge-sop",
+          "sha256": "c94ea763acab2149e422d525c3043667819140a86962086b287645529e513077",
+          "section": "不充电; 回充失败; 负载压降分支"
+        },
+        {
+          "sourceId": "nff-current",
+          "sha256": "ebc704baa76a6002d71a612bc1a0070adbd7cb0a4d2dfc676ec774256658c097",
+          "section": "4 交叉验证规则; 7 未发现问题 / 维修完成验收门"
+        }
+      ],
+      "binding": {
+        "cardId": "guide-station-recognition",
+        "pathId": "guided",
+        "model": "LUBA 2X",
+        "firmware": "",
+        "knowledgeVersion": "2026-09-16-hardware-top10.1",
+        "actionIndex": 0,
+        "instruction": "Check station power/indication and compare recognition using confirmed-good, model-compatible station/adapter hardware."
+      },
+      "title": "Record the station-side result",
+      "lines": [
+        "Record station power/indicator status and whether the mower recognizes each tested station-and-adapter combination.",
+        "Keep the model and firmware unchanged while comparing compatible hardware; a combined swap cannot identify the failed component."
+      ]
+    },
+    {
+      "id": "hw-station-record-comparison-luba-3",
+      "kind": "reasoning",
+      "status": "APPROVED",
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true,
+        "current": true
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "charge-sop",
+          "sha256": "c94ea763acab2149e422d525c3043667819140a86962086b287645529e513077",
+          "section": "不充电; 回充失败; 负载压降分支"
+        },
+        {
+          "sourceId": "nff-current",
+          "sha256": "ebc704baa76a6002d71a612bc1a0070adbd7cb0a4d2dfc676ec774256658c097",
+          "section": "4 交叉验证规则; 7 未发现问题 / 维修完成验收门"
+        }
+      ],
+      "binding": {
+        "cardId": "guide-station-recognition",
+        "pathId": "guided",
+        "model": "LUBA 3",
+        "firmware": "",
+        "knowledgeVersion": "2026-09-16-hardware-top10.1",
+        "actionIndex": 0,
+        "instruction": "Check station power/indication and compare recognition using confirmed-good, model-compatible station/adapter hardware."
+      },
+      "title": "Record the station-side result",
+      "lines": [
+        "Record station power/indicator status and whether the mower recognizes each tested station-and-adapter combination.",
+        "Keep the model and firmware unchanged while comparing compatible hardware; a combined swap cannot identify the failed component."
+      ]
+    },
+    {
+      "id": "hw-docking-cleaning-luba-2",
+      "kind": "tools",
+      "status": "APPROVED",
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true,
+        "current": true
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "maintenance",
+          "sha256": "a2478ac41fe2a0b100488c598af1e9a68f79a4743079ce176b262ac3e4cde012",
+          "section": "安全和清洁; 刀片和刀盘"
+        },
+        {
+          "sourceId": "charge-sop",
+          "sha256": "c94ea763acab2149e422d525c3043667819140a86962086b287645529e513077",
+          "section": "不充电; 回充失败; 负载压降分支"
+        }
+      ],
+      "binding": {
+        "cardId": "guide-docking",
+        "pathId": "guided",
+        "model": "LUBA 2",
+        "firmware": "",
+        "knowledgeVersion": "2026-09-16-hardware-top10.1",
+        "actionIndex": 0,
+        "instruction": "Power off the mower before cleaning the docking contacts and IR window. Remove any actual obstruction, then repeat docking."
+      },
+      "title": "Clean contacts and the IR window",
+      "lines": [
+        "Fully power off the mower before cleaning. Use a soft brush or damp cloth on the charging contacts and charging-station IR window.",
+        "Avoid sharp objects and corrosive or volatile solvents. Retain the docking behavior after cleaning for the next check."
+      ]
+    },
+    {
+      "id": "hw-docking-cleaning-luba-2x",
+      "kind": "tools",
+      "status": "APPROVED",
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true,
+        "current": true
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "maintenance",
+          "sha256": "a2478ac41fe2a0b100488c598af1e9a68f79a4743079ce176b262ac3e4cde012",
+          "section": "安全和清洁; 刀片和刀盘"
+        },
+        {
+          "sourceId": "charge-sop",
+          "sha256": "c94ea763acab2149e422d525c3043667819140a86962086b287645529e513077",
+          "section": "不充电; 回充失败; 负载压降分支"
+        }
+      ],
+      "binding": {
+        "cardId": "guide-docking",
+        "pathId": "guided",
+        "model": "LUBA 2X",
+        "firmware": "",
+        "knowledgeVersion": "2026-09-16-hardware-top10.1",
+        "actionIndex": 0,
+        "instruction": "Power off the mower before cleaning the docking contacts and IR window. Remove any actual obstruction, then repeat docking."
+      },
+      "title": "Clean contacts and the IR window",
+      "lines": [
+        "Fully power off the mower before cleaning. Use a soft brush or damp cloth on the charging contacts and charging-station IR window.",
+        "Avoid sharp objects and corrosive or volatile solvents. Retain the docking behavior after cleaning for the next check."
+      ]
+    },
+    {
+      "id": "hw-docking-cleaning-luba-3",
+      "kind": "tools",
+      "status": "APPROVED",
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true,
+        "current": true
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "maintenance",
+          "sha256": "a2478ac41fe2a0b100488c598af1e9a68f79a4743079ce176b262ac3e4cde012",
+          "section": "安全和清洁; 刀片和刀盘"
+        },
+        {
+          "sourceId": "charge-sop",
+          "sha256": "c94ea763acab2149e422d525c3043667819140a86962086b287645529e513077",
+          "section": "不充电; 回充失败; 负载压降分支"
+        }
+      ],
+      "binding": {
+        "cardId": "guide-docking",
+        "pathId": "guided",
+        "model": "LUBA 3",
+        "firmware": "",
+        "knowledgeVersion": "2026-09-16-hardware-top10.1",
+        "actionIndex": 0,
+        "instruction": "Power off the mower before cleaning the docking contacts and IR window. Remove any actual obstruction, then repeat docking."
+      },
+      "title": "Clean contacts and the IR window",
+      "lines": [
+        "Fully power off the mower before cleaning. Use a soft brush or damp cloth on the charging contacts and charging-station IR window.",
+        "Avoid sharp objects and corrosive or volatile solvents. Retain the docking behavior after cleaning for the next check."
+      ]
+    },
+    {
+      "id": "hw-power-observation-luba-2",
+      "kind": "reasoning",
+      "status": "APPROVED",
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true,
+        "current": true
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "power-sop",
+          "sha256": "70ad9870ae5a48cdd419f903754ba90e50cbd33eff5a119083b079f0123c7c1c",
+          "section": "Numbered steps 1–5; 接电池打火/疑似短路"
+        },
+        {
+          "sourceId": "nff-current",
+          "sha256": "ebc704baa76a6002d71a612bc1a0070adbd7cb0a4d2dfc676ec774256658c097",
+          "section": "4 交叉验证规则; 7 未发现问题 / 维修完成验收门"
+        }
+      ],
+      "binding": {
+        "cardId": "guide-power",
+        "pathId": "guided",
+        "model": "LUBA 2",
+        "firmware": "",
+        "knowledgeVersion": "2026-09-16-hardware-top10.1",
+        "actionIndex": 1,
+        "instruction": "Distinguish no-power from shutdown after starting. Use the observed indicators and supported checks to establish the failing element; do not infer battery failure from the symptom alone."
+      },
+      "title": "Describe when power is lost",
+      "lines": [
+        "Record whether the mower never powers on, starts then shuts down, or powers off when leaving the station. Include the indicator state and battery readings from the supported test."
+      ]
+    },
+    {
+      "id": "hw-power-observation-luba-2x",
+      "kind": "reasoning",
+      "status": "APPROVED",
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true,
+        "current": true
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "power-sop",
+          "sha256": "70ad9870ae5a48cdd419f903754ba90e50cbd33eff5a119083b079f0123c7c1c",
+          "section": "Numbered steps 1–5; 接电池打火/疑似短路"
+        },
+        {
+          "sourceId": "nff-current",
+          "sha256": "ebc704baa76a6002d71a612bc1a0070adbd7cb0a4d2dfc676ec774256658c097",
+          "section": "4 交叉验证规则; 7 未发现问题 / 维修完成验收门"
+        }
+      ],
+      "binding": {
+        "cardId": "guide-power",
+        "pathId": "guided",
+        "model": "LUBA 2X",
+        "firmware": "",
+        "knowledgeVersion": "2026-09-16-hardware-top10.1",
+        "actionIndex": 1,
+        "instruction": "Distinguish no-power from shutdown after starting. Use the observed indicators and supported checks to establish the failing element; do not infer battery failure from the symptom alone."
+      },
+      "title": "Describe when power is lost",
+      "lines": [
+        "Record whether the mower never powers on, starts then shuts down, or powers off when leaving the station. Include the indicator state and battery readings from the supported test."
+      ]
+    },
+    {
+      "id": "hw-power-observation-luba-3",
+      "kind": "reasoning",
+      "status": "APPROVED",
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true,
+        "current": true
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "power-sop",
+          "sha256": "70ad9870ae5a48cdd419f903754ba90e50cbd33eff5a119083b079f0123c7c1c",
+          "section": "Numbered steps 1–5; 接电池打火/疑似短路"
+        },
+        {
+          "sourceId": "nff-current",
+          "sha256": "ebc704baa76a6002d71a612bc1a0070adbd7cb0a4d2dfc676ec774256658c097",
+          "section": "4 交叉验证规则; 7 未发现问题 / 维修完成验收门"
+        }
+      ],
+      "binding": {
+        "cardId": "guide-power",
+        "pathId": "guided",
+        "model": "LUBA 3",
+        "firmware": "",
+        "knowledgeVersion": "2026-09-16-hardware-top10.1",
+        "actionIndex": 1,
+        "instruction": "Distinguish no-power from shutdown after starting. Use the observed indicators and supported checks to establish the failing element; do not infer battery failure from the symptom alone."
+      },
+      "title": "Describe when power is lost",
+      "lines": [
+        "Record whether the mower never powers on, starts then shuts down, or powers off when leaving the station. Include the indicator state and battery readings from the supported test."
+      ]
+    },
+    {
+      "id": "hw-rtk-result-scope-luba-2",
+      "kind": "reasoning",
+      "status": "APPROVED",
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true,
+        "current": true
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "position-sop",
+          "sha256": "87c3c901fa3fd8f5e378f6bc6de91e57a597982a918f54f964e24c47309c06ed",
+          "section": "判断流程; 升级条件"
+        },
+        {
+          "sourceId": "nff-current",
+          "sha256": "ebc704baa76a6002d71a612bc1a0070adbd7cb0a4d2dfc676ec774256658c097",
+          "section": "4 交叉验证规则; 7 未发现问题 / 维修完成验收门"
+        }
+      ],
+      "binding": {
+        "cardId": "guide-rtk-connection",
+        "pathId": "guided",
+        "model": "LUBA 2",
+        "firmware": "",
+        "knowledgeVersion": "2026-09-16-hardware-top10.1",
+        "actionIndex": 0,
+        "instruction": "Check RTK station power, indicators and its adapter first using the model-applicable procedure and compatible hardware."
+      },
+      "title": "Separate station power from mower positioning",
+      "lines": [
+        "Record the RTK station's power and indicator status separately from the mower's RTK connection/positioning status.",
+        "Retain visible antenna damage, water ingress or installation obstruction for PIE. A mower positioning symptom alone does not confirm that the RTK station is faulty."
+      ]
+    },
+    {
+      "id": "hw-rtk-result-scope-luba-2x",
+      "kind": "reasoning",
+      "status": "APPROVED",
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true,
+        "current": true
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "position-sop",
+          "sha256": "87c3c901fa3fd8f5e378f6bc6de91e57a597982a918f54f964e24c47309c06ed",
+          "section": "判断流程; 升级条件"
+        },
+        {
+          "sourceId": "nff-current",
+          "sha256": "ebc704baa76a6002d71a612bc1a0070adbd7cb0a4d2dfc676ec774256658c097",
+          "section": "4 交叉验证规则; 7 未发现问题 / 维修完成验收门"
+        }
+      ],
+      "binding": {
+        "cardId": "guide-rtk-connection",
+        "pathId": "guided",
+        "model": "LUBA 2X",
+        "firmware": "",
+        "knowledgeVersion": "2026-09-16-hardware-top10.1",
+        "actionIndex": 0,
+        "instruction": "Check RTK station power, indicators and its adapter first using the model-applicable procedure and compatible hardware."
+      },
+      "title": "Separate station power from mower positioning",
+      "lines": [
+        "Record the RTK station's power and indicator status separately from the mower's RTK connection/positioning status.",
+        "Retain visible antenna damage, water ingress or installation obstruction for PIE. A mower positioning symptom alone does not confirm that the RTK station is faulty."
+      ]
+    },
+    {
+      "id": "hw-rtk-result-scope-luba-3",
+      "kind": "reasoning",
+      "status": "APPROVED",
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true,
+        "current": true
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "position-sop",
+          "sha256": "87c3c901fa3fd8f5e378f6bc6de91e57a597982a918f54f964e24c47309c06ed",
+          "section": "判断流程; 升级条件"
+        },
+        {
+          "sourceId": "nff-current",
+          "sha256": "ebc704baa76a6002d71a612bc1a0070adbd7cb0a4d2dfc676ec774256658c097",
+          "section": "4 交叉验证规则; 7 未发现问题 / 维修完成验收门"
+        }
+      ],
+      "binding": {
+        "cardId": "guide-rtk-connection",
+        "pathId": "guided",
+        "model": "LUBA 3",
+        "firmware": "",
+        "knowledgeVersion": "2026-09-16-hardware-top10.1",
+        "actionIndex": 0,
+        "instruction": "Check RTK station power, indicators and its adapter first using the model-applicable procedure and compatible hardware."
+      },
+      "title": "Separate station power from mower positioning",
+      "lines": [
+        "Record the RTK station's power and indicator status separately from the mower's RTK connection/positioning status.",
+        "Retain visible antenna damage, water ingress or installation obstruction for PIE. A mower positioning symptom alone does not confirm that the RTK station is faulty."
+      ]
+    },
+    {
+      "id": "hw-bumper-test-result-luba-2",
+      "kind": "reasoning",
+      "status": "APPROVED",
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true,
+        "current": true
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "archived-diagnostic",
+          "sha256": "54627f51550252c73855cb0ca4ccac3f2b8007aa07e18a26f948471e4ab2fcc9",
+          "section": "Battery Test; Side-bumper fault isolation; Cross-validation; No power/no boot"
+        },
+        {
+          "sourceId": "local-reuse",
+          "sha256": "8322c45095d1c4fac87b3b58bfee6ba151248894d9321c6807a1e58a4073e5d2",
+          "section": "reuse-charge-comparison; reuse-bumper-crosscheck; reuse-cable-part-check; reuse-power-observation"
+        },
+        {
+          "sourceId": "sensor-sop",
+          "sha256": "23eba425422459b97224ca99276e51b94a8719c0e7305e8268e3114d1ff85a8f",
+          "section": "Numbered steps 1–5; safety stop"
+        }
+      ],
+      "binding": {
+        "cardId": "guide-bumper",
+        "pathId": "guided",
+        "model": "LUBA 2",
+        "firmware": "",
+        "knowledgeVersion": "2026-09-16-hardware-top10.1",
+        "actionIndex": 1,
+        "instruction": "With the mechanism clear, use a model-supported test or confirmed-good compatible reference to isolate the bumper/sensor. If the suspect bumper works on the reference mower, contact PIE for the mower-side sensing path. Replace only a confirmed faulty, model-serviceable bumper/sensor."
+      },
+      "title": "Read the bumper cross-check",
+      "lines": [
+        "If the suspect bumper works on a confirmed-good compatible reference mower, retain that result for PIE to investigate the mower-side sensing path.",
+        "Do not label a replacement bumper as proven good merely because it is new. Confirm STOP and bumper operation during final safety checks."
+      ]
+    },
+    {
+      "id": "hw-bumper-test-result-luba-2x",
+      "kind": "reasoning",
+      "status": "APPROVED",
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true,
+        "current": true
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "archived-diagnostic",
+          "sha256": "54627f51550252c73855cb0ca4ccac3f2b8007aa07e18a26f948471e4ab2fcc9",
+          "section": "Battery Test; Side-bumper fault isolation; Cross-validation; No power/no boot"
+        },
+        {
+          "sourceId": "local-reuse",
+          "sha256": "8322c45095d1c4fac87b3b58bfee6ba151248894d9321c6807a1e58a4073e5d2",
+          "section": "reuse-charge-comparison; reuse-bumper-crosscheck; reuse-cable-part-check; reuse-power-observation"
+        },
+        {
+          "sourceId": "sensor-sop",
+          "sha256": "23eba425422459b97224ca99276e51b94a8719c0e7305e8268e3114d1ff85a8f",
+          "section": "Numbered steps 1–5; safety stop"
+        }
+      ],
+      "binding": {
+        "cardId": "guide-bumper",
+        "pathId": "guided",
+        "model": "LUBA 2X",
+        "firmware": "",
+        "knowledgeVersion": "2026-09-16-hardware-top10.1",
+        "actionIndex": 1,
+        "instruction": "With the mechanism clear, use a model-supported test or confirmed-good compatible reference to isolate the bumper/sensor. If the suspect bumper works on the reference mower, contact PIE for the mower-side sensing path. Replace only a confirmed faulty, model-serviceable bumper/sensor."
+      },
+      "title": "Read the bumper cross-check",
+      "lines": [
+        "If the suspect bumper works on a confirmed-good compatible reference mower, retain that result for PIE to investigate the mower-side sensing path.",
+        "Do not label a replacement bumper as proven good merely because it is new. Confirm STOP and bumper operation during final safety checks."
+      ]
+    },
+    {
+      "id": "hw-bumper-test-result-luba-3",
+      "kind": "reasoning",
+      "status": "APPROVED",
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true,
+        "current": true
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "archived-diagnostic",
+          "sha256": "54627f51550252c73855cb0ca4ccac3f2b8007aa07e18a26f948471e4ab2fcc9",
+          "section": "Battery Test; Side-bumper fault isolation; Cross-validation; No power/no boot"
+        },
+        {
+          "sourceId": "local-reuse",
+          "sha256": "8322c45095d1c4fac87b3b58bfee6ba151248894d9321c6807a1e58a4073e5d2",
+          "section": "reuse-charge-comparison; reuse-bumper-crosscheck; reuse-cable-part-check; reuse-power-observation"
+        },
+        {
+          "sourceId": "sensor-sop",
+          "sha256": "23eba425422459b97224ca99276e51b94a8719c0e7305e8268e3114d1ff85a8f",
+          "section": "Numbered steps 1–5; safety stop"
+        }
+      ],
+      "binding": {
+        "cardId": "guide-bumper",
+        "pathId": "guided",
+        "model": "LUBA 3",
+        "firmware": "",
+        "knowledgeVersion": "2026-09-16-hardware-top10.1",
+        "actionIndex": 1,
+        "instruction": "With the mechanism clear, use a model-supported test or confirmed-good compatible reference to isolate the bumper/sensor. If the suspect bumper works on the reference mower, contact PIE for the mower-side sensing path. Replace only a confirmed faulty, model-serviceable bumper/sensor."
+      },
+      "title": "Read the bumper cross-check",
+      "lines": [
+        "If the suspect bumper works on a confirmed-good compatible reference mower, retain that result for PIE to investigate the mower-side sensing path.",
+        "Do not label a replacement bumper as proven good merely because it is new. Confirm STOP and bumper operation during final safety checks."
+      ]
+    },
+    {
+      "id": "hw-cable-sbom-boundary-luba-2",
+      "kind": "reasoning",
+      "status": "APPROVED",
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true,
+        "current": true
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "archived-parts",
+          "sha256": "045c977cb9c7f31854f499b86e9d2409c322828f894487a8bb48b2e511a89e49",
+          "section": "SBOM vs exploded-view consistency rule; Repair-strategy rule"
+        },
+        {
+          "sourceId": "local-reuse",
+          "sha256": "8322c45095d1c4fac87b3b58bfee6ba151248894d9321c6807a1e58a4073e5d2",
+          "section": "reuse-charge-comparison; reuse-bumper-crosscheck; reuse-cable-part-check; reuse-power-observation"
+        },
+        {
+          "sourceId": "parts-alternatives",
+          "sha256": "485e6c677ec26d47a693bdab6e7fb2197f6159ed6a97438a25922a1406e9221a",
+          "section": "V2 header; LUBA 2X cutter and wheel alternatives"
+        },
+        {
+          "sourceId": "parts-compat",
+          "sha256": "1704dc3b7e510eafd3328528bf9b788e07eb2f421e99040fdbd9befd4b1b33d0",
+          "section": "LUBA 2X cutter rows; regional adapter rows; model compatibility"
+        },
+        {
+          "sourceId": "manual-policy",
+          "sha256": "9cc4a7efa5ea74a9cd75cc8ea8fff84a86ccf7acacce5956da9c5ecf9f25ee4b",
+          "section": "依据优先级; 使用前必须锁定; 共同诊断原则; 来源与限制"
+        }
+      ],
+      "binding": {
+        "cardId": "guide-visible-cable-damage",
+        "pathId": "guided",
+        "model": "LUBA 2",
+        "firmware": "",
+        "knowledgeVersion": "2026-09-16-hardware-top10.1",
+        "actionIndex": 0,
+        "instruction": "Identify the visibly damaged cable/harness, then confirm its serviceable replacement against the exact model in SBOM and the service diagram. If the references disagree or the part is not separately serviceable, contact PIE before fitting a replacement."
+      },
+      "title": "Confirm the replacement reference",
+      "lines": [
+        "Match the damaged cable's function and connector endpoints to the exact model's SBOM and service diagram before choosing a part.",
+        "An alternative-part listing does not establish model compatibility. If the diagram, SBOM or compatibility table disagree, retain the conflicting references and ask PIE before fitting the part."
+      ]
+    },
+    {
+      "id": "hw-cable-sbom-boundary-luba-2x",
+      "kind": "reasoning",
+      "status": "APPROVED",
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true,
+        "current": true
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "archived-parts",
+          "sha256": "045c977cb9c7f31854f499b86e9d2409c322828f894487a8bb48b2e511a89e49",
+          "section": "SBOM vs exploded-view consistency rule; Repair-strategy rule"
+        },
+        {
+          "sourceId": "local-reuse",
+          "sha256": "8322c45095d1c4fac87b3b58bfee6ba151248894d9321c6807a1e58a4073e5d2",
+          "section": "reuse-charge-comparison; reuse-bumper-crosscheck; reuse-cable-part-check; reuse-power-observation"
+        },
+        {
+          "sourceId": "parts-alternatives",
+          "sha256": "485e6c677ec26d47a693bdab6e7fb2197f6159ed6a97438a25922a1406e9221a",
+          "section": "V2 header; LUBA 2X cutter and wheel alternatives"
+        },
+        {
+          "sourceId": "parts-compat",
+          "sha256": "1704dc3b7e510eafd3328528bf9b788e07eb2f421e99040fdbd9befd4b1b33d0",
+          "section": "LUBA 2X cutter rows; regional adapter rows; model compatibility"
+        },
+        {
+          "sourceId": "manual-policy",
+          "sha256": "9cc4a7efa5ea74a9cd75cc8ea8fff84a86ccf7acacce5956da9c5ecf9f25ee4b",
+          "section": "依据优先级; 使用前必须锁定; 共同诊断原则; 来源与限制"
+        }
+      ],
+      "binding": {
+        "cardId": "guide-visible-cable-damage",
+        "pathId": "guided",
+        "model": "LUBA 2X",
+        "firmware": "",
+        "knowledgeVersion": "2026-09-16-hardware-top10.1",
+        "actionIndex": 0,
+        "instruction": "Identify the visibly damaged cable/harness, then confirm its serviceable replacement against the exact model in SBOM and the service diagram. If the references disagree or the part is not separately serviceable, contact PIE before fitting a replacement."
+      },
+      "title": "Confirm the replacement reference",
+      "lines": [
+        "Match the damaged cable's function and connector endpoints to the exact model's SBOM and service diagram before choosing a part.",
+        "An alternative-part listing does not establish model compatibility. If the diagram, SBOM or compatibility table disagree, retain the conflicting references and ask PIE before fitting the part."
+      ]
+    },
+    {
+      "id": "hw-cable-sbom-boundary-luba-3",
+      "kind": "reasoning",
+      "status": "APPROVED",
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true,
+        "current": true
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "archived-parts",
+          "sha256": "045c977cb9c7f31854f499b86e9d2409c322828f894487a8bb48b2e511a89e49",
+          "section": "SBOM vs exploded-view consistency rule; Repair-strategy rule"
+        },
+        {
+          "sourceId": "local-reuse",
+          "sha256": "8322c45095d1c4fac87b3b58bfee6ba151248894d9321c6807a1e58a4073e5d2",
+          "section": "reuse-charge-comparison; reuse-bumper-crosscheck; reuse-cable-part-check; reuse-power-observation"
+        },
+        {
+          "sourceId": "parts-alternatives",
+          "sha256": "485e6c677ec26d47a693bdab6e7fb2197f6159ed6a97438a25922a1406e9221a",
+          "section": "V2 header; LUBA 2X cutter and wheel alternatives"
+        },
+        {
+          "sourceId": "parts-compat",
+          "sha256": "1704dc3b7e510eafd3328528bf9b788e07eb2f421e99040fdbd9befd4b1b33d0",
+          "section": "LUBA 2X cutter rows; regional adapter rows; model compatibility"
+        },
+        {
+          "sourceId": "manual-policy",
+          "sha256": "9cc4a7efa5ea74a9cd75cc8ea8fff84a86ccf7acacce5956da9c5ecf9f25ee4b",
+          "section": "依据优先级; 使用前必须锁定; 共同诊断原则; 来源与限制"
+        }
+      ],
+      "binding": {
+        "cardId": "guide-visible-cable-damage",
+        "pathId": "guided",
+        "model": "LUBA 3",
+        "firmware": "",
+        "knowledgeVersion": "2026-09-16-hardware-top10.1",
+        "actionIndex": 0,
+        "instruction": "Identify the visibly damaged cable/harness, then confirm its serviceable replacement against the exact model in SBOM and the service diagram. If the references disagree or the part is not separately serviceable, contact PIE before fitting a replacement."
+      },
+      "title": "Confirm the replacement reference",
+      "lines": [
+        "Match the damaged cable's function and connector endpoints to the exact model's SBOM and service diagram before choosing a part.",
+        "An alternative-part listing does not establish model compatibility. If the diagram, SBOM or compatibility table disagree, retain the conflicting references and ask PIE before fitting the part."
+      ]
+    },
+    {
+      "id": "hw-power-stop-luba-2",
+      "kind": "safety",
+      "status": "APPROVED",
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true,
+        "current": true
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "power-sop",
+          "sha256": "70ad9870ae5a48cdd419f903754ba90e50cbd33eff5a119083b079f0123c7c1c",
+          "section": "Numbered steps 1–5; 接电池打火/疑似短路"
+        },
+        {
+          "sourceId": "nff-current",
+          "sha256": "ebc704baa76a6002d71a612bc1a0070adbd7cb0a4d2dfc676ec774256658c097",
+          "section": "4 交叉验证规则; 7 未发现问题 / 维修完成验收门"
+        }
+      ],
+      "binding": {
+        "cardId": "guide-power",
+        "pathId": "guided",
+        "model": "LUBA 2",
+        "firmware": "",
+        "knowledgeVersion": "2026-09-16-hardware-top10.1",
+        "actionIndex": 0,
+        "instruction": "Use the model-supported battery/power check and note the indicators during the power-on attempt. With power disconnected, inspect the power-button and power connections using the safe service procedure."
+      },
+      "title": "Before powered testing",
+      "lines": [
+        "If heat, swelling, an unusual smell, water ingress or sparking is present, stop further powered tests and contact PIE."
+      ]
+    },
+    {
+      "id": "hw-power-stop-luba-2x",
+      "kind": "safety",
+      "status": "APPROVED",
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true,
+        "current": true
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "power-sop",
+          "sha256": "70ad9870ae5a48cdd419f903754ba90e50cbd33eff5a119083b079f0123c7c1c",
+          "section": "Numbered steps 1–5; 接电池打火/疑似短路"
+        },
+        {
+          "sourceId": "nff-current",
+          "sha256": "ebc704baa76a6002d71a612bc1a0070adbd7cb0a4d2dfc676ec774256658c097",
+          "section": "4 交叉验证规则; 7 未发现问题 / 维修完成验收门"
+        }
+      ],
+      "binding": {
+        "cardId": "guide-power",
+        "pathId": "guided",
+        "model": "LUBA 2X",
+        "firmware": "",
+        "knowledgeVersion": "2026-09-16-hardware-top10.1",
+        "actionIndex": 0,
+        "instruction": "Use the model-supported battery/power check and note the indicators during the power-on attempt. With power disconnected, inspect the power-button and power connections using the safe service procedure."
+      },
+      "title": "Before powered testing",
+      "lines": [
+        "If heat, swelling, an unusual smell, water ingress or sparking is present, stop further powered tests and contact PIE."
+      ]
+    },
+    {
+      "id": "hw-power-stop-luba-3",
+      "kind": "safety",
+      "status": "APPROVED",
+      "review": {
+        "scopeConfirmed": true,
+        "safetyReviewed": true,
+        "current": true
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "power-sop",
+          "sha256": "70ad9870ae5a48cdd419f903754ba90e50cbd33eff5a119083b079f0123c7c1c",
+          "section": "Numbered steps 1–5; 接电池打火/疑似短路"
+        },
+        {
+          "sourceId": "nff-current",
+          "sha256": "ebc704baa76a6002d71a612bc1a0070adbd7cb0a4d2dfc676ec774256658c097",
+          "section": "4 交叉验证规则; 7 未发现问题 / 维修完成验收门"
+        }
+      ],
+      "binding": {
+        "cardId": "guide-power",
+        "pathId": "guided",
+        "model": "LUBA 3",
+        "firmware": "",
+        "knowledgeVersion": "2026-09-16-hardware-top10.1",
+        "actionIndex": 0,
+        "instruction": "Use the model-supported battery/power check and note the indicators during the power-on attempt. With power disconnected, inspect the power-button and power connections using the safe service procedure."
+      },
+      "title": "Before powered testing",
+      "lines": [
+        "If heat, swelling, an unusual smell, water ingress or sparking is present, stop further powered tests and contact PIE."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,183 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-09-16",
+  "task": "EC-MT-20260916-HARDWARE-TOP10-010",
+  "sources": [
+    {
+      "id": "final-verification",
+      "file": "07-标准知识/03-标准SOP/NFF与二返标准SOP.md",
+      "section": "7. 未发现问题 / 维修完成验收门",
+      "sha256": "ebc704baa76a6002d71a612bc1a0070adbd7cb0a4d2dfc676ec774256658c097",
+      "currentAsOf": "2026-09-14"
+    },
+    {
+      "id": "burn-in-authority",
+      "file": "90-来源/业务口径/2026-09-11-维修后BurnIn验收口径.md",
+      "section": "已确认 / 与2026-08-17口径的关系",
+      "sha256": "1bb22e3f68fe626be11c69e59d44b925cb7a58a97fdd4fd757cdfdbccbfc39ff",
+      "currentAsOf": "2026-09-14"
+    }
+  ],
+  "review": "Technical verification obligations only; no internal closure status or case identifier projected. Conditional tests require an actual relevant repair and model-supported procedure.",
+  "updates": [
+    {
+      "cardId": "sym-cutting-functional-test",
+      "pathId": "software",
+      "previousVerificationSha256": "4a3f78fc15b1b979cc552967a9f6ab9df30298a1ecefe41070f7fa5acd316d85",
+      "verificationSha256": "d3e2492378c5924cab2a5e90b4dbe000573fdfc1e386263a33e0d62d9245ab98",
+      "sourceRefs": [
+        "final-verification",
+        "burn-in-authority"
+      ],
+      "publishedFields": [
+        "verification.steps",
+        "verification.canonical"
+      ]
+    },
+    {
+      "cardId": "guide-wheel-movement",
+      "pathId": "guided",
+      "previousVerificationSha256": "43fcfa6f3c86e6685071e8366f18a39fcc68cf4aee0d7a9fc747a73a5bd2e9ca",
+      "verificationSha256": "c0affbfa43799b1446824d45054728858c99ce06bef76606d7f01e808b3e3acd",
+      "sourceRefs": [
+        "final-verification",
+        "burn-in-authority"
+      ],
+      "publishedFields": [
+        "verification.steps",
+        "verification.canonical"
+      ]
+    },
+    {
+      "cardId": "guide-cutting-operation",
+      "pathId": "guided",
+      "previousVerificationSha256": "45f293dfd222918917f48a2f41205d00510ab95bc5c2ac6f1d1dc189ae5acf01",
+      "verificationSha256": "de42340c79efae46fff82ab1f154b40b91f8c704187f41133d7c0f3c4a06048d",
+      "sourceRefs": [
+        "final-verification",
+        "burn-in-authority"
+      ],
+      "publishedFields": [
+        "verification.steps",
+        "verification.canonical"
+      ]
+    },
+    {
+      "cardId": "guide-no-charge",
+      "pathId": "guided",
+      "previousVerificationSha256": "3023aabc5fc96afec344cff1428ca09e36eb51e4165c2f762553459c87da5784",
+      "verificationSha256": "95bf1a2d7dec28cd49e884c863b7a394f0e970147a0e67153adaa675609d0d85",
+      "sourceRefs": [
+        "final-verification",
+        "burn-in-authority"
+      ],
+      "publishedFields": [
+        "verification.steps",
+        "verification.canonical"
+      ]
+    },
+    {
+      "cardId": "guide-station-recognition",
+      "pathId": "guided",
+      "previousVerificationSha256": "a30d919fbb05294fe45bfa172ae6e2a01a838a4b17aeb6a374c45a1da855a278",
+      "verificationSha256": "d02bb6371a07d72382f5f095e302519123bef12bbde946b7a857b918542b0b8e",
+      "sourceRefs": [
+        "final-verification",
+        "burn-in-authority"
+      ],
+      "publishedFields": [
+        "verification.steps",
+        "verification.canonical"
+      ]
+    },
+    {
+      "cardId": "guide-docking",
+      "pathId": "guided",
+      "previousVerificationSha256": "c9184f73f79655b0752a9b5920e38f8ad2d5440151559ce408447d5e735947a9",
+      "verificationSha256": "c8328e8c4ee3cd42997c22947345337d6acc1a5eed6ad00afc263171f3a1f2a2",
+      "sourceRefs": [
+        "final-verification",
+        "burn-in-authority"
+      ],
+      "publishedFields": [
+        "verification.steps",
+        "verification.canonical"
+      ]
+    },
+    {
+      "cardId": "guide-power",
+      "pathId": "guided",
+      "previousVerificationSha256": "f8f1cdbd99b7ea25fb0823c4cee897479c229e7f324e4dd7d55ef30626186a1a",
+      "verificationSha256": "b006b869e2b2e16bb794516afce69f13fb78efb783a45f2e96cd3691bbac97f6",
+      "sourceRefs": [
+        "final-verification",
+        "burn-in-authority"
+      ],
+      "publishedFields": [
+        "verification.steps",
+        "verification.canonical"
+      ]
+    },
+    {
+      "cardId": "guide-rtk-connection",
+      "pathId": "guided",
+      "previousVerificationSha256": "17c828fd78a66250c17d238efc2c69d9dba6a19cde9686d246ccf7289ebf9525",
+      "verificationSha256": "67f42ce2ca8970e1efce69a18e4b7eeb91f4c4c386d2d02f5cb1081f33cef169",
+      "sourceRefs": [
+        "final-verification",
+        "burn-in-authority"
+      ],
+      "publishedFields": [
+        "verification.steps",
+        "verification.canonical"
+      ]
+    },
+    {
+      "cardId": "guide-bumper",
+      "pathId": "guided",
+      "previousVerificationSha256": "5bf18adf40072a655701f3f118584d194bca98ef0fa5787eee04a16d80a35aaa",
+      "verificationSha256": "69c60e79805322a8593d4b7228f4d96d2161db0c0b4dfb259394ae09483b08d3",
+      "sourceRefs": [
+        "final-verification",
+        "burn-in-authority"
+      ],
+      "publishedFields": [
+        "verification.steps",
+        "verification.canonical"
+      ]
+    },
+    {
+      "cardId": "guide-visible-cable-damage",
+      "pathId": "guided",
+      "previousVerificationSha256": "eb358bff004450cfa4b917c470a57624a4db1e68310091bd544b8b7600f8900b",
+      "verificationSha256": "1343f14abeef3b112abb6d363f0d2f437d56f1fdeee4762f3907ea4e8740fab5",
+      "sourceRefs": [
+        "final-verification",
+        "burn-in-authority"
+      ],
+      "publishedFields": [
+        "verification.steps",
+        "verification.canonical"
+      ]
+    },
+    {
+      "cardId": "guide-update-failure",
+      "pathId": "guided",
+      "previousVerificationSha256": "a4e1a81bd00de46153977421a9fdd78bca48aa79e45308bdb53ff9ad2b34f947",
+      "verificationSha256": "acd7daf03da1713b00bc2f96b0552f272ee2646f4392425bdfb840bf5b7cc9e3",
+      "sourceRefs": [
+        "final-verification",
+        "burn-in-authority"
+      ],
+      "publishedFields": [
+        "verification.steps",
+        "verification.canonical"
+      ]
+    }
+  ],
+  "supersededConflict": {
+    "field": "sym-cutting-functional-test.verification.canonical",
+    "previous": "Blanket ultrasonic failure exemption",
+    "resolution": "Current September14 sole acceptance rule governs all applicable tests; exempt only demonstrably non-applicable tests. Old frozen/private paths remain unmodified and do not authorize repair."
+  }
+}

@@ -19,8 +19,9 @@ try{
   const catalog=await(await page.request.get(base+'/knowledge.json')).json();const path=catalog.cards.find(c=>c.id==='guide-wheel-movement').paths[0];
   assert.deepEqual(await page.locator('.step-instruction').allTextContents(),path.action);
   assert.deepEqual(await page.locator('.service-verification li').allTextContents(),path.verification.steps);
-  assert.equal(await page.locator('.step-support,.support-disclosure').count(),0);
-  assert.doesNotMatch(await page.locator('#result').innerText(),/Parts for this step|Tools and how to use them|Why this check matters|How to access and remove|Coming soon|FIXTURE-PART/);
+  assert.equal(await page.locator('.support-disclosure').count(),1);
+  assert.equal(await page.locator('.support-disclosure[open]').count(),0);
+  assert.doesNotMatch(await page.locator('#result').innerText(),/Parts for this step|How to access and remove|Coming soon|FIXTURE-PART/);
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
   assert.equal(await page.locator('.service-actions').evaluate(e=>Boolean(e.compareDocumentPosition(document.querySelector('.part-box'))&Node.DOCUMENT_POSITION_FOLLOWING)),true);
   assert.equal(await page.locator('.part-box').evaluate(e=>Boolean(e.compareDocumentPosition(document.querySelector('.service-verification'))&Node.DOCUMENT_POSITION_FOLLOWING)),true);

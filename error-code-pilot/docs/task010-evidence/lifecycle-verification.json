@@ -1,0 +1,17 @@
+{
+  "cycles": [
+    {
+      "cycle": 1,
+      "port": 8806,
+      "httpStatus": 200
+    },
+    {
+      "cycle": 2,
+      "port": 8806,
+      "httpStatus": 200
+    }
+  ],
+  "ownedChildrenExited": true,
+  "relaunchPassed": true,
+  "mainRuntimeUntouched": true
+}
