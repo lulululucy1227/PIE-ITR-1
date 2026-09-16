@@ -20,9 +20,8 @@ try{
   for(const card of cards){
    const model=card.scope.models[0];
    await enterSearch(page,card.message,undefined,model);
-   if(card.paths[0].qualifier)await page.getByRole('button',{name:'Yes, this matches',exact:true}).click();
-   assert.equal(await page.locator('.support-disclosure,.service-caution').count(),0);
-   await page.locator('#continue').click();await page.locator('.service-plan').waitFor();
+   if(card.paths[0].qualifier){assert.equal(await page.locator('.support-disclosure,.service-caution').count(),0);await page.locator('#qualifier-yes').click();}
+   await page.locator('#solution-page:visible').waitFor();await page.locator('.service-plan').waitFor();
    const records=catalog.stepSupport.filter(r=>r.binding.cardId===card.id&&r.binding.model===model);
    assert.equal(await page.locator('.support-disclosure').count(),records.filter(r=>r.kind!=='safety').length);
    assert.equal(await page.locator('.support-disclosure[open]').count(),0);

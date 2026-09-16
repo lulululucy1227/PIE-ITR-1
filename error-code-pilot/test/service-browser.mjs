@@ -26,15 +26,15 @@ try{
   assert.equal(await page.locator('.service-actions').evaluate(e=>Boolean(e.compareDocumentPosition(document.querySelector('.part-box'))&Node.DOCUMENT_POSITION_FOLLOWING)),true);
   assert.equal(await page.locator('.part-box').evaluate(e=>Boolean(e.compareDocumentPosition(document.querySelector('.service-verification'))&Node.DOCUMENT_POSITION_FOLLOWING)),true);
   await page.screenshot({path:`artifacts/service-${width}-guide.png`,fullPage:true});
-  const contrast=await page.locator('button.primary').filter({hasText:'Fixed'}).evaluate(e=>{
+  const contrast=await page.locator('button.primary').filter({hasText:'Checks passed'}).evaluate(e=>{
    const luminance=color=>{const rgb=color.match(/[\d.]+/g).slice(0,3).map(Number).map(c=>{c/=255;return c<=.04045?c/12.92:((c+.055)/1.055)**2.4;});return .2126*rgb[0]+.7152*rgb[1]+.0722*rgb[2];};
    const style=getComputedStyle(e),a=luminance(style.color),b=luminance(style.backgroundColor);return (Math.max(a,b)+.05)/(Math.min(a,b)+.05);
   });assert.ok(contrast>=4.5);
-  await page.getByRole('button',{name:'Fixed',exact:true}).click();assert.equal(await page.getByRole('heading',{name:'You reported it fixed',exact:true}).count(),0);
-  await page.locator('#verification').check();await page.getByRole('button',{name:'Fixed',exact:true}).click();await page.getByRole('heading',{name:'You reported it fixed',exact:true}).waitFor();
+  assert.equal(await page.locator('input[type=checkbox]').count(),0);
+  await page.getByRole('button',{name:'Checks passed — issue resolved',exact:true}).click();await page.getByRole('heading',{name:'You reported it fixed',exact:true}).waitFor();
   await page.locator('#edit-issue').click();assert.equal(await page.locator('.service-plan').count(),0);assert.equal(await page.locator('#observed-symptom').inputValue(),'SYM-001');
   await choose(page,'SYM-003','LUBA 2');await page.locator('#observed-symptom').selectOption('__other__');await page.locator('#search').fill('');await solve(page);await page.getByRole('heading',{name:'Next step with PIE',exact:true}).waitFor();assert.equal(await page.locator('.service-plan,.step-support').count(),0);
-  checks.push({width,allApprovedActionsPreserved:true,noEmptyResources:true,verificationGate:true,backPreserved:true,otherSafe:true,contrast});await page.close();
+  checks.push({width,allApprovedActionsPreserved:true,noEmptyResources:true,explicitVerificationOutcome:true,backPreserved:true,otherSafe:true,contrast});await page.close();
  }
  assert.deepEqual(errors,[]);fs.writeFileSync('artifacts/service-browser-verification.json',JSON.stringify({checks,errors},null,2)+'\n');console.log('SERVICE BROWSER GREEN',checks.length);
 }finally{await browser.close();await new Promise(r=>server.close(r));}

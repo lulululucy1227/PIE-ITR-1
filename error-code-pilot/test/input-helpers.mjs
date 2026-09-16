@@ -22,11 +22,11 @@ export async function enterSearch(page,q,id,model){
  await choose(page,symptom,model);await page.locator('#search').fill(q);await page.locator('#search-button').click();
  const exact=searchCards(catalog.cards,q);if(exact.matches.length===1&&exact.kind.startsWith('exact'))await page.getByRole('button',{name:(card.code?card.code+' · ':'')+card.message,exact:true}).click();
 }
-export async function confirm(page){const yes=page.getByRole('button',{name:'Yes, this matches',exact:true});if(await yes.count())await yes.click();}
+export async function confirm(page){const yes=page.locator('#qualifier-yes');if(await yes.count())await yes.click();}
 export async function solve(page){
  if(await page.locator('#symptom-stage').isVisible()&&!await page.locator('#confirm-stage').isVisible())await page.locator('#search-button').click();
  if(await page.locator('#confirm-stage').isVisible()){
-  const yes=page.getByRole('button',{name:'Yes, this matches',exact:true});
+  const yes=page.locator('#qualifier-yes');
   if(await yes.count())await yes.click();
  }
  if(!await page.locator('#solution-page').isVisible()){

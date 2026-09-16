@@ -1,6 +1,14 @@
 // Presentation-only translations. Never pass translated labels to the resolver,
 // search, exact step bindings, or outcome state. User-entered text stays verbatim.
 export const zh = {
+  'When does the cutting problem occur?':'割草问题在什么情况下出现？',
+  'During mowing / manual operation, with no Error 1202':'实际割草或手动操作时出现，且没有错误码 1202',
+  'Only in a test, Error 1202 is shown, or unsure':'仅测试时出现、显示 1202，或不确定',
+  'Does the problem occur outside Functional Test?':'除功能测试外，实际割草是否也异常？',
+  'Mowing works normally; no other motor or driver fault':'实际割草正常，且无其他电机或驱动故障',
+  'Mowing also fails, another fault is present, or unsure':'实际割草也异常、有其他故障，或不确定',
+  'Which situation applies?':'请选择实际情况',
+  'Checks passed — issue resolved':'已验证，问题已解决',
   'PIE Troubleshooter':'PIE 排障助手',
   'Switch to Chinese':'切换为英文',
   'Skip to problem details':'跳转到问题信息',

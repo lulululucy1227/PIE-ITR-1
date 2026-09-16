@@ -25,6 +25,6 @@ try{
   }
   await context.close();
  }
- const page=await browser.newPage();await page.goto(base);await page.locator('#model:enabled').waitFor();await enterSymptom(page,'SYM-004','LUBA 2');await page.getByRole('button',{name:'No / unsure — contact PIE',exact:true}).click();await solve(page);await page.getByRole('heading',{name:'Next step with PIE',exact:true}).waitFor();assert.equal(await page.locator('#result .answer-grid').count(),0);checks.push('non1202 operation qualifier rejection remains PIE');await page.close();
+ const page=await browser.newPage();await page.goto(base);await page.locator('#model:enabled').waitFor();await enterSymptom(page,'SYM-004','LUBA 2');await page.locator('#qualifier-no').click();await solve(page);await page.getByRole('heading',{name:'Next step with PIE',exact:true}).waitFor();assert.equal(await page.locator('#result .answer-grid').count(),0);checks.push('non1202 operation qualifier rejection remains PIE');await page.close();
  assert.deepEqual(errors,[]);assert.deepEqual(external,[]);fs.writeFileSync('artifacts/stable-browser-verification.json',JSON.stringify({passed:checks.length,checks,pageErrors:errors,externalRequests:0},null,2));console.log('STABLE BROWSER GREEN '+checks.length);
 }finally{await browser.close();await new Promise(r=>server.close(r));}

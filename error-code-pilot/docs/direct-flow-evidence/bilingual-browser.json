@@ -1,0 +1,281 @@
+{
+  "statePreserved": true,
+  "englishOnly": true,
+  "chineseGuidance": true,
+  "refreshClearsCase": true,
+  "otherTextUnchanged": true,
+  "error1202Frozen": true,
+  "checks": [
+    {
+      "card": "guide-wheel-movement",
+      "width": 1366,
+      "height": 768,
+      "chinese": true,
+      "englishOnly": true,
+      "noOverflow": true,
+      "staleCleared": true
+    },
+    {
+      "card": "guide-cutting-operation",
+      "width": 1366,
+      "height": 768,
+      "chinese": true,
+      "englishOnly": true,
+      "noOverflow": true,
+      "staleCleared": true
+    },
+    {
+      "card": "guide-no-charge",
+      "width": 1366,
+      "height": 768,
+      "chinese": true,
+      "englishOnly": true,
+      "noOverflow": true,
+      "staleCleared": true
+    },
+    {
+      "card": "guide-station-recognition",
+      "width": 1366,
+      "height": 768,
+      "chinese": true,
+      "englishOnly": true,
+      "noOverflow": true,
+      "staleCleared": true
+    },
+    {
+      "card": "guide-docking",
+      "width": 1366,
+      "height": 768,
+      "chinese": true,
+      "englishOnly": true,
+      "noOverflow": true,
+      "staleCleared": true
+    },
+    {
+      "card": "guide-power",
+      "width": 1366,
+      "height": 768,
+      "chinese": true,
+      "englishOnly": true,
+      "noOverflow": true,
+      "staleCleared": true
+    },
+    {
+      "card": "guide-rtk-connection",
+      "width": 1366,
+      "height": 768,
+      "chinese": true,
+      "englishOnly": true,
+      "noOverflow": true,
+      "staleCleared": true
+    },
+    {
+      "card": "guide-bumper",
+      "width": 1366,
+      "height": 768,
+      "chinese": true,
+      "englishOnly": true,
+      "noOverflow": true,
+      "staleCleared": true
+    },
+    {
+      "card": "guide-visible-cable-damage",
+      "width": 1366,
+      "height": 768,
+      "chinese": true,
+      "englishOnly": true,
+      "noOverflow": true,
+      "staleCleared": true
+    },
+    {
+      "card": "guide-update-failure",
+      "width": 1366,
+      "height": 768,
+      "chinese": true,
+      "englishOnly": true,
+      "noOverflow": true,
+      "staleCleared": true
+    },
+    {
+      "card": "guide-wheel-movement",
+      "width": 1920,
+      "height": 1080,
+      "chinese": true,
+      "englishOnly": true,
+      "noOverflow": true,
+      "staleCleared": true
+    },
+    {
+      "card": "guide-cutting-operation",
+      "width": 1920,
+      "height": 1080,
+      "chinese": true,
+      "englishOnly": true,
+      "noOverflow": true,
+      "staleCleared": true
+    },
+    {
+      "card": "guide-no-charge",
+      "width": 1920,
+      "height": 1080,
+      "chinese": true,
+      "englishOnly": true,
+      "noOverflow": true,
+      "staleCleared": true
+    },
+    {
+      "card": "guide-station-recognition",
+      "width": 1920,
+      "height": 1080,
+      "chinese": true,
+      "englishOnly": true,
+      "noOverflow": true,
+      "staleCleared": true
+    },
+    {
+      "card": "guide-docking",
+      "width": 1920,
+      "height": 1080,
+      "chinese": true,
+      "englishOnly": true,
+      "noOverflow": true,
+      "staleCleared": true
+    },
+    {
+      "card": "guide-power",
+      "width": 1920,
+      "height": 1080,
+      "chinese": true,
+      "englishOnly": true,
+      "noOverflow": true,
+      "staleCleared": true
+    },
+    {
+      "card": "guide-rtk-connection",
+      "width": 1920,
+      "height": 1080,
+      "chinese": true,
+      "englishOnly": true,
+      "noOverflow": true,
+      "staleCleared": true
+    },
+    {
+      "card": "guide-bumper",
+      "width": 1920,
+      "height": 1080,
+      "chinese": true,
+      "englishOnly": true,
+      "noOverflow": true,
+      "staleCleared": true
+    },
+    {
+      "card": "guide-visible-cable-damage",
+      "width": 1920,
+      "height": 1080,
+      "chinese": true,
+      "englishOnly": true,
+      "noOverflow": true,
+      "staleCleared": true
+    },
+    {
+      "card": "guide-update-failure",
+      "width": 1920,
+      "height": 1080,
+      "chinese": true,
+      "englishOnly": true,
+      "noOverflow": true,
+      "staleCleared": true
+    },
+    {
+      "card": "guide-wheel-movement",
+      "width": 390,
+      "height": 844,
+      "chinese": true,
+      "englishOnly": true,
+      "noOverflow": true,
+      "staleCleared": true
+    },
+    {
+      "card": "guide-cutting-operation",
+      "width": 390,
+      "height": 844,
+      "chinese": true,
+      "englishOnly": true,
+      "noOverflow": true,
+      "staleCleared": true
+    },
+    {
+      "card": "guide-no-charge",
+      "width": 390,
+      "height": 844,
+      "chinese": true,
+      "englishOnly": true,
+      "noOverflow": true,
+      "staleCleared": true
+    },
+    {
+      "card": "guide-station-recognition",
+      "width": 390,
+      "height": 844,
+      "chinese": true,
+      "englishOnly": true,
+      "noOverflow": true,
+      "staleCleared": true
+    },
+    {
+      "card": "guide-docking",
+      "width": 390,
+      "height": 844,
+      "chinese": true,
+      "englishOnly": true,
+      "noOverflow": true,
+      "staleCleared": true
+    },
+    {
+      "card": "guide-power",
+      "width": 390,
+      "height": 844,
+      "chinese": true,
+      "englishOnly": true,
+      "noOverflow": true,
+      "staleCleared": true
+    },
+    {
+      "card": "guide-rtk-connection",
+      "width": 390,
+      "height": 844,
+      "chinese": true,
+      "englishOnly": true,
+      "noOverflow": true,
+      "staleCleared": true
+    },
+    {
+      "card": "guide-bumper",
+      "width": 390,
+      "height": 844,
+      "chinese": true,
+      "englishOnly": true,
+      "noOverflow": true,
+      "staleCleared": true
+    },
+    {
+      "card": "guide-visible-cable-damage",
+      "width": 390,
+      "height": 844,
+      "chinese": true,
+      "englishOnly": true,
+      "noOverflow": true,
+      "staleCleared": true
+    },
+    {
+      "card": "guide-update-failure",
+      "width": 390,
+      "height": 844,
+      "chinese": true,
+      "englishOnly": true,
+      "noOverflow": true,
+      "staleCleared": true
+    }
+  ],
+  "errors": []
+}

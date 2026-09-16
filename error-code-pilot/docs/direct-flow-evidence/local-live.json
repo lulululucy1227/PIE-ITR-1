@@ -1,0 +1,7 @@
+{
+  "url": "http://127.0.0.1:8796",
+  "matchingBuild": true,
+  "directAfterScenario": true,
+  "noCheckbox": true,
+  "chineseOutcomePassed": true
+}

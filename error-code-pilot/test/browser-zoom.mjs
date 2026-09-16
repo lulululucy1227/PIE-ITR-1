@@ -39,14 +39,14 @@ try{
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
    await capture(`bilingual/zoom125-${size.width}-chinese-home.png`);
    await page.locator('#language-toggle').click();
-   await choose(page,'SYM-004','LUBA 2 5000X');await capture(`zoom125-${size.width}-details.png`);assert.equal(await page.locator('#observed-symptom').isVisible(),true);await page.locator('#observed-symptom').click();await capture(`zoom125-${size.width}-picker.png`);await page.keyboard.press('Escape');assert.equal(await page.locator('#observed-symptom').inputValue(),'SYM-004');assert.equal(await page.locator('#search-button').evaluate(e=>e.getBoundingClientRect().bottom<=innerHeight),true);await page.locator('#search').fill('');await page.locator('#search-button').click();await enterFirmware(page,'1.30.31.10');await page.getByRole('button',{name:'Yes, this matches',exact:true}).click();
+   await choose(page,'SYM-004','LUBA 2 5000X');await capture(`zoom125-${size.width}-details.png`);assert.equal(await page.locator('#observed-symptom').isVisible(),true);await page.locator('#observed-symptom').click();await capture(`zoom125-${size.width}-picker.png`);await page.keyboard.press('Escape');assert.equal(await page.locator('#observed-symptom').inputValue(),'SYM-004');assert.equal(await page.locator('#search-button').evaluate(e=>e.getBoundingClientRect().bottom<=innerHeight),true);await page.locator('#search').fill('');await page.locator('#search-button').click();await enterFirmware(page,'1.30.31.10');
    assert.equal(await page.locator('#result').innerText(),'');assert.equal(await page.locator('#solution-page').isVisible(),false);
    await capture(`zoom125-${size.width}-identify-selection.png`);
-   await page.locator('#continue').click();
+   await page.locator('#qualifier-yes').click();
    await page.getByRole('heading',{name:'What should I do now?',exact:true}).waitFor();assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
    await page.evaluate(()=>scrollTo(0,0));
    await capture(`zoom125-${size.width}-repair.png`);
-   await page.locator('#verification').scrollIntoViewIfNeeded();
+   await page.locator('.outcome').scrollIntoViewIfNeeded();
    await capture(`zoom125-${size.width}-verification.png`);
    await page.getByRole('button',{name:'Still not fixed',exact:true}).click();await page.getByRole('heading',{name:'Next step with PIE',exact:true}).waitFor();
    await page.goBack();await page.locator('#identify-page:visible').waitFor();assert.equal(await page.locator('#result').innerText(),'');assert.equal(await page.locator('#model').inputValue(),'LUBA 2 5000X');
@@ -54,8 +54,8 @@ try{
    const guided=knowledge.cards.filter(c=>c.id.startsWith('guide-'));assert.equal(guided.length,10);
    for(const card of guided){
     await enterSearch(page,card.message,undefined,card.scope.models[0]);
-    if(card.paths[0].qualifier)await page.getByRole('button',{name:'Yes, this matches',exact:true}).click();
-    assert.equal(await page.locator('#result').innerText(),'');await page.locator('#continue').click();await page.getByRole('heading',{name:'What should I do now?',exact:true}).waitFor();
+    if(card.paths[0].qualifier)await page.locator('#qualifier-yes').click();
+    await page.getByRole('heading',{name:'What should I do now?',exact:true}).waitFor();
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,card.id);
     assert.equal(await page.locator('.support-disclosure[open]').count(),0);
     if(await page.locator('.support-disclosure').count()){

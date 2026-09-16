@@ -1,0 +1,9 @@
+{
+  "directAfterScenario": true,
+  "noCheckbox": true,
+  "explicitVerifiedOutcome": true,
+  "negativeAndMismatchedCodeStayPIE": true,
+  "failedRepairEscalates": true,
+  "bilingual": true,
+  "errors": []
+}

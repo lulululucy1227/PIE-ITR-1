@@ -39,7 +39,7 @@ try{
  assert.equal(await page.locator('#observed-symptom option[value="SYM-009"]').count(),1);checks.push('model changes filter station recognition and clear stale selection');
  await enterSearch(page,'Robot does not charge','SYM-007','LUBA 2');await solve(page);await page.goBack();
  await page.locator('#observed-symptom').evaluate(e=>{e.append(new Option('Forged','SYM-999'));e.value='SYM-999';});
- await page.locator('#continue').click();assert.equal(await page.locator('#solution-page').isVisible(),false);assert.equal(await page.locator('#result').innerText(),'');checks.push('silent DOM tampering cannot reuse a resolved card');
+ await page.locator('#search-button').click();assert.equal(await page.locator('#solution-page').isVisible(),false);assert.equal(await page.locator('#result').innerText(),'');checks.push('silent DOM tampering cannot reuse a resolved card');
  await enterSymptom(page,'SYM-007','LUBA 2');await solve(page);await page.goBack();await category(page);await page.locator('#observed-symptom').selectOption('SYM-001');await page.goForward();
  assert.equal(await page.locator('#solution-page').isVisible(),false);assert.equal(await page.locator('#observed-symptom').inputValue(),'SYM-001');assert.equal(await page.locator('#result').innerText(),'');checks.push('symptom change across groups invalidates forward history');
  await enterSymptom(page,'SYM-004','LUBA 2 5000X');await enterFirmware(page,'1.30.31.10');await confirm(page);await solve(page);await page.goBack();await enterFirmware(page,'0');await page.goForward();

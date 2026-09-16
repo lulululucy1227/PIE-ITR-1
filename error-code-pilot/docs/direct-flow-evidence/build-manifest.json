@@ -1,0 +1,72 @@
+{
+  "knowledgeVersion": "2026-09-16-hardware-top10.1",
+  "cards": 31,
+  "privateReuseAudit": {
+    "reviewed": 18,
+    "published": 5,
+    "classes": {
+      "PUBLIC_REPAIR_FACT": 3,
+      "PUBLIC_TOOL_STEP": 1,
+      "PUBLIC_PART_FACT": 1,
+      "PRIVATE_INTERNAL": 3,
+      "NEEDS_SCOPE_REVIEW": 6,
+      "CONFLICT": 2,
+      "DUPLICATE": 2
+    },
+    "snapshotSha256": "34d9e89f782e5dffbbe146cab2977a57fbb3c90d9d2b516ffde2610aa3ad65b6"
+  },
+  "privateCandidateAudit": {
+    "imported": 19,
+    "frozen": 1,
+    "promoted": 9,
+    "visibility": {
+      "AGENT_GUIDED": 9,
+      "PIE_ONLY": 10
+    },
+    "evidence": {
+      "STABLE_OPERATIONAL_GUIDANCE": 14,
+      "SOURCE_RECOMMENDATION": 5
+    },
+    "frozenVisibility": {
+      "WITHHELD": 1
+    },
+    "sourceSha256": "edc38d9ec9e9d0c4f9be47cbefb087f9f5975ea7378cf045aa4142dc1cb441f1"
+  },
+  "files": [
+    {
+      "name": "index.html",
+      "bytes": 3231,
+      "sha256": "f617efe2e37550acc6dc74b2842e55332e3932c6e2d9ee12bebd01f0e03bf4d0"
+    },
+    {
+      "name": "styles.css",
+      "bytes": 18605,
+      "sha256": "050a9badd5c3c0d27ca251bb7b22bd873017b05419b193b446679099b93fae63"
+    },
+    {
+      "name": "app.mjs",
+      "bytes": 24803,
+      "sha256": "d2867dfb9f69c4f6603e5e2561c53ee13f9bc955d0a3316206f3ff73ad4f10c7"
+    },
+    {
+      "name": "engine.mjs",
+      "bytes": 20180,
+      "sha256": "50f02cfb5f357f6f3e3e6ecda765a02305bfda7fd3075577ba8648c34714fdbb"
+    },
+    {
+      "name": "service-plan.mjs",
+      "bytes": 4379,
+      "sha256": "cc4cfaf3ad9261ec775502c8d80f2fdecc614a6c0ee3fbd0ca944e1af860bd07"
+    },
+    {
+      "name": "i18n.mjs",
+      "bytes": 50132,
+      "sha256": "0591b65fe5d0d0fba09eaf3fe89023eef73597e73d65a877248f6afc6c48d136"
+    },
+    {
+      "name": "knowledge.json",
+      "bytes": 93624,
+      "sha256": "ccda15f2eeb9ce16cece6c0fc872d1c2be47c3996ea4079ca32c3a44f89b1f07"
+    }
+  ]
+}

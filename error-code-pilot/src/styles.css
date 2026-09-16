@@ -105,6 +105,9 @@ html[lang="zh-CN"] body{font-family:system-ui,"Microsoft YaHei","PingFang SC",sa
 #symptom-stage .step-buttons{border-top:0;padding-top:4px}
 #confirm-stage{margin-top:16px}
 #confirm-stage .intro{margin-bottom:12px}
+#confirm-stage>.intro{display:none}
+#confirm-stage #selection>.card{padding:20px 24px}
+#confirm-stage #selection h3{margin-top:0;margin-bottom:14px}
 @media(max-width:850px){
  .service-plan{grid-template-columns:1fr;gap:24px}
  .service-plan .service-actions,.service-plan .part-box,.service-plan .service-verification{grid-column:auto;grid-row:auto}

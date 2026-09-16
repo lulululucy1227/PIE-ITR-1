@@ -28,7 +28,7 @@ try{
  await page.locator('#observed-symptom').selectOption('SYM-004');
  await page.locator('#search-button').click();
  await page.locator('#confirm-stage:visible').waitFor();
- await page.getByRole('button',{name:'Yes, this matches',exact:true}).waitFor();
+ await page.locator('#qualifier-yes').waitFor();
  if(await page.locator('#search-button').isVisible())duplicateControls.push('Original Continue remains visible during qualifier confirmation');
  await page.locator('#details-back').click();
  await page.locator('#observed-symptom').selectOption('SYM-021');

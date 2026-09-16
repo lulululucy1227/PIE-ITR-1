@@ -26,13 +26,13 @@ try{
  assert.match(await page.locator('#result').innerText(),/检查|充电/);
  assert.doesNotMatch(await page.locator('#result').innerText(),/What should I do|Contact PIE|Still not fixed/);
  await page.locator('.support-disclosure summary').first().click();
- await page.locator('#verification').check();
+ assert.equal(await page.locator('input[type=checkbox]').count(),0);
  await page.locator('#language-toggle').click();
  await page.getByRole('heading',{name:'What to do next',exact:true}).waitFor();
  assert.doesNotMatch(await page.locator('body').innerText(),/\p{Script=Han}/u);
  assert.equal(await page.locator('.support-disclosure[open]').count(),1);
- assert.equal(await page.locator('#verification').isChecked(),true);
- await page.getByRole('button',{name:'Fixed',exact:true}).click();
+ assert.equal(await page.getByRole('button',{name:'Checks passed — issue resolved',exact:true}).count(),1);
+ await page.getByRole('button',{name:'Checks passed — issue resolved',exact:true}).click();
  await page.locator('#language-toggle').click();
  await page.getByRole('heading',{name:'你已反馈问题解决',exact:true}).waitFor();
  assert.equal(await page.locator('#verification').count(),0,'Language switch cannot reopen a completed outcome');
@@ -58,7 +58,7 @@ try{
  assert.equal(await page.locator('#solution-page').isVisible(),false);
  await page.getByRole('button',{name:'1202 · 刀盘卡阻',exact:true}).click();
  await page.getByRole('button',{name:'两个刀盘均无卡阻，但报错仍存在',exact:true}).click();
- await page.locator('#continue').click();
+ await page.locator('#solution-page:visible').waitFor();
  await page.getByRole('heading',{name:'联系 PIE 确认下一步',exact:true}).waitFor();
  assert.equal(await page.locator('.service-plan').count(),0,'1202 stays frozen in Chinese');
  await page.locator('#language-toggle').click();
@@ -69,10 +69,10 @@ try{
    await enterSearch(page,card.message,undefined,card.scope.models[0]);
    if(card.paths[0].qualifier){
     await page.locator('#language-toggle').click();
-    await page.getByRole('button',{name:'是，与实际情况一致',exact:true}).click();
+    await page.locator('#qualifier-yes').click();
     await page.locator('#language-toggle').click();
    }
-   await page.locator('#continue').click();await page.locator('.service-plan').waitFor();
+   await page.locator('#solution-page:visible').waitFor();await page.locator('.service-plan').waitFor();
    await page.locator('#language-toggle').click();
    await page.getByRole('heading',{name:'现在应该怎么做？',exact:true}).waitFor();
    for(const instruction of card.paths[0].action)assert.ok((await page.locator('#result').innerText()).includes(translate(instruction,'zh-CN')));
