@@ -6,6 +6,7 @@ import {projectAgentCatalog} from '../src/engine.mjs';
 import {validateCandidates,candidateCounts,PAYLOAD_PATH} from '../lib/candidates.mjs';
 import {enrichKnowledge,reuseCounts} from '../lib/reuse.mjs';
 import {projectHardwareSupport} from '../lib/hardware-support.mjs';
+import {validateTranslations} from '../src/i18n.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 export async function build({catalog,candidates,hardwareSupport}={}) {
   const input=catalog||JSON.parse(fs.readFileSync(path.join(root,'data/canonical.json'),'utf8'));
@@ -15,12 +16,13 @@ export async function build({catalog,candidates,hardwareSupport}={}) {
   agent.knowledgeVersion='2026-09-16-hardware-top10.1';
   const reviewedSupport=hardwareSupport||JSON.parse(fs.readFileSync(path.join(root,'data/hardware-step-support.json'),'utf8'));
   agent.stepSupport=projectHardwareSupport(reviewedSupport,agent);
+  validateTranslations(agent);
   const privateCandidates=candidates||JSON.parse(fs.readFileSync(path.join(root,'data/feishu-candidates.json'),'utf8'));
   const payloadText=fs.readFileSync(path.join(root,'..',PAYLOAD_PATH),'utf8');
   const candidateErrors=validateCandidates(privateCandidates,input,{payloadText});
   if(candidateErrors.length)throw new Error(candidateErrors.join('\n'));
   const files=new Map();
-  for(const name of ['index.html','styles.css','app.mjs','engine.mjs','service-plan.mjs']) files.set(name,fs.readFileSync(path.join(root,'src',name)));
+  for(const name of ['index.html','styles.css','app.mjs','engine.mjs','service-plan.mjs','i18n.mjs']) files.set(name,fs.readFileSync(path.join(root,'src',name)));
   files.set('knowledge.json',Buffer.from(JSON.stringify(agent,null,2)+'\n'));
   const outDir=path.join(root,'dist');
   if(fs.existsSync(outDir)) {

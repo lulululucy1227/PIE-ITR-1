@@ -35,6 +35,10 @@ try{
    const dimensions=await page.evaluate(()=>({width:innerWidth,dpr:devicePixelRatio,overflow:document.documentElement.scrollWidth>innerWidth}));
    assert.equal(dimensions.overflow,false);assert.equal(await page.locator('select').count(),2);
    await capture(`zoom125-${size.width}-home.png`);
+   await page.locator('#language-toggle').click();await page.getByRole('heading',{name:'遇到了什么问题？',exact:true}).waitFor();
+   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
+   await capture(`bilingual/zoom125-${size.width}-chinese-home.png`);
+   await page.locator('#language-toggle').click();
    await choose(page,'SYM-004','LUBA 2 5000X');await capture(`zoom125-${size.width}-details.png`);assert.equal(await page.locator('#observed-symptom').isVisible(),true);await page.locator('#observed-symptom').click();await capture(`zoom125-${size.width}-picker.png`);await page.keyboard.press('Escape');assert.equal(await page.locator('#observed-symptom').inputValue(),'SYM-004');assert.equal(await page.locator('#search-button').evaluate(e=>e.getBoundingClientRect().bottom<=innerHeight),true);await page.locator('#search').fill('');await page.locator('#search-button').click();await enterFirmware(page,'1.30.31.10');await page.getByRole('button',{name:'Yes, this matches',exact:true}).click();
    assert.equal(await page.locator('#result').innerText(),'');assert.equal(await page.locator('#solution-page').isVisible(),false);
    await capture(`zoom125-${size.width}-identify-selection.png`);
@@ -59,10 +63,15 @@ try{
      assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,card.id+' expanded detail');
     }
     await page.evaluate(()=>scrollTo(0,0));await capture(`zoom125-${size.width}-${card.id}.png`);
+    await page.locator('#language-toggle').click();await page.getByRole('heading',{name:'现在应该怎么做？',exact:true}).waitFor();
+    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,card.id+' Chinese 125%');
+    if(card.id==='guide-power')await capture(`bilingual/zoom125-${size.width}-chinese-power.png`);
+    await page.locator('#language-toggle').click();
+    assert.doesNotMatch(await page.locator('body').innerText(),/\p{Script=Han}/u);
     await page.locator('#edit-issue').click();await page.locator('#identify-page:visible').waitFor();
    }
    assert.deepEqual(errors,[]);assert.deepEqual(external,[]);
-   results.push({viewport:size,zoom,dimensions,homeAndRepairPassed:true,styledPickerPassed:true,failedRepairPassed:true,newGuidedPathsChecked:guided.length,pageErrors:errors,externalRequests:0});
+   results.push({viewport:size,zoom,dimensions,homeAndRepairPassed:true,styledPickerPassed:true,failedRepairPassed:true,newGuidedPathsChecked:guided.length,bilingualGuidesChecked:guided.length,pageErrors:errors,externalRequests:0});
    console.log('PASS native 125% zoom '+size.width+'x'+size.height);
   }finally{await ctx.close();}
  }

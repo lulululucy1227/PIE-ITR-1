@@ -1,5 +1,7 @@
 import {searchCards,resolveCard,recordOutcome,OBSERVABLE_AREAS,controlledModels,controlledSymptoms,controlledReferences,controlledRepairAllowed,validControlledSelection} from './engine.mjs';
 import {buildAgentServicePlan} from './service-plan.mjs';
+import {installLanguageSwitch} from './i18n.mjs';
+installLanguageSwitch();
 const $=id=>document.getElementById(id);
 // Presentation vocabulary follows the reviewed local ITR taxonomy snapshot.
 // Keep catalog IDs/areas and repair scope unchanged; labels are not diagnoses.

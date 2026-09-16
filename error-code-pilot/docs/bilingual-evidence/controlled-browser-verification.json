@@ -1,0 +1,25 @@
+{
+  "passed": 19,
+  "checks": [
+    "home starts with controlled model without a separate area choice",
+    "one symptom selector groups all model-compatible choices",
+    "optional code cannot bypass specific controlled symptom",
+    "Other text and code never generate a repair",
+    "constructed symptom ID is rejected",
+    "injected model option cannot enter symptom stage",
+    "real symptom ID outside selected model is rejected",
+    "model changes filter station recognition and clear stale selection",
+    "silent DOM tampering cannot reuse a resolved card",
+    "symptom change across groups invalidates forward history",
+    "firmware edit invalidates old solution and qualifier",
+    "unlinked exact code cannot authorize a repair",
+    "stale candidate button cannot resolve changed inputs",
+    "stale outcome button does not mutate repair history",
+    "exact referenced path only; completed non-direct fallback advances once",
+    "fallback cannot authorize an unreferenced direct repair",
+    "1366 single-panel progressive identification layout",
+    "1920 single-panel progressive identification layout",
+    "390 single-panel progressive identification layout"
+  ],
+  "errors": []
+}

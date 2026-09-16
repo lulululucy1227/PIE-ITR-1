@@ -1,0 +1,101 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {createRequire} from 'node:module';
+import {build} from '../scripts/build.mjs';
+import {createPreview} from '../scripts/serve.mjs';
+import {enterSearch} from './input-helpers.mjs';
+import {translate} from '../src/i18n.mjs';
+const {chromium}=createRequire(import.meta.url)('C:/Users/Reggie/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+await build();
+const server=await createPreview({port:0}),base='http://127.0.0.1:'+server.address().port;
+const browser=await chromium.launch({headless:true,executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'});
+const page=await browser.newPage({viewport:{width:1366,height:768}}),errors=[],checks=[];
+page.setDefaultTimeout(7000);
+page.on('pageerror',e=>errors.push(e.message));
+try{
+ await page.goto(base);await page.locator('#model:enabled').waitFor();
+ assert.equal(await page.locator('#language-toggle').count(),1,'A language control must be available');
+ await page.locator('#model').selectOption('LUBA 2');
+ await page.locator('#observed-symptom').selectOption('SYM-010');
+ await page.locator('#language-toggle').click();
+ await page.getByRole('heading',{name:'遇到了什么问题？',exact:true}).waitFor();
+ assert.equal(await page.locator('#model').inputValue(),'LUBA 2');
+ assert.equal(await page.locator('#observed-symptom').inputValue(),'SYM-010');
+ assert.equal(await page.locator('html').getAttribute('lang'),'zh-CN');
+ await page.locator('#search-button').click();await page.locator('#solution-page:visible').waitFor();
+ assert.match(await page.locator('#result').innerText(),/检查|充电/);
+ assert.doesNotMatch(await page.locator('#result').innerText(),/What should I do|Contact PIE|Still not fixed/);
+ await page.locator('.support-disclosure summary').first().click();
+ await page.locator('#verification').check();
+ await page.locator('#language-toggle').click();
+ await page.getByRole('heading',{name:'What to do next',exact:true}).waitFor();
+ assert.doesNotMatch(await page.locator('body').innerText(),/\p{Script=Han}/u);
+ assert.equal(await page.locator('.support-disclosure[open]').count(),1);
+ assert.equal(await page.locator('#verification').isChecked(),true);
+ await page.getByRole('button',{name:'Fixed',exact:true}).click();
+ await page.locator('#language-toggle').click();
+ await page.getByRole('heading',{name:'你已反馈问题解决',exact:true}).waitFor();
+ assert.equal(await page.locator('#verification').count(),0,'Language switch cannot reopen a completed outcome');
+ await page.reload();await page.locator('#model:enabled').waitFor();
+ assert.equal(await page.locator('html').getAttribute('lang'),'zh-CN');
+ assert.equal(await page.locator('#solution-page').isVisible(),false);
+ assert.equal(await page.locator('#model').inputValue(),'');
+ // User observations are not translated, persisted, or interpreted as a repair.
+ await page.locator('#model').selectOption('LUBA 2');
+ await page.locator('#observed-symptom').selectOption('__other__');
+ await page.locator('#other-description').fill('Robot does not charge');
+ await page.locator('#search-button').click();
+ await page.getByRole('heading',{name:'联系 PIE 确认下一步',exact:true}).waitFor();
+ assert.equal(await page.locator('.other-description').innerText(),'Robot does not charge');
+ assert.equal(await page.locator('.service-plan').count(),0);
+ await page.locator('#language-toggle').click();
+ assert.doesNotMatch(await page.locator('body').innerText(),/\p{Script=Han}/u);
+ await page.locator('#edit-issue').click();
+ await page.locator('#observed-symptom').selectOption('SYM-004');
+ await page.locator('#search').fill('1202');await page.locator('#search-button').click();
+ await page.locator('#language-toggle').click();
+ await page.getByRole('heading',{name:'确认设备显示的报错',exact:true}).waitFor();
+ assert.equal(await page.locator('#solution-page').isVisible(),false);
+ await page.getByRole('button',{name:'1202 · 刀盘卡阻',exact:true}).click();
+ await page.getByRole('button',{name:'两个刀盘均无卡阻，但报错仍存在',exact:true}).click();
+ await page.locator('#continue').click();
+ await page.getByRole('heading',{name:'联系 PIE 确认下一步',exact:true}).waitFor();
+ assert.equal(await page.locator('.service-plan').count(),0,'1202 stays frozen in Chinese');
+ await page.locator('#language-toggle').click();
+ const catalog=JSON.parse(fs.readFileSync('dist/knowledge.json'));
+ for(const size of [{width:1366,height:768},{width:1920,height:1080},{width:390,height:844}]){
+  await page.setViewportSize(size);
+  for(const card of catalog.cards.filter(c=>c.id.startsWith('guide-'))){
+   await enterSearch(page,card.message,undefined,card.scope.models[0]);
+   if(card.paths[0].qualifier){
+    await page.locator('#language-toggle').click();
+    await page.getByRole('button',{name:'是，与实际情况一致',exact:true}).click();
+    await page.locator('#language-toggle').click();
+   }
+   await page.locator('#continue').click();await page.locator('.service-plan').waitFor();
+   await page.locator('#language-toggle').click();
+   await page.getByRole('heading',{name:'现在应该怎么做？',exact:true}).waitFor();
+   for(const instruction of card.paths[0].action)assert.ok((await page.locator('#result').innerText()).includes(translate(instruction,'zh-CN')));
+   if(await page.locator('.support-disclosure').count())await page.locator('.support-disclosure summary').first().click();
+   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
+   if(card.id==='guide-power')await page.screenshot({path:`artifacts/bilingual/chinese-power-${size.width}.png`,fullPage:true});
+   await page.locator('#language-toggle').click();
+   assert.doesNotMatch(await page.locator('body').innerText(),/\p{Script=Han}/u);
+   await page.locator('#edit-issue').click();await page.locator('#identify-page:visible').waitFor();
+   assert.equal(await page.locator('#model').inputValue(),card.scope.models[0]);
+   await page.locator('#search').fill('changed message');
+   await page.locator('#language-toggle').click();
+   await page.goForward();assert.equal(await page.locator('#solution-page').isVisible(),false);
+   assert.equal(await page.locator('.service-plan').count(),0);
+   await page.locator('#language-toggle').click();
+   checks.push({card:card.id,...size,chinese:true,englishOnly:true,noOverflow:true,staleCleared:true});
+  }
+ }
+ await page.setViewportSize({width:1920,height:1080});await page.reload();await page.locator('#model:enabled').waitFor();
+ await page.screenshot({path:'artifacts/bilingual/english-home.png',fullPage:true});
+ await page.locator('#language-toggle').click();await page.locator('#model').selectOption('LUBA 2');
+ await page.screenshot({path:'artifacts/bilingual/chinese-identify.png',fullPage:true});
+ assert.deepEqual(errors,[]);
+ fs.writeFileSync('artifacts/bilingual/browser.json',JSON.stringify({statePreserved:true,englishOnly:true,chineseGuidance:true,refreshClearsCase:true,otherTextUnchanged:true,error1202Frozen:true,checks,errors},null,2));
+ console.log('BILINGUAL BROWSER GREEN');
+}finally{await browser.close();await new Promise(r=>server.close(r));}

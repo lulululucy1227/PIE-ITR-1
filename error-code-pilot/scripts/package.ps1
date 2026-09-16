@@ -8,7 +8,7 @@ $stage = Join-Path $pilotRoot "artifacts\package-$stamp"
 $zip = Join-Path $pilotRoot "artifacts\error-code-pilot-$stamp.zip"
 $runtimeNode = 'C:\Users\Reggie\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe'
 if (-not (Test-Path -LiteralPath $runtimeNode)) { throw 'Bundled runtime is unavailable; do not produce a partial colleague package.' }
-$allow = @('dist/index.html','dist/styles.css','dist/app.mjs','dist/engine.mjs','dist/service-plan.mjs','dist/knowledge.json','scripts/serve.mjs','scripts/launch-local.mjs','run-pilot.cmd','LOCAL_README.txt','runtime/node.exe')
+$allow = @('dist/index.html','dist/styles.css','dist/app.mjs','dist/engine.mjs','dist/service-plan.mjs','dist/i18n.mjs','dist/knowledge.json','scripts/serve.mjs','scripts/launch-local.mjs','run-pilot.cmd','LOCAL_README.txt','runtime/node.exe')
 New-Item -ItemType Directory -Path (Join-Path $stage 'dist'),(Join-Path $stage 'scripts'),(Join-Path $stage 'runtime') -Force | Out-Null
 foreach ($relative in $allow) {
   if ($relative -eq 'LOCAL_README.txt' -or $relative -eq 'runtime/node.exe') { continue }
@@ -26,6 +26,8 @@ It prefers http://127.0.0.1:8796 and safely tries 8797-8805 if occupied. Never u
 This package is for local service-agent/supervisor review only. No external deployment is authorized.
 Page 1: choose the supported mower model and one controlled symptom from the grouped list.
 Model and symptom are required selections. Error Code / Message is optional auxiliary text.
+Use the top-right language button to switch between English and Chinese. Selections stay unchanged.
+Only the language preference is kept in this browser tab; refreshing clears case selections/results.
 Only necessary conditions/firmware scope add a confirmation. Other text is for PIE contact only.
 Open the local HTTP address above, not src/index.html or dist/index.html directly.
 Click Continue for Page 2: the approved next action and verification, or safe PIE guidance.

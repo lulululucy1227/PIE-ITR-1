@@ -4,7 +4,7 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../dist');
-const mime={'index.html':'text/html; charset=utf-8','styles.css':'text/css; charset=utf-8','app.mjs':'text/javascript; charset=utf-8','engine.mjs':'text/javascript; charset=utf-8','service-plan.mjs':'text/javascript; charset=utf-8','knowledge.json':'application/json; charset=utf-8'};
+const mime={'index.html':'text/html; charset=utf-8','styles.css':'text/css; charset=utf-8','app.mjs':'text/javascript; charset=utf-8','engine.mjs':'text/javascript; charset=utf-8','service-plan.mjs':'text/javascript; charset=utf-8','i18n.mjs':'text/javascript; charset=utf-8','knowledge.json':'application/json; charset=utf-8'};
 export function previewIdentity(distRoot=root){
   const hash=createHash('sha256').update(path.resolve(distRoot));
   for(const file of Object.keys(mime))hash.update(file).update(fs.readFileSync(path.join(distRoot,file)));

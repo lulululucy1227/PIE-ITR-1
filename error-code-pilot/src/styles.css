@@ -92,6 +92,11 @@ input,select,textarea{border-color:#82958a;border-radius:var(--radius-control)}
 .support-disclosure>summary{font-size:13px;font-weight:600;color:var(--green);padding:0;min-height:24px}
 .support-disclosure h4{font-size:13px;font-weight:600;margin:12px 0 8px}
 .support-disclosure p{font-size:13px;line-height:1.65}
+.language-toggle{margin-left:auto;background:transparent;border:1px solid var(--line);border-radius:8px;padding:8px 12px;color:var(--green);font:inherit;font-size:13px;cursor:pointer;white-space:nowrap}
+.language-toggle:hover{background:#eef3ee}
+.language-toggle:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+html[lang="zh-CN"] body{font-family:system-ui,"Microsoft YaHei","PingFang SC",sans-serif}
+@media(max-width:600px){.topbar{gap:12px}.language-toggle{font-size:12px;padding:8px}.brand{font-size:15px}}
 .selection-summary{min-height:20px;margin:6px 0 0;color:var(--muted);font-size:13px;line-height:1.5}
 #category-stage .identify-form{border-radius:var(--radius-panel) var(--radius-panel) 10px 10px;margin-bottom:0}
 #symptom-stage{margin-top:0}

@@ -8,7 +8,7 @@ import {createPreview} from '../scripts/serve.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 test('build emits only agent assets and strips raw provenance and unresolved repair prose',async()=>{
   const result=await build();
-  assert.deepEqual(fs.readdirSync(result.outDir).sort(),['app.mjs','engine.mjs','index.html','knowledge.json','service-plan.mjs','styles.css']);
+  assert.deepEqual(fs.readdirSync(result.outDir).sort(),['app.mjs','engine.mjs','i18n.mjs','index.html','knowledge.json','service-plan.mjs','styles.css']);
   const data=fs.readFileSync(path.join(result.outDir,'knowledge.json'),'utf8');
   for(const forbidden of ['sourceRefs','"evidence":','"review":','"label_cn":','"evidence_state":','local-error-reference','cohortCount','2.3.30.26','C:/Users/','customer','cookie','INTERNAL-CANARY']) assert.equal(data.includes(forbidden),false,forbidden);
 });
@@ -18,6 +18,14 @@ test('invalid knowledge fails the build before changing last valid output',async
   bad.cards[0].paths[0].verification=null;
   await assert.rejects(()=>build({catalog:bad}),/verification/);
   assert.equal(fs.readFileSync(path.join(root,'dist/knowledge.json'),'utf8'),original);
+});
+
+test('a public message without a Chinese translation cannot replace the bilingual build',async()=>{
+ const original=fs.readFileSync(path.join(root,'dist/knowledge.json'),'utf8');
+ const catalog=JSON.parse(fs.readFileSync(path.join(root,'data/canonical.json'),'utf8'));
+ catalog.cards.find(c=>c.agentVisible&&c.publication==='approved').message='Untranslated new public condition';
+ await assert.rejects(()=>build({catalog}),/Missing Chinese translation/);
+ assert.equal(fs.readFileSync(path.join(root,'dist/knowledge.json'),'utf8'),original);
 });
 
 test('invalid private candidate source or promotion fails before changing valid output',async()=>{

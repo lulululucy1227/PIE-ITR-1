@@ -1,0 +1,45 @@
+{
+  "results": [
+    {
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "zoom": 1.25,
+      "dimensions": {
+        "width": 1093,
+        "dpr": 1.25,
+        "overflow": false
+      },
+      "homeAndRepairPassed": true,
+      "styledPickerPassed": true,
+      "failedRepairPassed": true,
+      "newGuidedPathsChecked": 10,
+      "bilingualGuidesChecked": 10,
+      "pageErrors": [],
+      "externalRequests": 0
+    },
+    {
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "zoom": 1.25,
+      "dimensions": {
+        "width": 1536,
+        "dpr": 1.25,
+        "overflow": false
+      },
+      "homeAndRepairPassed": true,
+      "styledPickerPassed": true,
+      "failedRepairPassed": true,
+      "newGuidedPathsChecked": 10,
+      "bilingualGuidesChecked": 10,
+      "pageErrors": [],
+      "externalRequests": 0
+    }
+  ],
+  "isolatedProfiles": true,
+  "testExtensionNotPackaged": true,
+  "ownedServerClosedInFinally": true
+}
